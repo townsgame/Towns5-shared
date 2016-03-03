@@ -8,6 +8,7 @@
 
 /**
  * @param {object} Resources
+ * @constructor
  */
 var Resources = module.exports = function(resources){
 

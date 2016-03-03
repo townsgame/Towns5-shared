@@ -7,11 +7,11 @@
 
 /**
  *
- * @param type
- * @param params
- * @param price_base
- * @param price_resource_list
- * @param perform
+ * @param {string} type enum('active', 'passive', 'triggered')
+ * @param {object} params {param: type}
+ * @param {function} price_base
+ * @param {array} price_resource_list
+ * @param {function} perform
  * @constructor
  */
 var Action = module.exports = function(type,params,price_base,price_resource_list,perform){
@@ -21,7 +21,8 @@ var Action = module.exports = function(type,params,price_base,price_resource_lis
 
 /**
  *
- * @param params
+ * @param {object} params
+ * @return {number} amount of energy to create this action with given params
  */
 Action.prototype.getPriceBase = function(params){
     //todo
@@ -30,7 +31,8 @@ Action.prototype.getPriceBase = function(params){
 
 /**
  *
- * @param params
+ * @param {object} params
+ * @return {array} possible combinations of resources to create this action with given params
  */
 Action.prototype.getPriceResourceList = function(params){
     //todo

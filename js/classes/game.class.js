@@ -8,6 +8,7 @@
 /**
  *
  * @param {array} action_list
+ * @constructor
  */
 var Game = module.exports = function(action_list){
     //todo
