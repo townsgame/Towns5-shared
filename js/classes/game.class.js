@@ -7,7 +7,7 @@
 
 /**
  *
- * @param action_list
+ * @param {array} action_list
  */
 var Game = module.exports = function(action_list){
     //todo
@@ -16,7 +16,7 @@ var Game = module.exports = function(action_list){
 
 /**
  *
- * @param object
+ * @param {object} Object
  */
 Game.prototype.getObjectPrice = function(object){
     //todo
@@ -25,7 +25,7 @@ Game.prototype.getObjectPrice = function(object){
 
 /**
  *
- * @param object
+ * @param {object} Object
  */
 Game.prototype.getObjectMaxLife = function(object){
     //todo
