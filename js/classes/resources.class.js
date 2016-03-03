@@ -6,9 +6,13 @@
 //Creating module
 
 
+/**
+ * @param {object} Resources
+ */
 var Resources = module.exports = function(resources){
 
     for(var key in resources){
+        //todo check
         this[key]=resources[key];
     }
 
@@ -20,10 +24,23 @@ var Resources = module.exports = function(resources){
 /**
  * Checks whether this contains a given resources
  * @param {object} Resources
- * @return {bool}
+ * @return {bool} contains
  */
 Resources.prototype.contains = function(resources){
-    //todo
+
+    for(var key in resources){
+
+        if(!isDefined(this[key])){
+            return false;
+        }
+
+        if(this[key]<resources[key]){
+            return false;
+        }
+    }
+
+    return true;
+
 };
 
 
@@ -31,10 +48,22 @@ Resources.prototype.contains = function(resources){
 /**
  * Add given resources
  * @param {object} Resources
- * @return {bool}
+ * @return {bool} success
  */
 Resources.prototype.add = function(resources){
-    //todo
+
+    for(var key in resources){
+
+        if(!isDefined(this[key])){
+            this[key]=0;
+        }
+
+        this[key]+=resources[key];
+
+    }
+
+    return true;
+
 };
 
 
@@ -42,8 +71,18 @@ Resources.prototype.add = function(resources){
 /**
  * Remove given resources
  * @param {object} Resources
- * @return {bool}
+ * @return {bool} success
  */
 Resources.prototype.remove = function(resources){
-    //todo
+
+    if(!this.contains(resources))return false;
+
+    for(var key in resources){
+
+        this[key]-=resources[key];
+
+    }
+
+    return true;
+
 };
