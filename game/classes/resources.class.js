@@ -22,6 +22,19 @@ var Resources = module.exports = function(resources){
 
 
 
+
+/**
+ * @param {number} k
+ * @return {bool} success
+ */
+Resources.prototype.deepCopy = function(){
+
+    return new Resources(this);
+
+};
+
+
+
 /**
  * Checks whether this contains a given resources
  * @param {object} Resources
@@ -81,6 +94,25 @@ Resources.prototype.remove = function(resources){
     for(var key in resources){
 
         this[key]-=resources[key];
+
+    }
+
+    return true;
+
+};
+
+
+
+
+/**
+ * @param {number} k
+ * @return {bool} success
+ */
+Resources.prototype.multiply = function(k){
+
+    for(var key in this){
+
+        this[key] = this[key] * k;
 
     }
 

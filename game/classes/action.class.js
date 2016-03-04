@@ -15,7 +15,11 @@
  * @constructor
  */
 var Action = module.exports = function(type,params,price_base,price_resource_list,perform){
-    //todo
+    this.type = type;
+    this.params = params;
+    this.price_base = price_base;
+    this.price_resource_list = price_resource_list;
+    this.perform = perform;
 };
 
 
@@ -25,7 +29,10 @@ var Action = module.exports = function(type,params,price_base,price_resource_lis
  * @return {number} amount of energy to create this action with given params
  */
 Action.prototype.getPriceBase = function(params){
-    //todo
+
+    var price = this.price_base(params);
+    return(price);
+
 };
 
 
@@ -35,5 +42,19 @@ Action.prototype.getPriceBase = function(params){
  * @return {array} possible combinations of resources to create this action with given params
  */
 Action.prototype.getPriceResourceList = function(params){
-    //todo
+
+    var price = this.getPriceBase(params);
+
+    var price_resource_list = [];
+
+    this.price_resource_list.forEach(function(resources){
+
+        price_resource_list.push(
+            resources.deepCopy().multiply(price)
+        );
+
+    });
+
+    return(price_resource_list);
+
 };
