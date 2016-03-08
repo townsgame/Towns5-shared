@@ -5,15 +5,12 @@
 //======================================================================================================================
 
 
-//Loading Object Class
-var Object = require('../classes/object.class.js');
-
 //Loading Instance of Game
 var game = require('../inits/game.init.js');
 
 
 //Creating sample object
-var foo_building = new Object({
+var foo_building = {
 
     name: "Foo",
     type: "building",
@@ -61,13 +58,13 @@ var foo_building = new Object({
 
     ]
 
-});
+};
 
 //max_life is number
-var max_life = foo_building.getMaxLife(game);
+var max_life = game.getObjectMaxLife(foo_building);
 
 //price is instance of Resources
-var price = foo_building.getPrice(game);
+var price = game.getObjectPrice(foo_building);
 
 
 console.log('Maximum amount life of object is: '+max_life);

@@ -14,7 +14,7 @@
  * @param {function} perform
  * @constructor
  */
-var Action = module.exports = function(type,params,price_base,price_resource_list,perform){
+var ActionType = module.exports = function(type, params, price_base, price_resource_list, perform){
     this.type = type;
     this.params = params;
     this.price_base = price_base;
@@ -28,7 +28,7 @@ var Action = module.exports = function(type,params,price_base,price_resource_lis
  * @param {object} params
  * @return {number} amount of energy to create this action with given params
  */
-Action.prototype.getPriceBase = function(params){
+ActionType.prototype.getPriceBase = function(params){
 
     var price = this.price_base(params);
     return(price);
@@ -41,7 +41,7 @@ Action.prototype.getPriceBase = function(params){
  * @param {object} params
  * @return {array} possible combinations of resources to create this action with given params
  */
-Action.prototype.getPriceResourceList = function(params){
+ActionType.prototype.getPriceResourceList = function(params){
 
     var price = this.getPriceBase(params);
 

@@ -7,10 +7,10 @@
 
 /**
  *
- * @param {array} action_list
+ * @param {array} action_type_list
  * @constructor
  */
-var Game = module.exports = function(action_list){
+var Game = module.exports = function(action_type_list){
     //todo
 };
 
