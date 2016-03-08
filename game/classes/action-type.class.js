@@ -7,7 +7,7 @@
 
 /**
  *
- * @param {string} type enum('active', 'passive', 'triggered')
+ * @param {string} type enum('active', 'passive', 'triggered') //todo refactor
  * @param {object} params {param: type}
  * @param {function} price_base
  * @param {array} price_resource_list
