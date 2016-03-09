@@ -13,8 +13,9 @@
 var Resources = module.exports = function(resources){
 
     for(var key in resources){
-        //todo check
-        this[key]=resources[key];
+        if(typeof resources[key]=='number') {
+            this[key] = resources[key];
+        }
     }
 
 };
@@ -27,7 +28,7 @@ var Resources = module.exports = function(resources){
  * @param {number} k
  * @return {bool} success
  */
-Resources.prototype.deepCopy = function(){
+Resources.prototype.clone = function(){
 
     return new Resources(this);
 
@@ -44,7 +45,7 @@ Resources.prototype.contains = function(resources){
 
     for(var key in resources){
 
-        if(!isDefined(this[key])){
+        if(typeof this[key]=='number'){
             return false;
         }
 
@@ -68,15 +69,38 @@ Resources.prototype.add = function(resources){
 
     for(var key in resources){
 
-        if(!isDefined(this[key])){
+        if(typeof this[key]=='undefined'){
             this[key]=0;
         }
 
-        this[key]+=resources[key];
+        if(typeof this[key]=='number') {
+            this[key] += resources[key];
+        }
 
     }
 
-    return true;
+    return this;
+
+};
+
+
+
+/**
+ * @param {number} k
+ * @return {bool} success
+ */
+Resources.prototype.multiply = function(k){
+
+    for(var key in this){
+
+        if(typeof this[key]=='number'){//todo better solution
+            this[key] = this[key] * k;
+        }
+
+
+    }
+
+    return this;
 
 };
 
@@ -104,18 +128,24 @@ Resources.prototype.remove = function(resources){
 
 
 
-/**
- * @param {number} k
- * @return {bool} success
- */
-Resources.prototype.multiply = function(k){
+
+Resources.prototype.toString = function(){
+
+    var strings = [];
 
     for(var key in this){
 
-        this[key] = this[key] * k;
+        if(typeof this[key]=='number'){//todo better solution
+
+            if(this[key]!=0){
+                strings.push(this[key]+' '+key);
+            }
+
+        }
 
     }
 
-    return true;
+    return strings.join(', ');
 
 };
+

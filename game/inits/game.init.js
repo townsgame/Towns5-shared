@@ -5,9 +5,13 @@
 //======================================================================================================================
 //Loading modules
 
-var Game = require('../classes/game.class.js');
-var ActionType = require('../classes/action-type.class.js');
-var Resources = require('../classes/resources.js');
+if(typeof Game=='undefined'){
+
+    var Game = require(__dirname+'/../classes/game.class.js');
+    var ActionType = require(__dirname+'/../classes/action-type.class.js');
+    var Resources = require(__dirname+'/../classes/resources.class.js');
+
+}
 
 //======================================================================================================================
 //Creating module
@@ -100,7 +104,7 @@ var game = module.exports = new Game(
                 'cooldown': 'number'
             },
             function(params){
-                return((Math.pow(params.distance,2)*params.strength*params.rounds*(1/params.cooldown))*0.05);
+                return((Math.pow(params.distance,2)*params.strength*params.rounds*(1/params.cooldown))*100);
             },
             new Resources({
                 'wood':   0,
