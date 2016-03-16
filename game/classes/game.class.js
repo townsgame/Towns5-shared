@@ -46,7 +46,7 @@ Game.prototype.getObjectPriceBases = function(object){
             }
             //---------------
 
-            var price_base = Math.ceil(action_type.price_base(action.params));
+            var price_base = Math.ceil(action_type.price_base(action.params));//
 
             //---------------Checking non negative value
             if(price_base<0){
