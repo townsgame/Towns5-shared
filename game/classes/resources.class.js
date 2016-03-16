@@ -14,7 +14,7 @@ var Resources = module.exports = function(resources){
 
     for(var key in resources){
         if(typeof resources[key]=='number') {
-            this[key] = resources[key];
+            this[key] = Math.ceil(resources[key]);
         }
     }
 
@@ -94,7 +94,7 @@ Resources.prototype.multiply = function(k){
     for(var key in this){
 
         if(typeof this[key]=='number'){//todo better solution
-            this[key] = this[key] * k;
+            this[key] = Math.ceil(this[key] * k);
         }
 
 
