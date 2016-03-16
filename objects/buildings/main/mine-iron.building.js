@@ -43,9 +43,55 @@ module.exports=
         }
     },
 
-    actions: {
+    actions: [
+        /**/{
+            "type": "defense",
+            "params":{
+                "defense": 1//[lifes / round]
+            }
+        },/**/
+        /**/{
+            "type": "regenerate",
+            "params":{
+                "regenerate": 1800//[s]
+            }
+        },/**/
+        /**/{
+            "type": "repair",
+            "params":{
+                "repair": 100//[%]
+            }
+        },/**/
+        /**/{
+            "type": "mine",
+            "params":{
+                "resource": "iron",//[resource]
+                "amount": 1//[resources / s]
+            }
+        },/**/
+        /*/{
+            "type": "attack",
+            "params":{
+                "distance": 1,//[fields]
+                "strength": 1,//[lifes / round]
+                "rounds": 1,//[rounds]
+                "cooldown": 600//[s]
+            }
+        },/**/
+        /*/{
+         "type": "move",
+         "params":{
+         "speed": 1//[fields / s]
 
-    }
+         }
+         },/**/
+        /**/{
+            "type": "throughput",
+            "params":{
+                "throughput": 50//[%]
+            }
+        }
+    ]
 
 }
 ;
