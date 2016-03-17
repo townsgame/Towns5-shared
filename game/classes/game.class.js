@@ -28,6 +28,12 @@ Game.prototype.getObjectPriceBases = function(object){
     var self=this;
     var price_bases=[];
 
+
+    if(typeof object.actions=='undefined'){
+        return([]);
+    }
+
+
     object.actions.forEach(function(action){
 
 
@@ -101,14 +107,19 @@ Game.prototype.getObjectPrices = function(object){
     var prices=[];
 
 
+    if(typeof object.actions=='undefined'){
+        return([]);
+    }
+
+
     object.actions.forEach(function(action,i){
 
         var action_type = self.action_type_list[action.type];
 
-        var price_resource = action_type.price_resource.clone();
+        var price_resources = action_type.price_resources.clone();
 
-        price_resource.multiply(price_bases[i]);
-        prices.push(price_resource);
+        price_resources.multiply(price_bases[i]);
+        prices.push(price_resources);
 
     });
 
@@ -127,7 +138,9 @@ Game.prototype.getObjectPrice = function(object){
 
     var prices=this.getObjectPrices(object);
 
-    price = prices[0].clone().multiply(0);//todo maybe better
+
+    price = this.action_type_list.defense.price_resources.clone().multiply(0);//todo better
+    //price = prices[0].clone().multiply(0);
 
     //console.log('empty price',price);
 
