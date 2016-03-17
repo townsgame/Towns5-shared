@@ -6,7 +6,7 @@
 
 
 //Loading Instance of Game
-var game = require('../inits/game.init.js');
+var game = require('../inits/game.read.js');
 
 
 //Creating sample object
