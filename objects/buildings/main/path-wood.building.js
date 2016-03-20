@@ -26,7 +26,7 @@ module.exports=
                         top: 1,
                         bottom: 1
                     },
-                    material: ['clay',0],
+                    material: 'clay_bricks',
                     position: {x:0,y:0,z:0},
                     size: {x:40,y:40,z:40},
                     rotation: 0
