@@ -3,6 +3,20 @@
  * @fileOverview Creates static class game
  */
 //======================================================================================================================
+//Loading modules
+
+if(typeof Resources=='undefined'){
+
+    require(__dirname+'/../classes-static/math.static.js');
+
+    var Resources = require(__dirname+'/resources.class.js');
+    var Model = require(__dirname+'/model.class.js');
+
+}
+
+
+
+//======================================================================================================================
 //Creating module
 
 /**
@@ -86,6 +100,9 @@ Game.prototype.getObjectMaxLife = function(object){
     var price_bases=this.getObjectPriceBases(object);
     var price_base = price_bases.reduce(function(pv, cv) { return pv + cv; }, 0);
 
+
+    price_base=Math.prettyNumber(price_base);
+
     return(price_base);
 
 };
@@ -100,6 +117,8 @@ Game.prototype.getObjectMaxLife = function(object){
  */
 Game.prototype.getObjectPrices = function(object){
 
+    //console.log(this);
+
     var price_bases=this.getObjectPriceBases(object);
 
 
@@ -111,15 +130,27 @@ Game.prototype.getObjectPrices = function(object){
         return([]);
     }
 
+    var design_resources = self.getObjectDesignPrice(object);
 
     object.actions.forEach(function(action,i){
 
         var action_type = self.action_type_list[action.type];
 
-        var price_resources = action_type.price_resources.clone();
+
+
+        action_type.price_resources_list.sort(function(A,B){//todo is it safe?
+
+            return design_resources.compare(A)-design_resources.compare(B);
+
+        });
+
+
+        var price_resources = action_type.price_resources_list[0].clone();
+
 
         price_resources.multiply(price_bases[i]);
         prices.push(price_resources);
+
 
     });
 
@@ -136,19 +167,64 @@ Game.prototype.getObjectPrices = function(object){
  */
 Game.prototype.getObjectPrice = function(object){
 
-    var prices=this.getObjectPrices(object);
-
-
-    price = this.action_type_list.defense.price_resources.clone().multiply(0);//todo better
-    //price = prices[0].clone().multiply(0);
+    var price = new Resources({});
 
     //console.log('empty price',price);
+
+    var prices=this.getObjectPrices(object);
 
     prices.forEach(function(price_){
 
         price.add(price_);
 
     });
+
+    price.prettyNumbers();
+
+    return(price);
+
+};
+
+
+/**
+ * todo maybe this should be under model.class.js?
+ * @param {object} Object
+ * @return {object} Resources - design amount of resources
+ */
+Game.prototype.getObjectDesignPrice = function(object){
+
+    if(!object.hasOwnProperty('design'))throw new Error('Object should have design!');
+    if(object.design.type!='model')throw new Error('Object should have design of type model!');
+
+
+    var price = new Resources({});
+
+
+    model = new Model(object.design.data);
+
+    linear_particles = model.getLinearParticles();
+
+
+    linear_particles.forEach(function(linear_particle){
+
+        var volume=
+            linear_particle.size.x *
+            linear_particle.size.y *
+            linear_particle.size.z;
+
+        var material=linear_particle.material.split('_');
+        material=material[0];
+
+        var price_={};
+        price_[material]=volume;
+
+        price.add(price_);
+
+    });
+
+    /*console.log('price of');
+    console.log(object.design.data);
+    console.log(price);*/
 
 
     return(price);
