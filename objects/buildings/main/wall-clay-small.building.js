@@ -10,7 +10,7 @@ module.exports=
 {
     name: "Malá zeď",
     type: "building",
-    subtype: "main",
+    subtype: "wall",
 
     design: {
         type: "model",

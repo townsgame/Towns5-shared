@@ -10,36 +10,226 @@ module.exports=
 {
     name: "Velká palisáda",
     type: "building",
-    subtype: "main",
+    subtype: "wall",
 
     design: {
         type: "model",
-        data: {
-            name:'root',
-            particles: [
+        data:  {
+            "name": "root",
+            "particles": [
                 {
-                    name: '',
-                    shape: {
-                        type: 'prism',
-                        n:4,
-                        rotated:false,
-                        top: 1,
-                        bottom: 1
+                    "name": "",
+                    "particles": [
+                        {
+                            "name": "pillar",
+                            "particles": [
+                                {
+                                    "name": "",
+                                    "shape": {
+                                        "type": "prism",
+                                        "n": 20,
+                                        "top": 1,
+                                        "bottom": 1,
+                                        "rotated": false
+                                    },
+                                    "material": "wood_raw",
+                                    "position": {
+                                        "x": 0,
+                                        "y": 0,
+                                        "z": 0
+                                    },
+                                    "size": {
+                                        "x": 6,
+                                        "y": 6,
+                                        "z": 35
+                                    },
+                                    "rotation": 0,
+                                    "skew": {
+                                        "z": {
+                                            "x": 0,
+                                            "y": 0
+                                        }
+                                    }
+                                },
+                                {
+                                    "name": "",
+                                    "shape": {
+                                        "type": "prism",
+                                        "n": 13,
+                                        "top": 0,
+                                        "bottom": 1,
+                                        "rotated": false
+                                    },
+                                    "material": "wood_raw",
+                                    "position": {
+                                        "x": 0,
+                                        "y": 0,
+                                        "z": 35
+                                    },
+                                    "size": {
+                                        "x": 6,
+                                        "y": 6,
+                                        "z": 15
+                                    },
+                                    "rotation": 0,
+                                    "skew": {
+                                        "z": {
+                                            "x": 0,
+                                            "y": 0
+                                        }
+                                    }
+                                },
+                                {
+                                    "name": "",
+                                    "shape": {
+                                        "type": "prism",
+                                        "n": 4,
+                                        "top": 1,
+                                        "bottom": 1,
+                                        "rotated": false
+                                    },
+                                    "material": "wood_raw",
+                                    "position": {
+                                        "x": 0,
+                                        "y": 10,
+                                        "z": 0
+                                    },
+                                    "size": {
+                                        "x": 4,
+                                        "y": 4,
+                                        "z": 25
+                                    },
+                                    "rotation": 0,
+                                    "skew": {
+                                        "z": {
+                                            "x": 0,
+                                            "y": -2
+                                        }
+                                    }
+                                }
+                            ],
+                            "position": {
+                                "x": -25,
+                                "y": 0,
+                                "z": 0
+                            },
+                            "size": 1,
+                            "rotation": 0,
+                            "skew": {
+                                "z": {
+                                    "x": 0,
+                                    "y": 0
+                                }
+                            }
+                        },
+                        {
+                            "link": "pillar",
+                            "position": {
+                                "x": -20,
+                                "y": 0,
+                                "z": 0
+                            },
+                            "rotation": 0
+                        },
+                        {
+                            "link": "pillar",
+                            "position": {
+                                "x": -15,
+                                "y": 0,
+                                "z": 0
+                            },
+                            "rotation": 0
+                        },
+                        {
+                            "link": "pillar",
+                            "position": {
+                                "x": -10,
+                                "y": 0,
+                                "z": 0
+                            },
+                            "rotation": 0
+                        },
+                        {
+                            "link": "pillar",
+                            "position": {
+                                "x": -5,
+                                "y": 0,
+                                "z": 0
+                            },
+                            "rotation": 0
+                        },
+                        {
+                            "link": "pillar",
+                            "position": {
+                                "x": 0,
+                                "y": 0,
+                                "z": 0
+                            },
+                            "rotation": 0
+                        },
+                        {
+                            "link": "pillar",
+                            "position": {
+                                "x": 5,
+                                "y": 0,
+                                "z": 0
+                            },
+                            "rotation": 0
+                        },
+                        {
+                            "link": "pillar",
+                            "position": {
+                                "x": 10,
+                                "y": 0,
+                                "z": 0
+                            },
+                            "rotation": 0
+                        },
+                        {
+                            "link": "pillar",
+                            "position": {
+                                "x": 15,
+                                "y": 0,
+                                "z": 0
+                            },
+                            "rotation": 0
+                        },
+                        {
+                            "link": "pillar",
+                            "position": {
+                                "x": 20,
+                                "y": 0,
+                                "z": 0
+                            },
+                            "rotation": 0
+                        },
+                        {
+                            "link": "pillar",
+                            "position": {
+                                "x": 25,
+                                "y": 0,
+                                "z": 0
+                            },
+                            "rotation": 0
+                        }
+                    ],
+                    "position": {
+                        "x": 0,
+                        "y": 0,
+                        "z": 0
                     },
-                    material: 'clay_bricks',
-                    position: {x:0,y:0,z:0},
-                    size: {x:40,y:40,z:40},
-                    rotation: 0
+                    "size": 1,
+                    "rotation": 0,
+                    "skew": {
+                        "z": {
+                            "x": 0,
+                            "y": 0
+                        }
+                    }
                 }
-                /*
-                ,{
-                    link: Locale.get('shape cube'),
-                    position: {x:0,y:0,z:40},
-                    size: 0.7,
-                    rotation: 45
-                }
-                */
-            ]
+            ],
+            "rotation": 0,
+            "size": 1
         }
     },
 
