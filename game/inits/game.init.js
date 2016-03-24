@@ -79,7 +79,7 @@ var game = module.exports = new Game(
                 'amount': 'number'
             },
             function(params){
-                return((params.amount)*100000);
+                return((params.amount)*3600);
             },
             Resources.newSingles({
                 'wood':   3,
@@ -136,7 +136,7 @@ var game = module.exports = new Game(
                 'throughput': 'number'
             },
             function(params){
-                return((Math.pow(params.throughput/100,2))*100);
+                return((Math.pow(params.throughput/100,2))*10);//todo
             },
             Resources.newSingles({
                 'wood':   2,
