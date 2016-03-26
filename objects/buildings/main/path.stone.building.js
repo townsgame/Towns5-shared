@@ -10,36 +10,38 @@ module.exports=
 {
     name: "Kamenná cesta",
     type: "building",
-    subtype: "main",
+    subtype: "path",
 
     design: {
         type: "model",
-        data: {
-            name:'root',
-            particles: [
+        data:  {
+            "name": "root",
+            "particles": [
                 {
-                    name: '',
-                    shape: {
-                        type: 'prism',
-                        n:4,
-                        rotated:false,
-                        top: 1,
-                        bottom: 1
+                    "name": "",
+                    "shape": {
+                        "type": "prism",
+                        "n": 4,
+                        "rotated": false,
+                        "top": 1,
+                        "bottom": 1
                     },
-                    material: 'clay_bricks',
-                    position: {x:0,y:0,z:0},
-                    size: {x:40,y:40,z:40},
-                    rotation: 0
+                    "material": "stone_bricks",
+                    "position": {
+                        "x": 0,
+                        "y": 0,
+                        "z": 0
+                    },
+                    "size": {
+                        "x": 50,
+                        "y": 50,
+                        "z": 4
+                    },
+                    "rotation": 0
                 }
-                /*
-                ,{
-                    link: Locale.get('shape cube'),
-                    position: {x:0,y:0,z:40},
-                    size: 0.7,
-                    rotation: 45
-                }
-                */
-            ]
+            ],
+            "rotation": 0,
+            "size": 1
         }
     },
 
