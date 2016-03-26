@@ -17,6 +17,8 @@ if(typeof Game=='undefined'){
 //Creating module
 
 
+var K=0.05;
+
 
 var game = module.exports = new Game(
     {
@@ -27,11 +29,11 @@ var game = module.exports = new Game(
                 'defense': 'number'
             },
             function(params){
-                return((params.defense)*10);
+                return((params.defense)*800*K);
             },
             Resources.newSingles({//todo in future should be resources and k in separate file.
                 'wood':   2,
-                'clay':   0,
+                'clay':   2,
                 'stone':  1,
                 'iron':   0
             })
@@ -43,13 +45,13 @@ var game = module.exports = new Game(
                 'regenerate': 'number'
             },
             function(params){
-                return((1/params.regenerate)*3600);
+                return((1/params.regenerate)*3600*K);
             },
             Resources.newSingles({
                 'wood':   4,
                 'clay':   2,
-                'stone':  0,
-                'iron':   0
+                'stone':  2,
+                'iron':   2
             })
         ),
         //---------------------------------------------Repair
@@ -59,13 +61,13 @@ var game = module.exports = new Game(
                 'repair': 'number'
             },
             function(params){
-                return((1/(params.repair/100))*1000);
+                return((1/(params.repair/100))*1000*K);
             },
             Resources.newSingles({
                 'wood':   4,
                 'clay':   2,
-                'stone':  0,
-                'iron':   0
+                'stone':  3,
+                'iron':   4
             }),
             function(object,params){
 
@@ -79,12 +81,12 @@ var game = module.exports = new Game(
                 'amount': 'number'
             },
             function(params){
-                return((params.amount)*3600);
+                return((params.amount)*3600*K);
             },
             Resources.newSingles({
                 'wood':   3,
-                'clay':   0,
-                'stone':  0,
+                'clay':   2,
+                'stone':  2,
                 'iron':   4
             })
         ),
@@ -98,10 +100,10 @@ var game = module.exports = new Game(
                 'cooldown': 'number'
             },
             function(params){
-                return((Math.pow(params.distance,2)*params.strength*params.rounds*(1/params.cooldown))*100);
+                return((Math.pow(params.distance,2)*params.strength*params.rounds*(1/params.cooldown))*100*K);
             },
             Resources.newSingles({
-                'wood':   0,
+                'wood':   2,
                 'clay':   0,
                 'stone':  3,
                 'iron':   2
@@ -117,7 +119,7 @@ var game = module.exports = new Game(
                 'speed': 'number'
             },
             function(params){
-                return((Math.pow(params.speed,2))*10);
+                return((Math.pow(params.speed,2))*10*K);
             },
             Resources.newSingles({
                 'wood':   2,
@@ -136,7 +138,7 @@ var game = module.exports = new Game(
                 'throughput': 'number'
             },
             function(params){
-                return((Math.pow(params.throughput/100,2))*10);//todo
+                return((Math.pow(params.throughput/100,2))*10*K);//todo
             },
             Resources.newSingles({
                 'wood':   2,
