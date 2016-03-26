@@ -14,9 +14,37 @@ var Resources = module.exports = function(resources){
 
     for(var key in resources){
         if(typeof resources[key]=='number') {
-            this[key] = resources[key];
+            this[key] = Math.ceil(resources[key]);
         }
     }
+
+};
+
+
+
+
+
+/**
+ * @return {array} new Resources
+ */
+Resources.newSingles = function(resources){
+
+    var resources_array=[];
+
+    for(var key in resources){
+        if(typeof resources[key]=='number') {
+            if(resources[key]>0) {
+
+                var resources_={};
+                resources_[key]=resources[key];
+
+                resources_array.push(new Resources(resources_));
+
+            }
+        }
+    }
+
+    return resources_array;
 
 };
 
@@ -94,13 +122,111 @@ Resources.prototype.multiply = function(k){
     for(var key in this){
 
         if(typeof this[key]=='number'){//todo better solution
-            this[key] = this[key] * k;
+            this[key] = Math.ceil(this[key] * k);
         }
 
 
     }
 
     return this;
+
+};
+
+
+/**
+ * @param {number} k
+ * @return {bool} success
+ */
+Resources.prototype.prettyNumbers = function(){
+
+    for(var key in this){
+
+        if(typeof this[key]=='number'){//todo better solution
+            this[key] = Math.prettyNumber(this[key]);
+        }
+
+    }
+
+    return this;
+
+};
+
+
+
+/**
+ * todo
+ */
+Resources.prototype.extractKeys = function(resoures){
+
+    var keys=[];
+
+    for(var key in this){
+
+        if(typeof this[key]=='number'){//todo better solution
+            keys.push(key);
+        }
+
+
+    }
+
+    return(keys);
+
+};
+
+
+
+
+
+
+/**
+ * todo
+ */
+Resources.prototype.compare = function(resoures){
+
+    var resources_A=this;
+    var resources_B=resoures;
+
+    //console.log('comparing ');
+    //console.log(resources_A);
+    //console.log(resources_B);
+
+    var keys=[];
+
+    keys=keys.concat(resources_A.extractKeys());
+    keys=keys.concat(resources_B.extractKeys());
+
+
+    keys=keys.filter(function(value, index, self) {
+        return self.indexOf(value) === index;
+    });
+
+    //console.log(keys);
+
+    var distance=0;
+
+    for(var i in keys){
+
+        var key = keys[i];
+
+        val_A = resources_A[key];
+        val_B = resources_B[key];
+
+        //console.log(key,val_A,val_B);
+
+        if(typeof val_A=='undefined')val_A=0;
+        if(typeof val_B=='undefined')val_B=0;
+
+        distance+=Math.pow(val_A-val_B,2);
+
+    }
+
+    distance=Math.sqrt(distance);
+
+
+    //console.log(distance);
+
+
+    return(distance);
 
 };
 

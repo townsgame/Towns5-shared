@@ -10,14 +10,14 @@
  * @param {string} type enum('active', 'passive', 'triggered') //todo refactor
  * @param {object} params {param: type}
  * @param {function} price_base
- * @param {array} price_resource
+ * @param {array} price_resources_list
  * @param {function} perform
  * @constructor
  */
-var ActionType = module.exports = function(type, params, price_base, price_resource, perform){
+var ActionType = module.exports = function(type, params, price_base, price_resources_list, perform){
     this.type = type;
     this.params = params;
     this.price_base = price_base;
-    this.price_resource = price_resource;
+    this.price_resources_list = price_resources_list;
     this.perform = perform;
 };

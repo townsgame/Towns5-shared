@@ -18,12 +18,6 @@ if(typeof Game=='undefined'){
 
 
 
-
-
-
-
-
-
 var game = module.exports = new Game(
     {
         //---------------------------------------------Defense
@@ -35,7 +29,7 @@ var game = module.exports = new Game(
             function(params){
                 return((params.defense)*10);
             },
-            new Resources({//todo in future should be resources and k in separate file.
+            Resources.newSingles({//todo in future should be resources and k in separate file.
                 'wood':   2,
                 'clay':   0,
                 'stone':  1,
@@ -51,7 +45,7 @@ var game = module.exports = new Game(
             function(params){
                 return((1/params.regenerate)*3600);
             },
-            new Resources({
+            Resources.newSingles({
                 'wood':   4,
                 'clay':   2,
                 'stone':  0,
@@ -67,7 +61,7 @@ var game = module.exports = new Game(
             function(params){
                 return((1/(params.repair/100))*1000);
             },
-            new Resources({
+            Resources.newSingles({
                 'wood':   4,
                 'clay':   2,
                 'stone':  0,
@@ -85,9 +79,9 @@ var game = module.exports = new Game(
                 'amount': 'number'
             },
             function(params){
-                return((params.amount)*100000);
+                return((params.amount)*3600);
             },
-            new Resources({
+            Resources.newSingles({
                 'wood':   3,
                 'clay':   0,
                 'stone':  0,
@@ -106,7 +100,7 @@ var game = module.exports = new Game(
             function(params){
                 return((Math.pow(params.distance,2)*params.strength*params.rounds*(1/params.cooldown))*100);
             },
-            new Resources({
+            Resources.newSingles({
                 'wood':   0,
                 'clay':   0,
                 'stone':  3,
@@ -125,7 +119,7 @@ var game = module.exports = new Game(
             function(params){
                 return((Math.pow(params.speed,2))*10);
             },
-            new Resources({
+            Resources.newSingles({
                 'wood':   2,
                 'clay':   0,
                 'stone':  0,
@@ -142,9 +136,9 @@ var game = module.exports = new Game(
                 'throughput': 'number'
             },
             function(params){
-                return((Math.pow(params.throughput/100,2))*100);
+                return((Math.pow(params.throughput/100,2))*10);//todo
             },
-            new Resources({
+            Resources.newSingles({
                 'wood':   2,
                 'clay':   3,
                 'stone':  1,
