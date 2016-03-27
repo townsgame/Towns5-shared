@@ -14,32 +14,311 @@ module.exports=
 
     design: {
         type: "model",
-        data: {
-            name:'root',
-            particles: [
+        data:  {
+            "name": "root",
+            "particles": [
                 {
-                    name: '',
-                    shape: {
-                        type: 'prism',
-                        n:4,
-                        rotated:false,
-                        top: 1,
-                        bottom: 1
+                    "name": "",
+                    "particles": [
+                        {
+                            "name": "wheel",
+                            "shape": {
+                                "type": "prism",
+                                "n": 20,
+                                "rotated": true,
+                                "top": 1,
+                                "bottom": 1
+                            },
+                            "material": "wood_fence",
+                            "position": {
+                                "x": 15,
+                                "y": 20,
+                                "z": 0
+                            },
+                            "size": {
+                                "x": 5,
+                                "y": 20,
+                                "z": 20
+                            },
+                            "rotation": 0
+                        },
+                        {
+                            "link": "wheel",
+                            "position": {
+                                "x": -15,
+                                "y": 20,
+                                "z": 0
+                            },
+                            "rotation": 0
+                        },
+                        {
+                            "link": "wheel",
+                            "position": {
+                                "x": 15,
+                                "y": -20,
+                                "z": 0
+                            },
+                            "rotation": 0
+                        },
+                        {
+                            "link": "wheel",
+                            "position": {
+                                "x": -15,
+                                "y": -20,
+                                "z": 0
+                            },
+                            "rotation": 0
+                        }
+                    ],
+                    "position": {
+                        "x": 0,
+                        "y": 0,
+                        "z": 0
                     },
-                    material: 'clay_bricks',
-                    position: {x:0,y:0,z:0},
-                    size: {x:40,y:40,z:40},
-                    rotation: 0
+                    "size": 1,
+                    "rotation": 0,
+                    "skew": {
+                        "z": {
+                            "x": 0,
+                            "y": 0
+                        }
+                    }
+                },
+                {
+                    "name": "",
+                    "shape": {
+                        "type": "prism",
+                        "n": 4,
+                        "top": 1,
+                        "bottom": 1,
+                        "rotated": false
+                    },
+                    "material": "wood_raw",
+                    "position": {
+                        "x": 0,
+                        "y": 0,
+                        "z": 6
+                    },
+                    "size": {
+                        "x": 35,
+                        "y": 76,
+                        "z": 10
+                    },
+                    "rotation": 0,
+                    "skew": {
+                        "z": {
+                            "x": 0,
+                            "y": 0
+                        }
+                    }
+                },
+                {
+                    "name": "m",
+                    "particles": [
+                        {
+                            "name": "",
+                            "shape": {
+                                "type": "prism",
+                                "n": 4,
+                                "top": 1,
+                                "bottom": 1,
+                                "rotated": false
+                            },
+                            "material": "clay_bricks",
+                            "position": {
+                                "x": -8,
+                                "y": 0,
+                                "z": 0
+                            },
+                            "size": {
+                                "x": 5,
+                                "y": 10,
+                                "z": 30
+                            },
+                            "rotation": 0,
+                            "skew": {
+                                "z": {
+                                    "x": 0,
+                                    "y": 0
+                                }
+                            }
+                        },
+                        {
+                            "name": "",
+                            "shape": {
+                                "type": "prism",
+                                "n": 4,
+                                "top": 1,
+                                "bottom": 1,
+                                "rotated": false
+                            },
+                            "material": "clay_bricks",
+                            "position": {
+                                "x": 8,
+                                "y": 0,
+                                "z": 0
+                            },
+                            "size": {
+                                "x": 5,
+                                "y": 10,
+                                "z": 30
+                            },
+                            "rotation": 0,
+                            "skew": {
+                                "z": {
+                                    "x": 0,
+                                    "y": 0
+                                }
+                            }
+                        },
+                        {
+                            "name": "",
+                            "shape": {
+                                "type": "prism",
+                                "n": 4,
+                                "top": 1,
+                                "bottom": 1,
+                                "rotated": false
+                            },
+                            "material": "iron_plates",
+                            "position": {
+                                "x": 0,
+                                "y": 0,
+                                "z": 15
+                            },
+                            "size": {
+                                "x": 2,
+                                "y": 2,
+                                "z": 15
+                            },
+                            "rotation": 0,
+                            "skew": {
+                                "z": {
+                                    "x": -4,
+                                    "y": 0
+                                }
+                            }
+                        },
+                        {
+                            "name": "",
+                            "shape": {
+                                "type": "prism",
+                                "n": 4,
+                                "top": 1,
+                                "bottom": 1,
+                                "rotated": false
+                            },
+                            "material": "iron_plates",
+                            "position": {
+                                "x": 0,
+                                "y": 0,
+                                "z": 15
+                            },
+                            "size": {
+                                "x": 2,
+                                "y": 2,
+                                "z": 15
+                            },
+                            "rotation": 0,
+                            "skew": {
+                                "z": {
+                                    "x": 4,
+                                    "y": 0
+                                }
+                            }
+                        }
+                    ],
+                    "position": {
+                        "x": 0,
+                        "y": -20,
+                        "z": 16
+                    },
+                    "size": 1,
+                    "rotation": 0,
+                    "skew": {
+                        "z": {
+                            "x": 0,
+                            "y": 0
+                        }
+                    }
+                },
+                {
+                    "link": "m",
+                    "position": {
+                        "x": 0,
+                        "y": 0,
+                        "z": 16
+                    },
+                    "rotation": 0
+                },
+                {
+                    "link": "m",
+                    "position": {
+                        "x": 0,
+                        "y": 20,
+                        "z": 16
+                    },
+                    "rotation": 0
+                },
+                {
+                    "name": "",
+                    "shape": {
+                        "type": "prism",
+                        "n": 20,
+                        "top": 1,
+                        "bottom": 1,
+                        "rotated": true
+                    },
+                    "material": "wood_fence",
+                    "position": {
+                        "x": 0,
+                        "y": 7,
+                        "z": 24
+                    },
+                    "size": {
+                        "x": 35,
+                        "y": 13,
+                        "z": 13
+                    },
+                    "rotation": 90,
+                    "skew": {
+                        "z": {
+                            "x": 0,
+                            "y": 0
+                        }
+                    }
+                },
+                {
+                    "name": "",
+                    "shape": {
+                        "type": "prism",
+                        "n": 9,
+                        "top": 1,
+                        "bottom": 1,
+                        "rotated": true
+                    },
+                    "material": "wood_raw",
+                    "position": {
+                        "x": 0,
+                        "y": 40,
+                        "z": 23
+                    },
+                    "size": {
+                        "x": 3,
+                        "y": 15,
+                        "z": 15
+                    },
+                    "rotation": 90,
+                    "skew": {
+                        "z": {
+                            "x": 0,
+                            "y": 0
+                        }
+                    }
                 }
-                /*
-                ,{
-                    link: Locale.get('shape cube'),
-                    position: {x:0,y:0,z:40},
-                    size: 0.7,
-                    rotation: 45
-                }
-                */
-            ]
+            ],
+            "rotation": 0,
+            "size": 1
         }
     },
 

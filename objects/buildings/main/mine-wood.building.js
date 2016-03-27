@@ -14,32 +14,279 @@ module.exports=
 
     design: {
         type: "model",
-        data: {
-            name:'root',
-            particles: [
+        data:  {
+            "name": "root",
+            "particles": [
                 {
-                    name: '',
-                    shape: {
-                        type: 'prism',
-                        n:4,
-                        rotated:false,
-                        top: 1,
-                        bottom: 1
+                    "name": "",
+                    "particles": [
+                        {
+                            "name": "woods",
+                            "particles": [
+                                {
+                                    "name": "wood",
+                                    "shape": {
+                                        "type": "prism",
+                                        "n": 4,
+                                        "top": 1,
+                                        "bottom": 1,
+                                        "rotated": false
+                                    },
+                                    "material": "wood_fence",
+                                    "position": {
+                                        "x": -10,
+                                        "y": 0,
+                                        "z": 0
+                                    },
+                                    "size": {
+                                        "x": 5,
+                                        "y": 50,
+                                        "z": 5
+                                    },
+                                    "rotation": 0,
+                                    "skew": {
+                                        "z": {
+                                            "x": 0,
+                                            "y": 0
+                                        }
+                                    }
+                                },
+                                {
+                                    "link": "wood",
+                                    "position": {
+                                        "x": 0,
+                                        "y": 0,
+                                        "z": 0
+                                    },
+                                    "rotation": 0
+                                },
+                                {
+                                    "link": "wood",
+                                    "position": {
+                                        "x": 10,
+                                        "y": 0,
+                                        "z": 0
+                                    },
+                                    "rotation": 0
+                                }
+                            ],
+                            "position": {
+                                "x": 0,
+                                "y": 0,
+                                "z": 0
+                            },
+                            "size": 1,
+                            "rotation": 0,
+                            "skew": {
+                                "z": {
+                                    "x": 0,
+                                    "y": 0
+                                }
+                            }
+                        },
+                        {
+                            "link": "woods",
+                            "position": {
+                                "x": 0,
+                                "y": 0,
+                                "z": 5
+                            },
+                            "rotation": 90
+                        },
+                        {
+                            "link": "woods",
+                            "position": {
+                                "x": 0,
+                                "y": 0,
+                                "z": 10
+                            },
+                            "rotation": 30
+                        }
+                    ],
+                    "position": {
+                        "x": 0,
+                        "y": 0,
+                        "z": 0
                     },
-                    material: 'clay_bricks',
-                    position: {x:0,y:0,z:0},
-                    size: {x:40,y:40,z:40},
-                    rotation: 0
+                    "size": 1,
+                    "rotation": 0,
+                    "skew": {
+                        "z": {
+                            "x": 0,
+                            "y": 0
+                        }
+                    }
+                },
+                {
+                    "name": "t",
+                    "particles": [
+                        {
+                            "name": "",
+                            "shape": {
+                                "type": "prism",
+                                "n": 4,
+                                "top": 1,
+                                "bottom": 1,
+                                "rotated": false
+                            },
+                            "material": "wood_raw",
+                            "position": {
+                                "x": 0,
+                                "y": 0,
+                                "z": 0
+                            },
+                            "size": {
+                                "x": 7,
+                                "y": 7,
+                                "z": 50
+                            },
+                            "rotation": 0,
+                            "skew": {
+                                "z": {
+                                    "x": 0,
+                                    "y": 0
+                                }
+                            }
+                        },
+                        {
+                            "name": "",
+                            "shape": {
+                                "type": "prism",
+                                "n": 4,
+                                "top": 1,
+                                "bottom": 1,
+                                "rotated": false
+                            },
+                            "material": "wood_raw",
+                            "position": {
+                                "x": 0,
+                                "y": 7,
+                                "z": 50
+                            },
+                            "size": {
+                                "x": 7,
+                                "y": 40,
+                                "z": 7
+                            },
+                            "rotation": 0,
+                            "skew": {
+                                "z": {
+                                    "x": 0,
+                                    "y": 0
+                                }
+                            }
+                        },
+                        {
+                            "name": "",
+                            "shape": {
+                                "type": "prism",
+                                "n": 4,
+                                "top": 1,
+                                "bottom": 1,
+                                "rotated": false
+                            },
+                            "material": "iron_plates",
+                            "position": {
+                                "x": 0,
+                                "y": 0,
+                                "z": 0
+                            },
+                            "size": {
+                                "x": 20,
+                                "y": 20,
+                                "z": 10
+                            },
+                            "rotation": 0,
+                            "skew": {
+                                "z": {
+                                    "x": 0,
+                                    "y": 0
+                                }
+                            }
+                        },
+                        {
+                            "name": "",
+                            "shape": {
+                                "type": "prism",
+                                "n": 4,
+                                "top": 1,
+                                "bottom": 1,
+                                "rotated": false
+                            },
+                            "material": "wood_boards",
+                            "position": {
+                                "x": 0,
+                                "y": 20,
+                                "z": 4
+                            },
+                            "size": {
+                                "x": 2,
+                                "y": 2,
+                                "z": 50
+                            },
+                            "rotation": 0,
+                            "skew": {
+                                "z": {
+                                    "x": 0,
+                                    "y": 0
+                                }
+                            }
+                        }
+                    ],
+                    "position": {
+                        "x": 20,
+                        "y": -25,
+                        "z": 0
+                    },
+                    "size": 1,
+                    "rotation": 0,
+                    "skew": {
+                        "z": {
+                            "x": 0,
+                            "y": 0
+                        }
+                    }
+                },
+                {
+                    "link": "t",
+                    "position": {
+                        "x": -20,
+                        "y": -25,
+                        "z": 0
+                    },
+                    "rotation": 0
+                },
+                {
+                    "name": "",
+                    "shape": {
+                        "type": "prism",
+                        "n": 4,
+                        "top": 1,
+                        "bottom": 1,
+                        "rotated": false
+                    },
+                    "material": "wood_boards",
+                    "position": {
+                        "x": 0,
+                        "y": -4,
+                        "z": 4
+                    },
+                    "size": {
+                        "x": 60,
+                        "y": 2,
+                        "z": 2
+                    },
+                    "rotation": 0,
+                    "skew": {
+                        "z": {
+                            "x": 0,
+                            "y": 0
+                        }
+                    }
                 }
-                /*
-                ,{
-                    link: Locale.get('shape cube'),
-                    position: {x:0,y:0,z:40},
-                    size: 0.7,
-                    rotation: 45
-                }
-                */
-            ]
+            ],
+            "rotation": 0,
+            "size": 1
         }
     },
 
