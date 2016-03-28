@@ -153,11 +153,11 @@ Resources.prototype.apply = function(modifier){
 };
 
 
-
 /**
- * todo
- */
-Resources.prototype.extractKeys = function(resoures){
+ *
+ * @return {Array} all resources keys
+*/
+Resources.prototype.extractKeys = function(){
 
     var keys=[];
 
@@ -175,21 +175,15 @@ Resources.prototype.extractKeys = function(resoures){
 };
 
 
-
-
-
-
 /**
- * todo
+ *
+ * @param {object} Resoures
+ * @return {number} Distance between this and given Resources
  */
 Resources.prototype.compare = function(resoures){
 
     var resources_A=this;
     var resources_B=resoures;
-
-    //console.log('comparing ');
-    //console.log(resources_A);
-    //console.log(resources_B);
 
     var keys=[];
 
@@ -201,7 +195,6 @@ Resources.prototype.compare = function(resoures){
         return self.indexOf(value) === index;
     });
 
-    //console.log(keys);
 
     var distance=0;
 
@@ -212,7 +205,6 @@ Resources.prototype.compare = function(resoures){
         val_A = resources_A[key];
         val_B = resources_B[key];
 
-        //console.log(key,val_A,val_B);
 
         if(typeof val_A=='undefined')val_A=0;
         if(typeof val_B=='undefined')val_B=0;
@@ -222,9 +214,6 @@ Resources.prototype.compare = function(resoures){
     }
 
     distance=Math.sqrt(distance);
-
-
-    //console.log(distance);
 
 
     return(distance);
@@ -253,9 +242,10 @@ Resources.prototype.remove = function(resources){
 };
 
 
-
-
-
+/**
+ * Converts Resources to simple string
+ * @return {string}
+ */
 Resources.prototype.toString = function(){
 
     var strings = [];
