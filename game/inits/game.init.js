@@ -7,6 +7,8 @@
 
 if(typeof Game=='undefined'){
 
+    require(__dirname+'/../classes-static/math.static.js');
+
     var Game = require(__dirname+'/../classes/game.class.js');
     var ActionType = require(__dirname+'/../classes/action-type.class.js');
     var Resources = require(__dirname+'/../classes/resources.class.js');
@@ -150,5 +152,8 @@ var game = module.exports = new Game(
         //---------------------------------------------
 
 
-    }
+    },
+    Math.prettyNumber,
+    Math.prettyNumber
+
 );

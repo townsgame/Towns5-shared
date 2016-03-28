@@ -7,8 +7,6 @@
 
 if(typeof Resources=='undefined'){
 
-    require(__dirname+'/../classes-static/math.static.js');
-
     var Resources = require(__dirname+'/resources.class.js');
     var Model = require(__dirname+'/model.class.js');
 
@@ -22,11 +20,15 @@ if(typeof Resources=='undefined'){
 /**
  *
  * @param {array} action_type_list
+ * @param {function} max_life_modifier
+ * @param {function} price_key_modifier
  * @constructor
  */
-var Game = module.exports = function(action_type_list){
+var Game = module.exports = function(action_type_list,max_life_modifier,price_key_modifier){
 
     this.action_type_list = action_type_list;
+    this.max_life_modifier = max_life_modifier;
+    this.price_key_modifier = price_key_modifier;
 
 };
 
@@ -101,7 +103,7 @@ Game.prototype.getObjectMaxLife = function(object){
     var price_base = price_bases.reduce(function(pv, cv) { return pv + cv; }, 0);
 
 
-    price_base=Math.prettyNumber(price_base);
+    price_base=this.max_life_modifier(price_base);
 
     return(price_base);
 
@@ -179,7 +181,7 @@ Game.prototype.getObjectPrice = function(object){
 
     });
 
-    price.prettyNumbers();
+    price.apply(this.price_key_modifier);
 
     return(price);
 

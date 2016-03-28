@@ -25,6 +25,7 @@ var Resources = module.exports = function(resources){
 
 
 /**
+ * @static
  * @return {array} new Resources
  */
 Resources.newSingles = function(resources){
@@ -134,15 +135,15 @@ Resources.prototype.multiply = function(k){
 
 
 /**
- * @param {number} k
- * @return {bool} success
+ * @param {function} modifier
+ * @return this
  */
-Resources.prototype.prettyNumbers = function(){
+Resources.prototype.apply = function(modifier){
 
     for(var key in this){
 
         if(typeof this[key]=='number'){//todo better solution
-            this[key] = Math.prettyNumber(this[key]);
+            this[key] = modifier(this[key]);
         }
 
     }
