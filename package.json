@@ -1,6 +1,6 @@
 {
   "name": "towns5shared",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Shared library for game Towns 5",
   "main": "index.js",
   "scripts": {
