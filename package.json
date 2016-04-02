@@ -1,0 +1,21 @@
+{
+  "name": "towns5shared",
+  "version": "0.1.1",
+  "description": "Shared library for game Towns 5",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@bitbucket.org/towns/towns-shared.git"
+  },
+  "keywords": [
+    "towns5",
+    "shared",
+    "library"
+  ],
+  "author": "Stefan Kecskes <mr.kecskes@gmail.com> (https://skey.uk)",
+  "license": "MIT",
+  "homepage": "https://bitbucket.org/towns/towns-shared#readme"
+}

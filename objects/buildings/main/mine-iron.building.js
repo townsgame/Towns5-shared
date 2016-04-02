@@ -8,8 +8,8 @@
 
 module.exports=
 {
-    name: "xxxxxx",
-    type: "Těžba železa",
+    name: "Těžba železa",
+    type: "building",
     subtype: "main",
 
     design: {
