@@ -418,7 +418,7 @@ Model.prototype.getLinearParticles = function(){
 
     particles2Linear(model.particles,false,model.rotation,model.size);
 
-    delete model;
+    //todo strict mode//delete model;
 
     return(particlesLinear);
 
