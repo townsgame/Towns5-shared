@@ -139,10 +139,9 @@ Game.prototype.getObjectPrices = function(object){
         var action_type = self.action_type_list[action.type];
 
 
-
         action_type.price_resources_list.sort(function(A,B){//todo is it safe?
 
-            return design_resources.compare(A)-design_resources.compare(B);
+            return design_resources.compare(A.clone().signum())-design_resources.compare(B.clone().signum());
 
         });
 
@@ -228,6 +227,7 @@ Game.prototype.getObjectDesignPrice = function(object){
     console.log(object.design.data);
     console.log(price);*/
 
+    //price.multiply(0.01);
 
     return(price);
 

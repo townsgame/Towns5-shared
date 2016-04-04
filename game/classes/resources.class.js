@@ -116,7 +116,7 @@ Resources.prototype.add = function(resources){
 
 /**
  * @param {number} k
- * @return {bool} success
+ * @return this
  */
 Resources.prototype.multiply = function(k){
 
@@ -132,6 +132,38 @@ Resources.prototype.multiply = function(k){
     return this;
 
 };
+
+
+
+/**
+ * @param {number} k
+ * @return this
+ */
+Resources.prototype.signum = function(k){
+
+    for(var key in this){
+
+        if(typeof this[key]=='number'){//todo better solution
+
+            if(this[key]>0){
+
+                this[key]=1;
+
+            }else{
+
+                this[key]=0
+
+            }
+
+        }
+
+
+    }
+
+    return this;
+
+};
+
 
 
 /**

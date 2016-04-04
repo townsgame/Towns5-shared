@@ -54,6 +54,7 @@
             var max_life = game.getObjectMaxLife(object_json);
             var prices = game.getObjectPrices(object_json);
             var price = game.getObjectPrice(object_json);
+            var design_price = game.getObjectDesignPrice(object_json);
 
             $('#object-price').html('');
 
@@ -63,6 +64,13 @@
 
 
             $('#object-price').append('<br><hr><br>');
+
+
+            $('#object-price').append('<b>Design price of building:</b><br>');
+            $('#object-price').append(design_price.toString());
+
+
+            $('#object-price').append('<br><br>');
 
 
             $('#object-price').append('<b>Price of building:</b><br>');
