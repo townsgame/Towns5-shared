@@ -34,7 +34,7 @@ module.exports=
                     },
                     "size": {
                         "x": 50,
-                        "y": 50,
+                        "y": 35,
                         "z": 4
                     },
                     "rotation": 0
