@@ -14,32 +14,154 @@ module.exports=
 
     design: {
         type: "model",
-        data: {
-            name:'root',
-            particles: [
+        data:  {
+            "name": "",
+            "particles": [
                 {
-                    name: '',
-                    shape: {
-                        type: 'prism',
-                        n:4,
-                        rotated:false,
-                        top: 1,
-                        bottom: 1
+                    "name": "grid",
+                    "particles": [
+                        {
+                            "name": "i",
+                            "shape": {
+                                "type": "prism",
+                                "n": 4,
+                                "rotated": false,
+                                "top": 1,
+                                "bottom": 1
+                            },
+                            "material": "wood_fence",
+                            "position": {
+                                "x": 5,
+                                "y": 0,
+                                "z": 0
+                            },
+                            "size": {
+                                "x": 1,
+                                "y": 40,
+                                "z": 2
+                            },
+                            "rotation": 0
+                        },
+                        {
+                            "link": "i",
+                            "position": {
+                                "x": -5,
+                                "y": 0,
+                                "z": 0
+                            },
+                            "rotation": 0
+                        },
+                        {
+                            "link": "i",
+                            "position": {
+                                "x": 10,
+                                "y": 0,
+                                "z": 0
+                            },
+                            "rotation": 0
+                        },
+                        {
+                            "link": "i",
+                            "position": {
+                                "x": -10,
+                                "y": 0,
+                                "z": 0
+                            },
+                            "rotation": 0
+                        },
+                        {
+                            "link": "i",
+                            "position": {
+                                "x": 0,
+                                "y": 0,
+                                "z": 0
+                            },
+                            "rotation": 0
+                        }
+                    ],
+                    "position": {
+                        "x": 0,
+                        "y": 0,
+                        "z": 0
                     },
-                    material: 'clay_bricks',
-                    position: {x:0,y:0,z:0},
-                    size: {x:40,y:40,z:40},
-                    rotation: 0
+                    "size": 1,
+                    "rotation": 0,
+                    "skew": {
+                        "z": {
+                            "x": 0,
+                            "y": 0
+                        }
+                    }
+                },
+                {
+                    "link": "grid",
+                    "position": {
+                        "x": 0,
+                        "y": 0,
+                        "z": 0
+                    },
+                    "rotation": 90
+                },
+                {
+                    "name": "",
+                    "particles": [
+                        {
+                            "name": "",
+                            "shape": {
+                                "type": "prism",
+                                "n": 9,
+                                "top": 0.2,
+                                "bottom": 1,
+                                "rotated": false
+                            },
+                            "material": "stone_bricks",
+                            "position": {
+                                "x": 5,
+                                "y": 5,
+                                "z": 0
+                            },
+                            "size": {
+                                "x": 20,
+                                "y": 15,
+                                "z": 20
+                            },
+                            "rotation": 320,
+                            "skew": {
+                                "z": {
+                                    "x": 0,
+                                    "y": 0
+                                }
+                            }
+                        }
+                    ],
+                    "position": {
+                        "x": 0,
+                        "y": 0,
+                        "z": 0
+                    },
+                    "size": 1,
+                    "rotation": 0,
+                    "skew": {
+                        "z": {
+                            "x": 0,
+                            "y": 0
+                        }
+                    }
                 }
-                /*
-                ,{
-                    link: Locale.get('shape cube'),
-                    position: {x:0,y:0,z:40},
-                    size: 0.7,
-                    rotation: 45
+            ],
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "size": 1,
+            "rotation": 0,
+            "skew": {
+                "z": {
+                    "x": 0,
+                    "y": 0
                 }
-                */
-            ]
+            }
         }
     },
 
