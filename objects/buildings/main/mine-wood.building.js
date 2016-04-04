@@ -286,7 +286,7 @@ module.exports=
                 }
             ],
             "rotation": 0,
-            "size": 1
+            "size": 0.6
         }
     },
 

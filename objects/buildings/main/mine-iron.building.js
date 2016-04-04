@@ -14,32 +14,140 @@ module.exports=
 
     design: {
         type: "model",
-        data: {
-            name:'root',
-            particles: [
+        data:  {
+            "name": "root",
+            "particles": [
                 {
-                    name: '',
-                    shape: {
-                        type: 'prism',
-                        n:4,
-                        rotated:false,
-                        top: 1,
-                        bottom: 1
+                    "name": "",
+                    "particles": [
+                        {
+                            "name": "",
+                            "shape": {
+                                "type": "prism",
+                                "n": 6,
+                                "top": 0.25,
+                                "bottom": 1,
+                                "rotated": false
+                            },
+                            "material": "stone_bricks",
+                            "position": {
+                                "x": 0,
+                                "y": 0,
+                                "z": 0
+                            },
+                            "size": {
+                                "x": 20,
+                                "y": 20,
+                                "z": 30
+                            },
+                            "rotation": 0,
+                            "skew": {
+                                "z": {
+                                    "x": 0,
+                                    "y": 0
+                                }
+                            }
+                        },
+                        {
+                            "name": "",
+                            "particles": [
+                                {
+                                    "name": "u",
+                                    "particles": [
+                                        {
+                                            "name": "",
+                                            "shape": {
+                                                "type": "prism",
+                                                "n": 6,
+                                                "top": 0.3,
+                                                "bottom": 1,
+                                                "rotated": false
+                                            },
+                                            "material": "stone_plain",
+                                            "position": {
+                                                "x": 10,
+                                                "y": 0,
+                                                "z": 0
+                                            },
+                                            "size": {
+                                                "x": 15,
+                                                "y": 15,
+                                                "z": 20
+                                            },
+                                            "rotation": 0,
+                                            "skew": {
+                                                "z": {
+                                                    "x": 0,
+                                                    "y": 0
+                                                }
+                                            }
+                                        }
+                                    ],
+                                    "position": {
+                                        "x": 0,
+                                        "y": 0,
+                                        "z": 0
+                                    },
+                                    "size": 1,
+                                    "rotation": 0,
+                                    "skew": {
+                                        "z": {
+                                            "x": 0,
+                                            "y": 0
+                                        }
+                                    }
+                                },
+                                {
+                                    "link": "u",
+                                    "position": {
+                                        "x": 0,
+                                        "y": 0,
+                                        "z": 0
+                                    },
+                                    "rotation": 120
+                                },
+                                {
+                                    "link": "u",
+                                    "position": {
+                                        "x": 0,
+                                        "y": 0,
+                                        "z": 0
+                                    },
+                                    "rotation": 240
+                                }
+                            ],
+                            "position": {
+                                "x": 0,
+                                "y": 0,
+                                "z": 0
+                            },
+                            "size": 1,
+                            "rotation": 0,
+                            "skew": {
+                                "z": {
+                                    "x": 0,
+                                    "y": 0
+                                }
+                            }
+                        }
+                    ],
+                    "position": {
+                        "x": 0,
+                        "y": 0,
+                        "z": 0
                     },
-                    material: 'clay_bricks',
-                    position: {x:0,y:0,z:0},
-                    size: {x:40,y:40,z:40},
-                    rotation: 0
+                    "size": 1,
+                    "rotation": 0,
+                    "skew": {
+                        "z": {
+                            "x": 0,
+                            "y": 0
+                        }
+                    }
                 }
-                /*
-                ,{
-                    link: Locale.get('shape cube'),
-                    position: {x:0,y:0,z:40},
-                    size: 0.7,
-                    rotation: 45
-                }
-                */
-            ]
+            ],
+            "rotation": 0,
+            "size": 1.3
         }
     },
 

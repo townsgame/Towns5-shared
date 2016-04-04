@@ -154,7 +154,7 @@ module.exports=
                 "y": 0,
                 "z": 0
             },
-            "size": 1,
+            "size": 1.8,
             "rotation": 0,
             "skew": {
                 "z": {
