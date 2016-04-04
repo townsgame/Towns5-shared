@@ -56,7 +56,7 @@ module.exports=
                                     },
                                     "material": "stone_bricks",
                                     "position": {
-                                        "x": 12,
+                                        "x": 11,
                                         "y": 0,
                                         "z": 0
                                     },
@@ -85,7 +85,7 @@ module.exports=
                                 {
                                     "link": "o",
                                     "position": {
-                                        "x": -12,
+                                        "x": -11,
                                         "y": 0,
                                         "z": 0
                                     },

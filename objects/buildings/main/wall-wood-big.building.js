@@ -14,7 +14,7 @@ module.exports=
 
     design: {
         type: "model",
-        data:  {
+        data:   {
             "name": "root",
             "particles": [
                 {
@@ -109,7 +109,7 @@ module.exports=
                                 }
                             ],
                             "position": {
-                                "x": -25,
+                                "x": -14,
                                 "y": 0,
                                 "z": 0
                             },
@@ -121,24 +121,6 @@ module.exports=
                                     "y": 0
                                 }
                             }
-                        },
-                        {
-                            "link": "pillar",
-                            "position": {
-                                "x": -20,
-                                "y": 0,
-                                "z": 0
-                            },
-                            "rotation": 0
-                        },
-                        {
-                            "link": "pillar",
-                            "position": {
-                                "x": -15,
-                                "y": 0,
-                                "z": 0
-                            },
-                            "rotation": 0
                         },
                         {
                             "link": "pillar",
@@ -188,25 +170,7 @@ module.exports=
                         {
                             "link": "pillar",
                             "position": {
-                                "x": 15,
-                                "y": 0,
-                                "z": 0
-                            },
-                            "rotation": 0
-                        },
-                        {
-                            "link": "pillar",
-                            "position": {
-                                "x": 20,
-                                "y": 0,
-                                "z": 0
-                            },
-                            "rotation": 0
-                        },
-                        {
-                            "link": "pillar",
-                            "position": {
-                                "x": 25,
+                                "x": 14,
                                 "y": 0,
                                 "z": 0
                             },
