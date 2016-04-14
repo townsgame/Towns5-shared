@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Towns-shared object price sample</title>
+</head>
+
+
+<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
+
+<script>
+    var module={};
+</script>
+
+
+<script src="../../classes-static/math.static.js"></script>
+
+
+<script src="../classes/terrain.class.js"></script>
+<script src="../classes/biotope.class.js"></script>
+<script src="../classes/map-generator.class.js"></script>
+
+
+<script src="../inits/map-generator.init.js"></script>
+
+
+
+<script>
+    $(function(){
+
+
+        var map_size_px = 2,
+            map_size = 150
+            map_x = 0
+            map_y = 0;
+
+
+        /**/$('#map')
+                .attr('width',map_size*map_size_px)
+                .attr('height',map_size*map_size_px)
+        ;/**/
+
+
+        var ctx = $('#map')[0].getContext('2d');
+
+
+        var map = mapGenerator.getMap(map_x,map_y,map_size);
+
+        //console.log(map);
+
+
+        for(var y= 0;y<map_size;y++){
+            for(var x= 0;x<map_size;x++){
+
+                if(typeof(map[y][x])==='undefined')continue;
+
+                //console.log(map[y][x].getColor());
+
+                ctx.beginPath();
+                ctx.rect(x*map_size_px, y*map_size_px, map_size_px, map_size_px);
+                ctx.fillStyle = map[y][x].getColor();
+                ctx.fill();
+
+
+
+
+            }
+        }
+
+
+    });
+</script>
+<style>
+
+#map{
+
+    border: 1px solid #000;
+    border-radius: 9999px;
+}
+
+</style>
+<body>
+
+
+<canvas id="map" width="300" height="300"></canvas>
+
+
+</body>
+</html>
