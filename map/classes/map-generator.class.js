@@ -19,24 +19,32 @@ var MapGenerator = module.exports  = function(getZ,biotope,blur){
 //======================================================================================================================loadMap
 
 
-MapGenerator.prototype.getZMap = function(startX,startY,size){
+MapGenerator.prototype.getZMapCircle = function(center,radius){
 
-    //r(size,startY,startX);
     var map=[];
 
-    for(var y=startY;y<=startY+size;y++){
+    for(var y=0;y<=radius*2;y++){
 
-        map[y-startY]=[];
+        map[y]=[];
 
-        for(var x=startX;x<=startX+size;x++){
+        for(var x=0;x<=radius*2;x++){
 
-            //console.log(x+','+y);
-            map[y-startY][x-startX]=this.getZ(x,y);
+
+            if(
+                Math.pow(x-radius+1/2,2)
+                +
+                Math.pow(y-radius+1/2,2)
+                >
+                Math.pow(radius,2)
+            )continue;
+
+
+            map[y][x]=this.getZ(x-radius+center.x,y-radius+center.y);
+
 
         }
     }
 
-    //r(map);
     return(map);
 
 };
@@ -45,7 +53,7 @@ MapGenerator.prototype.getZMap = function(startX,startY,size){
 
 
 
-MapGenerator.prototype.blurMap = function(map,blur/*change*/){
+/*MapGenerator.prototype.blurMap = function(map,blur){
 
     //r(blur,Math.pow(blur*2+1,2));
 
@@ -85,7 +93,7 @@ MapGenerator.prototype.blurMap = function(map,blur/*change*/){
 
     return(map_);
 
-};
+};*/
 
 
 //======================================================================================================================loadMap
@@ -114,41 +122,19 @@ MapGenerator.prototype.terrainMap = function(map){
 
 
 
-MapGenerator.prototype.getMap = function(startX,startY,size,onlyRound){
+MapGenerator.prototype.getMapCircle = function(center,radius){
 
-    if(typeof onlyRound=='undefined')onlyRound=true;
+
     var bounds=1;
 
 
-
-    map=this.getZMap(startX-bounds,startY-bounds,size+(2*bounds));
-
-    map=this.blurMap(map,bounds);
+    var z_map=this.getZMapCircle(center,radius);
 
 
-    var map_z=[];
-
-    for(var y=0;y<size;y++){
-        map_z[y]=[];
-        for(var x=0;x<size;x++){
-
-            if(Math.pow(x-(size/2),2)+Math.pow(y-(size/2),2)<=Math.pow(size/2,2) || !onlyRound){
-
-                map_z[y][x]=map[y+bounds][x+bounds+2/*@todo proc*/];
-
-            }/*else{
-
-                map_z[y][x]=undefined;
-
-            }*/
+    var map=this.terrainMap(z_map);
 
 
 
-        }
-    }
-    //delete map;
-
-    var map_bg=this.terrainMap(map_z);
-    return(map_bg);
+    return(map);
 };
 

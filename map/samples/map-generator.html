@@ -29,43 +29,73 @@
 <script>
     $(function(){
 
+        var on_row = 8;
+        var on_row_ = 0;
 
-        var map_size_px = 2,
-            map_size = 150
-            map_x = 0
-            map_y = 0;
+        while(on_row>=1) {
 
+            var horizont=Math.pow(2,10+9);
 
-        /**/$('#map')
-                .attr('width',map_size*map_size_px)
-                .attr('height',map_size*map_size_px)
-        ;/**/
-
-
-        var ctx = $('#map')[0].getContext('2d');
-
-
-        var map = mapGenerator.getMap(map_x,map_y,map_size);
-
-        //console.log(map);
+            var map_size_px = 1.3,
+                map_radius = 300 / on_row,
+                map_center = {
+                    x: (Math.random()-0.5)*horizont,
+                    y: (Math.random()-0.5)*horizont
+                };
 
 
-        for(var y= 0;y<map_size;y++){
-            for(var x= 0;x<map_size;x++){
-
-                if(typeof(map[y][x])==='undefined')continue;
-
-                //console.log(map[y][x].getColor());
-
-                ctx.beginPath();
-                ctx.rect(x*map_size_px, y*map_size_px, map_size_px, map_size_px);
-                ctx.fillStyle = map[y][x].getColor();
-                ctx.fill();
+            var jQueryCanvas = $('<canvas></canvas>');
 
 
+            jQueryCanvas
+                    .attr('width', map_radius * 2 * map_size_px)
+                    .attr('height', map_radius * 2 * map_size_px)
+                    .addClass('mapCircle')
+                    //.css('position','fixed')
+                    //.css('top' ,'calc(50% - '+(map_radius*map_size_px)+'px )')
+                    //.css('left','calc(50% - '+(map_radius*map_size_px)+'px )')
+            ;
 
+
+            var ctx = jQueryCanvas[0].getContext('2d');
+
+
+            var map = mapGenerator.getMapCircle(map_center, map_radius);
+
+            //console.log(map);
+
+
+            for (var y = 0; y < map_radius * 2; y++) {
+                for (var x = 0; x < map_radius * 2; x++) {
+
+                    if (typeof(map[y][x]) === 'undefined')continue;
+
+                    //console.log(map[y][x].getColor());
+
+                    ctx.beginPath();
+                    ctx.rect(Math.floor(x * map_size_px), Math.floor(y * map_size_px), Math.ceil(map_size_px), Math.ceil(map_size_px));
+                    ctx.fillStyle = map[y][x].getColor();
+                    ctx.fill();
+
+
+                }
+            }
+
+            $('#maps').append(jQueryCanvas);
+
+
+            on_row_ ++;
+            if(on_row_>=on_row){
+
+                on_row_=0;
+                on_row=on_row/2;
+                $('#maps').append('<br>');
 
             }
+
+
+
+
         }
 
 
@@ -73,17 +103,23 @@
 </script>
 <style>
 
-#map{
+.mapCircle{
 
-    border: 1px solid #000;
+    display: inline-block;
+
+    border: 2px solid #444;
     border-radius: 9999px;
+
+    /**/
 }
+
 
 </style>
 <body>
 
 
-<canvas id="map" width="300" height="300"></canvas>
+<div id="maps" style="text-align: center;width: 100%;">
+</div>
 
 
 </body>
