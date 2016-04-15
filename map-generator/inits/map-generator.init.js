@@ -1,36 +1,43 @@
-//todo headers
+
+/**
+ * @author ©Towns.cz
+ * @fileOverview ...
+ */
+//======================================================================================================================
 
 
-if(typeof MapGenerator=='undefined'){
-
-
-    var MapGenerator = require(__dirname+'/../classes/map-generator.class.js');
-
-
-}
+//-----------------------Creating namespace MapGenerator
+var Towns = Towns || {};
+Towns.MapGenerator = Towns.MapGenerator || {};
+var A/*Actual Namespace*/ = Towns.MapGenerator;
+//-----------------------
+//======================================================================================================================
 
 
 
 var terrains = [
-    new Terrain(0, '#000000', 'temnota'),
-    new Terrain(1, '#337EFA' ,'moře'),
-    new Terrain(2, '#545454' ,'dlažba'),
-    new Terrain(3, '#EFF7FB' ,'sníh/led'),
-    new Terrain(4, '#F9F98D' ,'písek'),
-    new Terrain(5, '#878787' ,'kamení'),
-    new Terrain(6, '#5A2F00' ,'hlína'),
-    new Terrain(7, '#EFF7FB' ,'sníh/led'),
-    new Terrain(8, '#2A7302' ,'tráva(normal)'),
-    new Terrain(9, '#51F311' ,'tráva(toxic)'),
-    new Terrain(10,'#535805' ,'les'),
-    new Terrain(11,'#337EFA' ,'řeka'),
-    new Terrain(12,'#8ABC02' ,'tráva(jaro)'),
-    new Terrain(13,'#8A9002' ,'tráva(pozim)')
+    new A.Terrain(0, '#000000', 'temnota'),
+    new A.Terrain(1, '#337EFA' ,'moře'),
+    new A.Terrain(2, '#545454' ,'dlažba'),
+    new A.Terrain(3, '#EFF7FB' ,'sníh/led'),
+    new A.Terrain(4, '#F9F98D' ,'písek'),
+    new A.Terrain(5, '#878787' ,'kamení'),
+    new A.Terrain(6, '#5A2F00' ,'hlína'),
+    new A.Terrain(7, '#EFF7FB' ,'sníh/led'),
+    new A.Terrain(8, '#2A7302' ,'tráva(normal)'),
+    new A.Terrain(9, '#51F311' ,'tráva(toxic)'),
+    new A.Terrain(10,'#535805' ,'les'),
+    new A.Terrain(11,'#337EFA' ,'řeka'),
+    new A.Terrain(12,'#8ABC02' ,'tráva(jaro)'),
+    new A.Terrain(13,'#8A9002' ,'tráva(pozim)')
 ];
 
 
 
-var mapGenerator = module.exports  = new MapGenerator(
+
+
+Towns.MapGenerator.map = module.exports = new Towns.MapGenerator.Map(
+
     function(x,y){
 
         //var z=(x/y)*50;
@@ -92,7 +99,7 @@ var mapGenerator = module.exports  = new MapGenerator(
 
     },
 
-    new Biotope([
+    new A.Biotope([
         { from: ( 0/100) , terrain: terrains[ 5]},
         { from: ( 5/100) , terrain: terrains[ 7]},
         { from: ( 7/100) , terrain: terrains[ 3]},
@@ -116,9 +123,6 @@ var mapGenerator = module.exports  = new MapGenerator(
 
 
 );
-
-
-
 
 
 

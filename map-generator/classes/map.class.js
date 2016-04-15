@@ -1,13 +1,20 @@
 
 /**
  * @author ©Towns.cz
- * @fileOverview Creates object MapGenerator with static methods
+ * @fileOverview ...
  */
 //======================================================================================================================
 
-//todo this file is deprecated and will be removed
 
-var MapGenerator = module.exports  = function(getZ,biotope,blur){
+////-----------------------Creating namespace MapGenerator
+var Towns = Towns || {};
+Towns.MapGenerator = Towns.MapGenerator || {};
+//-----------------------
+//======================================================================================================================
+
+
+
+Towns.MapGenerator.Map = module.exports  = function(getZ,biotope,blur){
 
     this.getZ = getZ;
     this.biotope = biotope;
@@ -19,7 +26,7 @@ var MapGenerator = module.exports  = function(getZ,biotope,blur){
 //======================================================================================================================loadMap
 
 
-MapGenerator.prototype.getZMapCircle = function(center,radius){
+Towns.MapGenerator.Map.prototype.getZMapCircle = function(center,radius){
 
     var map=[];
 
@@ -53,7 +60,7 @@ MapGenerator.prototype.getZMapCircle = function(center,radius){
 
 
 
-/*MapGenerator.prototype.blurMap = function(map,blur){
+/*Towns.MapGenerator.Map.prototype.blurMap = function(map,blur){
 
     //r(blur,Math.pow(blur*2+1,2));
 
@@ -99,7 +106,7 @@ MapGenerator.prototype.getZMapCircle = function(center,radius){
 //======================================================================================================================loadMap
 
 
-MapGenerator.prototype.terrainMap = function(map){
+Towns.MapGenerator.Map.prototype.terrainMap = function(map){
 
     var map_bg=[];
 
@@ -122,7 +129,7 @@ MapGenerator.prototype.terrainMap = function(map){
 
 
 
-MapGenerator.prototype.getMapCircle = function(center,radius){
+Towns.MapGenerator.Map.prototype.getMapCircle = function(center,radius){
 
 
     var bounds=1;
@@ -137,4 +144,5 @@ MapGenerator.prototype.getMapCircle = function(center,radius){
 
     return(map);
 };
+
 
