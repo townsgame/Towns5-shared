@@ -3,9 +3,16 @@
  * @fileOverview Creates object ModelParticles with static methods
  */
 //======================================================================================================================
+//-----------------------Creating namespace Towns.Game
+var Towns = Towns || {};
+Towns.Game = Towns.Game || {};
+var A/*Actual Namespace*/ = Towns.Game;
+//-----------------------
+//======================================================================================================================
 
 
-var ModelParticles = {};
+
+A.ModelParticles = module.exports = {};
 
 
 /**
@@ -14,7 +21,7 @@ var ModelParticles = {};
  * @param {object} particle
  * @return {object} particle
  */
-ModelParticles.cParams = function(particle){//todo ?? maybe rename
+A.ModelParticles.cParams = function(particle){//todo ?? maybe rename
 
 
     if(typeof particle.skew==='undefined'){
@@ -53,7 +60,7 @@ ModelParticles.cParams = function(particle){//todo ?? maybe rename
  * @param particle
  * @return {object} 3D model
  */
-ModelParticles.get3D = function(particle){
+A.ModelParticles.get3D = function(particle){
 
     var resource={};
 
@@ -192,7 +199,7 @@ ModelParticles.get3D = function(particle){
  * @param {number} base 0=bottom, 1=top
  * @return {Array} 2D lines
  */
-ModelParticles.get2Dlines = function(particle,base){
+A.ModelParticles.get2Dlines = function(particle,base){
 
 
     var resource=this.get3D(particle);
@@ -265,7 +272,7 @@ ModelParticles.get2Dlines = function(particle,base){
  * @param (array) lines2
  * @return {boolean}
  */
-ModelParticles.collisionLinesDetect = function(lines1,lines2){
+A.ModelParticles.collisionLinesDetect = function(lines1,lines2){
 
     for (var i1 in lines1) {
         for (var i2 in lines2) {
@@ -303,7 +310,7 @@ ModelParticles.collisionLinesDetect = function(lines1,lines2){
  * @param (object) particle2 top
  * @return {boolean}
  */
-ModelParticles.collision2D = function(particle1,particle2){
+A.ModelParticles.collision2D = function(particle1,particle2){
 
 
     var lines1 = ModelParticles.get2Dlines(particle1,1);

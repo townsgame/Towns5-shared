@@ -3,15 +3,15 @@
  * @fileOverview Creates Class Model
  */
 //======================================================================================================================
-//Loading modules
+//-----------------------Creating namespace Towns.Game
+var Towns = Towns || {};
+Towns.Game = Towns.Game || {};
+var A/*Actual Namespace*/ = Towns.Game;
+//-----------------------
 
-if(typeof ModelParticles=='undefined'){
-
-    var ModelParticles = require(__dirname+'/../classes-static/model-particles.static.js');
-
-}
-
-
+//-----------------------Loading modules
+A.ModelParticles = A.ModelParticles || require(__dirname+'/../classes-static/model-particles.static.js');
+//-----------------------
 //======================================================================================================================
 
 
@@ -21,7 +21,7 @@ if(typeof ModelParticles=='undefined'){
  * @return {boolean} false in case of fail
  * @constructor
  */
-var Model = module.exports = function (json){
+A.Model = module.exports = function (json){
 
     if(typeof(json)=='undefined')return false;
 
@@ -39,7 +39,7 @@ var Model = module.exports = function (json){
  * @param {number} rotation
  * @param {number} size
  */
-Model.prototype.addRotationSize = function(rotation,size){
+A.Model.prototype.addRotationSize = function(rotation,size){
 
     if(typeof rotation === 'undefined')rotation=0;
     if(typeof size === 'undefined')size=1;
@@ -57,7 +57,7 @@ Model.prototype.addRotationSize = function(rotation,size){
 //==================================================
 
 //todo jsdoc
-Model.prototype.clone = function(){
+A.Model.prototype.clone = function(){
 
     return new Model(JSON.parse(JSON.stringify(this)));
 
@@ -70,7 +70,7 @@ Model.prototype.clone = function(){
  * @param {string} dimension x,y,z,xy
  * @return {number} range
  */
-Model.prototype.range = function(dimension){
+A.Model.prototype.range = function(dimension){
 
     if(dimension=='xy'){
 
@@ -114,7 +114,7 @@ Model.prototype.range = function(dimension){
  * @param {number} move_y
  * @param {number} move_z
  */
-Model.prototype.moveBy = function(move_x,move_y,move_z){
+A.Model.prototype.moveBy = function(move_x,move_y,move_z){
 
     if(typeof move_x === 'undefined')move_x=0;
     if(typeof move_y === 'undefined')move_y=0;
@@ -140,7 +140,7 @@ Model.prototype.moveBy = function(move_x,move_y,move_z){
  * @param {number} move_x
  * @param {number} move_y
  */
-Model.prototype.joinModelZ = function(model,move_x,move_y){//todo second param should be position
+A.Model.prototype.joinModelZ = function(model,move_x,move_y){//todo second param should be position
 
     //var  model_=deepCopyModel(model);
     //model_.moveBy(move_x,move_y);//todo maybe delete moveBy
@@ -189,7 +189,7 @@ Model.prototype.joinModelZ = function(model,move_x,move_y){//todo second param s
  * @param {number} move_x
  * @param {number} move_y
  */
-Model.prototype.joinModel = function(model,move_x,move_y){//todo second param should be position
+A.Model.prototype.joinModel = function(model,move_x,move_y){//todo second param should be position
 
     var max_z=this.joinModelZ(model,move_x,move_y);
 
@@ -219,7 +219,7 @@ Model.prototype.joinModel = function(model,move_x,move_y){//todo second param sh
  * Deep copy this and converts links to raw data
  * @returns {object} Model
  */
-Model.prototype.getDeepCopyWithoutLinks = function() {
+A.Model.prototype.getDeepCopyWithoutLinks = function() {
 
 
     var model = this.clone();
@@ -317,7 +317,7 @@ Model.prototype.getDeepCopyWithoutLinks = function() {
  * Get 1D array of particles
  * @returns {Array} array of particles
  */
-Model.prototype.getLinearParticles = function(){
+A.Model.prototype.getLinearParticles = function(){
 
 
     var particlesLinear=[];
@@ -431,7 +431,7 @@ Model.prototype.getLinearParticles = function(){
  * @param path
  * @returns {object} part of this
  */
-Model.prototype.filterPath = function(path){
+A.Model.prototype.filterPath = function(path){
 
     var model=this;
 
@@ -459,7 +459,7 @@ Model.prototype.filterPath = function(path){
  * @param path
  * @returns {object} part of this
  */
-Model.prototype.filterPathSiblings = function(path){
+A.Model.prototype.filterPathSiblings = function(path){
 
     var model=this.getDeepCopyWithoutLinks();
     var current=model;

@@ -7,6 +7,7 @@
 //-----------------------Creating namespace Towns.MapGenerator
 var Towns = Towns || {};
 Towns.MapGenerator = Towns.MapGenerator || {};
+var A/*Actual Namespace*/ = Towns.MapGenerator;
 //-----------------------
 //======================================================================================================================
 

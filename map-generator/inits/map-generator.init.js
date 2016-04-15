@@ -11,10 +11,10 @@ var A/*Actual Namespace*/ = Towns.MapGenerator;
 //-----------------------
 
 //-----------------------Loading modules
-Towns.Math = Towns.Math || require('../../math/math.js');
-A.Terrain = A.Terrain || require('../classes/terrain.class.js');
-A.Biotope = A.Biotope || require('../classes/biotope.class.js');
-A.MapGenerator = A.MapGenerator || require('../classes/map-generator.class.js');
+Towns.Math = Towns.Math || require(__dirname+'/../../math/math.js');
+A.Terrain = A.Terrain || require(__dirname+'../classes/terrain.class.js');
+A.Biotope = A.Biotope || require(__dirname+'../classes/biotope.class.js');
+A.MapGenerator = A.MapGenerator || require(__dirname+'/../classes/map-generator.class.js');
 //-----------------------
 //======================================================================================================================
 

@@ -3,26 +3,26 @@
  * @fileOverview Creates configuration of game conditions
  */
 //======================================================================================================================
-//Loading modules
+//-----------------------Creating namespace Towns.Game
+var Towns = Towns || {};
+Towns.Game = Towns.Game || {};
+var A/*Actual Namespace*/ = Towns.Game;
+//-----------------------
 
-if(typeof Game=='undefined'){
-
-    require(__dirname+'/../../classes-static/math.static.js');
-
-    var Game = require(__dirname+'/../classes/game.class.js');
-    var ActionType = require(__dirname+'/../classes/action-type.class.js');
-    var Resources = require(__dirname+'/../classes/resources.class.js');
-
-}
-
+//-----------------------Loading modules
+Towns.Math = Towns.Math || require(__dirname+'/../../math/math.js');
+A.Game = A.Game || require(__dirname+'/../classes/game.class.js');
+A.ActionType = A.ActionType || require(__dirname+'/../classes/action-type.class.js');
+A.Resources = A.Resources || require(__dirname+'/../classes/resources.class.js');
+//-----------------------
 //======================================================================================================================
-//Creating module
+
 
 
 var K=0.05;
 
 
-var game = module.exports = new Game(
+A.game = module.exports = new Game(
     {
         //---------------------------------------------Defense
         'defense': new ActionType(
@@ -153,7 +153,7 @@ var game = module.exports = new Game(
 
 
     },
-    Towns.Towns.Math.angleDiff,
-    Towns.Towns.Math.angleDiff
+    Towns.Math.angleDiff,
+    Towns.Math.angleDiff
 
 );

@@ -3,15 +3,15 @@
  * @fileOverview Additional methods to object Math
  */
 //======================================================================================================================
-//-----------------------Creating namespace Towns.Math
+//-----------------------Creating namespace Towns
 var Towns = Towns || {};
-Towns.Math = Towns.Math || {};
-var A/*Actual Namespace*/ = Towns.Math;
-//-----------------------
-//-----------------------Exporting actual namespace
-module.exports=A;
+var A/*Actual Namespace*/ = Towns.MapGenerator;
 //-----------------------
 //======================================================================================================================
+
+
+
+A.Math = module.exports = {};
 
 
 

@@ -3,19 +3,19 @@
  * @fileOverview Creates static class game
  */
 //======================================================================================================================
-//Loading modules
+//-----------------------Creating namespace Towns.Game
+var Towns = Towns || {};
+Towns.Game = Towns.Game || {};
+var A/*Actual Namespace*/ = Towns.Game;
+//-----------------------
 
-if(typeof Resources=='undefined'){
-
-    var Resources = require(__dirname+'/resources.class.js');
-    var Model = require(__dirname+'/model.class.js');
-
-}
-
-
-
+//-----------------------Loading modules
+A.Resources = A.Resources || require(__dirname+'/resources.class.js');
+A.Model = A.Model || require(__dirname+'/model.class.js');
+//-----------------------
 //======================================================================================================================
-//Creating module
+
+
 
 /**
  *
@@ -24,7 +24,7 @@ if(typeof Resources=='undefined'){
  * @param {function} price_key_modifier
  * @constructor
  */
-var Game = module.exports = function(action_type_list,max_life_modifier,price_key_modifier){
+A.Game = module.exports = function(action_type_list,max_life_modifier,price_key_modifier){
 
     this.action_type_list = action_type_list;
     this.max_life_modifier = max_life_modifier;
@@ -39,7 +39,7 @@ var Game = module.exports = function(action_type_list,max_life_modifier,price_ke
  * @param {object} Object
  * @return {array} of numbers
  */
-Game.prototype.getObjectPriceBases = function(object){
+A.Game.prototype.getObjectPriceBases = function(object){
 
     var self=this;
     var price_bases=[];
@@ -97,7 +97,7 @@ Game.prototype.getObjectPriceBases = function(object){
  * @param {object} Object
  * @return {number} maximum life of object
  */
-Game.prototype.getObjectMaxLife = function(object){
+A.Game.prototype.getObjectMaxLife = function(object){
 
     var price_bases=this.getObjectPriceBases(object);
     var price_base = price_bases.reduce(function(pv, cv) { return pv + cv; }, 0);
@@ -117,7 +117,7 @@ Game.prototype.getObjectMaxLife = function(object){
  * @param {object} Object
  * @return {array} of Resources
  */
-Game.prototype.getObjectPrices = function(object){
+A.Game.prototype.getObjectPrices = function(object){
 
     //console.log(this);
 
@@ -166,7 +166,7 @@ Game.prototype.getObjectPrices = function(object){
  * @param {object} Object
  * @return {object} Resources - price of object
  */
-Game.prototype.getObjectPrice = function(object){
+A.Game.prototype.getObjectPrice = function(object){
 
     var price = new Resources({});
 
@@ -192,7 +192,7 @@ Game.prototype.getObjectPrice = function(object){
  * @param {object} Object
  * @return {object} Resources - design amount of resources
  */
-Game.prototype.getObjectDesignPrice = function(object){
+A.Game.prototype.getObjectDesignPrice = function(object){
 
     if(!object.hasOwnProperty('design'))throw new Error('Object should have design!');
     if(object.design.type!='model')throw new Error('Object should have design of type model!');

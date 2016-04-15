@@ -3,14 +3,22 @@
  * @fileOverview Creates class Resources
  */
 //======================================================================================================================
-//Creating module
+//-----------------------Creating namespace Towns.Game
+var Towns = Towns || {};
+Towns.Game = Towns.Game || {};
+var A/*Actual Namespace*/ = Towns.Game;
+//-----------------------
+//======================================================================================================================
+
+
+
 
 
 /**
  * @param {object} Resources
  * @constructor
  */
-var Resources = module.exports = function(resources){
+A.Resources = module.exports = function(resources){
 
     for(var key in resources){
         if(typeof resources[key]=='number') {
@@ -28,7 +36,7 @@ var Resources = module.exports = function(resources){
  * @static
  * @return {array} new Resources
  */
-Resources.newSingles = function(resources){
+A.Resources.newSingles = function(resources){
 
     var resources_array=[];
 
@@ -57,7 +65,7 @@ Resources.newSingles = function(resources){
  * @param {number} k
  * @return {bool} success
  */
-Resources.prototype.clone = function(){
+A.Resources.prototype.clone = function(){
 
     return new Resources(this);
 
@@ -70,7 +78,7 @@ Resources.prototype.clone = function(){
  * @param {object} Resources
  * @return {bool} contains
  */
-Resources.prototype.contains = function(resources){
+A.Resources.prototype.contains = function(resources){
 
     for(var key in resources){
 
@@ -94,7 +102,7 @@ Resources.prototype.contains = function(resources){
  * @param {object} Resources
  * @return {bool} success
  */
-Resources.prototype.add = function(resources){
+A.Resources.prototype.add = function(resources){
 
     for(var key in resources){
 
@@ -118,7 +126,7 @@ Resources.prototype.add = function(resources){
  * @param {number} k
  * @return this
  */
-Resources.prototype.multiply = function(k){
+A.Resources.prototype.multiply = function(k){
 
     for(var key in this){
 
@@ -139,7 +147,7 @@ Resources.prototype.multiply = function(k){
  * @param {number} k
  * @return this
  */
-Resources.prototype.signum = function(k){
+A.Resources.prototype.signum = function(k){
 
     for(var key in this){
 
@@ -170,7 +178,7 @@ Resources.prototype.signum = function(k){
  * @param {function} modifier
  * @return this
  */
-Resources.prototype.apply = function(modifier){
+A.Resources.prototype.apply = function(modifier){
 
     for(var key in this){
 
@@ -189,7 +197,7 @@ Resources.prototype.apply = function(modifier){
  *
  * @return {Array} all resources keys
 */
-Resources.prototype.extractKeys = function(){
+A.Resources.prototype.extractKeys = function(){
 
     var keys=[];
 
@@ -212,7 +220,7 @@ Resources.prototype.extractKeys = function(){
  * @param {object} Resoures
  * @return {number} Distance between this and given Resources
  */
-Resources.prototype.compare = function(resoures){
+A.Resources.prototype.compare = function(resoures){
 
     var resources_A=this;
     var resources_B=resoures;
@@ -259,7 +267,7 @@ Resources.prototype.compare = function(resoures){
  * @param {object} Resources
  * @return {bool} success
  */
-Resources.prototype.remove = function(resources){
+A.Resources.prototype.remove = function(resources){
 
     if(!this.contains(resources))return false;
 
@@ -278,7 +286,7 @@ Resources.prototype.remove = function(resources){
  * Converts Resources to simple string
  * @return {string}
  */
-Resources.prototype.toString = function(){
+A.Resources.prototype.toString = function(){
 
     var strings = [];
 
