@@ -4,8 +4,6 @@
  * @fileOverview ...
  */
 //======================================================================================================================
-
-
 ////-----------------------Creating namespace Towns.MapGenerator
 var Towns = Towns || {};
 Towns.MapGenerator = Towns.MapGenerator || {};

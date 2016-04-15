@@ -9,11 +9,15 @@ Towns.Game = Towns.Game || {};
 var A/*Actual Namespace*/ = Towns.Game;
 //-----------------------
 
-//-----------------------Loading modules
-Towns.Math = Towns.Math || require(__dirname+'/../../math/math.js');
-A.Game = A.Game || require(__dirname+'/../classes/game.class.js');
-A.ActionType = A.ActionType || require(__dirname+'/../classes/action-type.class.js');
-A.Resources = A.Resources || require(__dirname+'/../classes/resources.class.js');
+//-----------------------Loading modules if running under node js
+if(typeof window=='undefined'){
+
+    Towns.Math = require(__dirname+'/../../math/math.js');
+    A.Game = require(__dirname+'/../classes/game.class.js');
+    A.ActionType = require(__dirname+'/../classes/action-type.class.js');
+    A.Resources = require(__dirname+'/../classes/resources.class.js');
+
+}
 //-----------------------
 //======================================================================================================================
 

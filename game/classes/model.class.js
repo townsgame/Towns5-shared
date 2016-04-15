@@ -9,9 +9,13 @@ Towns.Game = Towns.Game || {};
 var A/*Actual Namespace*/ = Towns.Game;
 //-----------------------
 
-//-----------------------Loading modules
-Towns.Math = Towns.Math || require(__dirname+'/../../math/math.js');
-A.ModelParticles = A.ModelParticles || require(__dirname+'/../classes-static/model-particles.static.js');
+//-----------------------Loading modules if running under node js
+if(typeof window=='undefined') {
+
+    Towns.Math = require(__dirname + '/../../math/math.js');
+    A.ModelParticles = require(__dirname + '/../classes-static/model-particles.static.js');
+
+}
 //-----------------------
 //======================================================================================================================
 

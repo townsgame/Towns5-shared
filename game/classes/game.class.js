@@ -9,9 +9,13 @@ Towns.Game = Towns.Game || {};
 var A/*Actual Namespace*/ = Towns.Game;
 //-----------------------
 
-//-----------------------Loading modules
-A.Resources = A.Resources || require(__dirname+'/resources.class.js');
-A.Model = A.Model || require(__dirname+'/model.class.js');
+//-----------------------Loading modules if running under node js
+if(typeof window=='undefined'){
+
+    A.Resources = require(__dirname+'/resources.class.js');
+    A.Model = require(__dirname+'/model.class.js');
+
+}
 //-----------------------
 //======================================================================================================================
 
