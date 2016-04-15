@@ -53,10 +53,10 @@ A.Math.baseLog = function(base, number) {
  */
 A.Math.prettyNumber = function(number,number_of_non_zero_digits){
 
-    if(typeof number_of_non_zero_digits === 'undefined')number_of_non_zero_digits=2;
+    number_of_non_zero_digits = number_of_non_zero_digits || 2;//todo refactor like this
 
 
-    var digits=Math.ceil(this.baseLog(10,number));
+    var digits=Math.ceil(Towns.Math.baseLog(10,number));
     var k = Math.pow(10,number_of_non_zero_digits-digits);
 
     //console.log(digits,k);

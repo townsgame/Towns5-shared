@@ -153,7 +153,7 @@ A.game = module.exports = new A.Game(
 
 
     },
-    Towns.Math.angleDiff,
-    Towns.Math.angleDiff
+    Towns.Math.prettyNumber,
+    Towns.Math.prettyNumber
 
 );

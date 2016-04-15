@@ -198,10 +198,10 @@ A.Game.prototype.getObjectDesignPrice = function(object){
     if(object.design.type!='model')throw new Error('Object should have design of type model!');
 
 
-    var price = new Resources({});
+    var price = new A.Resources({});
 
 
-    model = new Model(object.design.data);
+    model = new A.Model(object.design.data);
 
     linear_particles = model.getLinearParticles();
 

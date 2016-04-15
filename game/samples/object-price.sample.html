@@ -35,13 +35,19 @@
     $(function(){
 
         /*
-        'http://api.towns.cz/objects/prototypes'
 
-        $('#object-json').val(JSON.stringify(object_data,null,4));
+
+
         */
 
+        $.ajax({
+            url: 'http://api.towns.cz/objects/prototypes'
+        }).done(function(response) {
 
+            $('#object-json').val(JSON.stringify(response[0],null,4));
+            change();
 
+        });
 
 
 
@@ -84,7 +90,6 @@
 
         $('#object-json').change(change);
         $('#object-json').keypress(function(){setTimeout(change,100)});
-        change();
 
     });
 

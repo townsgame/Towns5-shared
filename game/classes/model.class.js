@@ -10,6 +10,7 @@ var A/*Actual Namespace*/ = Towns.Game;
 //-----------------------
 
 //-----------------------Loading modules
+Towns.Math = Towns.Math || require(__dirname+'/../../math/math.js');
 A.ModelParticles = A.ModelParticles || require(__dirname+'/../classes-static/model-particles.static.js');
 //-----------------------
 //======================================================================================================================
@@ -59,7 +60,7 @@ A.Model.prototype.addRotationSize = function(rotation,size){
 //todo jsdoc
 A.Model.prototype.clone = function(){
 
-    return new Model(JSON.parse(JSON.stringify(this)));
+    return new A.Model(JSON.parse(JSON.stringify(this)));
 
 };
 
@@ -359,7 +360,7 @@ A.Model.prototype.getLinearParticles = function(){
 
             //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Position, Rotation and size //todo skew
 
-            var distDeg = Towns.Towns.Math.xy2distDeg(particle.position.x, particle.position.y);
+            var distDeg = Towns.Math.xy2distDeg(particle.position.x, particle.position.y);
 
             distDeg.dist = distDeg.dist * size;
             distDeg.deg += rotation;
