@@ -5,7 +5,7 @@
 //======================================================================================================================
 //-----------------------Creating namespace Towns
 var Towns = Towns || {};
-var A/*Actual Namespace*/ = Towns.MapGenerator;
+var A/*Actual Namespace*/ = Towns;
 //-----------------------
 //======================================================================================================================
 
@@ -21,7 +21,7 @@ A.Math = module.exports = {};
  * @param {number}
  * @return {number}
  */
-A.sign = Math.sign || function(x) {
+A.Math.sign = Math.sign || function(x) {
     x = +x; // convert to a number
     if (x === 0 || isNaN(x)) {
         return x;
@@ -38,7 +38,7 @@ A.sign = Math.sign || function(x) {
  * @param number
  * @returns {number}
  */
-A.baseLog = function(base, number) {
+A.Math.baseLog = function(base, number) {
     return Math.log(number) / Math.log(base);
 };
 
@@ -51,7 +51,7 @@ A.baseLog = function(base, number) {
  * @param {number} number_of_non_zero_digits
  * @return {number} Cuts unless digits to zero
  */
-A.prettyNumber = function(number,number_of_non_zero_digits){
+A.Math.prettyNumber = function(number,number_of_non_zero_digits){
 
     if(typeof number_of_non_zero_digits === 'undefined')number_of_non_zero_digits=2;
 
@@ -83,7 +83,7 @@ A.prettyNumber = function(number,number_of_non_zero_digits){
  * @param {number} degrees 2
  * @return {number} degrees difference
  */
-A.angleDiff = function(deg1,deg2){
+A.Math.angleDiff = function(deg1,deg2){
     var a = deg1 - deg2;
     var a = (a + 180) % 360 - 180;
     return(a);
@@ -96,7 +96,7 @@ A.angleDiff = function(deg1,deg2){
  * @param {number} radians
  * @return {number} degrees
  */
-A.rad2deg = function(radians){
+A.Math.rad2deg = function(radians){
     return(radians * (180/Math.PI));
 };
 
@@ -107,7 +107,7 @@ A.rad2deg = function(radians){
  * @param {number} degrees
  * @return {number} radians
  */
-A.deg2rad = function(degrees){
+A.Math.deg2rad = function(degrees){
     return(degrees * (Math.PI/180));
 };
 
@@ -119,7 +119,7 @@ A.deg2rad = function(degrees){
  * @param y
  * @return {number} distance
  */
-A.xy2dist = function(x,y){
+A.Math.xy2dist = function(x,y){
     return(Math.sqrt(Math.pow(x,2)+Math.pow(y,2)));
 };
 
@@ -127,7 +127,7 @@ A.xy2dist = function(x,y){
 //-------------------------
 
 //todo refactor to position
-A.xy2distDeg = function(x,y){
+A.Math.xy2distDeg = function(x,y){
 
     var output={};
 
@@ -141,7 +141,7 @@ A.xy2distDeg = function(x,y){
 //-------------------------
 
 //todo refactor to position
-A.distDeg2xy = function(dist,deg){
+A.Math.distDeg2xy = function(dist,deg){
 
     var rad=this.deg2rad(deg);
 
@@ -157,7 +157,7 @@ A.distDeg2xy = function(dist,deg){
 //-------------------------
 
 //todo mybe refactor to position
-A.xyRotate = function(x,y,deg){
+A.Math.xyRotate = function(x,y,deg){
 
     //nevyuzivam funkce Towns.A.xy2distDeg a A.distDeg2xy, abych nedelal zbytecny prevod do stupnu a spatky
     var dist = this.xy2dist(x,y);
@@ -182,7 +182,7 @@ A.xyRotate = function(x,y,deg){
  * @param {number} defval
  * @return {number}
  */
-A.toFloat = function(value,defval){
+A.Math.toFloat = function(value,defval){
 
     if(typeof defval === 'undefined')defval=0;
     if(typeof value ==='undefined')return(defval);
@@ -205,7 +205,7 @@ A.toFloat = function(value,defval){
  * @param {number} defval
  * @return {number}
  */
-A.toInt = function(value,defval){
+A.Math.toInt = function(value,defval){
 
     if(typeof(value)==='undefined')return(defval);
 
@@ -227,7 +227,7 @@ A.toInt = function(value,defval){
  * @param {number} max
  * @returns {number}
  */
-A.bounds = function(value,min,max){
+A.Math.bounds = function(value,min,max){
 
     if(value<min)return min;
     if(value>max)return max;
@@ -251,7 +251,7 @@ A.bounds = function(value,min,max){
  * @param b2y
  * @return {boolean}
  */
-A.lineCollision = function(a1x,a1y,a2x,a2y,b1x,b1y,b2x,b2y){
+A.Math.lineCollision = function(a1x,a1y,a2x,a2y,b1x,b1y,b2x,b2y){
 
 
 

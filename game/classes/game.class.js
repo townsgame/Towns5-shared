@@ -168,7 +168,7 @@ A.Game.prototype.getObjectPrices = function(object){
  */
 A.Game.prototype.getObjectPrice = function(object){
 
-    var price = new Resources({});
+    var price = new A.Resources({});
 
     //console.log('empty price',price);
 

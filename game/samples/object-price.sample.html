@@ -14,7 +14,7 @@
 </script>
 
 
-<script src="../../math/math.static.js"></script>
+<script src="../../math/math.js"></script>
 <script src="../classes-static/model-particles.static.js"></script>
 
 <script src="../classes/model.class.js"></script>
@@ -26,11 +26,6 @@
 
 
 
-<script src="../../objects/buildings/main/tower-stone.building.js"></script>
-<script>
-    var object_data=module.exports;
-</script>
-
 
 
 <script>
@@ -39,8 +34,16 @@
 
     $(function(){
 
+        /*
+        'http://api.towns.cz/objects/prototypes'
 
         $('#object-json').val(JSON.stringify(object_data,null,4));
+        */
+
+
+
+
+
 
 
 
@@ -50,11 +53,11 @@
 
             object_json=JSON.parse(object_json);
 
-            var price_bases = game.getObjectPriceBases(object_json);
-            var max_life = game.getObjectMaxLife(object_json);
-            var prices = game.getObjectPrices(object_json);
-            var price = game.getObjectPrice(object_json);
-            var design_price = game.getObjectDesignPrice(object_json);
+            var price_bases = Towns.Game.game.getObjectPriceBases(object_json);
+            var max_life = Towns.Game.game.getObjectMaxLife(object_json);
+            var prices = Towns.Game.game.getObjectPrices(object_json);
+            var price = Towns.Game.game.getObjectPrice(object_json);
+            var design_price = Towns.Game.game.getObjectDesignPrice(object_json);
 
             $('#object-price').html('');
 
