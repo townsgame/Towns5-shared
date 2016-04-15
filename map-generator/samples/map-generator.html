@@ -14,12 +14,12 @@
 </script>
 
 
-<script src="../../classes-static/math.static.js"></script>
+<script src="../../math/math.js"></script>
 
 
 <script src="../classes/terrain.class.js"></script>
 <script src="../classes/biotope.class.js"></script>
-<script src="../classes/map.class.js"></script>
+<script src="../classes/map-generator.class.js"></script>
 
 
 <script src="../inits/map-generator.init.js"></script>
@@ -60,7 +60,7 @@
             var ctx = jQueryCanvas[0].getContext('2d');
 
 
-            var map = Towns.MapGenerator.map.getMapCircle(map_center, map_radius);
+            var map = Towns.MapGenerator.mapGenerator.getMapCircle(map_center, map_radius);
 
             //console.log(map);
 

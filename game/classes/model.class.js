@@ -74,7 +74,7 @@ Model.prototype.range = function(dimension){
 
     if(dimension=='xy'){
 
-        return Math.xy2dist(this.range('x'),this.range('y')*this.size);
+        return Towns.Math.xy2dist(this.range('x'),this.range('y')*this.size);
 
     }
 
@@ -359,12 +359,12 @@ Model.prototype.getLinearParticles = function(){
 
             //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Position, Rotation and size //todo skew
 
-            var distDeg = Math.xy2distDeg(particle.position.x, particle.position.y);
+            var distDeg = Towns.Towns.Math.xy2distDeg(particle.position.x, particle.position.y);
 
             distDeg.dist = distDeg.dist * size;
             distDeg.deg += rotation;
 
-            var xy = Math.distDeg2xy(distDeg.dist, distDeg.deg);
+            var xy = Towns.Math.distDeg2xy(distDeg.dist, distDeg.deg);
 
             particle.rotation += rotation;
 

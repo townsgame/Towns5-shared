@@ -4,14 +4,20 @@
  * @fileOverview ...
  */
 //======================================================================================================================
-
-
-//-----------------------Creating namespace MapGenerator
+//-----------------------Creating namespace Towns.MapGenerator
 var Towns = Towns || {};
 Towns.MapGenerator = Towns.MapGenerator || {};
 var A/*Actual Namespace*/ = Towns.MapGenerator;
 //-----------------------
+
+//-----------------------Loading modules
+Towns.Math = Towns.Math || require('../../math/math.js');
+A.Terrain = A.Terrain || require('../classes/terrain.class.js');
+A.Biotope = A.Biotope || require('../classes/biotope.class.js');
+A.MapGenerator = A.MapGenerator || require('../classes/map-generator.class.js');
+//-----------------------
 //======================================================================================================================
+
 
 
 
@@ -36,7 +42,7 @@ var terrains = [
 
 
 
-Towns.MapGenerator.map = module.exports = new Towns.MapGenerator.Map(
+A.mapGenerator = module.exports = new A.MapGenerator(
 
     function(x,y){
 
@@ -72,7 +78,7 @@ Towns.MapGenerator.map = module.exports = new Towns.MapGenerator.Map(
             x=Math.floor(x/3);
             y=Math.floor(y/3);
 
-            var xy = Math.xyRotate(x,y,57);
+            var xy = Towns.Math.xyRotate(x,y,57);
 
             x=xy.x;
             y=xy.y;
@@ -86,7 +92,7 @@ Towns.MapGenerator.map = module.exports = new Towns.MapGenerator.Map(
 
 
         n=n-0.5;
-        var sign=Math.sign(n);
+        var sign=Towns.Math.sign(n);
         n=Math.abs(n)*2;
         n=Math.pow(n,1/3);
         n=(n/2*sign)+0.5;

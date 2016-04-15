@@ -106,26 +106,26 @@ ModelParticles.get3D = function(particle){
 
                 if(!is(particle.shape.rotated)){
 
-                    var x__=0.5*x_*Math.cos(n/particle.shape.n*Math.PI*2+Math.deg2rad(180+180/particle.shape.n))*base+x_*(level*particle.skew.z.x),
-                        y__=0.5*y_*Math.sin(n/particle.shape.n*Math.PI*2+Math.deg2rad(180+180/particle.shape.n))*base+y_*(level*particle.skew.z.y),
+                    var x__=0.5*x_*Math.cos(n/particle.shape.n*Math.PI*2+Towns.Math.deg2rad(180+180/particle.shape.n))*base+x_*(level*particle.skew.z.x),
+                        y__=0.5*y_*Math.sin(n/particle.shape.n*Math.PI*2+Towns.Math.deg2rad(180+180/particle.shape.n))*base+y_*(level*particle.skew.z.y),
                         z__=z_*level;
 
                 }else{
 
-                    var tmp=(2-(Math.cos(Math.deg2rad(180/particle.shape.n))));//todo better
+                    var tmp=(2-(Math.cos(Towns.Math.deg2rad(180/particle.shape.n))));//todo better
 
                     var x__=x_*((level*2)-1);//*(level-0.5);//+x_*(level*particle.skew.z.x),
 
-                        y__=0.5*y_*Math.sin(n/particle.shape.n*Math.PI*2+Math.deg2rad(180+180/particle.shape.n));//+y_*(level*particle.skew.z.y),
+                        y__=0.5*y_*Math.sin(n/particle.shape.n*Math.PI*2+Towns.Math.deg2rad(180+180/particle.shape.n));//+y_*(level*particle.skew.z.y),
 
 
                         z__=(1)*0.5*(
 
 
-                                z_*Math.cos(n/particle.shape.n*Math.PI*2+Math.deg2rad(180+180/particle.shape.n))*tmp
+                                z_*Math.cos(n/particle.shape.n*Math.PI*2+Towns.Math.deg2rad(180+180/particle.shape.n))*tmp
 
 
-                                +z_*((Math.cos(Math.deg2rad(180/particle.shape.n))))*tmp
+                                +z_*((Math.cos(Towns.Math.deg2rad(180/particle.shape.n))))*tmp
                             );
 
                 }
@@ -135,9 +135,9 @@ ModelParticles.get3D = function(particle){
 
                 //------------------ XY Rotation
 
-                var DistDeg_=Math.xy2distDeg(x__,y__);//todo refactor all like DistDeg, etc...
+                var DistDeg_=Towns.Towns.Math.xy2distDeg(x__,y__);//todo refactor all like DistDeg, etc...
                 DistDeg_.deg+=particle.rotation;
-                var xy_=Math.distDeg2xy(DistDeg_.dist,DistDeg_.deg);
+                var xy_=Towns.Math.distDeg2xy(DistDeg_.dist,DistDeg_.deg);
 
                 x__=xy_.x;
                 y__=xy_.y;
@@ -270,7 +270,7 @@ ModelParticles.collisionLinesDetect = function(lines1,lines2){
     for (var i1 in lines1) {
         for (var i2 in lines2) {
 
-            if (Math.lineCollision(
+            if (Towns.Math.lineCollision(
                     lines1[i1][0].x,
                     lines1[i1][0].y,
                     lines1[i1][1].x,

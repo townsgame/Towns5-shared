@@ -6,7 +6,7 @@
 //======================================================================================================================
 
 
-////-----------------------Creating namespace MapGenerator
+////-----------------------Creating namespace Towns.MapGenerator
 var Towns = Towns || {};
 Towns.MapGenerator = Towns.MapGenerator || {};
 //-----------------------
@@ -14,7 +14,7 @@ Towns.MapGenerator = Towns.MapGenerator || {};
 
 
 
-Towns.MapGenerator.Map = module.exports  = function(getZ,biotope,blur){
+Towns.MapGenerator.MapGenerator = module.exports  = function(getZ,biotope,blur){
 
     this.getZ = getZ;
     this.biotope = biotope;
@@ -26,7 +26,7 @@ Towns.MapGenerator.Map = module.exports  = function(getZ,biotope,blur){
 //======================================================================================================================loadMap
 
 
-Towns.MapGenerator.Map.prototype.getZMapCircle = function(center,radius){
+Towns.MapGenerator.MapGenerator.prototype.getZMapCircle = function(center,radius){
 
     var map=[];
 
@@ -106,7 +106,7 @@ Towns.MapGenerator.Map.prototype.getZMapCircle = function(center,radius){
 //======================================================================================================================loadMap
 
 
-Towns.MapGenerator.Map.prototype.terrainMap = function(map){
+Towns.MapGenerator.MapGenerator.prototype.terrainMap = function(map){
 
     var map_bg=[];
 
@@ -129,7 +129,7 @@ Towns.MapGenerator.Map.prototype.terrainMap = function(map){
 
 
 
-Towns.MapGenerator.Map.prototype.getMapCircle = function(center,radius){
+Towns.MapGenerator.MapGenerator.prototype.getMapCircle = function(center,radius){
 
 
     var bounds=1;

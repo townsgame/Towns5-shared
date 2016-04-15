@@ -3,6 +3,15 @@
  * @fileOverview Additional methods to object Math
  */
 //======================================================================================================================
+//-----------------------Creating namespace Towns.Math
+var Towns = Towns || {};
+Towns.Math = Towns.Math || {};
+var A/*Actual Namespace*/ = Towns.Math;
+//-----------------------
+//-----------------------Exporting actual namespace
+module.exports=A;
+//-----------------------
+//======================================================================================================================
 
 
 
@@ -12,7 +21,7 @@
  * @param {number}
  * @return {number}
  */
-Math.sign = Math.sign || function(x) {
+A.sign = Math.sign || function(x) {
     x = +x; // convert to a number
     if (x === 0 || isNaN(x)) {
         return x;
@@ -29,7 +38,7 @@ Math.sign = Math.sign || function(x) {
  * @param number
  * @returns {number}
  */
-Math.baseLog = function(base, number) {
+A.baseLog = function(base, number) {
     return Math.log(number) / Math.log(base);
 };
 
@@ -42,14 +51,12 @@ Math.baseLog = function(base, number) {
  * @param {number} number_of_non_zero_digits
  * @return {number} Cuts unless digits to zero
  */
-Math.prettyNumber = function(number,number_of_non_zero_digits){
+A.prettyNumber = function(number,number_of_non_zero_digits){
 
     if(typeof number_of_non_zero_digits === 'undefined')number_of_non_zero_digits=2;
 
-    //console.log('prettyNumber',number);
 
-
-    var digits=Math.ceil(Math.baseLog(10,number));
+    var digits=Math.ceil(this.baseLog(10,number));
     var k = Math.pow(10,number_of_non_zero_digits-digits);
 
     //console.log(digits,k);
@@ -76,7 +83,7 @@ Math.prettyNumber = function(number,number_of_non_zero_digits){
  * @param {number} degrees 2
  * @return {number} degrees difference
  */
-Math.angleDiff = function(deg1,deg2){
+A.angleDiff = function(deg1,deg2){
     var a = deg1 - deg2;
     var a = (a + 180) % 360 - 180;
     return(a);
@@ -89,7 +96,7 @@ Math.angleDiff = function(deg1,deg2){
  * @param {number} radians
  * @return {number} degrees
  */
-Math.rad2deg = function(radians){
+A.rad2deg = function(radians){
     return(radians * (180/Math.PI));
 };
 
@@ -100,7 +107,7 @@ Math.rad2deg = function(radians){
  * @param {number} degrees
  * @return {number} radians
  */
-Math.deg2rad = function(degrees){
+A.deg2rad = function(degrees){
     return(degrees * (Math.PI/180));
 };
 
@@ -112,7 +119,7 @@ Math.deg2rad = function(degrees){
  * @param y
  * @return {number} distance
  */
-Math.xy2dist = function(x,y){
+A.xy2dist = function(x,y){
     return(Math.sqrt(Math.pow(x,2)+Math.pow(y,2)));
 };
 
@@ -120,12 +127,12 @@ Math.xy2dist = function(x,y){
 //-------------------------
 
 //todo refactor to position
-Math.xy2distDeg = function(x,y){
+A.xy2distDeg = function(x,y){
 
     var output={};
 
-    output['dist'] = Math.xy2dist(x,y);
-    output['deg'] = Math.rad2deg(Math.atan2(y,x));
+    output['dist'] = this.xy2dist(x,y);
+    output['deg'] = this.rad2deg(Math.atan2(y,x));
 
     return(output);
 
@@ -134,9 +141,9 @@ Math.xy2distDeg = function(x,y){
 //-------------------------
 
 //todo refactor to position
-Math.distDeg2xy = function(dist,deg){
+A.distDeg2xy = function(dist,deg){
 
-    var rad=Math.deg2rad(deg);
+    var rad=this.deg2rad(deg);
 
     var output={};
 
@@ -150,13 +157,13 @@ Math.distDeg2xy = function(dist,deg){
 //-------------------------
 
 //todo mybe refactor to position
-Math.xyRotate = function(x,y,deg){
+A.xyRotate = function(x,y,deg){
 
-    //nevyuzivam funkce Math.xy2distDeg a Math.distDeg2xy, abych nedelal zbytecny prevod do stupnu a spatky
-    var dist = Math.xy2dist(x,y);
+    //nevyuzivam funkce Towns.A.xy2distDeg a A.distDeg2xy, abych nedelal zbytecny prevod do stupnu a spatky
+    var dist = this.xy2dist(x,y);
     var rad = Math.atan2(y,x);
 
-    rad += Math.deg2rad(deg);
+    rad += this.deg2rad(deg);
 
     var output={};
     output['x'] = Math.cos(rad)*dist;
@@ -175,7 +182,7 @@ Math.xyRotate = function(x,y,deg){
  * @param {number} defval
  * @return {number}
  */
-Math.toFloat = function(value,defval){
+A.toFloat = function(value,defval){
 
     if(typeof defval === 'undefined')defval=0;
     if(typeof value ==='undefined')return(defval);
@@ -198,7 +205,7 @@ Math.toFloat = function(value,defval){
  * @param {number} defval
  * @return {number}
  */
-Math.toInt = function(value,defval){
+A.toInt = function(value,defval){
 
     if(typeof(value)==='undefined')return(defval);
 
@@ -220,7 +227,7 @@ Math.toInt = function(value,defval){
  * @param {number} max
  * @returns {number}
  */
-Math.bounds = function(value,min,max){
+A.bounds = function(value,min,max){
 
     if(value<min)return min;
     if(value>max)return max;
@@ -244,7 +251,7 @@ Math.bounds = function(value,min,max){
  * @param b2y
  * @return {boolean}
  */
-Math.lineCollision = function(a1x,a1y,a2x,a2y,b1x,b1y,b2x,b2y){
+A.lineCollision = function(a1x,a1y,a2x,a2y,b1x,b1y,b2x,b2y){
 
 
 
