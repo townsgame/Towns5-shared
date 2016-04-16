@@ -79,6 +79,23 @@
                     ctx.fill();
 
 
+                    map[y][x].getVirtualObjects({x:map_center.x+x-map_radius,y:map_center.y+y-map_radius}).forEach(function(virtual_object){
+
+                        var xx=virtual_object.x-map_center.x+map_radius;
+                        var yy=virtual_object.y-map_center.y+map_radius;
+
+
+                        ctx.beginPath();
+                        ctx.arc(Math.floor(xx * map_size_px), Math.floor(yy * map_size_px),Math.ceil(map_size_px),0,2*Math.PI);
+                        ctx.fillStyle = '#fff';
+                        ctx.strokeStyle = '#000';
+                        ctx.stroke();
+                        ctx.fill();
+
+                    });
+
+
+
                 }
             }
 

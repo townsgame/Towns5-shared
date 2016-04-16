@@ -39,8 +39,18 @@ A.terrains = module.exports = [
 ];
 
 
-
 A.terrains[5].bindVirtualObject({
+    type: 'natural',
+    design: {
+        type: 'natural',
+        data:{
+            image:'rock'
+        }
+    }
+
+});
+
+A.terrains[10].bindVirtualObject({
     type: 'natural',
     design: {
         type: 'natural',
