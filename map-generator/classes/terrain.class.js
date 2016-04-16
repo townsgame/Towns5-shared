@@ -17,7 +17,7 @@ Towns.MapGenerator.Terrain = module.exports = function(imageCode, color, name_cz
 
     this.type="terrain";
     this.name=name_cz;
-    this.design = {}
+    this.design = {};
     this.design.type = "terrain";
     this.design.data = {};
     this.design.data.image = imageCode;
@@ -27,12 +27,15 @@ Towns.MapGenerator.Terrain = module.exports = function(imageCode, color, name_cz
 
 };
 
+Towns.MapGenerator.Terrain.prototype.getCode = function(prefered_width){
 
-Towns.MapGenerator.Terrain.prototype.getImage = function(prefered_width){
-
-    return(this.design.data.color);
+    return(this.design.data.image);
 
 };
+
+
+/*Towns.MapGenerator.Terrain.prototype.getImage = function(prefered_width){
+};*/
 
 
 

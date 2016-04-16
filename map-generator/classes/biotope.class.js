@@ -32,7 +32,6 @@ module.exports.prototype.getZTerrain = function(z){
 
     }
 
-    return('ahoj');
 
 };
 
