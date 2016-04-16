@@ -136,8 +136,6 @@ Towns.MapGenerator.MapGenerator.prototype.getMapCircle = function(center,radius)
 
     var z_map=this.getZMapCircle(center,radius);
 
-    console.log(z_map);
-
     var map=this.terrainMap(z_map);
 
 

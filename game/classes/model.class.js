@@ -6,7 +6,7 @@
 //-----------------------Creating namespace Towns.Game
 var Towns = Towns || {};
 Towns.Game = Towns.Game || {};
-var A/*Actual Namespace*/ = Towns.Game;
+var A/*Actual Namespace*/ = Towns.Game;//todo refactor this should not be under Game namespace
 //-----------------------
 
 //-----------------------Loading modules if running under node js
@@ -64,7 +64,7 @@ A.Model.prototype.addRotationSize = function(rotation,size){
 //todo jsdoc
 A.Model.prototype.clone = function(){
 
-    return new A.Model(JSON.parse(JSON.stringify(this)));
+    return new T.Game.Model(JSON.parse(JSON.stringify(this)));
 
 };
 

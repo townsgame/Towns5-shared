@@ -6,7 +6,7 @@
 //-----------------------Creating namespace Towns.Game
 var Towns = Towns || {};
 Towns.Game = Towns.Game || {};
-var A/*Actual Namespace*/ = Towns.Game;
+var A/*Actual Namespace*/ = Towns.Game;//todo refactor this should not be under Game namespace
 //-----------------------
 //======================================================================================================================
 
@@ -66,7 +66,7 @@ A.ModelParticles.get3D = function(particle){
 
 
 
-    particle=ModelParticles.cParams(particle);
+    particle= T.Game.ModelParticles.cParams(particle);//todo refactor use replace cParams with ||
 
     if(particle.shape.type=='prism') {
 
@@ -142,7 +142,7 @@ A.ModelParticles.get3D = function(particle){
 
                 //------------------ XY Rotation
 
-                var DistDeg_=Towns.Towns.Math.xy2distDeg(x__,y__);//todo refactor all like DistDeg, etc...
+                var DistDeg_=Towns.Math.xy2distDeg(x__,y__);//todo refactor all like DistDeg, etc...
                 DistDeg_.deg+=particle.rotation;
                 var xy_=Towns.Math.distDeg2xy(DistDeg_.dist,DistDeg_.deg);
 

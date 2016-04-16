@@ -6,7 +6,7 @@
 //-----------------------Creating namespace Towns.Game
 var Towns = Towns || {};
 Towns.Game = Towns.Game || {};
-var A/*Actual Namespace*/ = Towns.Game;
+var A/*Actual Namespace*/ = Towns.Game;//todo refactor this should not be under Game namespace
 //-----------------------
 //======================================================================================================================
 
