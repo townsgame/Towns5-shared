@@ -25,7 +25,7 @@ Towns.MapGenerator.MapGenerator = module.exports  = function(getZ,biotope,blur){
 //======================================================================================================================loadMap
 
 
-Towns.MapGenerator.MapGenerator.prototype.getZMapCircle = function(center,radius){
+Towns.MapGenerator.MapGenerator.prototype.getZMapCircle = function(center_integer,radius){
 
     var map=[];
 
@@ -45,7 +45,7 @@ Towns.MapGenerator.MapGenerator.prototype.getZMapCircle = function(center,radius
             )continue;
 
 
-            map[y][x]=this.getZ(x-radius+center.x,y-radius+center.y);
+            map[y][x]=this.getZ(x-radius+center_integer.x,y-radius+center_integer.y);
 
 
         }
@@ -134,7 +134,12 @@ Towns.MapGenerator.MapGenerator.prototype.getMapCircle = function(center,radius)
     var bounds=1;
 
 
-    var z_map=this.getZMapCircle(center,radius);
+    center_integer={
+      x: Math.floor(center.x),
+      y: Math.floor(center.y)
+    };
+
+    var z_map=this.getZMapCircle(center_integer,radius);
 
     var map=this.terrainMap(z_map);
 
