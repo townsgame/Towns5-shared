@@ -38,7 +38,7 @@ A.terrains = module.exports = [
     new A.Terrain({type:'terrain', design: {type:'terrain', data:{image: 13,color: '#8A9002', size: 1}}, name: 'tráva(pozim)'})
 ];
 
-
+/*
 A.terrains[5].setVirtualObjectsGenerator(function(position){
     return([{
 
