@@ -39,25 +39,309 @@ A.terrains = module.exports = [
 ];
 
 
-A.terrains[5].bindVirtualObject({
-    type: 'natural',
-    design: {
+A.terrains[5].setVirtualObjectsGenerator(function(position){
+    return([{
+
+        x: position.x,
+        y: position.y,
         type: 'natural',
-        data:{
-            image:'rock'
+        design: {
+            type: 'natural',
+            data:{
+                image:'rock0dark0'
+            }
         }
-    }
+
+    }]);
 
 });
 
-A.terrains[10].bindVirtualObject({
-    type: 'natural',
-    design: {
+
+A.terrains[10].setVirtualObjectsGenerator(function(position){
+    return([{
+
+        x: position.x,
+        y: position.y,
         type: 'natural',
-        data:{
-            image:'tree'
+        design: {
+            type: 'natural',
+            data:{
+                image:'tree0'
+            }
         }
-    }
+
+    }]);
 
 });
 
+
+/*A.terrains[4].bindVirtualObject( {
+    name: "Katapult",
+    type: "building",
+    subtype: "main",
+
+    design: {
+        type: "model",
+        data:  {
+            "name": "root",
+            "particles": [
+                {
+                    "name": "site",
+                    "particles": [
+                        {
+                            "name": "",
+                            "shape": {
+                                "type": "prism",
+                                "n": 4,
+                                "top": 1,
+                                "bottom": 1,
+                                "rotated": false
+                            },
+                            "material": "wood_raw",
+                            "position": {
+                                "x": -10,
+                                "y": 0,
+                                "z": 0
+                            },
+                            "size": {
+                                "x": 5,
+                                "y": 5,
+                                "z": 40
+                            },
+                            "rotation": 0,
+                            "skew": {
+                                "z": {
+                                    "x": 2,
+                                    "y": 0
+                                }
+                            }
+                        },
+                        {
+                            "name": "",
+                            "shape": {
+                                "type": "prism",
+                                "n": 4,
+                                "top": 1,
+                                "bottom": 1,
+                                "rotated": false
+                            },
+                            "material": "wood_raw",
+                            "position": {
+                                "x": 10,
+                                "y": 0,
+                                "z": 0
+                            },
+                            "size": {
+                                "x": 5,
+                                "y": 5,
+                                "z": 40
+                            },
+                            "rotation": 0,
+                            "skew": {
+                                "z": {
+                                    "x": -2,
+                                    "y": 0
+                                }
+                            }
+                        },
+                        {
+                            "name": "",
+                            "shape": {
+                                "type": "prism",
+                                "n": 3,
+                                "top": 1,
+                                "bottom": 1,
+                                "rotated": false
+                            },
+                            "material": "wood_fence",
+                            "position": {
+                                "x": 0,
+                                "y": 0,
+                                "z": 10
+                            },
+                            "size": {
+                                "x": 30,
+                                "y": 5,
+                                "z": 5
+                            },
+                            "rotation": 0,
+                            "skew": {
+                                "z": {
+                                    "x": 0,
+                                    "y": 0
+                                }
+                            }
+                        },
+                        {
+                            "name": "",
+                            "shape": {
+                                "type": "prism",
+                                "n": 4,
+                                "top": 1,
+                                "bottom": 1,
+                                "rotated": false
+                            },
+                            "material": "stone_bricks",
+                            "position": {
+                                "x": 0,
+                                "y": 0,
+                                "z": 0
+                            },
+                            "size": {
+                                "x": 40,
+                                "y": 3,
+                                "z": 3
+                            },
+                            "rotation": 0,
+                            "skew": {
+                                "z": {
+                                    "x": 0,
+                                    "y": 0
+                                }
+                            }
+                        }
+                    ],
+                    "position": {
+                        "x": 0,
+                        "y": 6,
+                        "z": 0
+                    },
+                    "size": 1,
+                    "rotation": 0,
+                    "skew": {
+                        "z": {
+                            "x": 0,
+                            "y": 0
+                        }
+                    }
+                },
+                {
+                    "link": "site",
+                    "position": {
+                        "x": 0,
+                        "y": -6,
+                        "z": 0
+                    },
+                    "rotation": 0
+                },
+                {
+                    "name": "",
+                    "shape": {
+                        "type": "prism",
+                        "n": 6,
+                        "top": 1,
+                        "bottom": 1,
+                        "rotated": false
+                    },
+                    "material": "wood_raw",
+                    "position": {
+                        "x": 0,
+                        "y": 0,
+                        "z": 35
+                    },
+                    "size": {
+                        "x": 5,
+                        "y": 15,
+                        "z": 5
+                    },
+                    "rotation": 0,
+                    "skew": {
+                        "z": {
+                            "x": 0,
+                            "y": 0
+                        }
+                    }
+                },
+                {
+                    "name": "",
+                    "shape": {
+                        "type": "prism",
+                        "n": 9,
+                        "top": 1,
+                        "bottom": 1,
+                        "rotated": false
+                    },
+                    "material": "wood_raw",
+                    "position": {
+                        "x": 10,
+                        "y": 0,
+                        "z": 20
+                    },
+                    "size": {
+                        "x": 7,
+                        "y": 3,
+                        "z": 60
+                    },
+                    "rotation": 0,
+                    "skew": {
+                        "z": {
+                            "x": -5,
+                            "y": 0
+                        }
+                    }
+                },
+                {
+                    "name": "",
+                    "shape": {
+                        "type": "prism",
+                        "n": 4,
+                        "top": 1,
+                        "bottom": 1,
+                        "rotated": false
+                    },
+                    "material": "stone_plain",
+                    "position": {
+                        "x": 10,
+                        "y": 0,
+                        "z": 15
+                    },
+                    "size": {
+                        "x": 10,
+                        "y": 10,
+                        "z": 10
+                    },
+                    "rotation": 0,
+                    "skew": {
+                        "z": {
+                            "x": 0,
+                            "y": 0
+                        }
+                    }
+                },
+                {
+                    "name": "",
+                    "shape": {
+                        "type": "prism",
+                        "n": 4,
+                        "top": 1,
+                        "bottom": 1,
+                        "rotated": false
+                    },
+                    "material": "wood_fence",
+                    "position": {
+                        "x": 13,
+                        "y": 0,
+                        "z": 11
+                    },
+                    "size": {
+                        "x": 3,
+                        "y": 25,
+                        "z": 3
+                    },
+                    "rotation": 0,
+                    "skew": {
+                        "z": {
+                            "x": 0,
+                            "y": 0
+                        }
+                    }
+                }
+            ],
+            "rotation": 0,
+            "size": 1
+        }
+    },
+
+
+
+});*/
