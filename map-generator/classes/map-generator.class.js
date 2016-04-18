@@ -30,7 +30,7 @@ Towns.MapGenerator.MapGenerator = module.exports  = function(getZ,biotope,virtua
 
 
 
-
+//private
 Towns.MapGenerator.MapGenerator.prototype.getZMapCircle = function(center_integer,radius){
 
     var map=[];
@@ -64,7 +64,7 @@ Towns.MapGenerator.MapGenerator.prototype.getZMapCircle = function(center_intege
 
 
 
-
+//private
 Towns.MapGenerator.MapGenerator.prototype.terrainMap = function(map){
 
     var map_bg=[];
@@ -85,17 +85,12 @@ Towns.MapGenerator.MapGenerator.prototype.terrainMap = function(map){
 };
 
 
-
-Towns.MapGenerator.MapGenerator.prototype.getMapArrayCircle = function(center,radius){
+//private
+Towns.MapGenerator.MapGenerator.prototype.getMapArrayCircle = function(center_integer,radius){
 
 
     var bounds=1;
 
-
-    center_integer={
-        x: Math.floor(center.x),
-        y: Math.floor(center.y)
-    };
 
     var z_map=this.getZMapCircle(center_integer,radius);
 
@@ -105,8 +100,8 @@ Towns.MapGenerator.MapGenerator.prototype.getMapArrayCircle = function(center,ra
 
 };
 
-
-Towns.MapGenerator.MapGenerator.prototype.convertMapArrayToObjects = function(map_array,center,radius){
+//private
+Towns.MapGenerator.MapGenerator.prototype.convertMapArrayToObjects = function(map_array,center_integer,radius){
 
     var objects=[];
 
@@ -119,8 +114,8 @@ Towns.MapGenerator.MapGenerator.prototype.convertMapArrayToObjects = function(ma
             var object = new Towns.MapGenerator.Terrain(map_array[y][x]);
 
 
-            object.x=center.x-radius+x;
-            object.y=center.y-radius+y;
+            object.x=center_integer.x-radius+x;
+            object.y=center_integer.y-radius+y;
 
 
             objects.push(object);
@@ -138,8 +133,13 @@ Towns.MapGenerator.MapGenerator.prototype.convertMapArrayToObjects = function(ma
 
 Towns.MapGenerator.MapGenerator.prototype.getMap = function(center,radius){
 
-    var map_array = this.getMapArrayCircle(center,radius);
-    var objects = this.convertMapArrayToObjects(map_array,center,radius);
+    center_integer={
+        x: Math.floor(center.x),
+        y: Math.floor(center.y)
+    };
+
+    var map_array = this.getMapArrayCircle(center_integer,radius);
+    var objects = this.convertMapArrayToObjects(map_array,center_integer,radius);
     return(objects);
 
 };

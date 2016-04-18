@@ -117,16 +117,9 @@ A.mapGenerator = module.exports = new A.MapGenerator(
 
     function(object,virtual_objects){
 
-        //console.log('x');
-
         if(object.type!='terrain')return;
-        //console.log(object);
-        //console.log(object.design.data.image);
 
-        if(object.design.data.image==10){
-
-
-            console.log('x');
+        if(object.design.data.image==5){
 
             virtual_objects.push(
                 {
@@ -145,10 +138,28 @@ A.mapGenerator = module.exports = new A.MapGenerator(
             );
 
 
+        }else
+        if(object.design.data.image==10){
+
+
+            virtual_objects.push(
+                {
+
+                    x: object.x,
+                    y: object.y,
+                    type: 'natural',
+                    design: {
+                        type: 'natural',
+                        data:{
+                            image:'tree0'
+                        }
+                    }
+
+                }
+            );
+
+
         }
-        //ddd();
-
-
 
 
     }
