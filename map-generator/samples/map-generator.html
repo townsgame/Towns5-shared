@@ -61,43 +61,43 @@
             var ctx = jQueryCanvas[0].getContext('2d');
 
 
-            var map = Towns.MapGenerator.mapGenerator.getMapCircle(map_center, map_radius);
+            var terrain_objects = Towns.MapGenerator.mapGenerator.getMap(map_center, map_radius);
 
-            //console.log(map);
+            terrain_objects.forEach(function(terrain_object){
 
+                var x=terrain_object.x-map_center.x;
+                var y=terrain_object.y-map_center.y;
 
-            for (var y = 0; y < map_radius * 2; y++) {
-                for (var x = 0; x < map_radius * 2; x++) {
-
-                    if (typeof(map[y][x]) === 'undefined')continue;
-
-                    //console.log(map[y][x].getColor());
-
-                    ctx.beginPath();
-                    ctx.rect(Math.floor(x * map_size_px), Math.floor(y * map_size_px), Math.ceil(map_size_px), Math.ceil(map_size_px));
-                    ctx.fillStyle = map[y][x].getColor();
-                    ctx.fill();
+                ctx.beginPath();
+                ctx.rect(Math.floor(x * map_size_px), Math.floor(y * map_size_px), Math.ceil(map_size_px), Math.ceil(map_size_px));
+                ctx.fillStyle = terrain_object.getColor();
+                ctx.fill();
 
 
-                    map[y][x].getVirtualObjects({x:map_center.x+x-map_radius,y:map_center.y+y-map_radius}).forEach(function(virtual_object){
-
-                        var xx=virtual_object.x-map_center.x+map_radius;
-                        var yy=virtual_object.y-map_center.y+map_radius;
+            });
 
 
-                        ctx.beginPath();
-                        ctx.arc(Math.floor(xx * map_size_px), Math.floor(yy * map_size_px),Math.ceil(map_size_px),0,2*Math.PI);
-                        ctx.fillStyle = '#fff';
-                        ctx.strokeStyle = '#000';
-                        ctx.stroke();
-                        ctx.fill();
+            var virtual_objects = Towns.MapGenerator.mapGenerator.getVirtualObjects(terrain_objects);
 
-                    });
+            console.log(virtual_objects);
+
+            virtual_objects.forEach(function(virtual_object){
+
+                var x=virtual_object.x-map_center.x;
+                var y=virtual_object.y-map_center.y;
+
+
+                 ctx.beginPath();
+                 ctx.arc(Math.floor(x * map_size_px), Math.floor(y * map_size_px),Math.ceil(map_size_px),0,2*Math.PI);
+                 ctx.fillStyle = '#fff';
+                 ctx.strokeStyle = '#000';
+                 ctx.stroke();
+                 ctx.fill();
+
+             });
 
 
 
-                }
-            }
 
             $('#maps').append(jQueryCanvas);
 

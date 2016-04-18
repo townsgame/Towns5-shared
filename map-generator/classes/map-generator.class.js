@@ -13,16 +13,15 @@ var A/*Actual Namespace*/ = Towns.MapGenerator;
 
 
 
-Towns.MapGenerator.MapGenerator = module.exports  = function(getZ,biotope,blur){
+Towns.MapGenerator.MapGenerator = module.exports  = function(getZ,biotope,virtualObjectGenerator){
 
     this.getZ = getZ;
     this.biotope = biotope;
-    this.blur = blur;
+    this.virtualObjectGenerator = virtualObjectGenerator;
 
 };
 
 
-//======================================================================================================================loadMap
 
 
 Towns.MapGenerator.MapGenerator.prototype.getZMapCircle = function(center_integer,radius){
@@ -55,54 +54,8 @@ Towns.MapGenerator.MapGenerator.prototype.getZMapCircle = function(center_intege
 
 };
 
-//======================================================================================================================loadMap
 
 
-
-/*Towns.MapGenerator.Map.prototype.blurMap = function(map,blur){
-
-    //r(blur,Math.pow(blur*2+1,2));
-
-    var map_=[];
-
-    for(var y= 0,l=map.length;y<l;y++){
-        map_[y]=[];
-        for(var x=0;x<l;x++){
-            map_[y][x]=0;
-        }
-    }
-
-
-
-
-    for(var y=0;y<l;y++){
-        for(var x=0;x<l;x++){
-
-            var z=map[y][x]/Math.pow(blur*2+1,2);//todo optimalizovat
-
-            for(var y_=y-blur;y_<=y+blur;y_++){
-                for(var x_=x-blur;x_<=x+blur;x_++){
-
-                    if(x_<0)break;
-                    if(y_<0)break;
-                    if(x_>=map.length)break;
-                    if(y_>=map.length)break;
-
-                    map_[y_][x_]+=z;
-                }
-            }
-
-        }
-    }
-
-
-
-    return(map_);
-
-};*/
-
-
-//======================================================================================================================loadMap
 
 
 Towns.MapGenerator.MapGenerator.prototype.terrainMap = function(map){
@@ -124,28 +77,87 @@ Towns.MapGenerator.MapGenerator.prototype.terrainMap = function(map){
 
 };
 
-//======================================================================================================================loadMap
 
 
-
-Towns.MapGenerator.MapGenerator.prototype.getMapCircle = function(center,radius){
+Towns.MapGenerator.MapGenerator.prototype.getMapArrayCircle = function(center,radius){
 
 
     var bounds=1;
 
 
     center_integer={
-      x: Math.floor(center.x),
-      y: Math.floor(center.y)
+        x: Math.floor(center.x),
+        y: Math.floor(center.y)
     };
 
     var z_map=this.getZMapCircle(center_integer,radius);
 
     var map=this.terrainMap(z_map);
 
-
-
     return(map);
+
 };
 
 
+Towns.MapGenerator.MapGenerator.prototype.convertMapArrayToObjects = function(map_array,center,radius){
+
+    var objects=[];
+
+    for (var y = 0; y < radius * 2; y++) {
+        for (var x = 0; x < radius * 2; x++) {
+
+            if (typeof(map_array[y][x]) === 'undefined')continue;
+
+
+            var object = new Towns.MapGenerator.Terrain(map_array[y][x]);
+
+
+            object.x=center_integer.x+x;
+            object.y=center_integer.y+y;
+
+
+            objects.push(object);
+
+
+        }
+    }
+
+    return(objects);
+};
+
+
+
+
+
+Towns.MapGenerator.MapGenerator.prototype.getMap = function(center,radius){
+
+    var map_array = this.getMapArrayCircle(center,radius);
+    var objects = this.convertMapArrayToObjects(map_array,center,radius);
+    return(objects);
+
+};
+
+
+
+
+
+//======================================================================================================================
+
+
+
+
+
+Towns.MapGenerator.MapGenerator.prototype.getVirtualObjects = function(objects){
+
+    var self = this;
+
+    var virtual_objects = [];
+    objects.forEach(function(object){
+
+        self.virtualObjectGenerator(object,virtual_objects);
+
+    });
+
+    return(virtual_objects);
+
+};

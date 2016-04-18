@@ -66,7 +66,7 @@ A.ModelParticles.get3D = function(particle){
 
 
 
-    particle= T.Game.ModelParticles.cParams(particle);//todo refactor use replace cParams with ||
+    particle= Towns.Game.ModelParticles.cParams(particle);//todo refactor use replace cParams with ||
 
     if(particle.shape.type=='prism') {
 

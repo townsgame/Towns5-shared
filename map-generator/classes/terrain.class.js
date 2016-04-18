@@ -19,7 +19,6 @@ Towns.MapGenerator.Terrain = module.exports = function(object){
         this[key] = object[key];
     }
 
-    this.virtual_objects_generator = false;
     /*this.type="terrain";
     this.name=name_cz;
     this.design = {};
@@ -52,25 +51,3 @@ Towns.MapGenerator.Terrain.prototype.getColor = function(){
 
 
 
-
-Towns.MapGenerator.Terrain.prototype.setVirtualObjectsGenerator = function(virtual_objects_generator){
-
-    this.virtual_objects_generator = virtual_objects_generator;
-
-};
-
-
-
-Towns.MapGenerator.Terrain.prototype.getVirtualObjects = function(position){
-
-    if(this.virtual_objects_generator){
-
-        return this.virtual_objects_generator(position);
-
-    }else{
-
-        return([]);
-
-    }
-
-};

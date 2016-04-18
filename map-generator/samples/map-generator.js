@@ -15,7 +15,7 @@ var mapGenerator = require('../inits/map-generator.init.js');
     };
 var ascii=['  ',' ~','##','~~','::','XX','Y@','~/','tt','--','||','^^','.~','\\\\','//'];
 
-var map = mapGenerator.getMapCircle(map_center,map_radius);
+var map = mapGenerator.getMapArrayCircle(map_center,map_radius);
 
 
 for (var y = 0; y < map_radius * 2; y++) {

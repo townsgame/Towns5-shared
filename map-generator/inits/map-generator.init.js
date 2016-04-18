@@ -112,7 +112,46 @@ A.mapGenerator = module.exports = new A.MapGenerator(
         { from: (68/100) , terrain: A.terrains[13]},
         { from: (73/100) , terrain: A.terrains[ 4]},
         { from: (87/100) , terrain: A.terrains[ 6]}
-    ])
+    ]),
+
+
+    function(object,virtual_objects){
+
+        //console.log('x');
+
+        if(object.type!='terrain')return;
+        //console.log(object);
+        //console.log(object.design.data.image);
+
+        if(object.design.data.image==10){
+
+
+            console.log('x');
+
+            virtual_objects.push(
+                {
+
+                    x: object.x,
+                    y: object.y,
+                    type: 'natural',
+                    design: {
+                        type: 'natural',
+                        data:{
+                            image:'rock0dark0'
+                        }
+                    }
+
+                }
+            );
+
+
+        }
+        //ddd();
+
+
+
+
+    }
 
 
 );
