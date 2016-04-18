@@ -9,6 +9,13 @@ var Towns = Towns || {};
 Towns.MapGenerator = Towns.MapGenerator || {};
 var A/*Actual Namespace*/ = Towns.MapGenerator;
 //-----------------------
+//-----------------------Loading modules if running under node js
+if(typeof window=='undefined'){
+
+    A.Terrain = require(__dirname+'/../classes/terrain.class.js');
+
+}
+//-----------------------
 //======================================================================================================================
 
 
@@ -112,8 +119,8 @@ Towns.MapGenerator.MapGenerator.prototype.convertMapArrayToObjects = function(ma
             var object = new Towns.MapGenerator.Terrain(map_array[y][x]);
 
 
-            object.x=center_integer.x+x;
-            object.y=center_integer.y+y;
+            object.x=center.x-radius+x;
+            object.y=center.y-radius+y;
 
 
             objects.push(object);

@@ -8,42 +8,17 @@
 //Loading Instance of mapGenerator
 var mapGenerator = require('../inits/map-generator.init.js');
 
-    map_radius = 20,
+    map_radius = 2,
     map_center = {
         x: 10000,
         y: 100
     };
-var ascii=['  ',' ~','##','~~','::','XX','Y@','~/','tt','--','||','^^','.~','\\\\','//'];
 
-var map = mapGenerator.getMapArrayCircle(map_center,map_radius);
-
-
-for (var y = 0; y < map_radius * 2; y++) {
-
-    var row='';
-
-    for (var x = 0; x < map_radius * 2; x++) {
-
-        if (typeof(map[y][x]) === 'undefined'){
-
-            row+=ascii[0];
-
-        }else{
-
-            row+=ascii[map[y][x].design.data.image];
-
-        }
+var objects = mapGenerator.getMap(map_center,map_radius);
 
 
-
-
-    }
-
-    console.log(row);
-
-
-}
-
+console.log('List of virtual objects of type terrain near ['+map_center.x+','+map_center.y+']:');
+console.log(objects);
 
 
 

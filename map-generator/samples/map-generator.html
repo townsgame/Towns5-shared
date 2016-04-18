@@ -65,8 +65,8 @@
 
             terrain_objects.forEach(function(terrain_object){
 
-                var x=terrain_object.x-map_center.x;
-                var y=terrain_object.y-map_center.y;
+                var x=terrain_object.x+map_radius-map_center.x;
+                var y=terrain_object.y+map_radius-map_center.y;
 
                 ctx.beginPath();
                 ctx.rect(Math.floor(x * map_size_px), Math.floor(y * map_size_px), Math.ceil(map_size_px), Math.ceil(map_size_px));
@@ -83,8 +83,8 @@
 
             virtual_objects.forEach(function(virtual_object){
 
-                var x=virtual_object.x-map_center.x;
-                var y=virtual_object.y-map_center.y;
+                var x=virtual_object.x+map_radius-map_center.x;
+                var y=virtual_object.y+map_radius-map_center.y;
 
 
                  ctx.beginPath();
