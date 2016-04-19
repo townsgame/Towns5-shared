@@ -1,9 +1,0 @@
-
-
-/*
-describe('Resources', function () {
-
-
-
-
-};*/
