@@ -130,7 +130,7 @@ A.mapGenerator = module.exports = new A.MapGenerator(
                     design: {
                         type: 'natural',
                         data:{
-                            image:'rock0dark0'
+                            image:'rock'+Math.floor(Towns.Math.randomSeedPosition(1,{x:object.x,y:object.y})*6)+'dark'+Math.floor(Towns.Math.randomSeedPosition(2,{x:object.x,y:object.y})*4)
                         }
                     }
 
@@ -151,7 +151,7 @@ A.mapGenerator = module.exports = new A.MapGenerator(
                     design: {
                         type: 'natural',
                         data:{
-                            image:'tree0'
+                            image:'tree'+Math.floor(Towns.Math.randomSeedPosition(3,{x:object.x,y:object.y})*10)
                         }
                     }
 

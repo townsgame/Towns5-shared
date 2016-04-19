@@ -175,6 +175,17 @@ A.Math.xyRotate = function(x,y,deg){
 
 //======================================================================================================================
 
+
+A.Math.randomSeedPosition = function(seed,position){
+
+
+    return (Math.sin(Math.pow((position.x*position.y)-seed,1/2))+1)/2;
+
+};
+
+//======================================================================================================================
+
+
 /**
  * Converts multitype to float
  * @static

@@ -147,6 +147,34 @@ Towns.MapGenerator.MapGenerator.prototype.getMap = function(center,radius){
 
 
 
+//======================================================================================================================
+
+
+
+
+
+Towns.MapGenerator.MapGenerator.prototype.getMapWithChanges = function(center,radius,material_terrains){
+    return objects;
+};
+
+
+
+
+Towns.MapGenerator.MapGenerator.prototype.getTerrainOnPosition = function(material_terrains,position){
+    return Terrain;
+};
+
+
+
+
+Towns.MapGenerator.MapGenerator.prototype.findNearestTerrain = function(material_terrains,position,terrain){
+    return 8;
+};
+
+
+
+
+
 
 //======================================================================================================================
 
