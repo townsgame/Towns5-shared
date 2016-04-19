@@ -47,7 +47,7 @@ A.Resources.newSingles = function(resources){
                 var resources_={};
                 resources_[key]=resources[key];
 
-                resources_array.push(new A.Resources(resources_));
+                resources_array.push(new T.Resources(resources_));
 
             }
         }
