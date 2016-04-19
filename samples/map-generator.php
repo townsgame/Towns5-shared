@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Towns-shared object price sample</title>
-</head>
+
 
 
 <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
@@ -11,20 +11,23 @@
 
 <script>
     var module={};
+    var global=window;
+    global.Towns = {};
 </script>
 
 
-<script src="../../math/math.js"></script>
+<?php
 
+$files=array_merge(
+    glob('../js/*.js'),
+    glob('../js/*/*.js')
+);
+foreach($files as $file):
 
-<script src="../classes/terrain.class.js"></script>
-<script src="../classes/biotope.class.js"></script>
-<script src="../classes/map-generator.class.js"></script>
+?>
+<script src="<?=$file?>"></script>
 
-
-<script src="../inits/terrains.init.js"></script>
-<script src="../inits/map-generator.init.js"></script>
-
+<?php endforeach; ?>
 
 
 <script>
@@ -136,6 +139,7 @@
 
 
 </style>
+</head>
 <body>
 
 
