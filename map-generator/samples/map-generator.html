@@ -61,38 +61,41 @@
             var ctx = jQueryCanvas[0].getContext('2d');
 
 
-            var terrain_objects = Towns.MapGenerator.mapGenerator.getMap(map_center, map_radius);
+            var objects = [];
+            Towns.MapGenerator.mapGenerator.completeMap(objects, map_center, map_radius);
 
-            terrain_objects.forEach(function(terrain_object){
-
-                var x=terrain_object.x+map_radius-map_center.x;
-                var y=terrain_object.y+map_radius-map_center.y;
-
-                ctx.beginPath();
-                ctx.rect(Math.floor(x * map_size_px), Math.floor(y * map_size_px), Math.ceil(map_size_px), Math.ceil(map_size_px));
-                ctx.fillStyle = terrain_object.getColor();
-                ctx.fill();
+            objects.forEach(function(object){
 
 
-            });
+                if(object.type=='terrain'){
 
 
-            var virtual_objects = Towns.MapGenerator.mapGenerator.getVirtualObjects(terrain_objects);
+                    var x=object.x+map_radius-map_center.x;
+                    var y=object.y+map_radius-map_center.y;
 
-            console.log(virtual_objects);
-
-            virtual_objects.forEach(function(virtual_object){
-
-                var x=virtual_object.x+map_radius-map_center.x;
-                var y=virtual_object.y+map_radius-map_center.y;
+                    ctx.beginPath();
+                    ctx.rect(Math.floor(x * map_size_px), Math.floor(y * map_size_px), Math.ceil(map_size_px), Math.ceil(map_size_px));
+                    ctx.fillStyle = object.getColor();
+                    ctx.fill();
 
 
-                 ctx.beginPath();
-                 ctx.arc(Math.floor(x * map_size_px), Math.floor(y * map_size_px),Math.ceil(map_size_px),0,2*Math.PI);
-                 ctx.fillStyle = '#fff';
-                 ctx.strokeStyle = '#000';
-                 ctx.stroke();
-                 ctx.fill();
+                }else
+                if(object.type=='natural'){
+
+                    var x=object.x+map_radius-map_center.x;
+                    var y=object.y+map_radius-map_center.y;
+
+
+                    ctx.beginPath();
+                    ctx.arc(Math.floor(x * map_size_px), Math.floor(y * map_size_px),Math.ceil(map_size_px),0,2*Math.PI);
+                    ctx.fillStyle = '#fff';
+                    ctx.strokeStyle = '#000';
+                    ctx.stroke();
+                    ctx.fill();
+
+                }
+
+
 
              });
 
