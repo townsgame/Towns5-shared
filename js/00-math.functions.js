@@ -3,15 +3,16 @@
  * @fileOverview Additional methods to object Math
  */
 //======================================================================================================================
-//-----------------------Creating namespace Towns
-var Towns = Towns || {};
+//-----------------------Creating namespace T (=global.Towns)
+var T = global.Towns;
 var A/*Actual Namespace*/ = Towns;
+module.exports = Towns;
 //-----------------------
 //======================================================================================================================
 
 
 
-A.Math = module.exports = {};
+A.Math = {};
 
 
 
@@ -56,7 +57,7 @@ A.Math.prettyNumber = function(number,number_of_non_zero_digits){
     number_of_non_zero_digits = number_of_non_zero_digits || 2;//todo refactor like this
 
 
-    var digits=Math.ceil(Towns.Math.baseLog(10,number));
+    var digits=Math.ceil(T.Math.baseLog(10,number));
     var k = Math.pow(10,number_of_non_zero_digits-digits);
 
     //console.log(digits,k);

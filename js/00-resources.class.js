@@ -3,10 +3,10 @@
  * @fileOverview Creates class Resources
  */
 //======================================================================================================================
-//-----------------------Creating namespace Towns.Game
-var Towns = Towns || {};
-Towns.Game = Towns.Game || {};
-var A/*Actual Namespace*/ = Towns.Game;//todo refactor this should not be under Game namespace
+//-----------------------Creating namespace T (=global.Towns).Game
+var T = global.Towns;
+var A/*Actual Namespace*/ = Towns;//todo refactor this should not be under Game namespace
+module.exports = Towns;
 //-----------------------
 //======================================================================================================================
 
@@ -18,7 +18,7 @@ var A/*Actual Namespace*/ = Towns.Game;//todo refactor this should not be under 
  * @param {object} Resources
  * @constructor
  */
-A.Resources = module.exports = function(resources){
+A.Resources = function(resources){
 
     for(var key in resources){
         if(typeof resources[key]=='number') {

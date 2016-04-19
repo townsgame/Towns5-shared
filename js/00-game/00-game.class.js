@@ -3,19 +3,10 @@
  * @fileOverview Creates static class game
  */
 //======================================================================================================================
-//-----------------------Creating namespace Towns.Game
-var Towns = Towns || {};
-Towns.Game = Towns.Game || {};
-var A/*Actual Namespace*/ = Towns.Game;
-//-----------------------
-
-//-----------------------Loading modules if running under node js
-if(typeof window=='undefined'){
-
-    A.Resources = require(__dirname+'/resources.class.js');
-    A.Model = require(__dirname+'/model.class.js');
-
-}
+//-----------------------Creating namespace T (=global.Towns)
+var T = global.Towns;
+var A/*Actual Namespace*/ = Towns;
+module.exports = Towns;
 //-----------------------
 //======================================================================================================================
 
@@ -28,7 +19,7 @@ if(typeof window=='undefined'){
  * @param {function} price_key_modifier
  * @constructor
  */
-A.Game = module.exports = function(action_type_list,max_life_modifier,price_key_modifier){
+A.Game = function(action_type_list,max_life_modifier,price_key_modifier){
 
     this.action_type_list = action_type_list;
     this.max_life_modifier = max_life_modifier;

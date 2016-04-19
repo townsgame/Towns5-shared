@@ -3,10 +3,11 @@
  * @fileOverview Creates class actions
  */
 //======================================================================================================================
-//-----------------------Creating namespace Towns.Game
-var Towns = Towns || {};
-Towns.Game = Towns.Game || {};
-var A/*Actual Namespace*/ = Towns.Game;
+//-----------------------Creating namespace T (=global.Towns).Game
+var T = global.Towns;
+T.Game = T.Game || {};
+var A/*Actual Namespace*/ = T.Game;
+module.exports = Towns;
 //-----------------------
 //======================================================================================================================
 
@@ -20,7 +21,7 @@ var A/*Actual Namespace*/ = Towns.Game;
  * @param {function} perform
  * @constructor
  */
-A.ActionType = module.exports = function(type, params, price_base, price_resources_list, perform){
+A.ActionType = function(type, params, price_base, price_resources_list, perform){
     this.type = type;
     this.params = params;
     this.price_base = price_base;

@@ -4,10 +4,11 @@
  * @fileOverview ...
  */
 //======================================================================================================================
-//-----------------------Creating namespace Towns.MapGenerator
-var Towns = Towns || {};
-Towns.MapGenerator = Towns.MapGenerator || {};
-var A/*Actual Namespace*/ = Towns.MapGenerator;
+//-----------------------Creating namespace T (=global.Towns).MapGenerator
+var T = global.Towns;
+T.MapGenerator = T.MapGenerator || {};
+var A/*Actual Namespace*/ = T.MapGenerator;
+module.exports = Towns;
 //-----------------------
 //======================================================================================================================
 
@@ -15,7 +16,7 @@ var A/*Actual Namespace*/ = Towns.MapGenerator;
 
 
 
-Towns.MapGenerator.Biotope = module.exports = function(terrains){
+A.Biotope = function(terrains){
 
     this.terrains = terrains;
 
@@ -23,7 +24,7 @@ Towns.MapGenerator.Biotope = module.exports = function(terrains){
 
 
 
-module.exports.prototype.getZTerrain = function(z){
+A.Biotope.prototype.getZTerrain = function(z){
 
 
     for(var i=this.terrains.length-1;i>=0;i--){

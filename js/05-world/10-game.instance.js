@@ -3,21 +3,11 @@
  * @fileOverview Creates configuration of game conditions
  */
 //======================================================================================================================
-//-----------------------Creating namespace Towns.Game
-var Towns = Towns || {};
-Towns.Game = Towns.Game || {};
-var A/*Actual Namespace*/ = Towns.Game;
-//-----------------------
-
-//-----------------------Loading modules if running under node js
-if(typeof window=='undefined'){
-
-    Towns.Math = require(__dirname+'/../../math/math.js');
-    A.Game = require(__dirname+'/../classes/game.class.js');
-    A.ActionType = require(__dirname+'/../classes/action-type.class.js');
-    A.Resources = require(__dirname+'/../classes/resources.class.js');
-
-}
+//-----------------------Creating namespace T (=global.Towns).Game
+var T = global.Towns;
+T.World = T.World || {};
+var A/*Actual Namespace*/ = T.World;
+module.exports = Towns;
 //-----------------------
 //======================================================================================================================
 
@@ -26,10 +16,10 @@ if(typeof window=='undefined'){
 var K=0.05;
 
 
-A.game = module.exports = new A.Game(
+A.game = new T.Game(
     {
         //---------------------------------------------Defense
-        'defense': new A.ActionType(
+        'defense': new T.Game.ActionType(
             'passive',
             {
                 'defense': 'number'
@@ -37,7 +27,7 @@ A.game = module.exports = new A.Game(
             function(params){
                 return((params.defense)*800*K);
             },
-            A.Resources.newSingles({//todo in future should be resources and k in separate file.
+            T.Resources.newSingles({//todo in future should be resources and k in separate file.
                 'wood':   2,
                 'clay':   2,
                 'stone':  1,
@@ -45,7 +35,7 @@ A.game = module.exports = new A.Game(
             })
         ),
         //---------------------------------------------Regenerate
-        'regenerate': new A.ActionType(
+        'regenerate': new T.Game.ActionType(
             'passive',
             {
                 'regenerate': 'number'
@@ -53,7 +43,7 @@ A.game = module.exports = new A.Game(
             function(params){
                 return((1/params.regenerate)*3600*K);
             },
-            A.Resources.newSingles({
+            T.Resources.newSingles({
                 'wood':   4,
                 'clay':   2,
                 'stone':  2,
@@ -61,7 +51,7 @@ A.game = module.exports = new A.Game(
             })
         ),
         //---------------------------------------------Repair
-        'repair': new A.ActionType(
+        'repair': new T.Game.ActionType(
             'active',
             {
                 'repair': 'number'
@@ -69,7 +59,7 @@ A.game = module.exports = new A.Game(
             function(params){
                 return((1/(params.repair/100))*1000*K);
             },
-            A.Resources.newSingles({
+            T.Resources.newSingles({
                 'wood':   4,
                 'clay':   2,
                 'stone':  3,
@@ -80,7 +70,7 @@ A.game = module.exports = new A.Game(
             }
         ),
         //---------------------------------------------Mine
-        'mine': new A.ActionType(
+        'mine': new T.Game.ActionType(
             'passive',
             {
                 'resource': 'string',
@@ -89,7 +79,7 @@ A.game = module.exports = new A.Game(
             function(params){
                 return((params.amount)*3600*K);
             },
-            A.Resources.newSingles({
+            T.Resources.newSingles({
                 'wood':   3,
                 'clay':   2,
                 'stone':  2,
@@ -97,7 +87,7 @@ A.game = module.exports = new A.Game(
             })
         ),
         //---------------------------------------------Attack
-        'attack': new A.ActionType(
+        'attack': new T.Game.ActionType(
             'active',
             {
                 'distance': 'number',
@@ -108,7 +98,7 @@ A.game = module.exports = new A.Game(
             function(params){
                 return((Math.pow(params.distance,2)*params.strength*params.rounds*(1/params.cooldown))*100*K);
             },
-            A.Resources.newSingles({
+            T.Resources.newSingles({
                 'wood':   2,
                 'clay':   0,
                 'stone':  3,
@@ -119,7 +109,7 @@ A.game = module.exports = new A.Game(
             }
         ),
         //---------------------------------------------Move
-        'move': new A.ActionType(
+        'move': new T.Game.ActionType(
             'active',
             {
                 'speed': 'number'
@@ -127,7 +117,7 @@ A.game = module.exports = new A.Game(
             function(params){
                 return((Math.pow(params.speed,2))*10*K);
             },
-            A.Resources.newSingles({
+            T.Resources.newSingles({
                 'wood':   2,
                 'clay':   0,
                 'stone':  0,
@@ -138,7 +128,7 @@ A.game = module.exports = new A.Game(
             }
         ),
         //---------------------------------------------Throughput
-        'throughput': new A.ActionType(
+        'throughput': new T.Game.ActionType(
             'passive',
             {
                 'throughput': 'number'
@@ -146,7 +136,7 @@ A.game = module.exports = new A.Game(
             function(params){
                 return((Math.pow(params.throughput/100,2))*10*K);//todo
             },
-            A.Resources.newSingles({
+            T.Resources.newSingles({
                 'wood':   2,
                 'clay':   3,
                 'stone':  1,
@@ -157,7 +147,7 @@ A.game = module.exports = new A.Game(
 
 
     },
-    Towns.Math.prettyNumber,
-    Towns.Math.prettyNumber
+    T.Math.prettyNumber,
+    T.Math.prettyNumber
 
 );

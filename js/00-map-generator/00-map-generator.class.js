@@ -4,23 +4,16 @@
  * @fileOverview ...
  */
 //======================================================================================================================
-////-----------------------Creating namespace Towns.MapGenerator
-var Towns = Towns || {};
-Towns.MapGenerator = Towns.MapGenerator || {};
-var A/*Actual Namespace*/ = Towns.MapGenerator;
-//-----------------------
-//-----------------------Loading modules if running under node js
-if(typeof window=='undefined'){
-
-    A.Terrain = require(__dirname+'/../classes/terrain.class.js');
-
-}
+////-----------------------Creating namespace T (=global.Towns)
+var T = global.Towns;
+var A/*Actual Namespace*/ = Towns;
+module.exports = Towns;
 //-----------------------
 //======================================================================================================================
 
 
 
-Towns.MapGenerator.MapGenerator = module.exports  = function(getZ,biotope,virtualObjectGenerator){
+A.MapGenerator = function(getZ,biotope,virtualObjectGenerator){
 
     this.getZ = getZ;
     this.biotope = biotope;
@@ -31,7 +24,7 @@ Towns.MapGenerator.MapGenerator = module.exports  = function(getZ,biotope,virtua
 
 
 //private
-Towns.MapGenerator.MapGenerator.prototype.getZMapCircle = function(center_integer,radius){
+A.MapGenerator.prototype.getZMapCircle = function(center_integer,radius){
 
     var map=[];
 
@@ -65,7 +58,7 @@ Towns.MapGenerator.MapGenerator.prototype.getZMapCircle = function(center_intege
 
 
 //private
-Towns.MapGenerator.MapGenerator.prototype.terrainMap = function(map){
+A.MapGenerator.prototype.terrainMap = function(map){
 
     var map_bg=[];
 
@@ -86,7 +79,7 @@ Towns.MapGenerator.MapGenerator.prototype.terrainMap = function(map){
 
 
 //private
-Towns.MapGenerator.MapGenerator.prototype.getMapArrayCircle = function(center_integer,radius){
+A.MapGenerator.prototype.getMapArrayCircle = function(center_integer,radius){
 
 
     var bounds=1;
@@ -101,7 +94,7 @@ Towns.MapGenerator.MapGenerator.prototype.getMapArrayCircle = function(center_in
 };
 
 //private
-Towns.MapGenerator.MapGenerator.prototype.convertMapArrayToObjects = function(map_array,center_integer,radius){
+A.MapGenerator.prototype.convertMapArrayToObjects = function(map_array,center_integer,radius){
 
     var objects=[];
 
@@ -111,7 +104,7 @@ Towns.MapGenerator.MapGenerator.prototype.convertMapArrayToObjects = function(ma
             if (typeof(map_array[y][x]) === 'undefined')continue;
 
 
-            var object = new Towns.MapGenerator.Terrain(map_array[y][x]);
+            var object = new T.Objects.Terrain(map_array[y][x]);
 
 
             object.x=center_integer.x-radius+x;
@@ -131,7 +124,7 @@ Towns.MapGenerator.MapGenerator.prototype.convertMapArrayToObjects = function(ma
 
 
 //private
-Towns.MapGenerator.MapGenerator.prototype.getPureMap = function(center,radius){
+A.MapGenerator.prototype.getPureMap = function(center,radius){
 
     center_integer={
         x: Math.floor(center.x),
@@ -148,7 +141,7 @@ Towns.MapGenerator.MapGenerator.prototype.getPureMap = function(center,radius){
 
 
 //private
-Towns.MapGenerator.MapGenerator.prototype.getVirtualObjectsFromTerrainObjects = function(objects){
+A.MapGenerator.prototype.getVirtualObjectsFromTerrainObjects = function(objects){
 
     var self = this;
 
@@ -174,7 +167,7 @@ Towns.MapGenerator.MapGenerator.prototype.getVirtualObjectsFromTerrainObjects = 
 
 
 
-Towns.MapGenerator.MapGenerator.prototype.completeMap = function(real_objects,center,radius,virtual_objects){
+A.MapGenerator.prototype.completeMap = function(real_objects,center,radius,virtual_objects){
 
     var virtual_objects = virtual_objects || true;
 
@@ -213,7 +206,7 @@ Towns.MapGenerator.MapGenerator.prototype.completeMap = function(real_objects,ce
 
 
 
-Towns.MapGenerator.MapGenerator.prototype.getMapArray = function(real_objects,center,radius){
+A.MapGenerator.prototype.getMapArray = function(real_objects,center,radius){
 
 
     this.completeMap(real_objects,center,radius,false);
@@ -244,7 +237,7 @@ Towns.MapGenerator.MapGenerator.prototype.getMapArray = function(real_objects,ce
 
             map_array[y][x]
                 =
-                T.MapGenerator.terrains[object.design.data.image];//todo maybe better
+                T.World.terrains[object.design.data.image];//todo maybe better
 
             //--------------------------
         }else {

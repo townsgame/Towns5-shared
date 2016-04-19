@@ -4,22 +4,11 @@
  * @fileOverview ...
  */
 //======================================================================================================================
-//-----------------------Creating namespace Towns.MapGenerator
-var Towns = Towns || {};
-Towns.MapGenerator = Towns.MapGenerator || {};
-var A/*Actual Namespace*/ = Towns.MapGenerator;
-//-----------------------
-
-//-----------------------Loading modules if running under node js
-if(typeof window=='undefined'){
-
-    Towns.Math = require(__dirname+'/../../math/math.js');
-    A.Terrain = require(__dirname+'/../classes/terrain.class.js');
-    A.Biotope = require(__dirname+'/../classes/biotope.class.js');
-    A.MapGenerator = require(__dirname+'/../classes/map-generator.class.js');
-    A.terrains = require(__dirname+'/terrains.init.js');
-
-}
+//-----------------------Creating namespace T (=global.Towns).MapGenerator
+var T = global.Towns;
+T.World = T.World || {};
+var A/*Actual Namespace*/ = T.World;
+module.exports = Towns;
 //-----------------------
 //======================================================================================================================
 
@@ -27,7 +16,7 @@ if(typeof window=='undefined'){
 
 
 
-A.mapGenerator = module.exports = new A.MapGenerator(
+A.mapGenerator = new T.MapGenerator(
 
     function(x,y){
 
@@ -63,7 +52,7 @@ A.mapGenerator = module.exports = new A.MapGenerator(
             x=Math.floor(x/3);
             y=Math.floor(y/3);
 
-            var xy = Towns.Math.xyRotate(x,y,57);
+            var xy = T.Math.xyRotate(x,y,57);
 
             x=xy.x;
             y=xy.y;
@@ -77,7 +66,7 @@ A.mapGenerator = module.exports = new A.MapGenerator(
 
 
         n=n-0.5;
-        var sign=Towns.Math.sign(n);
+        var sign=T.Math.sign(n);
         n=Math.abs(n)*2;
         n=Math.pow(n,1/3);
         n=(n/2*sign)+0.5;
@@ -92,7 +81,7 @@ A.mapGenerator = module.exports = new A.MapGenerator(
 
     },
 
-    new A.Biotope([
+    new T.MapGenerator.Biotope([
         { from: ( 0/100) , terrain: A.terrains[ 5]},
         { from: ( 5/100) , terrain: A.terrains[ 7]},
         { from: ( 7/100) , terrain: A.terrains[ 3]},
@@ -130,7 +119,7 @@ A.mapGenerator = module.exports = new A.MapGenerator(
                     design: {
                         type: 'natural',
                         data:{
-                            image:'rock'+Math.floor(Towns.Math.randomSeedPosition(1,{x:object.x,y:object.y})*6)+'dark'+Math.floor(Towns.Math.randomSeedPosition(2,{x:object.x,y:object.y})*4)
+                            image:'rock'+Math.floor(T.Math.randomSeedPosition(1,{x:object.x,y:object.y})*6)+'dark'+Math.floor(T.Math.randomSeedPosition(2,{x:object.x,y:object.y})*4)
                         }
                     }
 
@@ -151,7 +140,7 @@ A.mapGenerator = module.exports = new A.MapGenerator(
                     design: {
                         type: 'natural',
                         data:{
-                            image:'tree'+Math.floor(Towns.Math.randomSeedPosition(3,{x:object.x,y:object.y})*10)
+                            image:'tree'+Math.floor(T.Math.randomSeedPosition(3,{x:object.x,y:object.y})*10)
                         }
                     }
 

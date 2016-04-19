@@ -1,18 +1,19 @@
 /**
  * @author Towns.cz
- * @fileOverview Creates object ModelParticles with static methods
+ * @fileOverview Creates object Particles with static methods
  */
 //======================================================================================================================
-//-----------------------Creating namespace Towns.Game
-var Towns = Towns || {};
-Towns.Game = Towns.Game || {};
-var A/*Actual Namespace*/ = Towns.Game;//todo refactor this should not be under Game namespace
+//-----------------------Creating namespace T (=global.Towns).Game
+var T = global.Towns;
+T.Model = T.Model || {};
+var A/*Actual Namespace*/ = T.Model;//todo refactor this should not be under Game namespace
+module.exports = Towns;
 //-----------------------
 //======================================================================================================================
 
 
 
-A.ModelParticles = module.exports = {};
+A.Particles = {};
 
 
 /**
@@ -21,7 +22,7 @@ A.ModelParticles = module.exports = {};
  * @param {object} particle
  * @return {object} particle
  */
-A.ModelParticles.cParams = function(particle){//todo ?? maybe rename
+A.Particles.cParams = function(particle){//todo ?? maybe rename
 
 
     if(typeof particle.skew==='undefined'){
@@ -60,13 +61,13 @@ A.ModelParticles.cParams = function(particle){//todo ?? maybe rename
  * @param particle
  * @return {object} 3D model
  */
-A.ModelParticles.get3D = function(particle){
+A.Particles.get3D = function(particle){
 
     var resource={};
 
 
 
-    particle= Towns.Game.ModelParticles.cParams(particle);//todo refactor use replace cParams with ||
+    particle= T.Model.Particles.cParams(particle);//todo refactor use replace cParams with ||
 
     if(particle.shape.type=='prism') {
 
@@ -113,26 +114,26 @@ A.ModelParticles.get3D = function(particle){
 
                 if(!is(particle.shape.rotated)){
 
-                    var x__=0.5*x_*Math.cos(n/particle.shape.n*Math.PI*2+Towns.Math.deg2rad(180+180/particle.shape.n))*base+x_*(level*particle.skew.z.x),
-                        y__=0.5*y_*Math.sin(n/particle.shape.n*Math.PI*2+Towns.Math.deg2rad(180+180/particle.shape.n))*base+y_*(level*particle.skew.z.y),
+                    var x__=0.5*x_*Math.cos(n/particle.shape.n*Math.PI*2+T.Math.deg2rad(180+180/particle.shape.n))*base+x_*(level*particle.skew.z.x),
+                        y__=0.5*y_*Math.sin(n/particle.shape.n*Math.PI*2+T.Math.deg2rad(180+180/particle.shape.n))*base+y_*(level*particle.skew.z.y),
                         z__=z_*level;
 
                 }else{
 
-                    var tmp=(2-(Math.cos(Towns.Math.deg2rad(180/particle.shape.n))));//todo better
+                    var tmp=(2-(Math.cos(T.Math.deg2rad(180/particle.shape.n))));//todo better
 
                     var x__=x_*((level*2)-1);//*(level-0.5);//+x_*(level*particle.skew.z.x),
 
-                        y__=0.5*y_*Math.sin(n/particle.shape.n*Math.PI*2+Towns.Math.deg2rad(180+180/particle.shape.n));//+y_*(level*particle.skew.z.y),
+                        y__=0.5*y_*Math.sin(n/particle.shape.n*Math.PI*2+T.Math.deg2rad(180+180/particle.shape.n));//+y_*(level*particle.skew.z.y),
 
 
                         z__=(1)*0.5*(
 
 
-                                z_*Math.cos(n/particle.shape.n*Math.PI*2+Towns.Math.deg2rad(180+180/particle.shape.n))*tmp
+                                z_*Math.cos(n/particle.shape.n*Math.PI*2+T.Math.deg2rad(180+180/particle.shape.n))*tmp
 
 
-                                +z_*((Math.cos(Towns.Math.deg2rad(180/particle.shape.n))))*tmp
+                                +z_*((Math.cos(T.Math.deg2rad(180/particle.shape.n))))*tmp
                             );
 
                 }
@@ -142,9 +143,9 @@ A.ModelParticles.get3D = function(particle){
 
                 //------------------ XY Rotation
 
-                var DistDeg_=Towns.Math.xy2distDeg(x__,y__);//todo refactor all like DistDeg, etc...
+                var DistDeg_=T.Math.xy2distDeg(x__,y__);//todo refactor all like DistDeg, etc...
                 DistDeg_.deg+=particle.rotation;
-                var xy_=Towns.Math.distDeg2xy(DistDeg_.dist,DistDeg_.deg);
+                var xy_=T.Math.distDeg2xy(DistDeg_.dist,DistDeg_.deg);
 
                 x__=xy_.x;
                 y__=xy_.y;
@@ -199,7 +200,7 @@ A.ModelParticles.get3D = function(particle){
  * @param {number} base 0=bottom, 1=top
  * @return {Array} 2D lines
  */
-A.ModelParticles.get2Dlines = function(particle,base){
+A.Particles.get2Dlines = function(particle,base){
 
 
     var resource=this.get3D(particle);
@@ -272,12 +273,12 @@ A.ModelParticles.get2Dlines = function(particle,base){
  * @param (array) lines2
  * @return {boolean}
  */
-A.ModelParticles.collisionLinesDetect = function(lines1,lines2){
+A.Particles.collisionLinesDetect = function(lines1,lines2){
 
     for (var i1 in lines1) {
         for (var i2 in lines2) {
 
-            if (Towns.Math.lineCollision(
+            if (T.Math.lineCollision(
                     lines1[i1][0].x,
                     lines1[i1][0].y,
                     lines1[i1][1].x,
@@ -310,16 +311,16 @@ A.ModelParticles.collisionLinesDetect = function(lines1,lines2){
  * @param (object) particle2 top
  * @return {boolean}
  */
-A.ModelParticles.collision2D = function(particle1,particle2){
+A.Particles.collision2D = function(particle1,particle2){
 
 
-    var lines1 = ModelParticles.get2Dlines(particle1,1);
-    var lines2 = ModelParticles.get2Dlines(particle2,0);
+    var lines1 = Particles.get2Dlines(particle1,1);
+    var lines2 = Particles.get2Dlines(particle2,0);
 
     //-------------------------------Corner collision
 
 
-    var collision=ModelParticles.collisionLinesDetect(lines1,lines2);
+    var collision=Particles.collisionLinesDetect(lines1,lines2);
 
     //-------------------------------Inner convex collision
 
@@ -361,8 +362,8 @@ A.ModelParticles.collision2D = function(particle1,particle2){
                 inner1=[inner1];
                 inner2=[inner2];
 
-                var collision1=ModelParticles.collisionLinesDetect(inner1,outer);
-                var collision2=ModelParticles.collisionLinesDetect(inner2,outer);
+                var collision1=Particles.collisionLinesDetect(inner1,outer);
+                var collision2=Particles.collisionLinesDetect(inner2,outer);
 
 
                 if(collision1 && collision2){

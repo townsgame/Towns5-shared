@@ -3,19 +3,10 @@
  * @fileOverview Creates Class Model
  */
 //======================================================================================================================
-//-----------------------Creating namespace Towns.Game
-var Towns = Towns || {};
-Towns.Game = Towns.Game || {};
-var A/*Actual Namespace*/ = Towns.Game;//todo refactor this should not be under Game namespace
-//-----------------------
-
-//-----------------------Loading modules if running under node js
-if(typeof window=='undefined') {
-
-    Towns.Math = require(__dirname + '/../../math/math.js');
-    A.ModelParticles = require(__dirname + '/../classes-static/model-particles.static.js');
-
-}
+//-----------------------Creating namespace T (=global.Towns).Game
+var T = global.Towns;
+var A/*Actual Namespace*/ = Towns;
+module.exports = Towns;
 //-----------------------
 //======================================================================================================================
 
@@ -26,7 +17,7 @@ if(typeof window=='undefined') {
  * @return {boolean} false in case of fail
  * @constructor
  */
-A.Model = module.exports = function (json){
+A.Model = function (json){
 
     if(typeof(json)=='undefined')return false;
 
@@ -64,7 +55,7 @@ A.Model.prototype.addRotationSize = function(rotation,size){
 //todo jsdoc
 A.Model.prototype.clone = function(){
 
-    return new Towns.Game.Model(JSON.parse(JSON.stringify(this)));
+    return new T.Game.Model(JSON.parse(JSON.stringify(this)));
 
 };
 
@@ -79,7 +70,7 @@ A.Model.prototype.range = function(dimension){
 
     if(dimension=='xy'){
 
-        return Towns.Math.xy2dist(this.range('x'),this.range('y')*this.size);
+        return T.Math.xy2dist(this.range('x'),this.range('y')*this.size);
 
     }
 
@@ -166,7 +157,7 @@ A.Model.prototype.joinModelZ = function(model,move_x,move_y){//todo second param
         for(var ii in this_linear_particles){//todo maybe optimize by pre-sorting
 
 
-            if(ModelParticles.collision2D(this_linear_particles[ii],model_linear_particles[i])){
+            if(Particles.collision2D(this_linear_particles[ii],model_linear_particles[i])){
 
                 r(this_linear_particles[ii],model_linear_particles[i]);
 
@@ -364,12 +355,12 @@ A.Model.prototype.getLinearParticles = function(){
 
             //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Position, Rotation and size //todo skew
 
-            var distDeg = Towns.Math.xy2distDeg(particle.position.x, particle.position.y);
+            var distDeg = T.Math.xy2distDeg(particle.position.x, particle.position.y);
 
             distDeg.dist = distDeg.dist * size;
             distDeg.deg += rotation;
 
-            var xy = Towns.Math.distDeg2xy(distDeg.dist, distDeg.deg);
+            var xy = T.Math.distDeg2xy(distDeg.dist, distDeg.deg);
 
             particle.rotation += rotation;
 
