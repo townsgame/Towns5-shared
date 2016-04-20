@@ -14,7 +14,7 @@ module.exports = Towns;
 
 
 
-T.Objects.Terrain = function(object){
+A.Terrain = function(object){
 
     for(var key in object){
         this[key] = object[key];
@@ -32,7 +32,7 @@ T.Objects.Terrain = function(object){
 
 };
 
-T.Objects.Terrain.prototype.getCode = function(prefered_width){
+A.Terrain.prototype.getCode = function(prefered_width){
 
     return(this.design.data.image);
 
@@ -44,7 +44,7 @@ T.Objects.Terrain.prototype.getCode = function(prefered_width){
 
 
 
-T.Objects.Terrain.prototype.getColor = function(){
+A.Terrain.prototype.getColor = function(){
 
     return(this.design.data.color);
 

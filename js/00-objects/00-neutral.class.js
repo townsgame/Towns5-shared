@@ -14,7 +14,7 @@ module.exports = Towns;
 
 
 
-T.Objects.Neutral = function(object){
+A.Neutral = function(object){
 
     for(var key in object){
         this[key] = object[key];

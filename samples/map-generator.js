@@ -17,7 +17,11 @@ map_radius = 20,
 var ascii=['  ',' ~','##','~~','::','XX','Y@','~/','tt','--','||','^^','.~','\\\\','//'];
 
 
-var map = T.World.mapGenerator.getMapArray([],map_center,map_radius);
+var objects = new T.Objects.Array();
+
+T.World.mapGenerator.completeObjects(objects,map_center,map_radius,false);
+
+var map = objects.getMapArray(map_center,map_radius);
 
 
 for (var y = 0; y < map_radius * 2; y++) {
