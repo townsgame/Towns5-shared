@@ -120,15 +120,31 @@ A.Array.prototype.getMapArray = function(center,radius){
 
 
 
+A.Array.prototype.filterTypes = function(){
+
+    var filtered_objects=new T.Objects.Array();
+    var types=Array.prototype.slice.call(arguments);
+
+    this.forEach(function(object){
+
+        if(types.indexOf(object.type)==-1)return;
+
+        filtered_objects.push(object);
+
+    });
+
+    return(filtered_objects);
+};
+
 
 
 /*
- Towns.MapGenerator.MapGenerator.prototype.getTerrainObjectOnPosition = function(real_objects,position){
+ A.Array.prototype.getTerrainObjectOnPosition = function(real_objects,position){
  return Terrain;
  };
 
 
- Towns.MapGenerator.MapGenerator.prototype.findNearestTerrain = function(material_terrains,position,terrain){
+ A.Array.prototype.findNearestTerrain = function(material_terrains,position,terrain){
  return 8;
  };*/
 
