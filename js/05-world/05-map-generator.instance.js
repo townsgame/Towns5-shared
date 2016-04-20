@@ -119,7 +119,8 @@ A.mapGenerator = new T.MapGenerator(
                     design: {
                         type: 'natural',
                         data:{
-                            image:'rock'+Math.floor(T.Math.randomSeedPosition(1,{x:object.x,y:object.y})*6)+'dark'+Math.floor(T.Math.randomSeedPosition(2,{x:object.x,y:object.y})*4)
+                            image:'rock'+Math.floor(T.Math.randomSeedPosition(1,{x:object.x,y:object.y})*6)+'dark'+Math.floor(T.Math.randomSeedPosition(2,{x:object.x,y:object.y})*4),
+                            size: 1+T.Math.randomSeedPosition(5,{x:object.x,y:object.y})*3
                         }
                     }
 
@@ -140,7 +141,8 @@ A.mapGenerator = new T.MapGenerator(
                     design: {
                         type: 'natural',
                         data:{
-                            image:'tree'+Math.floor(T.Math.randomSeedPosition(3,{x:object.x,y:object.y})*10)
+                            image:'tree'+Math.floor(T.Math.randomSeedPosition(3,{x:object.x,y:object.y})*10),
+                            size: 1+T.Math.randomSeedPosition(6,{x:object.x,y:object.y})/2
                         }
                     }
 
