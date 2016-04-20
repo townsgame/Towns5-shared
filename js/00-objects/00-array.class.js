@@ -101,7 +101,7 @@ A.Array.prototype.getMapArray = function(center,radius){
 
                         map_array[y][x]
                             =
-                            T.MapGenerator.terrains[object.design.data.image];//todo maybe better
+                            T.World.terrains[object.design.data.image];//todo maybe better
 
                     }
                 }
