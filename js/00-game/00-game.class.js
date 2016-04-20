@@ -163,7 +163,7 @@ A.Game.prototype.getObjectPrices = function(object){
  */
 A.Game.prototype.getObjectPrice = function(object){
 
-    var price = new A.Resources({});
+    var price = new T.Resources({});
 
     //console.log('empty price',price);
 
@@ -193,10 +193,10 @@ A.Game.prototype.getObjectDesignPrice = function(object){
     if(object.design.type!='model')throw new Error('Object should have design of type model!');
 
 
-    var price = new A.Resources({});
+    var price = new T.Resources({});
 
 
-    model = new A.Model(object.design.data);
+    model = new T.Model(object.design.data);
 
     linear_particles = model.getLinearParticles();
 

@@ -5,7 +5,7 @@
 //======================================================================================================================
 
 
-//Loading Instance of mapGenerator
+//Loading Towns Namespace
 var T = require(__dirname+'/../towns-shared.js');
 
 

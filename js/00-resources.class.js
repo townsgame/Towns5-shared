@@ -67,7 +67,7 @@ A.Resources.newSingles = function(resources){
  */
 A.Resources.prototype.clone = function(){
 
-    return new A.Resources(this);
+    return new T.Resources(this);
 
 };
 

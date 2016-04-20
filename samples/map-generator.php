@@ -8,16 +8,12 @@
 
 <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
 <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
-
 <script>
     var module={};
     var global=window;
     global.Towns = {};
 </script>
-
-
 <?php
-
 $files=array_merge(
     glob('../js/*.js'),
     glob('../js/*/*.js')
@@ -26,8 +22,9 @@ foreach($files as $file):
 
 ?>
 <script src="<?=$file?>"></script>
-
 <?php endforeach; ?>
+
+
 
 
 <script>

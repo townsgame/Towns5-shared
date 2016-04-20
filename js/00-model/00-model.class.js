@@ -55,7 +55,7 @@ A.Model.prototype.addRotationSize = function(rotation,size){
 //todo jsdoc
 A.Model.prototype.clone = function(){
 
-    return new T.Game.Model(JSON.parse(JSON.stringify(this)));
+    return new T.Model(JSON.parse(JSON.stringify(this)));
 
 };
 

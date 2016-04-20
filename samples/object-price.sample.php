@@ -3,26 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <title>Towns-shared object price sample</title>
-</head>
+
+
 
 
 <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
 <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
-
 <script>
     var module={};
+    var global=window;
+    global.Towns = {};
 </script>
+<?php
+$files=array_merge(
+    glob('../js/*.js'),
+    glob('../js/*/*.js')
+);
+foreach($files as $file):
 
-
-<script src="../../math/math.js"></script>
-<script src="../classes-static/model-particles.static.js"></script>
-
-<script src="../classes/model.class.js"></script>
-<script src="../classes/action-type.class.js"></script>
-<script src="../classes/resources.class.js"></script>
-<script src="../classes/game.class.js"></script>
-
-<script src="../inits/game.init.js"></script>
+    ?>
+    <script src="<?=$file?>"></script>
+<?php endforeach; ?>
 
 
 
@@ -59,11 +60,11 @@
 
             object_json=JSON.parse(object_json);
 
-            var price_bases = T.Game.game.getObjectPriceBases(object_json);
-            var max_life = T.Game.game.getObjectMaxLife(object_json);
-            var prices = T.Game.game.getObjectPrices(object_json);
-            var price = T.Game.game.getObjectPrice(object_json);
-            var design_price = T.Game.game.getObjectDesignPrice(object_json);
+            var price_bases = T.World.game.getObjectPriceBases(object_json);
+            var max_life = T.World.game.getObjectMaxLife(object_json);
+            var prices = T.World.game.getObjectPrices(object_json);
+            var price = T.World.game.getObjectPrice(object_json);
+            var design_price = T.World.game.getObjectDesignPrice(object_json);
 
             $('#object-price').html('');
 
@@ -115,6 +116,7 @@
     }
 
 </style>
+</head>
 <body>
 
 

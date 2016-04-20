@@ -5,8 +5,8 @@
 //======================================================================================================================
 
 
-//Loading Instance of Game
-var game = require('../inits/game.init.js');
+//Loading Towns Namespace
+var T = require(__dirname+'/../towns-shared.js');
 
 
 //Creating sample object
@@ -53,10 +53,10 @@ var object = {
 };
 
 //max_life is number
-var max_life = game.getObjectMaxLife(object);
+var max_life = T.World.game.getObjectMaxLife(object);
 
 //price is instance of Resources
-var price = game.getObjectPrice(object);
+var price = T.World.game.getObjectPrice(object);
 
 
 console.log('Maximum amount life of '+object.type+' is: '+max_life);
