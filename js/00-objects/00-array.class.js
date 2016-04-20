@@ -36,7 +36,39 @@ A.Array.prototype.push = function(){
 
 
 
-A.Array.prototype.getMapArray = function(center,radius){
+A.Array.prototype.getById = function(id){
+
+    for(var i in this.objects){
+        if(this.objects[i].id==id)return this.objects[i];
+    }
+
+    return null;
+};
+
+
+
+A.Array.prototype.filterTypes = function(){
+
+    var filtered_objects=new T.Objects.Array();
+    var types=Array.prototype.slice.call(arguments);
+
+    this.forEach(function(object){
+
+        if(types.indexOf(object.type)==-1)return;
+
+        filtered_objects.push(object);
+
+    });
+
+    return(filtered_objects);
+};
+
+
+
+
+
+
+A.Array.prototype.getMapArray = function(center,radius){//todo maybe refactor to getTerrainCodes2DArray or getTerrainCodesMap
 
     /*var radius = size/2;
     var center ={
@@ -120,22 +152,6 @@ A.Array.prototype.getMapArray = function(center,radius){
 
 
 
-A.Array.prototype.filterTypes = function(){
-
-    var filtered_objects=new T.Objects.Array();
-    var types=Array.prototype.slice.call(arguments);
-
-    this.forEach(function(object){
-
-        if(types.indexOf(object.type)==-1)return;
-
-        filtered_objects.push(object);
-
-    });
-
-    return(filtered_objects);
-};
-
 
 
 /*
@@ -146,6 +162,13 @@ A.Array.prototype.filterTypes = function(){
 
  A.Array.prototype.findNearestTerrain = function(material_terrains,position,terrain){
  return 8;
- };*/
+ };
+
+
+ A.Array.prototype.getCollisionArray = function(real_objects,position){
+ return Terrain;
+ };
+
+ */
 
 
