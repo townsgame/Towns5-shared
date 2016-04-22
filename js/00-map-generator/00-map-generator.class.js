@@ -13,11 +13,13 @@ module.exports = Towns;
 
 
 
-A.MapGenerator = function(getZ,biotope,virtualObjectGenerator){
+A.MapGenerator = function(getZ,z_normalizing_table,biotope,virtualObjectGenerator){
 
     this.getZ = getZ;
+    this.z_normalizing_table = z_normalizing_table;
     this.biotope = biotope;
     this.virtualObjectGenerator = virtualObjectGenerator;
+
 
 };
 
@@ -44,7 +46,12 @@ A.MapGenerator.prototype.getZMapCircle = function(center_integer,radius){
             )continue;
 
 
-            map[y][x]=this.getZ(x-radius+center_integer.x,y-radius+center_integer.y);
+            var z = this.getZ(x-radius+center_integer.x,y-radius+center_integer.y);
+
+
+            map[y][x] = this.z_normalizing_table[Math.floor(z * this.z_normalizing_table.length)];
+
+
 
 
         }
@@ -168,7 +175,8 @@ A.MapGenerator.prototype.getVirtualObjectsFromTerrainObjects = function(objects)
 
 A.MapGenerator.prototype.completeObjects = function(real_objects,center,radius,virtual_objects){
 
-    var virtual_objects = virtual_objects || true;
+    if(typeof virtual_objects == 'undefined')virtual_objects = true;
+
 
     var terrains_objects = this.getPureMap(center, radius);
 
@@ -179,17 +187,11 @@ A.MapGenerator.prototype.completeObjects = function(real_objects,center,radius,v
 
     if(virtual_objects){
 
-        console.log('Getting virtual objects');
-
         var virtual_objects = this.getVirtualObjectsFromTerrainObjects(real_objects);
 
         virtual_objects.forEach(function(object){
             real_objects.push(object);
         });
-
-    }else{
-
-        console.log('NOT Getting virtual objects');
 
     }
 

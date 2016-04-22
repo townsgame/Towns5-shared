@@ -180,7 +180,7 @@ A.Math.xyRotate = function(x,y,deg){
 A.Math.randomSeedPosition = function(seed,position){
 
 
-    return (Math.sin(Math.pow((position.x*position.y)-seed,1/2))+1)/2;
+    return (Math.sin(Math.pow((position.x*position.y)-seed,2))+1)/2;
 
 };
 
@@ -322,5 +322,37 @@ A.Math.lineCollision = function(a1x,a1y,a2x,a2y,b1x,b1y,b2x,b2y){
     //console.log(collision);
 
     return collision;
+
+};
+
+
+
+
+
+
+
+A.Math.blurXY = function(generator,blur) {
+
+    return(function (x, y) {
+
+        var sum = 0;
+        var count = 0;
+
+
+        for (xx = x - blur; xx <= x + blur; xx++) {
+
+            for (yy = y - blur; yy <= y + blur; yy++) {
+
+                if (Math.pow(blur, 2) < Math.pow(xx - x, 2) + Math.pow(yy - y, 2))continue;
+
+                sum += generator(xx, yy);
+                count++;
+
+            }
+        }
+
+        return (sum / count);
+
+    });
 
 };

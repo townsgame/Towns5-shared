@@ -62,7 +62,7 @@ foreach($files as $file):
 
 
             var objects = [];
-            T.World.mapGenerator.completeObjects(objects, map_center, map_radius);
+            T.World.mapGenerator.completeObjects(objects, map_center, map_radius, false);
 
             objects.forEach(function(object){
 

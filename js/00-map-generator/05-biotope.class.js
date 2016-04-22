@@ -18,6 +18,21 @@ module.exports = Towns;
 
 A.Biotope = function(terrains){
 
+    var sum=0;
+    terrains.forEach(function(terrain){
+        sum+=terrain.amount;
+    });
+
+
+    var from=0;
+    terrains.forEach(function(terrain){
+
+        terrain.from=from/sum;
+        from+=terrain.amount;
+
+    });
+
+    //console.log(terrains);
     this.terrains = terrains;
 
 };
