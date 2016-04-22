@@ -17,5 +17,10 @@
   ],
   "author": "Stefan Kecskes <mr.kecskes@gmail.com> (https://skey.uk)",
   "license": "MIT",
-  "homepage": "https://bitbucket.org/towns/towns-shared#readme"
+  "homepage": "https://bitbucket.org/towns/towns-shared#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-documentation": "^2.2.0",
+    "gulp-jsdoc": "^0.1.5"
+  }
 }
