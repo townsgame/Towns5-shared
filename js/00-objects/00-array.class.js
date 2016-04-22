@@ -54,6 +54,27 @@ A.Array.prototype.getById = function(id){
 
 
 /**
+ *
+ * @param {string} id
+ * @param {object} object
+ * @returns {boolean}
+ */
+A.Array.prototype.setById = function(id,object){
+
+    for(var i in this.objects){
+        if(this.objects[i].id==id){
+
+            this.objects[i]=object;
+            return(true);
+
+        }
+    }
+
+    return false;
+};
+
+
+/**
  * @param {string} type
  * @returns {T.Objects.Array}
  */
