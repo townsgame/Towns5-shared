@@ -13,10 +13,17 @@ module.exports = Towns;
 //======================================================================================================================
 
 
+//todo//var z_map_cache={};
+
 
 A.mapGenerator = new T.MapGenerator(
 
     T.Math.blurXY(function(x,y){
+
+        //todo//var key='x'+x+'y'+y;
+        //todo//if(typeof z_map_cache[key]!='undefined'){
+        //todo//    return(z_map_cache[key]);
+        //todo//}
 
 
         const div=100;
@@ -49,6 +56,7 @@ A.mapGenerator = new T.MapGenerator(
         if(n<0)n-=Math.floor(n);
         if(n>1)n-=Math.floor(n);
 
+        //todo//z_map_cache[key]=n;
         return(n);
 
     },2)

@@ -17,7 +17,11 @@ module.exports = Towns;
 //todo ES6 style:     A.Array = class extends Array{
 
 
-
+/**
+ *
+ * @param {Array} objects
+ * @constructor
+ */
 A.Array = function(objects){
 
     var objects = objects || [];
@@ -34,8 +38,11 @@ A.Array.prototype.push = function(){
 };
 
 
-
-
+/**
+ *
+ * @param {string} id
+ * @returns {object}
+ */
 A.Array.prototype.getById = function(id){
 
     for(var i in this.objects){
@@ -46,7 +53,10 @@ A.Array.prototype.getById = function(id){
 };
 
 
-
+/**
+ * @param {string} type
+ * @returns {T.Objects.Array}
+ */
 A.Array.prototype.filterTypes = function(){
 
     var filtered_objects=new T.Objects.Array();
@@ -64,10 +74,12 @@ A.Array.prototype.filterTypes = function(){
 };
 
 
-
-
-
-
+/**
+ *
+ * @param {T.Position} center
+ * @param {number} radius
+ * @returns {Array}
+ */
 A.Array.prototype.getMapArray = function(center,radius){//todo maybe refactor to getTerrainCodes2DArray or getTerrainCodesMap
 
     /*var radius = size/2;

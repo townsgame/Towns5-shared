@@ -13,9 +13,11 @@ module.exports = Towns;
 //======================================================================================================================
 
 
-
-
-
+/**
+ *
+ * @param {Array} terrains
+ * @constructor
+ */
 A.Biotope = function(terrains){
 
     var sum=0;
@@ -38,7 +40,11 @@ A.Biotope = function(terrains){
 };
 
 
-
+/**
+ *
+ * @param {number} z
+ * @returns {T.Objects.Terrain}
+ */
 A.Biotope.prototype.getZTerrain = function(z){
 
 

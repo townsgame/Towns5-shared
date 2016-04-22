@@ -12,7 +12,14 @@ module.exports = Towns;
 //======================================================================================================================
 
 
-
+/**
+ *
+ * @param {function} getZ
+ * @param {Array} z_normalizing_table
+ * @param {T.MapGenerator.Biotope} biotope
+ * @param {function} virtualObjectGenerator
+ * @constructor
+ */
 A.MapGenerator = function(getZ,z_normalizing_table,biotope,virtualObjectGenerator){
 
     this.getZ = getZ;
@@ -24,8 +31,13 @@ A.MapGenerator = function(getZ,z_normalizing_table,biotope,virtualObjectGenerato
 };
 
 
-
-//private
+/**
+ *
+ * @param {T.Position} center_integer
+ * @param {number} radius
+ * @returns {Array}
+ * @private
+ */
 A.MapGenerator.prototype.getZMapCircle = function(center_integer,radius){
 
     var map=[];
@@ -62,9 +74,12 @@ A.MapGenerator.prototype.getZMapCircle = function(center_integer,radius){
 };
 
 
-
-
-//private
+/**
+ *
+ * @param {Array} map
+ * @returns {Array}
+ * @private
+ */
 A.MapGenerator.prototype.terrainMap = function(map){
 
     var map_bg=[];
@@ -85,7 +100,13 @@ A.MapGenerator.prototype.terrainMap = function(map){
 };
 
 
-//private
+/**
+ *
+ * @param {T.Position} center_integer
+ * @param {number} radius
+ * @returns {Array}
+ * @private
+ */
 A.MapGenerator.prototype.getMapArrayCircle = function(center_integer,radius){
 
 
@@ -100,7 +121,16 @@ A.MapGenerator.prototype.getMapArrayCircle = function(center_integer,radius){
 
 };
 
-//private
+
+
+/**
+ *
+ * @param {Array} map_array
+ * @param {T.Position} center_integer
+ * @param {number} radius
+ * @returns {Array}
+ * @private
+ */
 A.MapGenerator.prototype.convertMapArrayToObjects = function(map_array,center_integer,radius){
 
     var objects=[];
@@ -128,9 +158,13 @@ A.MapGenerator.prototype.convertMapArrayToObjects = function(map_array,center_in
 };
 
 
-
-
-//private
+/**
+ *
+ * @param {T.Position} center
+ * @param {number} radius
+ * @returns {Array}
+ * @private
+ */
 A.MapGenerator.prototype.getPureMap = function(center,radius){
 
     center_integer={
@@ -145,9 +179,12 @@ A.MapGenerator.prototype.getPureMap = function(center,radius){
 };
 
 
-
-
-//private
+/**
+ *
+ * @param {T.Objects.Array} objects
+ * @returns {T.Objects.Array}
+ * @private
+ */
 A.MapGenerator.prototype.getVirtualObjectsFromTerrainObjects = function(objects){
 
     var self = this;
@@ -170,9 +207,14 @@ A.MapGenerator.prototype.getVirtualObjectsFromTerrainObjects = function(objects)
 //=================================================PUBLIC===============================================================
 
 
-
-
-
+/**
+ * Complete terrain and virtual objects into Objects Array
+ * @param {T.Objects.Array} real_objects
+ * @param {T.Position} center
+ * @param {number} radius
+ * @param {boolean} virtual_objects
+ * @returns {T.Objects.Array}}
+ */
 A.MapGenerator.prototype.completeObjects = function(real_objects,center,radius,virtual_objects){
 
     if(typeof virtual_objects == 'undefined')virtual_objects = true;
