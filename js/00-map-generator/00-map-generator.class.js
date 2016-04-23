@@ -133,7 +133,7 @@ A.MapGenerator.prototype.getMapArrayCircle = function(center_integer,radius){
  */
 A.MapGenerator.prototype.convertMapArrayToObjects = function(map_array,center_integer,radius){
 
-    var objects=[];
+    var objects= new T.Objects.Array();
 
     for (var y = 0; y < radius * 2; y++) {
         for (var x = 0; x < radius * 2; x++) {
@@ -215,16 +215,12 @@ A.MapGenerator.prototype.getVirtualObjectsFromTerrainObjects = function(objects)
  * @param {boolean} virtual_objects
  * @returns {T.Objects.Array}}
  */
-A.MapGenerator.prototype.completeObjects = function(real_objects,center,radius,virtual_objects){
+A.MapGenerator.prototype.getCompleteObjects = function(real_objects,center,radius,virtual_objects){
 
     if(typeof virtual_objects == 'undefined')virtual_objects = true;
 
 
-    var terrains_objects = this.getPureMap(center, radius);
-
-    terrains_objects.forEach(function(object){
-        real_objects.push(object);
-    });
+    var complete_objects = this.getPureMap(center, radius);
 
 
     if(virtual_objects){
@@ -232,15 +228,19 @@ A.MapGenerator.prototype.completeObjects = function(real_objects,center,radius,v
         var virtual_objects = this.getVirtualObjectsFromTerrainObjects(real_objects);
 
         virtual_objects.forEach(function(object){
-            real_objects.push(object);
+            complete_objects.push(object);
         });
 
     }
 
 
 
+    real_objects.forEach(function(object){
+        complete_objects.push(object);
+    });
 
-    return(real_objects);
+
+    return(complete_objects);
 
 };
 

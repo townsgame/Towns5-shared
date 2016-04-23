@@ -24,8 +24,10 @@ module.exports = Towns;
  */
 A.Array = function(objects){
 
-    var objects = objects || [];
-    this.objects=objects;
+    this.objects = [];
+
+    if(objects instanceof Array)
+        objects.forEach(this.push,this);
 
 };
 
@@ -33,8 +35,32 @@ A.Array = function(objects){
 A.Array.prototype.forEach = function(){
     return this.objects.forEach.apply(this.objects,arguments);
 };
-A.Array.prototype.push = function(){
-    return this.objects.push.apply(this.objects,arguments);
+
+
+
+A.Array.prototype.push = function(object){
+
+    //----------------------------------
+    if(object.type=='building'){
+        //todo
+    }else
+    if(object.type=='terrain'){
+
+        object=new T.Objects.Terrain(object);
+
+    }else
+    if(object.type=='story'){
+        //todo
+    }else
+    if(object.type=='natural'){
+        //todo
+    }else
+    {
+        throw new Error('Cant put item into Towns Objects Array because of unrecognized object type '+object.type);
+    }
+    //----------------------------------
+
+    return this.objects.push(object);
 };
 
 
@@ -46,7 +72,7 @@ A.Array.prototype.push = function(){
 A.Array.prototype.getById = function(id){
 
     for(var i in this.objects){
-        if(this.objects[i].id==id)return this.objects[i];
+        if(this.objects[i].id==id || this.objects[i]._id==id)return this.objects[i];
     }
 
     return null;
@@ -62,7 +88,7 @@ A.Array.prototype.getById = function(id){
 A.Array.prototype.setById = function(id,object){
 
     for(var i in this.objects){
-        if(this.objects[i].id==id){
+        if(this.objects[i].id==id || this.objects[i]._id==id){
 
             this.objects[i]=object;
             return(true);
@@ -101,7 +127,7 @@ A.Array.prototype.filterTypes = function(){
  * @param {number} radius
  * @returns {Array}
  */
-A.Array.prototype.getMapArray = function(center,radius){//todo maybe refactor to getTerrainCodes2DArray or getTerrainCodesMap
+A.Array.prototype.getMapOfTerrainCodes = function(center,radius){//todo maybe refactor to getTerrainCodes2DArray or getTerrainCodesMap
 
     /*var radius = size/2;
     var center ={
@@ -133,9 +159,7 @@ A.Array.prototype.getMapArray = function(center,radius){//todo maybe refactor to
             var x = Math.floor(object.x - center.x + radius);
             var y = Math.floor(object.y - center.y + radius);
 
-            map_array[y][x]
-                =
-                T.World.terrains[object.design.data.image];//todo maybe better
+            map_array[y][x] = object.getCode();
 
             //--------------------------
         }else {
@@ -164,9 +188,8 @@ A.Array.prototype.getMapArray = function(center,radius){//todo maybe refactor to
 
                     if (T.Math.xy2dist(x - xc, y - yc) <= object.design.data.size) {
 
-                        map_array[y][x]
-                            =
-                            T.World.terrains[object.design.data.image];//todo maybe better
+                        map_array[y][x] = object.getCode();
+
 
                     }
                 }
@@ -187,18 +210,21 @@ A.Array.prototype.getMapArray = function(center,radius){//todo maybe refactor to
 
 
 
+
+ A.Array.prototype.getTerrainCodeOnPosition = function(position){
+    return 5;//todo
+ };
+
+
+ A.Array.prototype.getPositionOfNearestTerrain = function(position,terrain_code){
+    return new T.Position(8,8);//todo
+ };
+
+
+
 /*
- A.Array.prototype.getTerrainObjectOnPosition = function(real_objects,position){
- return Terrain;
- };
 
-
- A.Array.prototype.findNearestTerrain = function(material_terrains,position,terrain){
- return 8;
- };
-
-
- A.Array.prototype.getCollisionArray = function(real_objects,position){
+ A.Array.prototype.getMapOfCollisionCodes = function(real_objects,position){
  return Terrain;
  };
 
