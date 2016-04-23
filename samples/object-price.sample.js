@@ -6,7 +6,7 @@
 
 
 //Loading Towns Namespace
-var T = require(__dirname+'/../towns-shared.js');
+var T = require(__dirname+'/../build/towns-shared.js');
 
 
 //Creating sample object

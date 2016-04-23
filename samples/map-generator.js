@@ -6,7 +6,7 @@
 
 
 //Loading Towns Namespace
-var T = require(__dirname+'/../towns-shared.js');
+var T = require(__dirname+'/../build/towns-shared.js');
 
 
 map_radius = 20,
@@ -19,9 +19,9 @@ var ascii=['  ',' ~','##','~~','::','XX','Y@','~/','tt','--','||','^^','.~','\\\
 
 var objects = new T.Objects.Array();
 
-T.World.mapGenerator.completeObjects(objects,map_center,map_radius,false);
+var objects = T.World.mapGenerator.getCompleteObjects(objects,map_center,map_radius,false);
 
-var map = objects.getMapArray(map_center,map_radius);
+var map = objects.getMapOfTerrainCodes(map_center,map_radius);
 
 
 for (var y = 0; y < map_radius * 2; y++) {
@@ -38,7 +38,7 @@ for (var y = 0; y < map_radius * 2; y++) {
 
             //console.log(map[y][x]);
 
-            row+=ascii[map[y][x].design.data.image];
+            row+=ascii[map[y][x]];
 
         }
 

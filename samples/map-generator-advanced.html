@@ -2,27 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Towns-shared object price sample</title>
+    <title>Towns-shared advanced sample of MapGenerator usage</title>
 
 
 
-<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-<script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
-<script>
-    var module={};
-    var global=window;
-    global.Towns = {};
-</script>
-<?php
-$files=array_merge(
-    glob('../js/*.js'),
-    glob('../js/*/*.js')
-);
-foreach($files as $file):
-
-?>
-<script src="<?=$file?>"></script>
-<?php endforeach; ?>
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
+    <script>
+        var module={};
+        var global=window;
+    </script>
+    <script src="../build/towns-shared.js"></script>
 
 
 
@@ -62,7 +52,7 @@ foreach($files as $file):
 
 
             var objects = [];
-            T.World.mapGenerator.completeObjects(objects, map_center, map_radius/*, false*/);
+            objects = T.World.mapGenerator.getCompleteObjects(objects, map_center, map_radius/*, false*/);
 
             objects.forEach(function(object){
 

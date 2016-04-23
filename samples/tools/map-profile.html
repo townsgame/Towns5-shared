@@ -11,18 +11,8 @@
     <script>
         var module={};
         var global=window;
-        global.Towns = {};
     </script>
-    <?php
-    $files=array_merge(
-        glob('../../js/*.js'),
-        glob('../../js/*/*.js')
-    );
-    foreach($files as $file):
-
-        ?>
-        <script src="<?=$file?>"></script>
-    <?php endforeach; ?>
+    <script src="../../build/towns-shared.js"></script>
 
 
 
