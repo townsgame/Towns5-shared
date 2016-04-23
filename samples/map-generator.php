@@ -72,18 +72,18 @@
                      }
                      ]*/);
 
-                    log('Objects from server',server_objects);
+                    log('Objects from API near '+map_center,server_objects);
 
                     var map_array = server_objects.getMapOfTerrainCodes(map_center, map_radius);
-                    log('Map array created from that objects',map_array)//todo map of codes
+                    log('Getting map array created from that objects',map_array)//todo map of codes
 
 
                     var complete_objects = T.World.mapGenerator.getCompleteObjects(server_objects, map_center, map_radius, true);
-                    log('Completing objects via MapGenerator.completeObjects',complete_objects);
+                    log('Getting complete objects via MapGenerator.completeObjects',complete_objects);
 
 
                     var map_array = complete_objects.getMapOfTerrainCodes(map_center, map_radius);
-                    log('Map array created from that objects',map_array);
+                    log('Getting map of terrain codes created from that objects',map_array);
 
 
 
