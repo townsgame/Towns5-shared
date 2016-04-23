@@ -10,11 +10,7 @@ var A/*Actual Namespace*/ = T.Objects;
 
 
 
-A.Neutral = function(object){
-
-    for(var key in object){
-        this[key] = object[key];
-    }
+A.Natural = class extends A.Object{
 
 
 

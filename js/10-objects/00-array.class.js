@@ -38,7 +38,9 @@ A.Array.prototype.push = function(object){
 
     //----------------------------------
     if(object.type=='building'){
-        //todo
+
+        object=new T.Objects.Building(object);
+
     }else
     if(object.type=='terrain'){
 
@@ -46,10 +48,14 @@ A.Array.prototype.push = function(object){
 
     }else
     if(object.type=='story'){
-        //todo
+
+        object=new T.Objects.Story(object);
+
     }else
     if(object.type=='natural'){
-        //todo
+
+        object=new T.Objects.Natural(object);
+
     }else
     {
         throw new Error('Cant put item into Towns Objects Array because of unrecognized object type '+object.type);
