@@ -3,13 +3,8 @@
  * @fileOverview Creates object Particles with static methods
  */
 //======================================================================================================================
-//-----------------------Creating namespace T (=global.Towns).Game
-var T = global.Towns;
 T.Model = T.Model || {};
-var A/*Actual Namespace*/ = T.Model;//todo refactor this should not be under Game namespace
-module.exports = Towns;
-//-----------------------
-//======================================================================================================================
+var A/*Actual Namespace*/ = T.Model;
 
 
 

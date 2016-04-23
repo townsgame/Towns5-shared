@@ -4,13 +4,9 @@
  * @fileOverview ...
  */
 //======================================================================================================================
-//-----------------------Creating namespace T (=global.Towns).MapGenerator
-var T = global.Towns;
 T.Objects = T.Objects || {};
 var A/*Actual Namespace*/ = T.Objects;//todo refactor this should not be under MapGenerator namespace
-module.exports = Towns;
-//-----------------------
-//======================================================================================================================
+
 
 
 

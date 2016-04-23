@@ -3,13 +3,10 @@
  * @fileOverview Creates configuration of game conditions
  */
 //======================================================================================================================
-//-----------------------Creating namespace T (=global.Towns).Game
-var T = global.Towns;
 T.World = T.World || {};
 var A/*Actual Namespace*/ = T.World;
-module.exports = Towns;
-//-----------------------
-//======================================================================================================================
+
+
 
 
 

@@ -3,13 +3,7 @@
  * @fileOverview Creates class Resources
  */
 //======================================================================================================================
-//-----------------------Creating namespace T (=global.Towns).Game
-var T = global.Towns;
-var A/*Actual Namespace*/ = T;//todo refactor this should not be under Game namespace
-module.exports = Towns;
-//-----------------------
-//======================================================================================================================
-
+var A/*Actual Namespace*/ = T;
 
 
 
