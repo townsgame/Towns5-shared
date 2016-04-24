@@ -218,19 +218,18 @@ A.Array.prototype.getMapOfTerrainCodes = function(center,radius){//todo maybe re
 
 
 
-
+//todo jsdoc
 A.Array.prototype.get1x1TerrainObjects = function(){
 
     var terrain_objects_1x1=new T.Objects.Array();
 
 
-    var terrain_objects=this.filterTypes('terrain');
-    terrain_objects.reverse();
+    var terrain_objects = this.filterTypes('terrain').getAll().reverse();//normal Array
 
     //--------------------------Fill array
 
 
-    this.objects.forEach(function(object){
+    terrain_objects.forEach(function(object){
 
 
         /*if(object.design.data.size==1) {
@@ -298,31 +297,49 @@ A.Array.prototype.get1x1TerrainObjects = function(){
 
 
 
-
- A.Array.prototype.getTerrainCodeOnPosition = function(position){
-
-
-     for(var i=this.objects.length-1;i>=0;i--){
-         if (this.objects[i].type != 'terrain')continue;
+//todo jsdoc
+A.Array.prototype.getTerrainOnPosition = function(position){
 
 
-         if(this.objects[i].design.data.size<=position.getDistance(new T.Position(this.objects[i].x,this.objects[i].y))){
-             return(this.objects[i].getCode());
-         }
+ for(var i=this.objects.length-1;i>=0;i--){
+     if (this.objects[i].type != 'terrain')continue;
+
+
+     if(this.objects[i].design.data.size<=position.getDistance(new T.Position(this.objects[i].x,this.objects[i].y))){
+         return(this.objects[i]);
      }
+ }
 
-     return(false);
+ return(null);
 
- };
-
-
-
+};
 
 
- A.Array.prototype.getPositionOfNearestTerrain = function(position,terrain_code){
 
-     return(new Position(5,5));
- };
+
+//todo jsdoc
+A.Array.prototype.getNearestTerrain = function(position,terrain_code){
+
+    var terrain_objects_1x1 = this.get1x1TerrainObjects();
+
+    var min_distance=-1;
+    var nearest_terrain=null;
+
+    terrain_objects_1x1.forEach(function(terrain){
+
+        var distance = terrain.getPosition().getDistance(position);
+
+        if(min_distance===-1 || min_distance>distance){
+            min_distance=distance;
+            nearest_terrain=terrain;
+        }
+
+    });
+
+    return nearest_terrain;
+
+
+};
 
 
 

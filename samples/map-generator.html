@@ -76,15 +76,16 @@
                     log('Getting map of terrain codes created from that objects',map_array);
 
 
+                    console.log(complete_objects);
+                    var terrain1 = complete_objects.getTerrainOnPosition(position1);
+                    log('Getting terrain on '+position1,terrain1);
 
-                    var terrain_code = complete_objects.getTerrainCodeOnPosition(position1);
-                    log('Getting terrain code on '+position1,terrain_code);
+
+                    var terrain2 = complete_objects.getNearestTerrain(position2,terrain1.getCode());
+                    log('Getting nearest terrain from '+position2+' with code '+terrain1.getCode(),terrain2);
 
 
-                    var position3 = complete_objects.getPositionOfNearestTerrain(position2,terrain_code);
-                    log('Getting position of nearest terrain with code '+terrain_code,position3);
-
-                    log('Distance between '+position2+' and '+position3+' is',position2.getDistance(position3));
+                    log('Distance between these two terrains is',terrain1.getPosition().getDistance(terrain2.getPosition()));
 
 
 

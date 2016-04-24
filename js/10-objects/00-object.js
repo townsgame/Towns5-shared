@@ -20,4 +20,9 @@ A.Object = class{
 
     }
 
+    //todo jsdoc
+    getPosition(){
+        return(new T.Position(this.x,this.y));
+    }
+
 };
