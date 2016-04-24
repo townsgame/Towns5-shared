@@ -26,6 +26,14 @@ A.Terrain = class extends A.Object{
     }
 
 
+
+    clone(){//todo all classes should have this method
+
+        return(new T.Objects.Terrain(JSON.parse(JSON.stringify(this))));
+
+    }
+
+
     //todo getImage(){}
 
 

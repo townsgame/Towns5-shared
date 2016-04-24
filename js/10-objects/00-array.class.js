@@ -28,6 +28,12 @@ A.Array = function(objects){
 };
 
 
+A.Array.prototype.getAll = function(){
+    return this.objects;
+};
+
+
+
 A.Array.prototype.forEach = function(){
     return this.objects.forEach.apply(this.objects,arguments);
 };
@@ -213,13 +219,109 @@ A.Array.prototype.getMapOfTerrainCodes = function(center,radius){//todo maybe re
 
 
 
+A.Array.prototype.get1x1TerrainObjects = function(){
+
+    var terrain_objects_1x1=new T.Objects.Array();
+
+
+    var terrain_objects=this.filterTypes('terrain');
+    terrain_objects.reverse();
+
+    //--------------------------Fill array
+
+
+    this.objects.forEach(function(object){
+
+
+        /*if(object.design.data.size==1) {
+            //--------------------------
+
+            var object_1x1 = object;
+            terrain_objects_1x1.push(object_1x1);
+
+            //--------------------------
+        }else {*/
+            //--------------------------
+
+            var x_from = Math.floor(- object.design.data.size);
+            var x_to = Math.ceil(object.design.data.size);
+
+            var y_from = Math.floor(- object.design.data.size);
+            var y_to = Math.ceil(object.design.data.size);
+
+
+
+
+            for (var y = y_from; y <= y_to; y++) {
+                for (var x = x_from; x <= x_to; x++) {
+
+                    if (T.Math.xy2dist(x,y) <= object.design.data.size) {
+
+                        var object_1x1 = object.clone();
+
+                        object_1x1.design.data.size=1;
+                        object_1x1.x+=x;
+                        object_1x1.y+=y;
+
+                        if(terrain_objects_1x1.getAll().some(function(newer_object){
+                            if(newer_object.x==object_1x1.x && newer_object.y==object_1x1.y){
+                                return true;
+                            }
+                        })){
+
+
+                        }else{
+
+                            terrain_objects_1x1.push(object_1x1);
+
+                        }
+
+
+
+
+
+                    }
+                }
+            }
+
+            //--------------------------
+        //}
+
+    });
+    //--------------------------
+
+    return terrain_objects_1x1;
+
+
+};
+
+
+
+
+
  A.Array.prototype.getTerrainCodeOnPosition = function(position){
-    return 5;//todo
+
+
+     for(var i=this.objects.length-1;i>=0;i--){
+         if (this.objects[i].type != 'terrain')continue;
+
+
+         if(this.objects[i].design.data.size<=position.getDistance(new T.Position(this.objects[i].x,this.objects[i].y))){
+             return(this.objects[i].getCode());
+         }
+     }
+
+     return(false);
+
  };
 
 
+
+
+
  A.Array.prototype.getPositionOfNearestTerrain = function(position,terrain_code){
-    return new T.Position(8,8);//todo
+
+     return(new Position(5,5));
  };
 
 
