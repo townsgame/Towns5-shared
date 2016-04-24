@@ -13,6 +13,22 @@ through npm's package.json. This shared library should not connect to any databa
 intended that this shared library will work on its own, so there are no deployment instructions. Code reviews are more
 than welcomed.
 
+## Usage
+
+    gulp build
+
+### Browser
+
+       <script>
+           var module={};
+           var global=window;
+       </script>
+       <script src="path-to-towns-shared/build/towns-shared.js"></script>
+
+### Node.js
+
+    var T = require('path-to-towns-shared/build/towns-shared.js');
+
 ## Versioning
 
 We use semver versioning. Example version 1.0.2 means 1st major release, zero features added and 2 patches fixed. When 
@@ -20,6 +36,7 @@ we tag master branch with version, please update this also in package.json file.
 
 # Folder Structure
 
+todo update
     [towns5shared]/                 <- root folder
 	├── [game]/                     <- game specific logic
 	|   ├── [classes]/                 

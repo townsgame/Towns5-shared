@@ -1,35 +1,42 @@
+
+
+
 var gulp = require('gulp');
 var jsdoc = require("gulp-jsdoc");
-
+var sort = require('gulp-sort');
+var concat = require('gulp-concat');
+var rename = require('gulp-rename');
+var es6transpiler = require('gulp-es6-transpiler');
+var uglify = require('gulp-uglify');
+var fs = require("fs");
 
 
 gulp.task('documentation', function () {
 
-    var template = {
-        path            : "ink-docstrap",
-        systemName      : "Something",
-        footer          : "Something",
-        copyright       : "Something",
-        navType         : "vertical",
-        theme           : "lumen",
-        linenums        : true,
-        collapseSymbols : false,
-        inverseNav      : true
-    };
-
-
-    var options = {
-        showPrivate: false,
-        monospaceLinks: false,
-        cleverLinks: false,
-        outputSourceFiles: true
-    };
-
-
     gulp.src(["./js/*.js","./js/*/*.js"])
-        .pipe(jsdoc('./documentation', template, {}, options))
-        //.pipe(jsdoc.parser(infos, name))
-        //.pipe(gulp.dest('./somewhere'))
+        .pipe(jsdoc('./documentation'))
+    ;
+
+});
+
+
+
+gulp.task('build', function () {
+
+
+    gulp.src(['./js/*.js','./js/*/*.js'])
+
+        .pipe(sort())
+        .pipe(concat('towns-shared.js'))
+        .pipe(es6transpiler({
+            "disallowUnknownReferences": false,
+            "disallowDuplicated": false
+        }))
+        .pipe(gulp.dest('./build'))
+
+        .pipe(uglify())
+        .pipe(rename({suffix: '.min'}))
+        .pipe(gulp.dest('./build'))
     ;
 
 });
@@ -37,5 +44,10 @@ gulp.task('documentation', function () {
 
 
 
+gulp.task('develop', function() {
+
+    gulp.start("build");
+    gulp.watch(['./js/*.js','./js/*/*.js'], ['build']);
 
 
+});
