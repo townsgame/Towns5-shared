@@ -318,25 +318,36 @@ A.Array.prototype.getTerrainOnPosition = function(position){
 
 
 //todo jsdoc
-A.Array.prototype.getNearestTerrain = function(position,terrain_code){
+A.Array.prototype.getNearestTerrainPositionWithCode = function(position,terrain_code){
 
     var terrain_objects_1x1 = this.get1x1TerrainObjects();
 
     var min_distance=-1;
-    var nearest_terrain=null;
+    var nearest_terrain_1x1=false;
 
-    terrain_objects_1x1.forEach(function(terrain){
+    terrain_objects_1x1.forEach(function(terrain_1x1){
 
-        var distance = terrain.getPosition().getDistance(position);
+        var distance = terrain_1x1.getPosition().getDistance(position);
 
         if(min_distance===-1 || min_distance>distance){
             min_distance=distance;
-            nearest_terrain=terrain;
+            nearest_terrain_1x1=terrain_1x1;
         }
 
     });
 
-    return nearest_terrain;
+    if(nearest_terrain_1x1===false){
+
+        return null;
+
+    }else{
+
+        return nearest_terrain_1x1.getPosition();
+
+    }
+
+
+
 
 
 };

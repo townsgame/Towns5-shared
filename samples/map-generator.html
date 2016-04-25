@@ -35,7 +35,7 @@
             var map_radius = 2;
             var map_center = new T.Position({x: 20600, y: 378535});
             var position1 =  map_center.getMoved(1,2);
-            var position2 =  map_center.getMoved(-2,1);
+            var position2 =  map_center.getMoved(-8,1);
 
 
 
@@ -76,16 +76,15 @@
                     log('Getting map of terrain codes created from that objects',map_array);
 
 
-                    console.log(complete_objects);
                     var terrain1 = complete_objects.getTerrainOnPosition(position1);
                     log('Getting terrain on '+position1,terrain1);
 
 
-                    var terrain2 = complete_objects.getNearestTerrain(position2,terrain1.getCode());
-                    log('Getting nearest terrain from '+position2+' with code '+terrain1.getCode(),terrain2);
+                    var position3 = complete_objects.getNearestTerrainPositionWithCode(position2,terrain1.getCode());
+                    log('Getting position of nearest terrain from '+position2+' with code '+terrain1.getCode(),position3);
 
 
-                    log('Distance between these two terrains is',terrain1.getPosition().getDistance(terrain2.getPosition()));
+                    log('Distance between these two terrains is',terrain1.getPosition().getDistance(position2));
 
 
 

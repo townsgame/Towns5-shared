@@ -2,7 +2,7 @@
 
 
 var gulp = require('gulp');
-var jsdoc = require("gulp-jsdoc");
+var jsdoc = require('gulp-jsdoc3');
 var sort = require('gulp-sort');
 var concat = require('gulp-concat');
 var rename = require('gulp-rename');
@@ -11,13 +11,51 @@ var uglify = require('gulp-uglify');
 var fs = require("fs");
 
 
-gulp.task('documentation', function () {
 
-    gulp.src(["./js/*.js","./js/*/*.js"])
-        .pipe(jsdoc('./documentation'))
-    ;
+
+
+
+
+gulp.task('documentation', function (callback) {
+
+    var config = {
+        "tags": {
+            "allowUnknownTags": true
+        },
+        "source": {
+            "excludePattern": "(^|\\/|\\\\)_"
+        },
+        "opts": {
+            "destination": "./documentation"
+        },
+        "plugins": [
+            "plugins/markdown"
+        ],
+        "templates": {
+            "cleverLinks": false,
+            "monospaceLinks": false,
+            "default": {
+                "outputSourceFiles": true
+            },
+            "path": "ink-docstrap",
+            "theme": "cerulean",
+            "navType": "vertical",
+            "linenums": true,
+            "dateFormat": "MMMM Do YYYY, h:mm:ss a"
+        }
+    };
+
+
+    gulp.src(["./js/*.js","./js/*/*.js"]/*, {read: false}*/)
+        .pipe(sort())
+        .pipe(jsdoc(config,callback));
+
 
 });
+
+
+
+
 
 
 
@@ -40,6 +78,9 @@ gulp.task('build', function () {
     ;
 
 });
+
+
+
 
 
 
