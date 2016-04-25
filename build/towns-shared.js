@@ -453,7 +453,7 @@ A.MapGenerator.prototype.getVirtualObjectsFromTerrainObjects = function(objects)
     var self = this;
 
     var virtual_objects = [];
-    objects.forEach(function(object){
+    objects.get1x1TerrainObjects().forEach(function(object){
 
         self.virtualObjectGenerator(object,virtual_objects);
 
@@ -486,9 +486,16 @@ A.MapGenerator.prototype.getCompleteObjects = function(real_objects,center,radiu
     var complete_objects = this.getPureMap(center, radius);
 
 
+
+    real_objects.forEach(function(object){
+        complete_objects.push(object);
+    });
+
+
+
     if(virtual_objects){
 
-        var virtual_objects = this.getVirtualObjectsFromTerrainObjects(real_objects);
+        var virtual_objects = this.getVirtualObjectsFromTerrainObjects(complete_objects);
 
         virtual_objects.forEach(function(object){
             complete_objects.push(object);
@@ -497,10 +504,6 @@ A.MapGenerator.prototype.getCompleteObjects = function(real_objects,center,radiu
     }
 
 
-
-    real_objects.forEach(function(object){
-        complete_objects.push(object);
-    });
 
 
     return(complete_objects);
@@ -2238,11 +2241,18 @@ var A/*Actual Namespace*/ = T.Objects;
 
 
 
-A.Building = ((function(super$0){"use strict";super$0=A.Object;function constructor$0() {if(super$0!==null)super$0.apply(this, arguments)}if(!PRS$0)MIXIN$0(constructor$0, super$0);if(super$0!==null)SP$0(constructor$0,super$0);constructor$0.prototype = OC$0(super$0!==null?super$0.prototype:null,{"constructor":{"value":constructor$0,"configurable":true,"writable":true}});DP$0(constructor$0,"prototype",{"configurable":false,"enumerable":false,"writable":false});
+A.Building = ((function(super$0){"use strict";super$0=A.Object;function constructor$0() {if(super$0!==null)super$0.apply(this, arguments)}if(!PRS$0)MIXIN$0(constructor$0, super$0);if(super$0!==null)SP$0(constructor$0,super$0);constructor$0.prototype = OC$0(super$0!==null?super$0.prototype:null,{"constructor":{"value":constructor$0,"configurable":true,"writable":true}});DP$0(constructor$0,"prototype",{"configurable":false,"enumerable":false,"writable":false});var proto$0={};
 
 
+    proto$0.getModel = function(){
+        if(!(this.design.data instanceof T.Model)){
+            this.design.data=new T.Model(this.design.data);
+        }
 
-;return constructor$0;})());
+        return(this.design.data);
+    };
+
+MIXIN$0(constructor$0.prototype,proto$0);proto$0=void 0;return constructor$0;})());
 
 
 /**
@@ -2256,11 +2266,15 @@ var A/*Actual Namespace*/ = T.Objects;
 
 
 
-A.Natural = ((function(super$0){"use strict";super$0=A.Object;function constructor$0() {if(super$0!==null)super$0.apply(this, arguments)}if(!PRS$0)MIXIN$0(constructor$0, super$0);if(super$0!==null)SP$0(constructor$0,super$0);constructor$0.prototype = OC$0(super$0!==null?super$0.prototype:null,{"constructor":{"value":constructor$0,"configurable":true,"writable":true}});DP$0(constructor$0,"prototype",{"configurable":false,"enumerable":false,"writable":false});
+A.Natural = ((function(super$0){"use strict";super$0=A.Object;function constructor$0() {if(super$0!==null)super$0.apply(this, arguments)}if(!PRS$0)MIXIN$0(constructor$0, super$0);if(super$0!==null)SP$0(constructor$0,super$0);constructor$0.prototype = OC$0(super$0!==null?super$0.prototype:null,{"constructor":{"value":constructor$0,"configurable":true,"writable":true}});DP$0(constructor$0,"prototype",{"configurable":false,"enumerable":false,"writable":false});var proto$0={};
 
 
 
-;return constructor$0;})());
+    proto$0.getCode = function(){
+        return(this.design.data.image);
+    };
+
+MIXIN$0(constructor$0.prototype,proto$0);proto$0=void 0;return constructor$0;})());
 
 
 /**

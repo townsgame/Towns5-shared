@@ -14,4 +14,8 @@ A.Natural = class extends A.Object{
 
 
 
+    getCode(){
+        return(this.design.data.image);
+    }
+
 };

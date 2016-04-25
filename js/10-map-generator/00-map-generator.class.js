@@ -186,7 +186,7 @@ A.MapGenerator.prototype.getVirtualObjectsFromTerrainObjects = function(objects)
     var self = this;
 
     var virtual_objects = [];
-    objects.forEach(function(object){
+    objects.get1x1TerrainObjects().forEach(function(object){
 
         self.virtualObjectGenerator(object,virtual_objects);
 
@@ -219,9 +219,16 @@ A.MapGenerator.prototype.getCompleteObjects = function(real_objects,center,radiu
     var complete_objects = this.getPureMap(center, radius);
 
 
+
+    real_objects.forEach(function(object){
+        complete_objects.push(object);
+    });
+
+
+
     if(virtual_objects){
 
-        var virtual_objects = this.getVirtualObjectsFromTerrainObjects(real_objects);
+        var virtual_objects = this.getVirtualObjectsFromTerrainObjects(complete_objects);
 
         virtual_objects.forEach(function(object){
             complete_objects.push(object);
@@ -230,10 +237,6 @@ A.MapGenerator.prototype.getCompleteObjects = function(real_objects,center,radiu
     }
 
 
-
-    real_objects.forEach(function(object){
-        complete_objects.push(object);
-    });
 
 
     return(complete_objects);
