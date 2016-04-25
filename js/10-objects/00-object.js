@@ -15,7 +15,12 @@ A.Object = class{
     constructor(object){
 
         for(var key in object){
-            this[key] = object[key];
+
+            var this_key = key;
+
+            if(this_key=='_id')this_key='id';//todo maybe better solution
+
+            this[this_key] = object[key];
         }
 
     }

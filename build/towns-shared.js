@@ -928,6 +928,16 @@ A.Math.blurXY = function(generator,blur) {
     });
 
 };
+
+
+
+
+A.Math.bytesToSize = function(bytes) {
+    var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+    if (bytes == 0) return '0 Byte';
+    var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
+    return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i];
+};
 /**
  * @author ©Towns.cz
  * @fileOverview Creates Class Model
@@ -1876,35 +1886,38 @@ A.Array.prototype.forEach = function(){
 
 
 
-A.Array.prototype.push = function(object){
+A.Array.initInstance = function(object) {
 
     //----------------------------------
-    if(object.type=='building'){
+    if (object.type == 'building') {
 
-        object=new T.Objects.Building(object);
+        object = new T.Objects.Building(object);
 
-    }else
-    if(object.type=='terrain'){
+    } else if (object.type == 'terrain') {
 
-        object=new T.Objects.Terrain(object);
+        object = new T.Objects.Terrain(object);
 
-    }else
-    if(object.type=='story'){
+    } else if (object.type == 'story') {
 
-        object=new T.Objects.Story(object);
+        object = new T.Objects.Story(object);
 
-    }else
-    if(object.type=='natural'){
+    } else if (object.type == 'natural') {
 
-        object=new T.Objects.Natural(object);
+        object = new T.Objects.Natural(object);
 
-    }else
-    {
-        throw new Error('Cant put item into Towns Objects Array because of unrecognized object type '+object.type);
+    } else {
+        throw new Error('Cant put item into Towns Objects Array because of unrecognized object type ' + object.type);
     }
     //----------------------------------
 
-    return this.objects.push(object);
+    return(object);
+
+
+};
+
+
+A.Array.prototype.push = function(object){
+    return this.objects.push(T.Objects.Array.initInstance(object));
 };
 
 
@@ -1915,8 +1928,10 @@ A.Array.prototype.push = function(object){
  */
 A.Array.prototype.getById = function(id){
 
+    if(typeof id!=='string')throw new Error('getById: id should be string');
+
     for(var i in this.objects){
-        if(this.objects[i].id==id || this.objects[i]._id==id)return this.objects[i];
+        if(this.objects[i].id==id)return this.objects[i];
     }
 
     return null;
@@ -1931,10 +1946,12 @@ A.Array.prototype.getById = function(id){
  */
 A.Array.prototype.setById = function(id,object){
 
-    for(var i in this.objects){
-        if(this.objects[i].id==id || this.objects[i]._id==id){
+    if(typeof id!=='string')throw new Error('setById: id should be string');
 
-            this.objects[i]=object;
+    for(var i in this.objects){
+        if(this.objects[i].id==id){
+
+            this.objects[i]=T.Objects.Array.initInstance(object);
             return(true);
 
         }
@@ -1942,6 +1959,32 @@ A.Array.prototype.setById = function(id,object){
 
     return false;
 };
+
+
+
+
+/**
+ *
+ * @param {string} id
+ * @returns {boolean}
+ */
+A.Array.prototype.removeId = function(id,object){
+
+    if(typeof id!=='string')throw new Error('removeId: id should be string');
+
+    for(var i in this.objects){
+        if(this.objects[i].id==id){
+
+            this.objects.splice(i,1);
+            return(true);
+
+        }
+    }
+
+    return false;
+};
+
+
 
 
 /**
@@ -2057,6 +2100,7 @@ A.Array.prototype.getMapOfTerrainCodes = function(center,radius){//todo maybe re
 //todo jsdoc
 A.Array.prototype.get1x1TerrainObjects = function(){
 
+
     var terrain_objects_1x1=new T.Objects.Array();
 
 
@@ -2064,18 +2108,26 @@ A.Array.prototype.get1x1TerrainObjects = function(){
 
     //--------------------------Fill array
 
+    var blocked_positions={};
 
     terrain_objects.forEach(function(object){
 
 
-        /*if(object.design.data.size==1) {
+        if(object.design.data.size==1) {
             //--------------------------
 
             var object_1x1 = object;
-            terrain_objects_1x1.push(object_1x1);
+
+            var key = 'x'+object_1x1.x+'y'+object_1x1.y;
+            if(typeof blocked_positions[key]=='undefined'){
+                blocked_positions[key]=true;
+
+                terrain_objects_1x1.push(object_1x1);
+
+            }
 
             //--------------------------
-        }else {*/
+        }else {
             //--------------------------
 
             var x_from = Math.floor(- object.design.data.size);
@@ -2098,20 +2150,13 @@ A.Array.prototype.get1x1TerrainObjects = function(){
                         object_1x1.x+=x;
                         object_1x1.y+=y;
 
-                        if(terrain_objects_1x1.getAll().some(function(newer_object){
-                            if(newer_object.x==object_1x1.x && newer_object.y==object_1x1.y){
-                                return true;
-                            }
-                        })){
-
-
-                        }else{
+                        var key = 'x'+object_1x1.x+'y'+object_1x1.y;
+                        if(typeof blocked_positions[key]=='undefined'){
+                            blocked_positions[key]=true;
 
                             terrain_objects_1x1.push(object_1x1);
 
                         }
-
-
 
 
 
@@ -2120,7 +2165,7 @@ A.Array.prototype.get1x1TerrainObjects = function(){
             }
 
             //--------------------------
-        //}
+        }
 
     });
     //--------------------------
@@ -2217,7 +2262,12 @@ A.Object = ((function(){"use strict";var proto$0={};
     function constructor$0(object){
 
         for(var key in object){
-            this[key] = object[key];
+
+            var this_key = key;
+
+            if(this_key=='_id')this_key='id';//todo maybe better solution
+
+            this[this_key] = object[key];
         }
 
     }DP$0(constructor$0,"prototype",{"configurable":false,"enumerable":false,"writable":false});
@@ -2288,11 +2338,13 @@ var A/*Actual Namespace*/ = T.Objects;
 
 
 
-A.Story = ((function(super$0){"use strict";super$0=A.Object;function constructor$0() {if(super$0!==null)super$0.apply(this, arguments)}if(!PRS$0)MIXIN$0(constructor$0, super$0);if(super$0!==null)SP$0(constructor$0,super$0);constructor$0.prototype = OC$0(super$0!==null?super$0.prototype:null,{"constructor":{"value":constructor$0,"configurable":true,"writable":true}});DP$0(constructor$0,"prototype",{"configurable":false,"enumerable":false,"writable":false});
+A.Story = ((function(super$0){"use strict";super$0=A.Object;function constructor$0() {if(super$0!==null)super$0.apply(this, arguments)}if(!PRS$0)MIXIN$0(constructor$0, super$0);if(super$0!==null)SP$0(constructor$0,super$0);constructor$0.prototype = OC$0(super$0!==null?super$0.prototype:null,{"constructor":{"value":constructor$0,"configurable":true,"writable":true}});DP$0(constructor$0,"prototype",{"configurable":false,"enumerable":false,"writable":false});var proto$0={};
 
+    proto$0.getMarkdown = function(){
+        return(this.content.data);
+    };
 
-
-;return constructor$0;})());
+MIXIN$0(constructor$0.prototype,proto$0);proto$0=void 0;return constructor$0;})());
 
 
 /**
@@ -2692,6 +2744,37 @@ A.Resources.prototype.toString = function(){
 };
 
 
+
+
+
+
+A.Resources.prototype.toHTML = function(){//todo put url prefix into params
+
+    var strings = [];
+
+    for(var key in this){
+
+        if(typeof this[key]=='number'){//todo better solution
+
+            if(this[key]!=0){
+
+                var name = Locale.get('resource',key);
+                var value = this[key];
+
+                value=value.toLocaleString(/*'en-US''de-DE'*/);//todo todo better solution
+
+                strings.push('<div><img src="/media/image/resources/'+key+'.png" title="'+name+'" alt="'+name+'" >'+value+'</div>');
+            }
+
+        }
+
+    }
+    strings=strings.join(' ');
+    strings='<div class="resources">'+strings+'</div>';
+
+    return strings;
+
+};
 
 /**
  * @author ©Towns.cz

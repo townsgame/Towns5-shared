@@ -40,35 +40,38 @@ A.Array.prototype.forEach = function(){
 
 
 
-A.Array.prototype.push = function(object){
+A.Array.initInstance = function(object) {
 
     //----------------------------------
-    if(object.type=='building'){
+    if (object.type == 'building') {
 
-        object=new T.Objects.Building(object);
+        object = new T.Objects.Building(object);
 
-    }else
-    if(object.type=='terrain'){
+    } else if (object.type == 'terrain') {
 
-        object=new T.Objects.Terrain(object);
+        object = new T.Objects.Terrain(object);
 
-    }else
-    if(object.type=='story'){
+    } else if (object.type == 'story') {
 
-        object=new T.Objects.Story(object);
+        object = new T.Objects.Story(object);
 
-    }else
-    if(object.type=='natural'){
+    } else if (object.type == 'natural') {
 
-        object=new T.Objects.Natural(object);
+        object = new T.Objects.Natural(object);
 
-    }else
-    {
-        throw new Error('Cant put item into Towns Objects Array because of unrecognized object type '+object.type);
+    } else {
+        throw new Error('Cant put item into Towns Objects Array because of unrecognized object type ' + object.type);
     }
     //----------------------------------
 
-    return this.objects.push(object);
+    return(object);
+
+
+};
+
+
+A.Array.prototype.push = function(object){
+    return this.objects.push(T.Objects.Array.initInstance(object));
 };
 
 
@@ -79,8 +82,10 @@ A.Array.prototype.push = function(object){
  */
 A.Array.prototype.getById = function(id){
 
+    if(typeof id!=='string')throw new Error('getById: id should be string');
+
     for(var i in this.objects){
-        if(this.objects[i].id==id || this.objects[i]._id==id)return this.objects[i];
+        if(this.objects[i].id==id)return this.objects[i];
     }
 
     return null;
@@ -95,10 +100,12 @@ A.Array.prototype.getById = function(id){
  */
 A.Array.prototype.setById = function(id,object){
 
-    for(var i in this.objects){
-        if(this.objects[i].id==id || this.objects[i]._id==id){
+    if(typeof id!=='string')throw new Error('setById: id should be string');
 
-            this.objects[i]=object;
+    for(var i in this.objects){
+        if(this.objects[i].id==id){
+
+            this.objects[i]=T.Objects.Array.initInstance(object);
             return(true);
 
         }
@@ -106,6 +113,32 @@ A.Array.prototype.setById = function(id,object){
 
     return false;
 };
+
+
+
+
+/**
+ *
+ * @param {string} id
+ * @returns {boolean}
+ */
+A.Array.prototype.removeId = function(id,object){
+
+    if(typeof id!=='string')throw new Error('removeId: id should be string');
+
+    for(var i in this.objects){
+        if(this.objects[i].id==id){
+
+            this.objects.splice(i,1);
+            return(true);
+
+        }
+    }
+
+    return false;
+};
+
+
 
 
 /**
@@ -221,6 +254,7 @@ A.Array.prototype.getMapOfTerrainCodes = function(center,radius){//todo maybe re
 //todo jsdoc
 A.Array.prototype.get1x1TerrainObjects = function(){
 
+
     var terrain_objects_1x1=new T.Objects.Array();
 
 
@@ -228,18 +262,26 @@ A.Array.prototype.get1x1TerrainObjects = function(){
 
     //--------------------------Fill array
 
+    var blocked_positions={};
 
     terrain_objects.forEach(function(object){
 
 
-        /*if(object.design.data.size==1) {
+        if(object.design.data.size==1) {
             //--------------------------
 
             var object_1x1 = object;
-            terrain_objects_1x1.push(object_1x1);
+
+            var key = 'x'+object_1x1.x+'y'+object_1x1.y;
+            if(typeof blocked_positions[key]=='undefined'){
+                blocked_positions[key]=true;
+
+                terrain_objects_1x1.push(object_1x1);
+
+            }
 
             //--------------------------
-        }else {*/
+        }else {
             //--------------------------
 
             var x_from = Math.floor(- object.design.data.size);
@@ -262,20 +304,13 @@ A.Array.prototype.get1x1TerrainObjects = function(){
                         object_1x1.x+=x;
                         object_1x1.y+=y;
 
-                        if(terrain_objects_1x1.getAll().some(function(newer_object){
-                            if(newer_object.x==object_1x1.x && newer_object.y==object_1x1.y){
-                                return true;
-                            }
-                        })){
-
-
-                        }else{
+                        var key = 'x'+object_1x1.x+'y'+object_1x1.y;
+                        if(typeof blocked_positions[key]=='undefined'){
+                            blocked_positions[key]=true;
 
                             terrain_objects_1x1.push(object_1x1);
 
                         }
-
-
 
 
 
@@ -284,7 +319,7 @@ A.Array.prototype.get1x1TerrainObjects = function(){
             }
 
             //--------------------------
-        //}
+        }
 
     });
     //--------------------------
