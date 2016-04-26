@@ -17,11 +17,11 @@ map_radius = 20,
 var ascii=['  ',' ~','##','~~','::','XX','Y@','~/','tt','--','||','^^','.~','\\\\','//'];
 
 
-var objects = new T.Objects.Array();
+var objects_from_server = new T.Objects.Array(/*[{},{},...]*/);
 
-var objects = T.World.mapGenerator.getCompleteObjects(objects,map_center,map_radius,false);
+var objects_all = T.World.mapGenerator.getCompleteObjects(objects_from_server,map_center,map_radius,false);
 
-var map = objects.getMapOfTerrainCodes(map_center,map_radius);
+var map = objects_all.getMapOfTerrainCodes(map_center,map_radius);
 
 
 for (var y = 0; y < map_radius * 2; y++) {
