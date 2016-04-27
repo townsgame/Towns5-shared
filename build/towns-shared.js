@@ -14,10 +14,127 @@ var T = global.Towns;
 
 /**
  * @author ©Towns.cz
+ * @fileOverview Creates class Color
+ */
+//======================================================================================================================
+
+
+T.Color = ((function(){"use strict";var static$0={},proto$0={};
+
+    /**
+     *
+     * @param r red from 0 to 255
+     * @param g green from 0 to 255
+     * @param b blue from 0 to 255
+     * @param a alpha from 0 to 255
+     */
+    function constructor$0(r, g, b){var a = arguments[3];if(a === void 0)a = 255;
+        this.r = r;
+        this.g = g;
+        this.b = b;
+        this.a = a;
+    }DP$0(constructor$0,"prototype",{"configurable":false,"enumerable":false,"writable":false});
+
+
+    /**
+     * Repairs overflowed colors
+     * @private
+     */
+    proto$0.bounds = function(){
+
+        this.r = Math.round(this.r);
+        this.g = Math.round(this.g);
+        this.b = Math.round(this.b);
+        this.a = Math.round(this.a);
+
+        if (this.r > 255) {
+            this.r = 255;
+        }
+        if (this.r < 0) {
+            this.r = 0;
+        }
+        if (this.g > 255) {
+            this.g = 255;
+        }
+        if (this.g < 0) {
+            this.g = 0;
+        }
+        if (this.b > 255) {
+            this.b = 255;
+        }
+        if (this.b < 0) {
+            this.b = 0;
+        }
+
+        if (this.a > 255) {
+            this.a = 255;
+        }
+        if (this.a < 0) {
+            this.a = 0;
+        }
+    };
+
+
+    /**
+     * Get css representation of this color
+     * @returns {string} eg. rgb(100,200,200)
+     */
+    proto$0.getCssColor = function(){
+
+        this.bounds();
+        if (this.a == 255) {
+            return 'rgb(' + this.r + ', ' + this.g + ', ' + this.b + ')';
+        } else {
+            //r('rgba(' + this.r + ', ' + this.g + ', ' + this.b + ', ' + Math.round(this.a/255*100)/100 + ')');
+            return 'rgba(' + this.r + ', ' + this.g + ', ' + this.b + ', ' + Math.round(this.a / 255 * 100) / 100 + ')';
+        }
+
+    };
+
+    /**
+     * Get hex representation of this color (ignores alpha chanel.)
+     * @returns {string} eg. #00ff00
+     */
+    proto$0.getHex = function(){
+        this.bounds();
+        return '#' + ((1 << 24) + (this.r << 16) + (this.g << 8) + this.b).toString(16).slice(1);
+    };
+
+
+    /**
+     * Creates new T.Color form hex code of color
+     * @param {string} hex code of color eg. #00ff00
+     * @returns {T.Color} Color
+     */
+    static$0.createFromHex = function(hex){
+
+        var result, shorthandRegex;
+
+        shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+        hex = hex.replace(shorthandRegex, function (m, r, g, b) {
+            return r + r + g + g + b + b;
+        });
+        result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+        if (result) {
+            return new T.Color(
+                parseInt(result[1], 16),
+                parseInt(result[2], 16),
+                parseInt(result[3], 16)
+            );
+        } else {
+
+            throw new Error('Error while creating T.Color from '+hex);
+
+        }
+    };
+
+MIXIN$0(constructor$0,static$0);MIXIN$0(constructor$0.prototype,proto$0);static$0=proto$0=void 0;return constructor$0;})());
+
+/**
+ * @author ©Towns.cz
  * @fileOverview Creates static class game
  */
 //======================================================================================================================
-var A/*Actual Namespace*/ = T;
 
 
 
@@ -28,7 +145,7 @@ var A/*Actual Namespace*/ = T;
  * @param {function} price_key_modifier
  * @constructor
  */
-A.Game = function(action_type_list,max_life_modifier,price_key_modifier){
+T.Game = function(action_type_list,max_life_modifier,price_key_modifier){
 
     this.action_type_list = action_type_list;
     this.max_life_modifier = max_life_modifier;
@@ -43,7 +160,7 @@ A.Game = function(action_type_list,max_life_modifier,price_key_modifier){
  * @param {object} Object
  * @return {array} of numbers
  */
-A.Game.prototype.getObjectPriceBases = function(object){
+T.Game.prototype.getObjectPriceBases = function(object){
 
     var self=this;
     var price_bases=[];
@@ -101,7 +218,7 @@ A.Game.prototype.getObjectPriceBases = function(object){
  * @param {object} Object
  * @return {number} maximum life of object
  */
-A.Game.prototype.getObjectMaxLife = function(object){
+T.Game.prototype.getObjectMaxLife = function(object){
 
     var price_bases=this.getObjectPriceBases(object);
     var price_base = price_bases.reduce(function(pv, cv) { return pv + cv; }, 0);
@@ -121,7 +238,7 @@ A.Game.prototype.getObjectMaxLife = function(object){
  * @param {object} Object
  * @return {array} of Resources
  */
-A.Game.prototype.getObjectPrices = function(object){
+T.Game.prototype.getObjectPrices = function(object){
 
     //console.log(this);
 
@@ -143,9 +260,9 @@ A.Game.prototype.getObjectPrices = function(object){
         var action_type = self.action_type_list[action.type];
 
 
-        action_type.price_resources_list.sort(function(A,B){//todo is it safe?
+        action_type.price_resources_list.sort(function(a,b){//todo is it safe?
 
-            return design_resources.compare(A.clone().signum())-design_resources.compare(B.clone().signum());
+            return design_resources.compare(a.clone().signum())-design_resources.compare(b.clone().signum());
 
         });
 
@@ -170,7 +287,7 @@ A.Game.prototype.getObjectPrices = function(object){
  * @param {object} Object
  * @return {object} Resources - price of object
  */
-A.Game.prototype.getObjectPrice = function(object){
+T.Game.prototype.getObjectPrice = function(object){
 
     var price = new T.Resources({});
 
@@ -196,7 +313,7 @@ A.Game.prototype.getObjectPrice = function(object){
  * @param {object} Object
  * @return {object} Resources - design amount of resources
  */
-A.Game.prototype.getObjectDesignPrice = function(object){
+T.Game.prototype.getObjectDesignPrice = function(object){
 
     if(!object.hasOwnProperty('design'))throw new Error('Object should have design!');
     if(object.design.type!='model')throw new Error('Object should have design of type model!');
@@ -242,10 +359,6 @@ A.Game.prototype.getObjectDesignPrice = function(object){
  * @fileOverview Creates class actions
  */
 //======================================================================================================================
-T.Game = T.Game || {};
-var A/*Actual Namespace*/ = T.Game;
-
-
 
 
 /**
@@ -257,7 +370,7 @@ var A/*Actual Namespace*/ = T.Game;
  * @param {function} perform
  * @constructor
  */
-A.ActionType = function(type, params, price_base, price_resources_list, perform){
+T.Game.ActionType = function(type, params, price_base, price_resources_list, perform){
     this.type = type;
     this.params = params;
     this.price_base = price_base;
@@ -967,6 +1080,14 @@ A.Model = function (json){
     if(typeof(this.size)=='undefined')this.size=1;
 };
 //==================================================
+
+
+
+A.Model.prototype.clone = function (){
+    return(new T.Model(JSON.parse(JSON.stringify(this))));
+};
+
+
 
 /**
  * @param {number} rotation
@@ -2094,10 +2215,10 @@ A.Array.prototype.getMapOfTerrainCodes = function(center,radius){//todo maybe re
 };
 
 
-
-
-
-//todo jsdoc
+/**
+ *
+ * @returns {T.Objects.Array}
+ */
 A.Array.prototype.get1x1TerrainObjects = function(){
 
 
@@ -2294,6 +2415,11 @@ var A/*Actual Namespace*/ = T.Objects;
 A.Building = ((function(super$0){"use strict";super$0=A.Object;function constructor$0() {if(super$0!==null)super$0.apply(this, arguments)}if(!PRS$0)MIXIN$0(constructor$0, super$0);if(super$0!==null)SP$0(constructor$0,super$0);constructor$0.prototype = OC$0(super$0!==null?super$0.prototype:null,{"constructor":{"value":constructor$0,"configurable":true,"writable":true}});DP$0(constructor$0,"prototype",{"configurable":false,"enumerable":false,"writable":false});var proto$0={};
 
 
+    proto$0.clone = function(){//todo all classes should have this method
+        return(new T.Objects.Building(JSON.parse(JSON.stringify(this))));
+    };
+
+
     proto$0.getModel = function(){
         if(!(this.design.data instanceof T.Model)){
             this.design.data=new T.Model(this.design.data);
@@ -2318,11 +2444,16 @@ var A/*Actual Namespace*/ = T.Objects;
 
 A.Natural = ((function(super$0){"use strict";super$0=A.Object;function constructor$0() {if(super$0!==null)super$0.apply(this, arguments)}if(!PRS$0)MIXIN$0(constructor$0, super$0);if(super$0!==null)SP$0(constructor$0,super$0);constructor$0.prototype = OC$0(super$0!==null?super$0.prototype:null,{"constructor":{"value":constructor$0,"configurable":true,"writable":true}});DP$0(constructor$0,"prototype",{"configurable":false,"enumerable":false,"writable":false});var proto$0={};
 
+    proto$0.clone = function(){//todo all classes should have this method
+        return(new T.Objects.Natural(JSON.parse(JSON.stringify(this))));
+    };
 
 
     proto$0.getCode = function(){
         return(this.design.data.image);
     };
+
+
 
 MIXIN$0(constructor$0.prototype,proto$0);proto$0=void 0;return constructor$0;})());
 
@@ -2340,9 +2471,16 @@ var A/*Actual Namespace*/ = T.Objects;
 
 A.Story = ((function(super$0){"use strict";super$0=A.Object;function constructor$0() {if(super$0!==null)super$0.apply(this, arguments)}if(!PRS$0)MIXIN$0(constructor$0, super$0);if(super$0!==null)SP$0(constructor$0,super$0);constructor$0.prototype = OC$0(super$0!==null?super$0.prototype:null,{"constructor":{"value":constructor$0,"configurable":true,"writable":true}});DP$0(constructor$0,"prototype",{"configurable":false,"enumerable":false,"writable":false});var proto$0={};
 
+    proto$0.clone = function(){//todo all classes should have this method
+        return(new T.Objects.Story(JSON.parse(JSON.stringify(this))));
+    };
+
     proto$0.getMarkdown = function(){
         return(this.content.data);
     };
+
+
+
 
 MIXIN$0(constructor$0.prototype,proto$0);proto$0=void 0;return constructor$0;})());
 
@@ -2360,6 +2498,12 @@ var A/*Actual Namespace*/ = T.Objects;//todo refactor this should not be under M
 
 A.Terrain = ((function(super$0){"use strict";super$0=A.Object;function constructor$0() {if(super$0!==null)super$0.apply(this, arguments)}if(!PRS$0)MIXIN$0(constructor$0, super$0);if(super$0!==null)SP$0(constructor$0,super$0);constructor$0.prototype = OC$0(super$0!==null?super$0.prototype:null,{"constructor":{"value":constructor$0,"configurable":true,"writable":true}});DP$0(constructor$0,"prototype",{"configurable":false,"enumerable":false,"writable":false});var proto$0={};
 
+
+    proto$0.clone = function(){//todo all classes should have this method
+        return(new T.Objects.Terrain(JSON.parse(JSON.stringify(this))));
+    };
+
+
     proto$0.getCode = function(prefered_width){
 
         return(this.design.data.image);
@@ -2375,11 +2519,7 @@ A.Terrain = ((function(super$0){"use strict";super$0=A.Object;function construct
 
 
 
-    proto$0.clone = function(){//todo all classes should have this method
 
-        return(new T.Objects.Terrain(JSON.parse(JSON.stringify(this))));
-
-    };
 
 
     //todo getImage(){}
@@ -2390,55 +2530,111 @@ MIXIN$0(constructor$0.prototype,proto$0);proto$0=void 0;return constructor$0;})(
 
 /**
  * @author ©Towns.cz
+ * @fileOverview Creates class Position 3D
+ */
+//======================================================================================================================
+var A/*Actual Namespace*/ = T;
+
+
+A.Position3D = ((function(){"use strict";var proto$0={};
+
+
+    function constructor$0(x,y,z){
+
+        if(typeof x == 'object'){
+
+            this.x= x.x;
+            this.y= x.y;
+            this.z= x.z;
+
+        }else{
+
+            this.x= x;
+            this.y= y;
+            this.z= z;
+
+        }
+
+    }DP$0(constructor$0,"prototype",{"configurable":false,"enumerable":false,"writable":false});
+
+
+
+    /**
+     * Converts Position3D to simple string
+     * @return {string}
+     */
+    proto$0.toString = function(){
+
+        return '['+this.x+','+this.y+','+this.z+']';
+
+    };
+
+
+
+MIXIN$0(constructor$0.prototype,proto$0);proto$0=void 0;return constructor$0;})());
+
+
+
+
+
+/**
+ * @author ©Towns.cz
  * @fileOverview Creates class Position
  */
 //======================================================================================================================
 var A/*Actual Namespace*/ = T;
 
 
+A.Position = ((function(){"use strict";var proto$0={};
+
+    function constructor$0(x,y){
+
+        if(typeof x == 'object'){
+
+            this.x= x.x;
+            this.y= x.y;
+
+        }else{
+
+            this.x= x;
+            this.y= y;
+
+        }
+
+    }DP$0(constructor$0,"prototype",{"configurable":false,"enumerable":false,"writable":false});
 
 
-A.Position = function(x,y){
+    proto$0.getMoved = function(x,y){
 
-    if(typeof x == 'object'){
+        return new T.Position(this.x+x,this.y+y);
 
-        this.x= x.x;
-        this.y= x.y;
-
-    }else{
-
-        this.x= x;
-        this.y= y;
-
-    }
-
-};
+    };
 
 
-A.Position.prototype.getMoved = function(x,y){
+    proto$0.getDistance = function(position){
 
-    return new T.Position(this.x+x,this.y+y);
+        return T.Math.xy2dist(position.x-this.x,position.y-this.y);
 
-};
-
-
-A.Position.prototype.getDistance = function(position){
-
-    return T.Math.xy2dist(position.x-this.x,position.y-this.y);
-
-};
+    };
 
 
 
-/**
- * Converts Position to simple string
- * @return {string}
- */
-A.Position.prototype.toString = function(){
+    /**
+     * Converts Position to simple string
+     * @return {string}
+     */
+    proto$0.toString = function(){
 
-    return '['+this.x+','+this.y+']';
+        return '['+this.x+','+this.y+']';
 
-};
+    };
+
+
+
+MIXIN$0(constructor$0.prototype,proto$0);proto$0=void 0;return constructor$0;})());
+
+
+
 
 
 /**

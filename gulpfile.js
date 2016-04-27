@@ -18,7 +18,7 @@ var fs = require("fs");
 
 gulp.task('documentation', function (callback) {
 
-    var config = {
+    var documentation_config = {
         "tags": {
             "allowUnknownTags": true
         },
@@ -48,7 +48,7 @@ gulp.task('documentation', function (callback) {
 
     gulp.src(["./js/*.js","./js/*/*.js"]/*, {read: false}*/)
         .pipe(sort())
-        .pipe(jsdoc(config,callback));
+        .pipe(jsdoc(documentation_config,callback));
 
 
 });

@@ -3,7 +3,6 @@
  * @fileOverview Creates static class game
  */
 //======================================================================================================================
-var A/*Actual Namespace*/ = T;
 
 
 
@@ -14,7 +13,7 @@ var A/*Actual Namespace*/ = T;
  * @param {function} price_key_modifier
  * @constructor
  */
-A.Game = function(action_type_list,max_life_modifier,price_key_modifier){
+T.Game = function(action_type_list,max_life_modifier,price_key_modifier){
 
     this.action_type_list = action_type_list;
     this.max_life_modifier = max_life_modifier;
@@ -29,7 +28,7 @@ A.Game = function(action_type_list,max_life_modifier,price_key_modifier){
  * @param {object} Object
  * @return {array} of numbers
  */
-A.Game.prototype.getObjectPriceBases = function(object){
+T.Game.prototype.getObjectPriceBases = function(object){
 
     var self=this;
     var price_bases=[];
@@ -87,7 +86,7 @@ A.Game.prototype.getObjectPriceBases = function(object){
  * @param {object} Object
  * @return {number} maximum life of object
  */
-A.Game.prototype.getObjectMaxLife = function(object){
+T.Game.prototype.getObjectMaxLife = function(object){
 
     var price_bases=this.getObjectPriceBases(object);
     var price_base = price_bases.reduce(function(pv, cv) { return pv + cv; }, 0);
@@ -107,7 +106,7 @@ A.Game.prototype.getObjectMaxLife = function(object){
  * @param {object} Object
  * @return {array} of Resources
  */
-A.Game.prototype.getObjectPrices = function(object){
+T.Game.prototype.getObjectPrices = function(object){
 
     //console.log(this);
 
@@ -129,9 +128,9 @@ A.Game.prototype.getObjectPrices = function(object){
         var action_type = self.action_type_list[action.type];
 
 
-        action_type.price_resources_list.sort(function(A,B){//todo is it safe?
+        action_type.price_resources_list.sort(function(a,b){//todo is it safe?
 
-            return design_resources.compare(A.clone().signum())-design_resources.compare(B.clone().signum());
+            return design_resources.compare(a.clone().signum())-design_resources.compare(b.clone().signum());
 
         });
 
@@ -156,7 +155,7 @@ A.Game.prototype.getObjectPrices = function(object){
  * @param {object} Object
  * @return {object} Resources - price of object
  */
-A.Game.prototype.getObjectPrice = function(object){
+T.Game.prototype.getObjectPrice = function(object){
 
     var price = new T.Resources({});
 
@@ -182,7 +181,7 @@ A.Game.prototype.getObjectPrice = function(object){
  * @param {object} Object
  * @return {object} Resources - design amount of resources
  */
-A.Game.prototype.getObjectDesignPrice = function(object){
+T.Game.prototype.getObjectDesignPrice = function(object){
 
     if(!object.hasOwnProperty('design'))throw new Error('Object should have design!');
     if(object.design.type!='model')throw new Error('Object should have design of type model!');

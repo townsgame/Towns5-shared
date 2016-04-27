@@ -1,52 +1,41 @@
 /**
  * @author ©Towns.cz
- * @fileOverview Creates class Position
+ * @fileOverview Creates class Position 3D
  */
 //======================================================================================================================
 var A/*Actual Namespace*/ = T;
 
 
-A.Position = class{
+A.Position3D = class{
 
-    constructor(x,y){
+
+    constructor(x,y,z){
 
         if(typeof x == 'object'){
 
             this.x= x.x;
             this.y= x.y;
+            this.z= x.z;
 
         }else{
 
             this.x= x;
             this.y= y;
+            this.z= z;
 
         }
 
     }
 
 
-    getMoved(x,y){
-
-        return new T.Position(this.x+x,this.y+y);
-
-    }
-
-
-    getDistance(position){
-
-        return T.Math.xy2dist(position.x-this.x,position.y-this.y);
-
-    }
-
-
 
     /**
-     * Converts Position to simple string
+     * Converts Position3D to simple string
      * @return {string}
      */
     toString(){
 
-        return '['+this.x+','+this.y+']';
+        return '['+this.x+','+this.y+','+this.z+']';
 
     }
 

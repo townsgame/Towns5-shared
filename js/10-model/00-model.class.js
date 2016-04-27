@@ -28,6 +28,14 @@ A.Model = function (json){
 };
 //==================================================
 
+
+
+A.Model.prototype.clone = function (){
+    return(new T.Model(JSON.parse(JSON.stringify(this))));
+};
+
+
+
 /**
  * @param {number} rotation
  * @param {number} size

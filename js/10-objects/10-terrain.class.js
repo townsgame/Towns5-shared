@@ -12,6 +12,12 @@ var A/*Actual Namespace*/ = T.Objects;//todo refactor this should not be under M
 
 A.Terrain = class extends A.Object{
 
+
+    clone(){//todo all classes should have this method
+        return(new T.Objects.Terrain(JSON.parse(JSON.stringify(this))));
+    }
+
+
     getCode(prefered_width){
 
         return(this.design.data.image);
@@ -27,11 +33,7 @@ A.Terrain = class extends A.Object{
 
 
 
-    clone(){//todo all classes should have this method
 
-        return(new T.Objects.Terrain(JSON.parse(JSON.stringify(this))));
-
-    }
 
 
     //todo getImage(){}

@@ -248,10 +248,10 @@ A.Array.prototype.getMapOfTerrainCodes = function(center,radius){//todo maybe re
 };
 
 
-
-
-
-//todo jsdoc
+/**
+ *
+ * @returns {T.Objects.Array}
+ */
 A.Array.prototype.get1x1TerrainObjects = function(){
 
 

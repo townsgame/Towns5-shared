@@ -3,10 +3,6 @@
  * @fileOverview Creates class actions
  */
 //======================================================================================================================
-T.Game = T.Game || {};
-var A/*Actual Namespace*/ = T.Game;
-
-
 
 
 /**
@@ -18,7 +14,7 @@ var A/*Actual Namespace*/ = T.Game;
  * @param {function} perform
  * @constructor
  */
-A.ActionType = function(type, params, price_base, price_resources_list, perform){
+T.Game.ActionType = function(type, params, price_base, price_resources_list, perform){
     this.type = type;
     this.params = params;
     this.price_base = price_base;
