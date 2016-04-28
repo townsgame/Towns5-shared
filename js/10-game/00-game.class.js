@@ -192,9 +192,9 @@ T.Game = class{
         var price = new T.Resources({});
     
     
-        model = new T.Model(object.design.data);
+        var model = new T.Model(object.design.data);
     
-        linear_particles = model.getLinearParticles();
+        var linear_particles = model.getLinearParticles();
     
     
         linear_particles.forEach(function(linear_particle){

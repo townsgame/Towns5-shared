@@ -8,7 +8,7 @@ T.Objects = T.Objects || {};
 
 
 
-T.Objects.Terrain = class extends A.Object{
+T.Objects.Terrain = class extends T.Objects.Object{
 
 
     clone(){//todo all classes should have this method

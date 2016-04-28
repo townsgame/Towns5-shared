@@ -324,9 +324,9 @@ T.Game = ((function(){"use strict";var proto$0={};
         var price = new T.Resources({});
     
     
-        model = new T.Model(object.design.data);
+        var model = new T.Model(object.design.data);
     
-        linear_particles = model.getLinearParticles();
+        var linear_particles = model.getLinearParticles();
     
     
         linear_particles.forEach(function(linear_particle){
@@ -552,7 +552,7 @@ T.MapGenerator = ((function(){"use strict";var proto$0={};
      */
     proto$0.getPureMap = function(center,radius){
 
-        center_integer={
+        var center_integer={
             x: Math.floor(center.x),
             y: Math.floor(center.y)
         };
@@ -2424,7 +2424,7 @@ T.Objects = T.Objects || {};
 
 
 
-T.Objects.Building = ((function(super$0){"use strict";super$0=A.Object;function constructor$0() {if(super$0!==null)super$0.apply(this, arguments)}if(!PRS$0)MIXIN$0(constructor$0, super$0);if(super$0!==null)SP$0(constructor$0,super$0);constructor$0.prototype = OC$0(super$0!==null?super$0.prototype:null,{"constructor":{"value":constructor$0,"configurable":true,"writable":true}});DP$0(constructor$0,"prototype",{"configurable":false,"enumerable":false,"writable":false});var proto$0={};
+T.Objects.Building = ((function(super$0){"use strict";super$0=T.Objects.Object;function constructor$0() {if(super$0!==null)super$0.apply(this, arguments)}if(!PRS$0)MIXIN$0(constructor$0, super$0);if(super$0!==null)SP$0(constructor$0,super$0);constructor$0.prototype = OC$0(super$0!==null?super$0.prototype:null,{"constructor":{"value":constructor$0,"configurable":true,"writable":true}});DP$0(constructor$0,"prototype",{"configurable":false,"enumerable":false,"writable":false});var proto$0={};
 
 
     proto$0.clone = function(){//todo all classes should have this method
@@ -2453,7 +2453,7 @@ T.Objects = T.Objects || {};
 
 
 
-T.Objects.Natural = ((function(super$0){"use strict";super$0=A.Object;function constructor$0() {if(super$0!==null)super$0.apply(this, arguments)}if(!PRS$0)MIXIN$0(constructor$0, super$0);if(super$0!==null)SP$0(constructor$0,super$0);constructor$0.prototype = OC$0(super$0!==null?super$0.prototype:null,{"constructor":{"value":constructor$0,"configurable":true,"writable":true}});DP$0(constructor$0,"prototype",{"configurable":false,"enumerable":false,"writable":false});var proto$0={};
+T.Objects.Natural = ((function(super$0){"use strict";super$0=T.Objects.Object;function constructor$0() {if(super$0!==null)super$0.apply(this, arguments)}if(!PRS$0)MIXIN$0(constructor$0, super$0);if(super$0!==null)SP$0(constructor$0,super$0);constructor$0.prototype = OC$0(super$0!==null?super$0.prototype:null,{"constructor":{"value":constructor$0,"configurable":true,"writable":true}});DP$0(constructor$0,"prototype",{"configurable":false,"enumerable":false,"writable":false});var proto$0={};
 
     proto$0.clone = function(){//todo all classes should have this method
         return(new T.Objects.Natural(JSON.parse(JSON.stringify(this))));
@@ -2479,7 +2479,7 @@ T.Objects = T.Objects || {};
 
 
 
-T.Objects.Story = ((function(super$0){"use strict";super$0=A.Object;function constructor$0() {if(super$0!==null)super$0.apply(this, arguments)}if(!PRS$0)MIXIN$0(constructor$0, super$0);if(super$0!==null)SP$0(constructor$0,super$0);constructor$0.prototype = OC$0(super$0!==null?super$0.prototype:null,{"constructor":{"value":constructor$0,"configurable":true,"writable":true}});DP$0(constructor$0,"prototype",{"configurable":false,"enumerable":false,"writable":false});var proto$0={};
+T.Objects.Story = ((function(super$0){"use strict";super$0=T.Objects.Object;function constructor$0() {if(super$0!==null)super$0.apply(this, arguments)}if(!PRS$0)MIXIN$0(constructor$0, super$0);if(super$0!==null)SP$0(constructor$0,super$0);constructor$0.prototype = OC$0(super$0!==null?super$0.prototype:null,{"constructor":{"value":constructor$0,"configurable":true,"writable":true}});DP$0(constructor$0,"prototype",{"configurable":false,"enumerable":false,"writable":false});var proto$0={};
 
     proto$0.clone = function(){//todo all classes should have this method
         return(new T.Objects.Story(JSON.parse(JSON.stringify(this))));
@@ -2504,7 +2504,7 @@ T.Objects = T.Objects || {};
 
 
 
-T.Objects.Terrain = ((function(super$0){"use strict";super$0=A.Object;function constructor$0() {if(super$0!==null)super$0.apply(this, arguments)}if(!PRS$0)MIXIN$0(constructor$0, super$0);if(super$0!==null)SP$0(constructor$0,super$0);constructor$0.prototype = OC$0(super$0!==null?super$0.prototype:null,{"constructor":{"value":constructor$0,"configurable":true,"writable":true}});DP$0(constructor$0,"prototype",{"configurable":false,"enumerable":false,"writable":false});var proto$0={};
+T.Objects.Terrain = ((function(super$0){"use strict";super$0=T.Objects.Object;function constructor$0() {if(super$0!==null)super$0.apply(this, arguments)}if(!PRS$0)MIXIN$0(constructor$0, super$0);if(super$0!==null)SP$0(constructor$0,super$0);constructor$0.prototype = OC$0(super$0!==null?super$0.prototype:null,{"constructor":{"value":constructor$0,"configurable":true,"writable":true}});DP$0(constructor$0,"prototype",{"configurable":false,"enumerable":false,"writable":false});var proto$0={};
 
 
     proto$0.clone = function(){//todo all classes should have this method
@@ -2655,7 +2655,7 @@ MIXIN$0(constructor$0.prototype,proto$0);proto$0=void 0;return constructor$0;})(
  * @param {object} Resources
  * @constructor
  */
-T.Resources = ((function(){"use strict";var proto$0={};
+T.Resources = ((function(){"use strict";var static$0={},proto$0={};
 
 
     function constructor$0(resources)
@@ -2674,7 +2674,7 @@ T.Resources = ((function(){"use strict";var proto$0={};
      * @static
      * @return {array} new Resources
      */
-    proto$0.newSingles = function(resources){
+    static$0.newSingles = function(resources){
 
         var resources_array = [];
 
@@ -2879,8 +2879,8 @@ T.Resources = ((function(){"use strict";var proto$0={};
 
             var key = keys[i];
 
-            val_A = resources_A[key];
-            val_B = resources_B[key];
+            var val_A = resources_A[key];
+            var val_B = resources_B[key];
 
 
             if (typeof val_A == 'undefined')val_A = 0;
@@ -2976,7 +2976,7 @@ T.Resources = ((function(){"use strict";var proto$0={};
 
 
 
-MIXIN$0(constructor$0.prototype,proto$0);proto$0=void 0;return constructor$0;})());
+MIXIN$0(constructor$0,static$0);MIXIN$0(constructor$0.prototype,proto$0);static$0=proto$0=void 0;return constructor$0;})());
 
 /**
  * @author ©Towns.cz
@@ -3090,7 +3090,7 @@ T.World.mapGenerator = new T.MapGenerator(
 
         if(object.type!='terrain')return;
 
-        if(object.design.datT.World.image==5){
+        if(object.getCode()==5){
             virtual_objects.push(
                 {
 
@@ -3110,7 +3110,7 @@ T.World.mapGenerator = new T.MapGenerator(
 
 
         }else
-        if(object.design.datT.World.image==10){
+        if(object.getCode()==10){
                         virtual_objects.push(
                 {
 

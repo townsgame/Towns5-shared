@@ -161,7 +161,7 @@ T.MapGenerator = class{
      */
     getPureMap(center,radius){
 
-        center_integer={
+        var center_integer={
             x: Math.floor(center.x),
             y: Math.floor(center.y)
         };

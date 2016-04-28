@@ -9,7 +9,7 @@ T.Objects = T.Objects || {};
 
 
 
-T.Objects.Natural = class extends A.Object{
+T.Objects.Natural = class extends T.Objects.Object{
 
     clone(){//todo all classes should have this method
         return(new T.Objects.Natural(JSON.parse(JSON.stringify(this))));

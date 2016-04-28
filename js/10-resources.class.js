@@ -29,7 +29,7 @@ T.Resources = class{
      * @static
      * @return {array} new Resources
      */
-    newSingles(resources){
+    static newSingles(resources){
 
         var resources_array = [];
 
@@ -234,8 +234,8 @@ T.Resources = class{
 
             var key = keys[i];
 
-            val_A = resources_A[key];
-            val_B = resources_B[key];
+            var val_A = resources_A[key];
+            var val_B = resources_B[key];
 
 
             if (typeof val_A == 'undefined')val_A = 0;

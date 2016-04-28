@@ -83,7 +83,7 @@ T.World.mapGenerator = new T.MapGenerator(
 
         if(object.type!='terrain')return;
 
-        if(object.design.datT.World.image==5){
+        if(object.getCode()==5){
             virtual_objects.push(
                 {
 
@@ -103,7 +103,7 @@ T.World.mapGenerator = new T.MapGenerator(
 
 
         }else
-        if(object.design.datT.World.image==10){
+        if(object.getCode()==10){
                         virtual_objects.push(
                 {
 
