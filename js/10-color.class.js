@@ -1,6 +1,6 @@
 /**
  * @author ©Towns.cz
- * @fileOverview Creates class Color
+ * @fileOverview Creates class T.Color
  */
 //======================================================================================================================
 

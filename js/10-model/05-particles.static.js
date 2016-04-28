@@ -1,6 +1,6 @@
 /**
  * @author Towns.cz
- * @fileOverview Creates object Particles with static methods
+ * @fileOverview Creates static class T.Model.Particles
  */
 //======================================================================================================================
 

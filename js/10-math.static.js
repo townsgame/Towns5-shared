@@ -1,6 +1,6 @@
 /**
  * @author ©Towns.cz
- * @fileOverview Additional methods to object Math
+ * @fileOverview Creates static class T.Math
  */
 //======================================================================================================================
 

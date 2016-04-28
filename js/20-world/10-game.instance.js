@@ -1,6 +1,6 @@
 /**
  * @author ©Towns.cz
- * @fileOverview Creates configuration of game conditions
+ * @fileOverview Creates configuration of game conditions via instance T.World.game
  */
 //======================================================================================================================
 

@@ -1,6 +1,6 @@
 /**
  * @author ©Towns.cz
- * @fileOverview Creates Class Model
+ * @fileOverview Creates class T.Model
  */
 //======================================================================================================================
 

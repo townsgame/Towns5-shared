@@ -1,6 +1,6 @@
 /**
  * @author ©Towns.cz
- * @fileOverview Creates class Position
+ * @fileOverview Creates class T.Position
  */
 //======================================================================================================================
 

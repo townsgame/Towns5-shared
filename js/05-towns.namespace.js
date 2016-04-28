@@ -1,6 +1,6 @@
 /**
  * @author ©Towns.cz
- * @fileOverview Creating namespace Towns
+ * @fileOverview Initialize namespace Towns
  */
 //======================================================================================================================
 
