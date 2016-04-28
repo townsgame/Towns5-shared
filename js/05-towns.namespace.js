@@ -19,7 +19,7 @@ var T = global.Towns;
  */
 T.setNamespace = function(namespace){
 
-    namespace=namespace.split(',');
+    namespace=namespace.split('.');
 
     var Actual=this;
 
@@ -27,6 +27,9 @@ T.setNamespace = function(namespace){
     for(var i= 0,l=namespace.length;i<l;i++){
 
         key=namespace[i];
+
+        if(key==='T')throw new Error('Cant set namespace T under T!');
+
         if(typeof Actual[key]==='undefined'){
 
             Actual[key]={};
@@ -34,7 +37,7 @@ T.setNamespace = function(namespace){
 
         }else{
 
-            return(true);
+            Actual=Actual[key];
 
         }
 
