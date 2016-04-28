@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-	<title>Documentation Class: Resources</title>
+	<title>Documentation Class: Math</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -33,7 +33,7 @@
 			<li class="dropdown">
 				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="A.ActionType.html">A.ActionType</a></li><li><a href="A.Array.html">A.Array</a></li><li><a href="A.Biotope.html">A.Biotope</a></li><li><a href="A.Game.html">A.Game</a></li><li><a href="A.MapGenerator.html">A.MapGenerator</a></li><li><a href="A.Model.html">A.Model</a></li><li><a href="A.Resources.html">A.Resources</a></li>
+					<li><a href="T.Color.html">T.Color</a></li><li><a href="T.Game.html">T.Game</a></li><li><a href="T.Game.ActionType.html">T.Game.ActionType</a></li><li><a href="T.MapGenerator.html">T.MapGenerator</a></li><li><a href="T.MapGenerator.Biotope.html">T.MapGenerator.Biotope</a></li><li><a href="T.Math.html">T.Math</a></li><li><a href="T.Model.html">T.Model</a></li><li><a href="T.Model.Particles.html">T.Model.Particles</a></li><li><a href="T.Objects.Array.html">T.Objects.Array</a></li><li><a href="T.Resources.html">T.Resources</a></li>
 				</ul>
 			</li>
 			
@@ -63,14 +63,16 @@
 		<div id="main">
 			
 
-	<h1 class="page-title">Class: Resources</h1>
+	<h1 class="page-title">Class: Math</h1>
 <section>
 
 <header>
     
         <h2>
-        Resources
+        Math
         </h2>
+        
+            <div class="class-description"><p>Mathematical functions to Towns</p></div>
         
     
 </header>
@@ -82,7 +84,7 @@
         
 <hr>
 <dt>
-    <h4 class="name" id="Resources"><span class="type-signature"></span>new Resources(Resources)</h4>
+    <h4 class="name" id="Math"><span class="type-signature"></span>new Math()</h4>
     
     
 </dt>
@@ -95,56 +97,6 @@
     
 
     
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>Resources</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
     
 
     
@@ -224,105 +176,7 @@
             
 <hr>
 <dt>
-    <h4 class="name" id=".newSingles"><span class="type-signature">&lt;static> </span>newSingles()</h4>
-    
-    
-</dt>
-<dd>
-
-    
-
-    
-
-    
-
-    
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <h5>Returns:</h5>
-    
-            
-<div class="param-desc">
-    <p>new Resources</p>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">array</span>
-
-
-
-    </dd>
-</dl>
-
-
-        
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt>
-    <h4 class="name" id="add"><span class="type-signature"></span>add(Resources)</h4>
+    <h4 class="name" id=".angleDiff"><span class="type-signature">&lt;static> </span>angleDiff(degrees, degrees)</h4>
     
     
 </dt>
@@ -330,7 +184,7 @@
 
     
     <div class="description">
-        <p>Add given resources</p>
+        <p>Difference between two angeles</p>
     </div>
     
 
@@ -365,13 +219,13 @@
 
         <tr>
             
-                <td class="name"><code>Resources</code></td>
+                <td class="name"><code>degrees</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">object</span>
+<span class="param-type">number</span>
 
 
 
@@ -382,7 +236,31 @@
 
             
 
-            <td class="description last"></td>
+            <td class="description last"><p>1</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>degrees</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>2</p></td>
         </tr>
 
     
@@ -446,7 +324,7 @@
     
             
 <div class="param-desc">
-    <p>success</p>
+    <p>degrees difference</p>
 </div>
 
 
@@ -457,7 +335,7 @@
     </dt>
     <dd>
         
-<span class="param-type">bool</span>
+<span class="param-type">number</span>
 
 
 
@@ -474,7 +352,7 @@
             
 <hr>
 <dt>
-    <h4 class="name" id="apply"><span class="type-signature"></span>apply(modifier)</h4>
+    <h4 class="name" id=".baseLog"><span class="type-signature">&lt;static> </span>baseLog(base, number)</h4>
     
     
 </dt>
@@ -513,13 +391,217 @@
 
         <tr>
             
-                <td class="name"><code>modifier</code></td>
+                <td class="name"><code>base</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>number</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">number</span>
+
+
+
+    </dd>
+</dl>
+
+
+        
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id=".bounds"><span class="type-signature">&lt;static> </span>bounds(value, min, max)</h4>
+    
+    
+</dt>
+<dd>
+
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>value</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">function</span>
+<span class="param-type">number</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>min</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>max</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
 
 
 
@@ -593,11 +675,20 @@
     <h5>Returns:</h5>
     
             
-<div class="param-desc">
-    <p>this</p>
-</div>
 
 
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">number</span>
+
+
+
+    </dd>
+</dl>
 
 
         
@@ -609,7 +700,7 @@
             
 <hr>
 <dt>
-    <h4 class="name" id="clone"><span class="type-signature"></span>clone(k)</h4>
+    <h4 class="name" id=".deg2rad"><span class="type-signature">&lt;static> </span>deg2rad(degrees)</h4>
     
     
 </dt>
@@ -648,7 +739,7 @@
 
         <tr>
             
-                <td class="name"><code>k</code></td>
+                <td class="name"><code>degrees</code></td>
             
 
             <td class="type">
@@ -729,155 +820,7 @@
     
             
 <div class="param-desc">
-    <p>success</p>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">bool</span>
-
-
-
-    </dd>
-</dl>
-
-
-        
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt>
-    <h4 class="name" id="compare"><span class="type-signature"></span>compare(Resoures)</h4>
-    
-    
-</dt>
-<dd>
-
-    
-
-    
-
-    
-
-    
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>Resoures</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <h5>Returns:</h5>
-    
-            
-<div class="param-desc">
-    <p>Distance between this and given Resources</p>
+    <p>radians</p>
 </div>
 
 
@@ -905,7 +848,7 @@
             
 <hr>
 <dt>
-    <h4 class="name" id="contains"><span class="type-signature"></span>contains(Resources)</h4>
+    <h4 class="name" id=".lineCollision"><span class="type-signature">&lt;static> </span>lineCollision(a1x, a1y, a2x, a2y, b1x, b1y, b2x, b2y)</h4>
     
     
 </dt>
@@ -913,7 +856,7 @@
 
     
     <div class="description">
-        <p>Checks whether this contains a given resources</p>
+        <p>Is line A colliding line B?</p>
     </div>
     
 
@@ -948,16 +891,136 @@
 
         <tr>
             
-                <td class="name"><code>Resources</code></td>
+                <td class="name"><code>a1x</code></td>
             
 
             <td class="type">
             
-                
-<span class="param-type">object</span>
+            </td>
 
+            
 
+            
 
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>a1y</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>a2x</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>a2y</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>b1x</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>b1y</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>b2x</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>b2y</code></td>
+            
+
+            <td class="type">
             
             </td>
 
@@ -1028,10 +1091,6 @@
     <h5>Returns:</h5>
     
             
-<div class="param-desc">
-    <p>contains</p>
-</div>
-
 
 
 <dl>
@@ -1040,7 +1099,7 @@
     </dt>
     <dd>
         
-<span class="param-type">bool</span>
+<span class="param-type">boolean</span>
 
 
 
@@ -1057,105 +1116,7 @@
             
 <hr>
 <dt>
-    <h4 class="name" id="extractKeys"><span class="type-signature"></span>extractKeys()</h4>
-    
-    
-</dt>
-<dd>
-
-    
-
-    
-
-    
-
-    
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <h5>Returns:</h5>
-    
-            
-<div class="param-desc">
-    <p>all resources keys</p>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Array</span>
-
-
-
-    </dd>
-</dl>
-
-
-        
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt>
-    <h4 class="name" id="multiply"><span class="type-signature"></span>multiply(k)</h4>
+    <h4 class="name" id=".prettyNumber"><span class="type-signature">&lt;static> </span>prettyNumber(number, number_of_non_zero_digits)</h4>
     
     
 </dt>
@@ -1194,7 +1155,31 @@
 
         <tr>
             
-                <td class="name"><code>k</code></td>
+                <td class="name"><code>number</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>number_of_non_zero_digits</code></td>
             
 
             <td class="type">
@@ -1275,146 +1260,7 @@
     
             
 <div class="param-desc">
-    <p>this</p>
-</div>
-
-
-
-
-        
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt>
-    <h4 class="name" id="remove"><span class="type-signature"></span>remove(Resources)</h4>
-    
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        <p>Remove given resources</p>
-    </div>
-    
-
-    
-
-    
-
-    
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>Resources</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <h5>Returns:</h5>
-    
-            
-<div class="param-desc">
-    <p>success</p>
+    <p>Cuts unless digits to zero</p>
 </div>
 
 
@@ -1425,7 +1271,7 @@
     </dt>
     <dd>
         
-<span class="param-type">bool</span>
+<span class="param-type">number</span>
 
 
 
@@ -1442,7 +1288,7 @@
             
 <hr>
 <dt>
-    <h4 class="name" id="signum"><span class="type-signature"></span>signum(k)</h4>
+    <h4 class="name" id=".rad2deg"><span class="type-signature">&lt;static> </span>rad2deg(radians)</h4>
     
     
 </dt>
@@ -1481,7 +1327,7 @@
 
         <tr>
             
-                <td class="name"><code>k</code></td>
+                <td class="name"><code>radians</code></td>
             
 
             <td class="type">
@@ -1562,10 +1408,23 @@
     
             
 <div class="param-desc">
-    <p>this</p>
+    <p>degrees</p>
 </div>
 
 
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">number</span>
+
+
+
+    </dd>
+</dl>
 
 
         
@@ -1577,23 +1436,69 @@
             
 <hr>
 <dt>
-    <h4 class="name" id="toString"><span class="type-signature"></span>toString()</h4>
+    <h4 class="name" id=".sign"><span class="type-signature">&lt;static> </span>sign(x)</h4>
     
     
 </dt>
 <dd>
 
     
-    <div class="description">
-        <p>Converts Resources to simple string</p>
-    </div>
-    
 
     
 
     
 
     
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>x</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
     
 
     
@@ -1658,7 +1563,499 @@
     </dt>
     <dd>
         
-<span class="param-type">string</span>
+<span class="param-type">number</span>
+
+
+
+    </dd>
+</dl>
+
+
+        
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id=".toFloat"><span class="type-signature">&lt;static> </span>toFloat(value, defval)</h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Converts multitype to float</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>value</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>defval</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">number</span>
+
+
+
+    </dd>
+</dl>
+
+
+        
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id=".toInt"><span class="type-signature">&lt;static> </span>toInt(value, defval)</h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Converts multitype to integer</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>value</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>defval</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">number</span>
+
+
+
+    </dd>
+</dl>
+
+
+        
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id=".xy2dist"><span class="type-signature">&lt;static> </span>xy2dist(x, y)</h4>
+    
+    
+</dt>
+<dd>
+
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>x</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>y</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>distance</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">number</span>
 
 
 
@@ -1719,7 +2116,7 @@
 <span class="jsdoc-message">
 	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a>
 	
-		on April 25th 2016, 5:01:20 pm
+		on April 28th 2016, 11:40:25 am
 	
 	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
 </span>

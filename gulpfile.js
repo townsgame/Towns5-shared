@@ -13,6 +13,25 @@ var jshint = require('gulp-jshint');
 
 
 
+var includes=['./js/*.js','./js/*/*.js'];
+
+
+deleteFolderRecursive = function(path) {
+    var files = [];
+    if( fs.existsSync(path) ) {
+        files = fs.readdirSync(path);
+        files.forEach(function(file,index){
+            var curPath = path + "/" + file;
+            if(fs.lstatSync(curPath).isDirectory()) { // recurse
+                deleteFolderRecursive(curPath);
+            } else { // delete file
+                fs.unlinkSync(curPath);
+            }
+        });
+        fs.rmdirSync(path);
+    }
+};
+
 
 
 
@@ -47,7 +66,10 @@ gulp.task('documentation', function (callback) {
     };
 
 
-    gulp.src(["./js/*.js","./js/*/*.js"]/*, {read: false}*/)
+    deleteFolderRecursive('./documentation');
+
+
+    gulp.src(includes/*, {read: false}*/)
         .pipe(sort())
         .pipe(jsdoc(documentation_config,callback));
 
@@ -63,7 +85,7 @@ gulp.task('documentation', function (callback) {
 gulp.task('build', function () {
 
 
-    gulp.src(['./js/*.js','./js/*/*.js'])
+    gulp.src(includes)
 
         .pipe(sort())
         .pipe(concat('towns-shared.js'))
@@ -89,7 +111,7 @@ gulp.task('build', function () {
 gulp.task('develop', function() {
 
     gulp.start("build");
-    gulp.watch(['./js/*.js','./js/*/*.js'], ['build']);
+    gulp.watch(includes, ['build']);
 
 
 });
@@ -100,7 +122,7 @@ gulp.task('develop', function() {
 
 
 gulp.task("test", function() {
-    gulp.src(['./js/*.js','./js/*/*.js'])
+    gulp.src(includes)
         .pipe(jshint({esversion:6,laxcomma:true}))
         .pipe(jshint.reporter("default"));
 

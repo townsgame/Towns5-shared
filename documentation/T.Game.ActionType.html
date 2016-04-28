@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-	<title>Documentation Class: MapGenerator</title>
+	<title>Documentation Class: ActionType</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -33,7 +33,7 @@
 			<li class="dropdown">
 				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="A.ActionType.html">A.ActionType</a></li><li><a href="A.Array.html">A.Array</a></li><li><a href="A.Biotope.html">A.Biotope</a></li><li><a href="A.Game.html">A.Game</a></li><li><a href="A.MapGenerator.html">A.MapGenerator</a></li><li><a href="A.Model.html">A.Model</a></li><li><a href="A.Resources.html">A.Resources</a></li>
+					<li><a href="T.Color.html">T.Color</a></li><li><a href="T.Game.html">T.Game</a></li><li><a href="T.Game.ActionType.html">T.Game.ActionType</a></li><li><a href="T.MapGenerator.html">T.MapGenerator</a></li><li><a href="T.MapGenerator.Biotope.html">T.MapGenerator.Biotope</a></li><li><a href="T.Math.html">T.Math</a></li><li><a href="T.Model.html">T.Model</a></li><li><a href="T.Model.Particles.html">T.Model.Particles</a></li><li><a href="T.Objects.Array.html">T.Objects.Array</a></li><li><a href="T.Resources.html">T.Resources</a></li>
 				</ul>
 			</li>
 			
@@ -63,13 +63,15 @@
 		<div id="main">
 			
 
-	<h1 class="page-title">Class: MapGenerator</h1>
+	<h1 class="page-title">Class: ActionType</h1>
 <section>
 
 <header>
     
         <h2>
-        MapGenerator
+            <span class="ancestors"><a href="T.Game.html">.Game</a>.</span>
+        
+        ActionType
         </h2>
         
     
@@ -82,7 +84,7 @@
         
 <hr>
 <dt>
-    <h4 class="name" id="MapGenerator"><span class="type-signature"></span>new MapGenerator(getZ, z_normalizing_table, biotope, virtualObjectGenerator)</h4>
+    <h4 class="name" id="ActionType"><span class="type-signature"></span>new ActionType(type, params, price_base, price_resources_list, perform)</h4>
     
     
 </dt>
@@ -121,7 +123,55 @@
 
         <tr>
             
-                <td class="name"><code>getZ</code></td>
+                <td class="name"><code>type</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>enum('active', 'passive', 'triggered') //todo refactor</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>params</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>{param: type}</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>price_base</code></td>
             
 
             <td class="type">
@@ -145,13 +195,13 @@
 
         <tr>
             
-                <td class="name"><code>z_normalizing_table</code></td>
+                <td class="name"><code>price_resources_list</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Array</span>
+<span class="param-type">array</span>
 
 
 
@@ -169,31 +219,7 @@
 
         <tr>
             
-                <td class="name"><code>biotope</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">T.MapGenerator.Biotope</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>virtualObjectGenerator</code></td>
+                <td class="name"><code>perform</code></td>
             
 
             <td class="type">
@@ -289,234 +315,6 @@
 
     
 
-    
-        <h3 class="subsection-title">Methods</h3>
-
-        <dl>
-            
-<hr>
-<dt>
-    <h4 class="name" id="getCompleteObjects"><span class="type-signature"></span>getCompleteObjects(real_objects, center, radius, virtual_objects)</h4>
-    
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        <p>Complete terrain and virtual objects into Objects Array</p>
-    </div>
-    
-
-    
-
-    
-
-    
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>real_objects</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">T.Objects.Array</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>center</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">T.Position</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>radius</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>virtual_objects</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <h5>Returns:</h5>
-    
-            
-<div class="param-desc">
-    <p>}</p>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">T.Objects.Array</span>
-
-
-
-    </dd>
-</dl>
-
-
-        
-
-    
-</dd>
-
-        </dl>
     
 
     
@@ -564,7 +362,7 @@
 <span class="jsdoc-message">
 	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a>
 	
-		on April 25th 2016, 5:01:20 pm
+		on April 28th 2016, 11:40:25 am
 	
 	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
 </span>

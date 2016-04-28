@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-	<title>Documentation Class: Game</title>
+	<title>Documentation Class: Color</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -33,7 +33,7 @@
 			<li class="dropdown">
 				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="A.ActionType.html">A.ActionType</a></li><li><a href="A.Array.html">A.Array</a></li><li><a href="A.Biotope.html">A.Biotope</a></li><li><a href="A.Game.html">A.Game</a></li><li><a href="A.MapGenerator.html">A.MapGenerator</a></li><li><a href="A.Model.html">A.Model</a></li><li><a href="A.Resources.html">A.Resources</a></li>
+					<li><a href="T.Color.html">T.Color</a></li><li><a href="T.Game.html">T.Game</a></li><li><a href="T.Game.ActionType.html">T.Game.ActionType</a></li><li><a href="T.MapGenerator.html">T.MapGenerator</a></li><li><a href="T.MapGenerator.Biotope.html">T.MapGenerator.Biotope</a></li><li><a href="T.Math.html">T.Math</a></li><li><a href="T.Model.html">T.Model</a></li><li><a href="T.Model.Particles.html">T.Model.Particles</a></li><li><a href="T.Objects.Array.html">T.Objects.Array</a></li><li><a href="T.Resources.html">T.Resources</a></li>
 				</ul>
 			</li>
 			
@@ -63,13 +63,13 @@
 		<div id="main">
 			
 
-	<h1 class="page-title">Class: Game</h1>
+	<h1 class="page-title">Class: Color</h1>
 <section>
 
 <header>
     
         <h2>
-        Game
+        Color
         </h2>
         
     
@@ -82,7 +82,7 @@
         
 <hr>
 <dt>
-    <h4 class="name" id="Game"><span class="type-signature"></span>new Game(action_type_list, max_life_modifier, price_key_modifier)</h4>
+    <h4 class="name" id="Color"><span class="type-signature"></span>new Color(r, g, b, a)</h4>
     
     
 </dt>
@@ -121,16 +121,10 @@
 
         <tr>
             
-                <td class="name"><code>action_type_list</code></td>
+                <td class="name"><code>r</code></td>
             
 
             <td class="type">
-            
-                
-<span class="param-type">array</span>
-
-
-
             
             </td>
 
@@ -138,23 +132,17 @@
 
             
 
-            <td class="description last"></td>
+            <td class="description last"><p>red from 0 to 255</p></td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>max_life_modifier</code></td>
+                <td class="name"><code>g</code></td>
             
 
             <td class="type">
-            
-                
-<span class="param-type">function</span>
-
-
-
             
             </td>
 
@@ -162,23 +150,17 @@
 
             
 
-            <td class="description last"></td>
+            <td class="description last"><p>green from 0 to 255</p></td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>price_key_modifier</code></td>
+                <td class="name"><code>b</code></td>
             
 
             <td class="type">
-            
-                
-<span class="param-type">function</span>
-
-
-
             
             </td>
 
@@ -186,7 +168,25 @@
 
             
 
-            <td class="description last"></td>
+            <td class="description last"><p>blue from 0 to 255</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>a</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>alpha from 0 to 255</p></td>
         </tr>
 
     
@@ -272,7 +272,7 @@
             
 <hr>
 <dt>
-    <h4 class="name" id="getObjectDesignPrice"><span class="type-signature"></span>getObjectDesignPrice(Object)</h4>
+    <h4 class="name" id=".createFromHex"><span class="type-signature">&lt;static> </span>createFromHex(hex)</h4>
     
     
 </dt>
@@ -280,7 +280,7 @@
 
     
     <div class="description">
-        <p>todo maybe this should be under model.class.js?</p>
+        <p>Creates new T.Color form hex code of color</p>
     </div>
     
 
@@ -315,13 +315,13 @@
 
         <tr>
             
-                <td class="name"><code>Object</code></td>
+                <td class="name"><code>hex</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">object</span>
+<span class="param-type">string</span>
 
 
 
@@ -332,7 +332,7 @@
 
             
 
-            <td class="description last"></td>
+            <td class="description last"><p>code of color eg. #00ff00</p></td>
         </tr>
 
     
@@ -396,7 +396,7 @@
     
             
 <div class="param-desc">
-    <p>Resources - design amount of resources</p>
+    <p>Color</p>
 </div>
 
 
@@ -407,7 +407,7 @@
     </dt>
     <dd>
         
-<span class="param-type">object</span>
+<span class="param-type"><a href="T.Color.html">T.Color</a></span>
 
 
 
@@ -424,69 +424,23 @@
             
 <hr>
 <dt>
-    <h4 class="name" id="getObjectMaxLife"><span class="type-signature"></span>getObjectMaxLife(Object)</h4>
+    <h4 class="name" id="getCssColor"><span class="type-signature"></span>getCssColor()</h4>
     
     
 </dt>
 <dd>
 
     
-
+    <div class="description">
+        <p>Get css representation of this color</p>
+    </div>
     
 
     
 
     
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>Object</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
 
     
-    </tbody>
-</table>
-
     
 
     
@@ -544,7 +498,7 @@
     
             
 <div class="param-desc">
-    <p>maximum life of object</p>
+    <p>eg. rgb(100,200,200)</p>
 </div>
 
 
@@ -555,7 +509,7 @@
     </dt>
     <dd>
         
-<span class="param-type">number</span>
+<span class="param-type">string</span>
 
 
 
@@ -572,69 +526,23 @@
             
 <hr>
 <dt>
-    <h4 class="name" id="getObjectPrice"><span class="type-signature"></span>getObjectPrice(Object)</h4>
+    <h4 class="name" id="getHex"><span class="type-signature"></span>getHex()</h4>
     
     
 </dt>
 <dd>
 
     
-
+    <div class="description">
+        <p>Get hex representation of this color (ignores alpha chanel.)</p>
+    </div>
     
 
     
 
     
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>Object</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
 
     
-    </tbody>
-</table>
-
     
 
     
@@ -692,7 +600,7 @@
     
             
 <div class="param-desc">
-    <p>Resources - price of object</p>
+    <p>eg. #00ff00</p>
 </div>
 
 
@@ -703,303 +611,7 @@
     </dt>
     <dd>
         
-<span class="param-type">object</span>
-
-
-
-    </dd>
-</dl>
-
-
-        
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt>
-    <h4 class="name" id="getObjectPriceBases"><span class="type-signature"></span>getObjectPriceBases(Object)</h4>
-    
-    
-</dt>
-<dd>
-
-    
-
-    
-
-    
-
-    
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>Object</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <h5>Returns:</h5>
-    
-            
-<div class="param-desc">
-    <p>of numbers</p>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">array</span>
-
-
-
-    </dd>
-</dl>
-
-
-        
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt>
-    <h4 class="name" id="getObjectPrices"><span class="type-signature"></span>getObjectPrices(Object)</h4>
-    
-    
-</dt>
-<dd>
-
-    
-
-    
-
-    
-
-    
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>Object</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <h5>Returns:</h5>
-    
-            
-<div class="param-desc">
-    <p>of Resources</p>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">array</span>
+<span class="param-type">string</span>
 
 
 
@@ -1060,7 +672,7 @@
 <span class="jsdoc-message">
 	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a>
 	
-		on April 25th 2016, 5:01:20 pm
+		on April 28th 2016, 11:40:25 am
 	
 	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
 </span>

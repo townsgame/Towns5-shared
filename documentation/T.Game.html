@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-	<title>Documentation Class: Array</title>
+	<title>Documentation Class: Game</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -33,7 +33,7 @@
 			<li class="dropdown">
 				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="A.ActionType.html">A.ActionType</a></li><li><a href="A.Array.html">A.Array</a></li><li><a href="A.Biotope.html">A.Biotope</a></li><li><a href="A.Game.html">A.Game</a></li><li><a href="A.MapGenerator.html">A.MapGenerator</a></li><li><a href="A.Model.html">A.Model</a></li><li><a href="A.Resources.html">A.Resources</a></li>
+					<li><a href="T.Color.html">T.Color</a></li><li><a href="T.Game.html">T.Game</a></li><li><a href="T.Game.ActionType.html">T.Game.ActionType</a></li><li><a href="T.MapGenerator.html">T.MapGenerator</a></li><li><a href="T.MapGenerator.Biotope.html">T.MapGenerator.Biotope</a></li><li><a href="T.Math.html">T.Math</a></li><li><a href="T.Model.html">T.Model</a></li><li><a href="T.Model.Particles.html">T.Model.Particles</a></li><li><a href="T.Objects.Array.html">T.Objects.Array</a></li><li><a href="T.Resources.html">T.Resources</a></li>
 				</ul>
 			</li>
 			
@@ -63,13 +63,13 @@
 		<div id="main">
 			
 
-	<h1 class="page-title">Class: Array</h1>
+	<h1 class="page-title">Class: Game</h1>
 <section>
 
 <header>
     
         <h2>
-        Array
+        Game
         </h2>
         
     
@@ -82,7 +82,7 @@
         
 <hr>
 <dt>
-    <h4 class="name" id="Array"><span class="type-signature"></span>new Array(objects)</h4>
+    <h4 class="name" id="Game"><span class="type-signature"></span>new Game(action_type_list, max_life_modifier, price_key_modifier)</h4>
     
     
 </dt>
@@ -121,13 +121,61 @@
 
         <tr>
             
-                <td class="name"><code>objects</code></td>
+                <td class="name"><code>action_type_list</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Array</span>
+<span class="param-type">array</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>max_life_modifier</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>price_key_modifier</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
 
 
 
@@ -210,6 +258,13 @@
     
 
     
+        <h3 class="subsection-title">Classes</h3>
+
+        <dl>
+            <dt><a href="T.Game.ActionType.html">ActionType</a></dt>
+            <dd></dd>
+        </dl>
+    
 
     
 
@@ -224,12 +279,16 @@
             
 <hr>
 <dt>
-    <h4 class="name" id="filterTypes"><span class="type-signature"></span>filterTypes(type)</h4>
+    <h4 class="name" id="getObjectDesignPrice"><span class="type-signature"></span>getObjectDesignPrice(Object)</h4>
     
     
 </dt>
 <dd>
 
+    
+    <div class="description">
+        <p>todo maybe this should be under model.class.js?</p>
+    </div>
     
 
     
@@ -263,13 +322,13 @@
 
         <tr>
             
-                <td class="name"><code>type</code></td>
+                <td class="name"><code>Object</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">string</span>
+<span class="param-type">object</span>
 
 
 
@@ -343,150 +402,10 @@
     <h5>Returns:</h5>
     
             
+<div class="param-desc">
+    <p>Resources - design amount of resources</p>
+</div>
 
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">T.Objects.Array</span>
-
-
-
-    </dd>
-</dl>
-
-
-        
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt>
-    <h4 class="name" id="getById"><span class="type-signature"></span>getById(id)</h4>
-    
-    
-</dt>
-<dd>
-
-    
-
-    
-
-    
-
-    
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>id</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <h5>Returns:</h5>
-    
-            
 
 
 <dl>
@@ -512,7 +431,7 @@
             
 <hr>
 <dt>
-    <h4 class="name" id="getMapOfTerrainCodes"><span class="type-signature"></span>getMapOfTerrainCodes(center, radius)</h4>
+    <h4 class="name" id="getObjectMaxLife"><span class="type-signature"></span>getObjectMaxLife(Object)</h4>
     
     
 </dt>
@@ -551,13 +470,13 @@
 
         <tr>
             
-                <td class="name"><code>center</code></td>
+                <td class="name"><code>Object</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">T.Position</span>
+<span class="param-type">object</span>
 
 
 
@@ -572,101 +491,81 @@
         </tr>
 
     
+    </tbody>
+</table>
 
-        <tr>
-            
-                <td class="name"><code>radius</code></td>
-            
+    
 
-            <td class="type">
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
             
-                
+<div class="param-desc">
+    <p>maximum life of object</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
 <span class="param-type">number</span>
 
 
 
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <h5>Returns:</h5>
-    
-            
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Array</span>
-
-
-
     </dd>
 </dl>
 
@@ -680,7 +579,7 @@
             
 <hr>
 <dt>
-    <h4 class="name" id="setById"><span class="type-signature"></span>setById(id, object)</h4>
+    <h4 class="name" id="getObjectPrice"><span class="type-signature"></span>getObjectPrice(Object)</h4>
     
     
 </dt>
@@ -719,31 +618,7 @@
 
         <tr>
             
-                <td class="name"><code>id</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>object</code></td>
+                <td class="name"><code>Object</code></td>
             
 
             <td class="type">
@@ -823,6 +698,10 @@
     <h5>Returns:</h5>
     
             
+<div class="param-desc">
+    <p>Resources - price of object</p>
+</div>
+
 
 
 <dl>
@@ -831,7 +710,303 @@
     </dt>
     <dd>
         
-<span class="param-type">boolean</span>
+<span class="param-type">object</span>
+
+
+
+    </dd>
+</dl>
+
+
+        
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id="getObjectPriceBases"><span class="type-signature"></span>getObjectPriceBases(Object)</h4>
+    
+    
+</dt>
+<dd>
+
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>Object</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>of numbers</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">array</span>
+
+
+
+    </dd>
+</dl>
+
+
+        
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id="getObjectPrices"><span class="type-signature"></span>getObjectPrices(Object)</h4>
+    
+    
+</dt>
+<dd>
+
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>Object</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>of Resources</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">array</span>
 
 
 
@@ -892,7 +1067,7 @@
 <span class="jsdoc-message">
 	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a>
 	
-		on April 25th 2016, 5:01:20 pm
+		on April 28th 2016, 11:40:25 am
 	
 	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
 </span>
