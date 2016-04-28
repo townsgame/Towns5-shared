@@ -5,12 +5,11 @@
  */
 //======================================================================================================================
 T.Objects = T.Objects || {};
-var A/*Actual Namespace*/ = T.Objects;
 
 
 
 
-A.Object = class{
+T.Objects.Object = class{
 
     constructor(object){
 

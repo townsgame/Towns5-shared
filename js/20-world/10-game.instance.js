@@ -3,9 +3,7 @@
  * @fileOverview Creates configuration of game conditions
  */
 //======================================================================================================================
-T.World = T.World || {};
-var A/*Actual Namespace*/ = T.World;
-
+T.World = T.World || {};//todo create namespace
 
 
 
@@ -13,7 +11,7 @@ var A/*Actual Namespace*/ = T.World;
 var K=0.05;
 
 
-A.game = new T.Game(
+T.World.game = new T.Game(
     {
         //---------------------------------------------Defense
         'defense': new T.Game.ActionType(

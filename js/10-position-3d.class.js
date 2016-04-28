@@ -3,10 +3,9 @@
  * @fileOverview Creates class Position 3D
  */
 //======================================================================================================================
-var A/*Actual Namespace*/ = T;
 
 
-A.Position3D = class{
+T.Position3D = class{
 
 
     constructor(x,y,z){

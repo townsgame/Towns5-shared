@@ -5,12 +5,10 @@
  */
 //======================================================================================================================
 T.Objects = T.Objects || {};
-var A/*Actual Namespace*/ = T.Objects;//todo refactor this should not be under MapGenerator namespace
 
 
 
-
-A.Terrain = class extends A.Object{
+T.Objects.Terrain = class extends A.Object{
 
 
     clone(){//todo all classes should have this method

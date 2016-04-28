@@ -5,12 +5,11 @@
  */
 //======================================================================================================================
 T.Objects = T.Objects || {};
-var A/*Actual Namespace*/ = T.Objects;
 
 
 
 
-A.Natural = class extends A.Object{
+T.Objects.Natural = class extends A.Object{
 
     clone(){//todo all classes should have this method
         return(new T.Objects.Natural(JSON.parse(JSON.stringify(this))));

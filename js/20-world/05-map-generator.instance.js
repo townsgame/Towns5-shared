@@ -4,16 +4,12 @@
  * @fileOverview ...
  */
 //======================================================================================================================
-T.World = T.World || {};
-var A/*Actual Namespace*/ = T.World;
+T.World = T.World || {};//todo create namespace
 
 
 
 
-//todo//var z_map_cache={};
-
-
-A.mapGenerator = new T.MapGenerator(
+T.World.mapGenerator = new T.MapGenerator(
 
     T.Math.blurXY(function(x,y){
 
@@ -63,20 +59,20 @@ A.mapGenerator = new T.MapGenerator(
 
     new T.MapGenerator.Biotope([
 
-        { amount: 120 , terrain: A.terrains[ 1]},//moře
-        { amount: 40 , terrain: A.terrains[11]},//řeka
-        { amount: 30 , terrain: A.terrains[ 4]},//písek
-        { amount: 20 , terrain: A.terrains[12]},//tráva jaro
-        { amount: 40 , terrain: A.terrains[ 9]},//tráva toxic
-        { amount: 20 , terrain: A.terrains[ 8]},//tráva normal
-        { amount: 20 , terrain: A.terrains[10]},//les
-        { amount: 50 , terrain: A.terrains[ 4]},//písek
-        { amount: 10 , terrain: A.terrains[13]},//tráva pozim
-        { amount: 20 , terrain: A.terrains[ 5]},//kamení
-        { amount: 60 , terrain: A.terrains[ 3]},//sníh/led
-        { amount: 10 , terrain: A.terrains[10]},//les
-        { amount: 60 , terrain: A.terrains[ 7]},//sníh/led
-        { amount: 10 , terrain: A.terrains[ 5]},//kamení
+        { amount: 120 , terrain: T.World.terrains[ 1]},//moře
+        { amount: 40 , terrain: T.World.terrains[11]},//řeka
+        { amount: 30 , terrain: T.World.terrains[ 4]},//písek
+        { amount: 20 , terrain: T.World.terrains[12]},//tráva jaro
+        { amount: 40 , terrain: T.World.terrains[ 9]},//tráva toxic
+        { amount: 20 , terrain: T.World.terrains[ 8]},//tráva normal
+        { amount: 20 , terrain: T.World.terrains[10]},//les
+        { amount: 50 , terrain: T.World.terrains[ 4]},//písek
+        { amount: 10 , terrain: T.World.terrains[13]},//tráva pozim
+        { amount: 20 , terrain: T.World.terrains[ 5]},//kamení
+        { amount: 60 , terrain: T.World.terrains[ 3]},//sníh/led
+        { amount: 10 , terrain: T.World.terrains[10]},//les
+        { amount: 60 , terrain: T.World.terrains[ 7]},//sníh/led
+        { amount: 10 , terrain: T.World.terrains[ 5]},//kamení
 
 
 
@@ -87,7 +83,7 @@ A.mapGenerator = new T.MapGenerator(
 
         if(object.type!='terrain')return;
 
-        if(object.design.data.image==5){
+        if(object.design.datT.World.image==5){
             virtual_objects.push(
                 {
 
@@ -107,7 +103,7 @@ A.mapGenerator = new T.MapGenerator(
 
 
         }else
-        if(object.design.data.image==10){
+        if(object.design.datT.World.image==10){
                         virtual_objects.push(
                 {
 

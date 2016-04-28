@@ -5,12 +5,11 @@
  */
 //======================================================================================================================
 T.Objects = T.Objects || {};
-var A/*Actual Namespace*/ = T.Objects;
 
 
 
 
-A.Building = class extends A.Object{
+T.Objects.Building = class extends A.Object{
 
 
     clone(){//todo all classes should have this method

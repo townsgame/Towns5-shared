@@ -4,13 +4,11 @@
  * @fileOverview ...
  */
 //======================================================================================================================
-T.World = T.World || {};
-var A/*Actual Namespace*/ = T.World;
+T.World = T.World || {};//todo create namespace
 
 
 
-
-A.terrains = [
+T.World.terrains = [
     new T.Objects.Terrain({type:'terrain', design: {type:'terrain', data:{image: 0 ,color: '#000000', size: 1}}, name: 'temnota'}),
     new T.Objects.Terrain({type:'terrain', design: {type:'terrain', data:{image: 1 ,color: '#337EFA', size: 1}}, name: 'moře'}),
     new T.Objects.Terrain({type:'terrain', design: {type:'terrain', data:{image: 2 ,color: '#545454', size: 1}}, name: 'dlažba'}),
