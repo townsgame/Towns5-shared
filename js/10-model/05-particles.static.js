@@ -3,12 +3,10 @@
  * @fileOverview Creates object Particles with static methods
  */
 //======================================================================================================================
-T.Model = T.Model || {};
-var A/*Actual Namespace*/ = T.Model;
 
 
 
-A.Particles = {};
+T.Model.Particles = {};
 
 
 /**
@@ -17,7 +15,7 @@ A.Particles = {};
  * @param {object} particle
  * @return {object} particle
  */
-A.Particles.cParams = function(particle){//todo ?? maybe rename
+T.Model.Particles.cParams = function(particle){//todo ?? maybe rename
 
 
     if(typeof particle.skew==='undefined'){
@@ -56,7 +54,7 @@ A.Particles.cParams = function(particle){//todo ?? maybe rename
  * @param particle
  * @return {object} 3D model
  */
-A.Particles.get3D = function(particle){
+T.Model.Particles.get3D = function(particle){
 
     var resource={};
 
@@ -196,7 +194,7 @@ A.Particles.get3D = function(particle){
  * @param {number} base 0=bottom, 1=top
  * @return {Array} 2D lines
  */
-A.Particles.get2Dlines = function(particle,base){
+T.Model.Particles.get2Dlines = function(particle,base){
 
 
     var resource=this.get3D(particle);
@@ -273,7 +271,7 @@ A.Particles.get2Dlines = function(particle,base){
  * @param (array) lines2
  * @return {boolean}
  */
-A.Particles.collisionLinesDetect = function(lines1,lines2){
+T.Model.Particles.collisionLinesDetect = function(lines1,lines2){
 
     for (var i1 in lines1) {
         for (var i2 in lines2) {
@@ -311,7 +309,7 @@ A.Particles.collisionLinesDetect = function(lines1,lines2){
  * @param (object) particle2 top
  * @return {boolean}
  */
-A.Particles.collision2D = function(particle1,particle2){
+T.Model.Particles.collision2D = function(particle1,particle2){
 
 
     var lines1 = Particles.get2Dlines(particle1,1);

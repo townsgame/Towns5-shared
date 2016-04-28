@@ -3,9 +3,6 @@
  * @fileOverview Creates configuration of game conditions
  */
 //======================================================================================================================
-T.World = T.World || {};//todo create namespace
-
-
 
 
 var K=0.05;

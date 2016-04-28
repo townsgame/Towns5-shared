@@ -13,6 +13,38 @@ var T = global.Towns;
 
 
 /**
+ * Checks existence of namespace. If not exists, this function creates it.
+ * @param namespace eg. 'Objects.Array'
+ * @returns {boolean}
+ */
+T.setNamespace = function(namespace){
+
+    namespace=namespace.split(',');
+
+    var Actual=this;
+
+    var key;
+    for(var i= 0,l=namespace.length;i<l;i++){
+
+        key=namespace[i];
+        if(typeof Actual[key]==='undefined'){
+
+            Actual[key]={};
+            Actual=Actual[key];
+
+        }else{
+
+            return(true);
+
+        }
+
+
+    }
+
+    return(true);
+
+};
+/**
  * @author ©Towns.cz
  * @fileOverview Creates class Color
  */
@@ -700,10 +732,7 @@ MIXIN$0(constructor$0.prototype,proto$0);proto$0=void 0;return constructor$0;})(
  * @fileOverview Additional methods to object Math
  */
 //======================================================================================================================
-
-
-
-T.Math = {};
+T.setNamespace('Math');
 
 
 
@@ -1550,12 +1579,10 @@ MIXIN$0(constructor$0.prototype,proto$0);proto$0=void 0;return constructor$0;})(
  * @fileOverview Creates object Particles with static methods
  */
 //======================================================================================================================
-T.Model = T.Model || {};
-var A/*Actual Namespace*/ = T.Model;
 
 
 
-A.Particles = {};
+T.Model.Particles = {};
 
 
 /**
@@ -1564,7 +1591,7 @@ A.Particles = {};
  * @param {object} particle
  * @return {object} particle
  */
-A.Particles.cParams = function(particle){//todo ?? maybe rename
+T.Model.Particles.cParams = function(particle){//todo ?? maybe rename
 
 
     if(typeof particle.skew==='undefined'){
@@ -1603,7 +1630,7 @@ A.Particles.cParams = function(particle){//todo ?? maybe rename
  * @param particle
  * @return {object} 3D model
  */
-A.Particles.get3D = function(particle){
+T.Model.Particles.get3D = function(particle){
 
     var resource={};
 
@@ -1743,7 +1770,7 @@ A.Particles.get3D = function(particle){
  * @param {number} base 0=bottom, 1=top
  * @return {Array} 2D lines
  */
-A.Particles.get2Dlines = function(particle,base){
+T.Model.Particles.get2Dlines = function(particle,base){
 
 
     var resource=this.get3D(particle);
@@ -1820,7 +1847,7 @@ A.Particles.get2Dlines = function(particle,base){
  * @param (array) lines2
  * @return {boolean}
  */
-A.Particles.collisionLinesDetect = function(lines1,lines2){
+T.Model.Particles.collisionLinesDetect = function(lines1,lines2){
 
     for (var i1 in lines1) {
         for (var i2 in lines2) {
@@ -1858,7 +1885,7 @@ A.Particles.collisionLinesDetect = function(lines1,lines2){
  * @param (object) particle2 top
  * @return {boolean}
  */
-A.Particles.collision2D = function(particle1,particle2){
+T.Model.Particles.collision2D = function(particle1,particle2){
 
 
     var lines1 = Particles.get2Dlines(particle1,1);
@@ -1976,7 +2003,7 @@ A.Particles.collision2D = function(particle1,particle2){
  * @fileOverview ...
  */
 //======================================================================================================================
-T.Objects = T.Objects || {};
+T.setNamespace('Objects');
 
 
 
@@ -2386,8 +2413,6 @@ MIXIN$0(constructor$0,static$0);MIXIN$0(constructor$0.prototype,proto$0);static$
  * @fileOverview ...
  */
 //======================================================================================================================
-T.Objects = T.Objects || {};
-
 
 
 
@@ -2419,8 +2444,6 @@ MIXIN$0(constructor$0.prototype,proto$0);proto$0=void 0;return constructor$0;})(
  * @fileOverview ...
  */
 //======================================================================================================================
-T.Objects = T.Objects || {};
-
 
 
 
@@ -2448,7 +2471,6 @@ MIXIN$0(constructor$0.prototype,proto$0);proto$0=void 0;return constructor$0;})(
  * @fileOverview ...
  */
 //======================================================================================================================
-T.Objects = T.Objects || {};
 
 
 
@@ -2474,8 +2496,6 @@ MIXIN$0(constructor$0.prototype,proto$0);proto$0=void 0;return constructor$0;})(
  * @fileOverview ...
  */
 //======================================================================================================================
-T.Objects = T.Objects || {};
-
 
 
 
@@ -2500,7 +2520,6 @@ MIXIN$0(constructor$0.prototype,proto$0);proto$0=void 0;return constructor$0;})(
  * @fileOverview ...
  */
 //======================================================================================================================
-T.Objects = T.Objects || {};
 
 
 
@@ -2983,7 +3002,7 @@ MIXIN$0(constructor$0,static$0);MIXIN$0(constructor$0.prototype,proto$0);static$
  * @fileOverview ...
  */
 //======================================================================================================================
-T.World = T.World || {};//todo create namespace
+T.setNamespace('World');
 
 
 
@@ -3011,8 +3030,6 @@ T.World.terrains = [
  * @fileOverview ...
  */
 //======================================================================================================================
-T.World = T.World || {};//todo create namespace
-
 
 
 
@@ -3160,9 +3177,6 @@ T.World.mapGenerator = new T.MapGenerator(
  * @fileOverview Creates configuration of game conditions
  */
 //======================================================================================================================
-T.World = T.World || {};//todo create namespace
-
-
 
 
 var K=0.05;
