@@ -149,7 +149,7 @@ T.Resources = class{
 
                 } else {
 
-                    this[key] = 0
+                    this[key] = 0;
 
                 }
 
@@ -287,7 +287,7 @@ T.Resources = class{
 
             if (typeof this[key] == 'number') {//todo better solution
 
-                if (this[key] != 0) {
+                if (this[key] !== 0) {
                     strings.push(this[key] + ' ' + key);
                 }
 
@@ -309,7 +309,7 @@ T.Resources = class{
 
             if (typeof this[key] == 'number') {//todo better solution
 
-                if (this[key] != 0) {
+                if (this[key] !== 0) {
 
                     var name = Locale.get('resource', key);
                     var value = this[key];

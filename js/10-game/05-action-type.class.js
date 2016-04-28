@@ -25,7 +25,7 @@ T.Game.ActionType = class{
         this.perform = perform;
     }
 
-}
+};
 
 
 

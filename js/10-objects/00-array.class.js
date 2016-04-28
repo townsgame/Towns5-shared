@@ -42,7 +42,7 @@ T.Objects.Array = class{
 
 
 
-    A.Array.initInstance(object) {
+    static initInstance(object) {
 
         //----------------------------------
         if (object.type == 'building') {
@@ -91,7 +91,7 @@ T.Objects.Array = class{
         }
 
         return null;
-    };
+    }
 
 
     /**
@@ -196,11 +196,13 @@ T.Objects.Array = class{
 
             if(object.type!='terrain')return;
 
+            var x,y;
+
             if(object.design.data.size==1) {//todo is this optimalization effective?
                 //--------------------------
 
-                var x = Math.floor(object.x - center.x + radius);
-                var y = Math.floor(object.y - center.y + radius);
+                x = Math.floor(object.x - center.x + radius);
+                y = Math.floor(object.y - center.y + radius);
 
                 map_array[y][x] = object.getCode();
 
@@ -219,11 +221,11 @@ T.Objects.Array = class{
                 var yc = radius + center.y - object.y;
 
 
-                for (var y = y_from; y <= y_to; y++) {
+                for (y = y_from; y <= y_to; y++) {
 
                     if (typeof map_array[y] === 'undefined')continue;
 
-                    for (var x = x_from; x <= x_to; x++) {
+                    for (x = x_from; x <= x_to; x++) {
 
 
                         if (typeof map_array[y][x] === 'undefined')continue;
@@ -268,13 +270,14 @@ T.Objects.Array = class{
 
         terrain_objects.forEach(function(object){
 
+            var object_1x1,key;
 
             if(object.design.data.size==1) {
                 //--------------------------
 
-                var object_1x1 = object;
+                object_1x1 = object;
 
-                var key = 'x'+object_1x1.x+'y'+object_1x1.y;
+                key = 'x'+object_1x1.x+'y'+object_1x1.y;
                 if(typeof blocked_positions[key]=='undefined'){
                     blocked_positions[key]=true;
 
@@ -300,13 +303,13 @@ T.Objects.Array = class{
 
                         if (T.Math.xy2dist(x,y) <= object.design.data.size) {
 
-                            var object_1x1 = object.clone();
+                            object_1x1 = object.clone();
 
                             object_1x1.design.data.size=1;
                             object_1x1.x+=x;
                             object_1x1.y+=y;
 
-                            var key = 'x'+object_1x1.x+'y'+object_1x1.y;
+                            key = 'x'+object_1x1.x+'y'+object_1x1.y;
                             if(typeof blocked_positions[key]=='undefined'){
                                 blocked_positions[key]=true;
 
@@ -401,6 +404,6 @@ T.Objects.Array = class{
 
     
 
-}
+};
 
 

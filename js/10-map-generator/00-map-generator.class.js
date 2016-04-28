@@ -46,10 +46,8 @@ T.MapGenerator = class{
 
 
                 if(
-                    Math.pow(x-radius+1/2,2)
-                    +
-                    Math.pow(y-radius+1/2,2)
-                    >
+                    Math.pow(x-radius+1/2,2)+
+                    Math.pow(y-radius+1/2,2)>
                     Math.pow(radius,2)
                 )continue;
 
@@ -211,9 +209,8 @@ T.MapGenerator = class{
      * @param {boolean} virtual_objects
      * @returns {T.Objects.Array}}
      */
-    getCompleteObjects(real_objects,center,radius,virtual_objects){
+    getCompleteObjects(real_objects,center,radius,natural_objects=true){
 
-        if(typeof virtual_objects == 'undefined')virtual_objects = true;
 
 
         var complete_objects = this.getPureMap(center, radius);
@@ -226,7 +223,7 @@ T.MapGenerator = class{
 
 
 
-        if(virtual_objects){
+        if(natural_objects){
 
             var virtual_objects = this.getVirtualObjectsFromTerrainObjects(complete_objects);
 
@@ -241,8 +238,8 @@ T.MapGenerator = class{
 
         return(complete_objects);
 
-    };
+    }
     
 
 
-}
+};

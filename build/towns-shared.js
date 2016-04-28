@@ -136,224 +136,227 @@ MIXIN$0(constructor$0,static$0);MIXIN$0(constructor$0.prototype,proto$0);static$
  */
 //======================================================================================================================
 
-
-
-/**
- *
- * @param {array} action_type_list
- * @param {function} max_life_modifier
- * @param {function} price_key_modifier
- * @constructor
- */
-T.Game = function(action_type_list,max_life_modifier,price_key_modifier){
-
-    this.action_type_list = action_type_list;
-    this.max_life_modifier = max_life_modifier;
-    this.price_key_modifier = price_key_modifier;
-
-};
-
-
-
-/**
- *
- * @param {object} Object
- * @return {array} of numbers
- */
-T.Game.prototype.getObjectPriceBases = function(object){
-
-    var self=this;
-    var price_bases=[];
-
-
-    if(typeof object.actions=='undefined'){
-        return([]);
-    }
-
-
-    object.actions.forEach(function(action){
-
-
-        if(typeof self.action_type_list[action.type]!='undefined'){
-
-            var action_type = self.action_type_list[action.type];
-
-            //---------------Checking params
-            for(var param in action_type.params){
-                var param_type = action_type.params[param];
-
-                if(typeof action.params[param]!=param_type){
-                    throw new Error('Param '+param+' should be '+param_type+' in action '+action.type);
-                }
-
-            }
-            //---------------
-
-            var price_base = Math.ceil(action_type.price_base(action.params));//
-
-            //---------------Checking non negative value
-            if(price_base<0){
-                throw new Error('Params in action '+action.type+' should not make this action negative');
-            }
-            //---------------
-
-
-            price_bases.push(price_base);
-
-        }else{
-            throw new Error('Unknown action type '+action.type);
+T.Game = ((function(){"use strict";var proto$0={};
+    
+    
+     /**
+     *
+     * @param {array} action_type_list
+     * @param {function} max_life_modifier
+     * @param {function} price_key_modifier
+     * @constructor
+     */
+    function constructor$0(action_type_list,max_life_modifier,price_key_modifier){
+    
+        this.action_type_list = action_type_list;
+        this.max_life_modifier = max_life_modifier;
+        this.price_key_modifier = price_key_modifier;
+    
+    }DP$0(constructor$0,"prototype",{"configurable":false,"enumerable":false,"writable":false});
+    
+    
+    
+    /**
+     *
+     * @param {object} Object
+     * @return {array} of numbers
+     */
+    proto$0.getObjectPriceBases = function(object){
+    
+        var self=this;
+        var price_bases=[];
+    
+    
+        if(typeof object.actions=='undefined'){
+            return([]);
         }
-
-
-    });
-
-    return(price_bases);
-
-};
-
-
-
-/**
- *
- * @param {object} Object
- * @return {number} maximum life of object
- */
-T.Game.prototype.getObjectMaxLife = function(object){
-
-    var price_bases=this.getObjectPriceBases(object);
-    var price_base = price_bases.reduce(function(pv, cv) { return pv + cv; }, 0);
-
-
-    price_base=this.max_life_modifier(price_base);
-
-    return(price_base);
-
-};
-
-
-
-
-/**
- *
- * @param {object} Object
- * @return {array} of Resources
- */
-T.Game.prototype.getObjectPrices = function(object){
-
-    //console.log(this);
-
-    var price_bases=this.getObjectPriceBases(object);
-
-
-    var self=this;
-    var prices=[];
-
-
-    if(typeof object.actions=='undefined'){
-        return([]);
-    }
-
-    var design_resources = self.getObjectDesignPrice(object);
-
-    object.actions.forEach(function(action,i){
-
-        var action_type = self.action_type_list[action.type];
-
-
-        action_type.price_resources_list.sort(function(a,b){//todo is it safe?
-
-            return design_resources.compare(a.clone().signum())-design_resources.compare(b.clone().signum());
-
+    
+    
+        object.actions.forEach(function(action){
+    
+    
+            if(typeof self.action_type_list[action.type]!='undefined'){
+    
+                var action_type = self.action_type_list[action.type];
+    
+                //---------------Checking params
+                for(var param in action_type.params){
+                    var param_type = action_type.params[param];
+    
+                    if(typeof action.params[param]!=param_type){
+                        throw new Error('Param '+param+' should be '+param_type+' in action '+action.type);
+                    }
+    
+                }
+                //---------------
+    
+                var price_base = Math.ceil(action_type.price_base(action.params));//
+    
+                //---------------Checking non negative value
+                if(price_base<0){
+                    throw new Error('Params in action '+action.type+' should not make this action negative');
+                }
+                //---------------
+    
+    
+                price_bases.push(price_base);
+    
+            }else{
+                throw new Error('Unknown action type '+action.type);
+            }
+    
+    
         });
+    
+        return(price_bases);
+    
+    };
+    
+    
+    
+    /**
+     *
+     * @param {object} Object
+     * @return {number} maximum life of object
+     */
+    proto$0.getObjectMaxLife = function(object){
+    
+        var price_bases=this.getObjectPriceBases(object);
+        var price_base = price_bases.reduce(function(pv, cv) { return pv + cv; }, 0);
+    
+    
+        price_base=this.max_life_modifier(price_base);
+    
+        return(price_base);
+    
+    };
+    
+    
+    
+    
+    /**
+     *
+     * @param {object} Object
+     * @return {array} of Resources
+     */
+    proto$0.getObjectPrices = function(object){
+    
+        //console.log(this);
+    
+        var price_bases=this.getObjectPriceBases(object);
+    
+    
+        var self=this;
+        var prices=[];
+    
+    
+        if(typeof object.actions=='undefined'){
+            return([]);
+        }
+    
+        var design_resources = self.getObjectDesignPrice(object);
+    
+        object.actions.forEach(function(action,i){
+    
+            var action_type = self.action_type_list[action.type];
+    
+    
+            action_type.price_resources_list.sort(function(a,b){//todo is it safe?
+    
+                return design_resources.compare(a.clone().signum())-design_resources.compare(b.clone().signum());
+    
+            });
+    
+    
+            var price_resources = action_type.price_resources_list[0].clone();
+    
+    
+            price_resources.multiply(price_bases[i]);
+            prices.push(price_resources);
+    
+    
+        });
+    
+        return(prices);
+    
+    };
+    
+    
+    
+    /**
+     *
+     * @param {object} Object
+     * @return {object} Resources - price of object
+     */
+    proto$0.getObjectPrice = function(object){
+    
+        var price = new T.Resources({});
+    
+        //console.log('empty price',price);
+    
+        var prices=this.getObjectPrices(object);
+    
+        prices.forEach(function(price_){
+    
+            price.add(price_);
+    
+        });
+    
+        price.apply(this.price_key_modifier);
+    
+        return(price);
+    
+    };
+    
 
 
-        var price_resources = action_type.price_resources_list[0].clone();
-
-
-        price_resources.multiply(price_bases[i]);
-        prices.push(price_resources);
-
-
-    });
-
-    return(prices);
-
-};
-
-
-
-/**
- *
- * @param {object} Object
- * @return {object} Resources - price of object
- */
-T.Game.prototype.getObjectPrice = function(object){
-
-    var price = new T.Resources({});
-
-    //console.log('empty price',price);
-
-    var prices=this.getObjectPrices(object);
-
-    prices.forEach(function(price_){
-
-        price.add(price_);
-
-    });
-
-    price.apply(this.price_key_modifier);
-
-    return(price);
-
-};
-
-
-/**
- * todo maybe this should be under model.class.js?
- * @param {object} Object
- * @return {object} Resources - design amount of resources
- */
-T.Game.prototype.getObjectDesignPrice = function(object){
-
-    if(!object.hasOwnProperty('design'))throw new Error('Object should have design!');
-    if(object.design.type!='model')throw new Error('Object should have design of type model!');
-
-
-    var price = new T.Resources({});
-
-
-    model = new T.Model(object.design.data);
-
-    linear_particles = model.getLinearParticles();
-
-
-    linear_particles.forEach(function(linear_particle){
-
-        var volume=
-            linear_particle.size.x *
-            linear_particle.size.y *
-            linear_particle.size.z;
-
-        var material=linear_particle.material.split('_');
-        material=material[0];
-
-        var price_={};
-        price_[material]=volume;
-
-        price.add(price_);
-
-    });
-
-    /*console.log('price of');
-    console.log(object.design.data);
-    console.log(price);*/
-
-    //price.multiply(0.01);
-
-    return(price);
-
-};
-
+    /**
+     * todo maybe this should be under model.class.js?
+     * @param {object} Object
+     * @return {object} Resources - design amount of resources
+     */
+    proto$0.getObjectDesignPrice = function(object){
+    
+        if(!object.hasOwnProperty('design'))throw new Error('Object should have design!');
+        if(object.design.type!='model')throw new Error('Object should have design of type model!');
+    
+    
+        var price = new T.Resources({});
+    
+    
+        model = new T.Model(object.design.data);
+    
+        linear_particles = model.getLinearParticles();
+    
+    
+        linear_particles.forEach(function(linear_particle){
+    
+            var volume=
+                linear_particle.size.x *
+                linear_particle.size.y *
+                linear_particle.size.z;
+    
+            var material=linear_particle.material.split('_');
+            material=material[0];
+    
+            var price_={};
+            price_[material]=volume;
+    
+            price.add(price_);
+    
+        });
+    
+        /*console.log('price of');
+        console.log(object.design.data);
+        console.log(price);*/
+    
+        //price.multiply(0.01);
+    
+        return(price);
+    
+    };
+    
+MIXIN$0(constructor$0.prototype,proto$0);proto$0=void 0;return constructor$0;})());
 /**
  * @author ©Towns.cz
  * @fileOverview Creates class actions
@@ -361,22 +364,30 @@ T.Game.prototype.getObjectDesignPrice = function(object){
 //======================================================================================================================
 
 
-/**
- *
- * @param {string} type enum('active', 'passive', 'triggered') //todo refactor
- * @param {object} params {param: type}
- * @param {function} price_base
- * @param {array} price_resources_list
- * @param {function} perform
- * @constructor
- */
-T.Game.ActionType = function(type, params, price_base, price_resources_list, perform){
-    this.type = type;
-    this.params = params;
-    this.price_base = price_base;
-    this.price_resources_list = price_resources_list;
-    this.perform = perform;
-};
+T.Game.ActionType = ((function(){"use strict";
+
+
+    /**
+     *
+     * @param {string} type enum('active', 'passive', 'triggered') //todo refactor
+     * @param {object} params {param: type}
+     * @param {function} price_base
+     * @param {array} price_resources_list
+     * @param {function} perform
+     * @constructor
+     */
+     function constructor$0(type, params, price_base, price_resources_list, perform){
+        this.type = type;
+        this.params = params;
+        this.price_base = price_base;
+        this.price_resources_list = price_resources_list;
+        this.perform = perform;
+    }DP$0(constructor$0,"prototype",{"configurable":false,"enumerable":false,"writable":false});
+
+;return constructor$0;})());
+
+
+
 
 
 /**
@@ -384,197 +395,195 @@ T.Game.ActionType = function(type, params, price_base, price_resources_list, per
  * @fileOverview ...
  */
 //======================================================================================================================
-var A/*Actual Namespace*/ = T;
 
 
+T.MapGenerator = ((function(){"use strict";var proto$0={};
 
-/**
- *
- * @param {function} getZ
- * @param {Array} z_normalizing_table
- * @param {T.MapGenerator.Biotope} biotope
- * @param {function} virtualObjectGenerator
- * @constructor
- */
-A.MapGenerator = function(getZ,z_normalizing_table,biotope,virtualObjectGenerator){
+    /**
+     *
+     * @param {function} getZ
+     * @param {Array} z_normalizing_table
+     * @param {T.MapGenerator.Biotope} biotope
+     * @param {function} virtualObjectGenerator
+     * @constructor
+     */
+    function constructor$0(getZ,z_normalizing_table,biotope,virtualObjectGenerator){
 
-    this.getZ = getZ;
-    this.z_normalizing_table = z_normalizing_table;
-    this.biotope = biotope;
-    this.virtualObjectGenerator = virtualObjectGenerator;
-
-
-};
+        this.getZ = getZ;
+        this.z_normalizing_table = z_normalizing_table;
+        this.biotope = biotope;
+        this.virtualObjectGenerator = virtualObjectGenerator;
 
 
-/**
- *
- * @param {T.Position} center_integer
- * @param {number} radius
- * @returns {Array}
- * @private
- */
-A.MapGenerator.prototype.getZMapCircle = function(center_integer,radius){
-
-    var map=[];
-
-    for(var y=0;y<=radius*2;y++){
-
-        map[y]=[];
-
-        for(var x=0;x<=radius*2;x++){
+    }DP$0(constructor$0,"prototype",{"configurable":false,"enumerable":false,"writable":false});
 
 
-            if(
-                Math.pow(x-radius+1/2,2)
-                +
-                Math.pow(y-radius+1/2,2)
-                >
-                Math.pow(radius,2)
-            )continue;
+    /**
+     *
+     * @param {T.Position} center_integer
+     * @param {number} radius
+     * @returns {Array}
+     * @private
+     */
+    proto$0.getZMapCircle = function(center_integer,radius){
+
+        var map=[];
+
+        for(var y=0;y<=radius*2;y++){
+
+            map[y]=[];
+
+            for(var x=0;x<=radius*2;x++){
 
 
-            var z = this.getZ(x-radius+center_integer.x,y-radius+center_integer.y);
+                if(
+                    Math.pow(x-radius+1/2,2)+
+                    Math.pow(y-radius+1/2,2)>
+                    Math.pow(radius,2)
+                )continue;
 
 
-            map[y][x] = this.z_normalizing_table[Math.floor(z * this.z_normalizing_table.length)];
+                var z = this.getZ(x-radius+center_integer.x,y-radius+center_integer.y);
+
+
+                map[y][x] = this.z_normalizing_table[Math.floor(z * this.z_normalizing_table.length)];
 
 
 
 
+            }
         }
-    }
 
-    return(map);
+        return(map);
 
-};
-
-
-/**
- *
- * @param {Array} map
- * @returns {Array}
- * @private
- */
-A.MapGenerator.prototype.terrainMap = function(map){
-
-    var map_bg=[];
-
-    for(var y=0,l=map.length;y<l;y++){
-        map_bg[y]=[];
-        for(var x=0;x<l;x++){
-
-            if(typeof(map[y][x])==='undefined')continue;
-
-            map_bg[y][x] = this.biotope.getZTerrain(map[y][x]);
-
-        }
-    }
-
-    return(map_bg);
-
-};
-
-
-/**
- *
- * @param {T.Position} center_integer
- * @param {number} radius
- * @returns {Array}
- * @private
- */
-A.MapGenerator.prototype.getMapArrayCircle = function(center_integer,radius){
-
-
-    var bounds=1;
-
-
-    var z_map=this.getZMapCircle(center_integer,radius);
-
-    var map=this.terrainMap(z_map);
-
-    return(map);
-
-};
-
-
-
-/**
- *
- * @param {Array} map_array
- * @param {T.Position} center_integer
- * @param {number} radius
- * @returns {Array}
- * @private
- */
-A.MapGenerator.prototype.convertMapArrayToObjects = function(map_array,center_integer,radius){
-
-    var objects= new T.Objects.Array();
-
-    for (var y = 0; y < radius * 2; y++) {
-        for (var x = 0; x < radius * 2; x++) {
-
-            if (typeof(map_array[y][x]) === 'undefined')continue;
-
-
-            var object = new T.Objects.Terrain(map_array[y][x]);
-
-
-            object.x=center_integer.x-radius+x;
-            object.y=center_integer.y-radius+y;
-
-
-            objects.push(object);
-
-
-        }
-    }
-
-    return(objects);
-};
-
-
-/**
- *
- * @param {T.Position} center
- * @param {number} radius
- * @returns {Array}
- * @private
- */
-A.MapGenerator.prototype.getPureMap = function(center,radius){
-
-    center_integer={
-        x: Math.floor(center.x),
-        y: Math.floor(center.y)
     };
 
-    var map_array = this.getMapArrayCircle(center_integer,radius);
-    var objects = this.convertMapArrayToObjects(map_array,center_integer,radius);
-    return(objects);
 
-};
+    /**
+     *
+     * @param {Array} map
+     * @returns {Array}
+     * @private
+     */
+    proto$0.terrainMap = function(map){
+
+        var map_bg=[];
+
+        for(var y=0,l=map.length;y<l;y++){
+            map_bg[y]=[];
+            for(var x=0;x<l;x++){
+
+                if(typeof(map[y][x])==='undefined')continue;
+
+                map_bg[y][x] = this.biotope.getZTerrain(map[y][x]);
+
+            }
+        }
+
+        return(map_bg);
+
+    };
 
 
-/**
- *
- * @param {T.Objects.Array} objects
- * @returns {T.Objects.Array}
- * @private
- */
-A.MapGenerator.prototype.getVirtualObjectsFromTerrainObjects = function(objects){
+    /**
+     *
+     * @param {T.Position} center_integer
+     * @param {number} radius
+     * @returns {Array}
+     * @private
+     */
+    proto$0.getMapArrayCircle = function(center_integer,radius){
 
-    var self = this;
 
-    var virtual_objects = [];
-    objects.get1x1TerrainObjects().forEach(function(object){
+        var bounds=1;
 
-        self.virtualObjectGenerator(object,virtual_objects);
 
-    });
+        var z_map=this.getZMapCircle(center_integer,radius);
 
-    return(virtual_objects);
+        var map=this.terrainMap(z_map);
 
-};
+        return(map);
+
+    };
+
+
+
+    /**
+     *
+     * @param {Array} map_array
+     * @param {T.Position} center_integer
+     * @param {number} radius
+     * @returns {Array}
+     * @private
+     */
+    proto$0.convertMapArrayToObjects = function(map_array,center_integer,radius){
+
+        var objects= new T.Objects.Array();
+
+        for (var y = 0; y < radius * 2; y++) {
+            for (var x = 0; x < radius * 2; x++) {
+
+                if (typeof(map_array[y][x]) === 'undefined')continue;
+
+
+                var object = new T.Objects.Terrain(map_array[y][x]);
+
+
+                object.x=center_integer.x-radius+x;
+                object.y=center_integer.y-radius+y;
+
+
+                objects.push(object);
+
+
+            }
+        }
+
+        return(objects);
+    };
+
+
+    /**
+     *
+     * @param {T.Position} center
+     * @param {number} radius
+     * @returns {Array}
+     * @private
+     */
+    proto$0.getPureMap = function(center,radius){
+
+        center_integer={
+            x: Math.floor(center.x),
+            y: Math.floor(center.y)
+        };
+
+        var map_array = this.getMapArrayCircle(center_integer,radius);
+        var objects = this.convertMapArrayToObjects(map_array,center_integer,radius);
+        return(objects);
+
+    };
+
+
+    /**
+     *
+     * @param {T.Objects.Array} objects
+     * @returns {T.Objects.Array}
+     * @private
+     */
+    proto$0.getVirtualObjectsFromTerrainObjects = function(objects){
+
+        var self = this;
+
+        var virtual_objects = [];
+        objects.get1x1TerrainObjects().forEach(function(object){
+
+            self.virtualObjectGenerator(object,virtual_objects);
+
+        });
+
+        return(virtual_objects);
+
+    };
 
 
 
@@ -583,53 +592,48 @@ A.MapGenerator.prototype.getVirtualObjectsFromTerrainObjects = function(objects)
 //=================================================PUBLIC===============================================================
 
 
-/**
- * Complete terrain and virtual objects into Objects Array
- * @param {T.Objects.Array} real_objects
- * @param {T.Position} center
- * @param {number} radius
- * @param {boolean} virtual_objects
- * @returns {T.Objects.Array}}
- */
-A.MapGenerator.prototype.getCompleteObjects = function(real_objects,center,radius,virtual_objects){
-
-    if(typeof virtual_objects == 'undefined')virtual_objects = true;
-
-
-    var complete_objects = this.getPureMap(center, radius);
+    /**
+     * Complete terrain and virtual objects into Objects Array
+     * @param {T.Objects.Array} real_objects
+     * @param {T.Position} center
+     * @param {number} radius
+     * @param {boolean} virtual_objects
+     * @returns {T.Objects.Array}}
+     */
+    proto$0.getCompleteObjects = function(real_objects,center,radius){var natural_objects = arguments[3];if(natural_objects === void 0)natural_objects = true;
 
 
 
-    real_objects.forEach(function(object){
-        complete_objects.push(object);
-    });
+        var complete_objects = this.getPureMap(center, radius);
 
 
 
-    if(virtual_objects){
-
-        var virtual_objects = this.getVirtualObjectsFromTerrainObjects(complete_objects);
-
-        virtual_objects.forEach(function(object){
+        real_objects.forEach(function(object){
             complete_objects.push(object);
         });
 
-    }
+
+
+        if(natural_objects){
+
+            var virtual_objects = this.getVirtualObjectsFromTerrainObjects(complete_objects);
+
+            virtual_objects.forEach(function(object){
+                complete_objects.push(object);
+            });
+
+        }
 
 
 
 
-    return(complete_objects);
+        return(complete_objects);
 
-};
-
-
-
+    };
+    
 
 
-
-
-
+MIXIN$0(constructor$0.prototype,proto$0);proto$0=void 0;return constructor$0;})());
 
 
 /**
@@ -637,54 +641,58 @@ A.MapGenerator.prototype.getCompleteObjects = function(real_objects,center,radiu
  * @fileOverview ...
  */
 //======================================================================================================================
-T.MapGenerator = T.MapGenerator || {};
-var A/*Actual Namespace*/ = T.MapGenerator;
+
+
+T.MapGenerator.Biotope = ((function(){"use strict";var proto$0={};
+
+    /**
+     *
+     * @param {Array} terrains
+     * @constructor
+     */
+    function constructor$0(terrains){
+
+        var sum=0;
+        terrains.forEach(function(terrain){
+            sum+=terrain.amount;
+        });
+
+
+        var from=0;
+        terrains.forEach(function(terrain){
+
+            terrain.from=from/sum;
+            from+=terrain.amount;
+
+        });
+
+        //console.log(terrains);
+        this.terrains = terrains;
+
+    }DP$0(constructor$0,"prototype",{"configurable":false,"enumerable":false,"writable":false});
+
+
+    /**
+     *
+     * @param {number} z
+     * @returns {T.Objects.Terrain}
+     */
+    proto$0.getZTerrain = function(z){
+
+
+        for(var i=this.terrains.length-1;i>=0;i--){
+
+            if(z >= this.terrains[i].from ) return(this.terrains[i].terrain);
+
+        }
+
+
+    };
 
 
 
-/**
- *
- * @param {Array} terrains
- * @constructor
- */
-A.Biotope = function(terrains){
+MIXIN$0(constructor$0.prototype,proto$0);proto$0=void 0;return constructor$0;})());
 
-    var sum=0;
-    terrains.forEach(function(terrain){
-        sum+=terrain.amount;
-    });
-
-
-    var from=0;
-    terrains.forEach(function(terrain){
-
-        terrain.from=from/sum;
-        from+=terrain.amount;
-
-    });
-
-    //console.log(terrains);
-    this.terrains = terrains;
-
-};
-
-
-/**
- *
- * @param {number} z
- * @returns {T.Objects.Terrain}
- */
-A.Biotope.prototype.getZTerrain = function(z){
-
-
-    for(var i=this.terrains.length-1;i>=0;i--){
-
-        if(z >= this.terrains[i].from ) return(this.terrains[i].terrain);
-
-    }
-
-
-};
 
 
 /**
@@ -692,12 +700,10 @@ A.Biotope.prototype.getZTerrain = function(z){
  * @fileOverview Additional methods to object Math
  */
 //======================================================================================================================
-var A/*Actual Namespace*/ = T;
 
 
 
-
-A.Math = {};
+T.Math = {};
 
 
 
@@ -707,7 +713,7 @@ A.Math = {};
  * @param {number}
  * @return {number}
  */
-A.Math.sign = Math.sign || function(x) {
+T.Math.sign = Math.sign || function(x) {
     x = +x; // convert to a number
     if (x === 0 || isNaN(x)) {
         return x;
@@ -724,7 +730,7 @@ A.Math.sign = Math.sign || function(x) {
  * @param number
  * @returns {number}
  */
-A.Math.baseLog = function(base, number) {
+T.Math.baseLog = function(base, number) {
     return Math.log(number) / Math.log(base);
 };
 
@@ -737,7 +743,7 @@ A.Math.baseLog = function(base, number) {
  * @param {number} number_of_non_zero_digits
  * @return {number} Cuts unless digits to zero
  */
-A.Math.prettyNumber = function(number,number_of_non_zero_digits){
+T.Math.prettyNumber = function(number,number_of_non_zero_digits){
 
     number_of_non_zero_digits = number_of_non_zero_digits || 2;//todo refactor like this
 
@@ -769,9 +775,9 @@ A.Math.prettyNumber = function(number,number_of_non_zero_digits){
  * @param {number} degrees 2
  * @return {number} degrees difference
  */
-A.Math.angleDiff = function(deg1,deg2){
+T.Math.angleDiff = function(deg1,deg2){
     var a = deg1 - deg2;
-    var a = (a + 180) % 360 - 180;
+    a = (a + 180) % 360 - 180;
     return(a);
 };
 
@@ -782,7 +788,7 @@ A.Math.angleDiff = function(deg1,deg2){
  * @param {number} radians
  * @return {number} degrees
  */
-A.Math.rad2deg = function(radians){
+T.Math.rad2deg = function(radians){
     return(radians * (180/Math.PI));
 };
 
@@ -793,7 +799,7 @@ A.Math.rad2deg = function(radians){
  * @param {number} degrees
  * @return {number} radians
  */
-A.Math.deg2rad = function(degrees){
+T.Math.deg2rad = function(degrees){
     return(degrees * (Math.PI/180));
 };
 
@@ -805,7 +811,7 @@ A.Math.deg2rad = function(degrees){
  * @param y
  * @return {number} distance
  */
-A.Math.xy2dist = function(x,y){
+T.Math.xy2dist = function(x,y){
     return(Math.sqrt(Math.pow(x,2)+Math.pow(y,2)));
 };
 
@@ -813,12 +819,12 @@ A.Math.xy2dist = function(x,y){
 //-------------------------
 
 //todo refactor to position
-A.Math.xy2distDeg = function(x,y){
+T.Math.xy2distDeg = function(x,y){
 
     var output={};
 
-    output['dist'] = this.xy2dist(x,y);
-    output['deg'] = this.rad2deg(Math.atan2(y,x));
+    output.dist = this.xy2dist(x,y);
+    output.deg = this.rad2deg(Math.atan2(y,x));
 
     return(output);
 
@@ -827,14 +833,14 @@ A.Math.xy2distDeg = function(x,y){
 //-------------------------
 
 //todo refactor to position
-A.Math.distDeg2xy = function(dist,deg){
+T.Math.distDeg2xy = function(dist,deg){
 
     var rad=this.deg2rad(deg);
 
     var output={};
 
-    output['x'] = Math.cos(rad)*dist;
-    output['y'] = Math.sin(rad)*dist;
+    output.x = Math.cos(rad)*dist;
+    output.y = Math.sin(rad)*dist;
 
     return(output);
 
@@ -843,7 +849,7 @@ A.Math.distDeg2xy = function(dist,deg){
 //-------------------------
 
 //todo mybe refactor to position
-A.Math.xyRotate = function(x,y,deg){
+T.Math.xyRotate = function(x,y,deg){
 
     //nevyuzivam funkce Towns.A.xy2distDeg a A.distDeg2xy, abych nedelal zbytecny prevod do stupnu a spatky
     var dist = this.xy2dist(x,y);
@@ -852,8 +858,8 @@ A.Math.xyRotate = function(x,y,deg){
     rad += this.deg2rad(deg);
 
     var output={};
-    output['x'] = Math.cos(rad)*dist;
-    output['y'] = Math.sin(rad)*dist;
+    output.x = Math.cos(rad)*dist;
+    output.y = Math.sin(rad)*dist;
 
     return(output);
 
@@ -862,7 +868,7 @@ A.Math.xyRotate = function(x,y,deg){
 //======================================================================================================================
 
 
-A.Math.randomSeedPosition = function(seed,position){
+T.Math.randomSeedPosition = function(seed,position){
 
 
     return (Math.sin(Math.pow((position.x*position.y)-seed,2))+1)/2;
@@ -879,7 +885,7 @@ A.Math.randomSeedPosition = function(seed,position){
  * @param {number} defval
  * @return {number}
  */
-A.Math.toFloat = function(value,defval){
+T.Math.toFloat = function(value,defval){
 
     if(typeof defval === 'undefined')defval=0;
     if(typeof value ==='undefined')return(defval);
@@ -902,7 +908,7 @@ A.Math.toFloat = function(value,defval){
  * @param {number} defval
  * @return {number}
  */
-A.Math.toInt = function(value,defval){
+T.Math.toInt = function(value,defval){
 
     if(typeof(value)==='undefined')return(defval);
 
@@ -924,7 +930,7 @@ A.Math.toInt = function(value,defval){
  * @param {number} max
  * @returns {number}
  */
-A.Math.bounds = function(value,min,max){
+T.Math.bounds = function(value,min,max){
 
     if(value<min)return min;
     if(value>max)return max;
@@ -948,16 +954,17 @@ A.Math.bounds = function(value,min,max){
  * @param b2y
  * @return {boolean}
  */
-A.Math.lineCollision = function(a1x,a1y,a2x,a2y,b1x,b1y,b2x,b2y){
+T.Math.lineCollision = function(a1x,a1y,a2x,a2y,b1x,b1y,b2x,b2y){
 
 
 
     var denominator = ((a2x - a1x) * (b2y - b1y)) - ((a2y - a1y) * (b2x - b1x));
     var numerator1 = ((a1y - b1y) * (b2x - b1x)) - ((a1x - b1x) * (b2y - b1y));
     var numerator2 = ((a1y - b1y) * (a2x - a1x)) - ((a1x - b1x) * (a2y - a1y));
+    var collision;
 
     // Detect coincident lines (has a problem, read below)
-    if (denominator == 0){
+    if (denominator === 0){
 
         //var collision= (numerator1 == 0 && numerator2 == 0);
         collision=false;
@@ -967,14 +974,14 @@ A.Math.lineCollision = function(a1x,a1y,a2x,a2y,b1x,b1y,b2x,b2y){
         var r = numerator1 / denominator;
         var s = numerator2 / denominator;
 
-        var collision=((r >= 0 && r <= 1) && (s >= 0 && s <= 1));
+        collision=((r >= 0 && r <= 1) && (s >= 0 && s <= 1));
 
     }
 
 
 
 
-    //-------------------------------Debug TDD
+    //-------------------------------Debug TDD do not delete
 
     /*var size=50;
     var src=createCanvasViaFunctionAndConvertToSrc(
@@ -1004,7 +1011,7 @@ A.Math.lineCollision = function(a1x,a1y,a2x,a2y,b1x,b1y,b2x,b2y){
 
     //-------------------------------
 
-    //console.log(collision);
+
 
     return collision;
 
@@ -1016,7 +1023,7 @@ A.Math.lineCollision = function(a1x,a1y,a2x,a2y,b1x,b1y,b2x,b2y){
 
 
 
-A.Math.blurXY = function(generator,blur) {
+T.Math.blurXY = function(generator,blur) {
 
     return(function (x, y) {
 
@@ -1045,9 +1052,9 @@ A.Math.blurXY = function(generator,blur) {
 
 
 
-A.Math.bytesToSize = function(bytes) {
+T.Math.bytesToSize = function(bytes) {
     var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
-    if (bytes == 0) return '0 Byte';
+    if (bytes === 0) return '0 Byte';
     var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
     return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i];
 };
@@ -1056,495 +1063,486 @@ A.Math.bytesToSize = function(bytes) {
  * @fileOverview Creates Class Model
  */
 //======================================================================================================================
-var A/*Actual Namespace*/ = T;
-module.exports = Towns;
 
 
 
+T.Model = ((function(){"use strict";var proto$0={};
 
-/**
- * @param {object} Model json
- * @return {boolean} false in case of fail
- * @constructor
- */
-A.Model = function (json){
 
-    if(typeof(json)=='undefined')return false;
 
-    this.name=json.name;
-    this.particles=json.particles;
-    this.rotation=json.rotation;
-    this.size=json.size;
 
-    if(typeof(this.rotation)=='undefined')this.rotation=0;
-    if(typeof(this.size)=='undefined')this.size=1;
-};
-//==================================================
+    /**
+     * @param {object} Model json
+     * @return {boolean} false in case of fail
+     * @constructor
+     */
+    function constructor$0(json){
 
+        if(typeof(json)=='undefined')return false;
 
+        this.name=json.name;
+        this.particles=json.particles;
+        this.rotation=json.rotation;
+        this.size=json.size;
 
-A.Model.prototype.clone = function (){
-    return(new T.Model(JSON.parse(JSON.stringify(this))));
-};
+        if(typeof(this.rotation)=='undefined')this.rotation=0;
+        if(typeof(this.size)=='undefined')this.size=1;
+    }DP$0(constructor$0,"prototype",{"configurable":false,"enumerable":false,"writable":false});
 
 
-
-/**
- * @param {number} rotation
- * @param {number} size
- */
-A.Model.prototype.addRotationSize = function(rotation,size){
-
-    if(typeof rotation === 'undefined')rotation=0;
-    if(typeof size === 'undefined')size=1;
-
-    this.rotation+=rotation;
-    this.size=this.size*size;
-
-};
-
-
-
-
-
-
-//==================================================
-
-//todo jsdoc
-A.Model.prototype.clone = function(){
-
-    return new T.Model(JSON.parse(JSON.stringify(this)));
-
-};
-
-
-//==================================================
-
-/**
- * @param {string} dimension x,y,z,xy
- * @return {number} range
- */
-A.Model.prototype.range = function(dimension){
-
-    if(dimension=='xy'){
-
-        return T.Math.xy2dist(this.range('x'),this.range('y')*this.size);
-
-    }
-
-
-    var particlesLinear=this.getLinearParticles();
-
-    var max=false,min=false,max_,min_;
-    for(var i in particlesLinear){
-
-
-        min_=particlesLinear[i].position[dimension];
-        max_=particlesLinear[i].position[dimension]+particlesLinear[i].size[dimension];
-
-        //todo feature reverse
-
-        if(max===false)max=max_;
-        if(min===false)min=min_;
-
-
-        if(max_>max)max=max_;
-        if(min_<min)min=min_;
-
-    }
-
-
-    return(Math.abs(min-max)/*this.size*/);//todo rotation
-
-
-
-};
-
-
-//==================================================
-
-/**
- * @param {number} move_x
- * @param {number} move_y
- * @param {number} move_z
- */
-A.Model.prototype.moveBy = function(move_x,move_y,move_z){
-
-    if(typeof move_x === 'undefined')move_x=0;
-    if(typeof move_y === 'undefined')move_y=0;
-    if(typeof move_z === 'undefined')move_z=0;
-
-    for(var i in this.particles){
-
-
-        this.particles[i].position.x+=move_x;
-        this.particles[i].position.y+=move_y;
-        this.particles[i].position.z+=move_z;
-
-    }
-
-
-
-};
-//==================================================
-
-/**
- * Return Z of joining model
- * @param {object} Model
- * @param {number} move_x
- * @param {number} move_y
- */
-A.Model.prototype.joinModelZ = function(model,move_x,move_y){//todo second param should be position
-
-    //var  model_=deepCopyModel(model);
-    //model_.moveBy(move_x,move_y);//todo maybe delete moveBy
-
-    //var max_z=this.range('z');
-
-
-    var this_linear_particles=this.getLinearParticles();
-    var model_linear_particles=model.getLinearParticles();
-
-
-    var distances=[0];
-    for(var i in model_linear_particles){
-
-        model_linear_particles[i].position.x+=move_x;
-        model_linear_particles[i].position.y+=move_y;
-
-        for(var ii in this_linear_particles){//todo maybe optimize by pre-sorting
-
-
-            if(Particles.collision2D(this_linear_particles[ii],model_linear_particles[i])){
-
-                r(this_linear_particles[ii],model_linear_particles[i]);
-
-
-                distances.push(this_linear_particles[ii].position.z+this_linear_particles[ii].size.z);
-
-            }
-
-
-
-        }
-
-    }
-
-    var max_z=Math.max.apply(Math,distances);
-
-    return max_z;
-
-};
-//==================================================
-
-/**
- * Join models together
- * @param {object} Model
- * @param {number} move_x
- * @param {number} move_y
- */
-A.Model.prototype.joinModel = function(model,move_x,move_y){//todo second param should be position
-
-    var max_z=this.joinModelZ(model,move_x,move_y);
-
-
-    this.particles=[
-        JSON.parse(JSON.stringify(this)),
-        JSON.parse(JSON.stringify(model))
-    ];
-
-    this.particles[1].position={
-        x:move_x,
-        y:move_y,
-        z:max_z
-    };
-
-    this.rotation=0;
-    this.size=1;
-
-};
-
-
-
-//======================================================================================================================
-
-
-/**
- * Deep copy this and converts links to raw data
- * @returns {object} Model
- */
-A.Model.prototype.getDeepCopyWithoutLinks = function() {
-
-
-    var model = this.clone();
-
-    //---------------------------------------------Convert links to raw data
-
-
-    var findParticleByName = function (particles, name) {//todo move to prototype
-
-        for (var i in particles) {
-
-            if (particles[i].name == name) {
-                return (particles[i]);
-            }
-
-            if (typeof(particles[i].particles)!='undefined') {
-                var finded_particle = findParticleByName(particles[i].particles, name);
-
-                if (finded_particle !== false) {
-                    return (finded_particle);
-                }
-
-            }
-
-
-        }
-
-        return (false);
-
+    proto$0.clone = function (){
+        return(new T.Model(JSON.parse(JSON.stringify(this))));
     };
 
 
-    var particlesLinks = function (particles) {//todo move to prototype
 
+    /**
+     * @param {number} rotation
+     * @param {number} size
+     */
+    proto$0.addRotationSize = function(rotation,size){
 
-        //r(particles);
-
-        for (var i in particles) {
-
-
-            //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Link
-            if (typeof(particles[i].link)!='undefined') {
-
-
-                var linked_particle = findParticleByName(model.particles, particles[i].link);
-
-                if (linked_particle == false) {
-                    throw new Error('Invalid link ' + particle.link);
-                }
-
-                linked_particle = JSON.parse(JSON.stringify(linked_particle));
-
-                if (typeof(particles[i].rotation)!='undefined') {
-                    linked_particle.rotation = particles[i].rotation;
-                }
-                if (typeof(particles[i].size)!='undefined') {
-                    linked_particle.size = particles[i].size;
-                }
-                if (typeof(particles[i].position)!='undefined') {
-                    linked_particle.position = particles[i].position;
-                }
-                //todo skew
-
-
-                particles[i] = linked_particle;
-            }
-            //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-            //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Group
-            if (typeof(particles[i].particles)!='undefined') {
-
-                particlesLinks(particles[i].particles);
-
-            }
-            //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-        }
-
-    };
-
-
-    particlesLinks(model.particles);
-
-    return(model);
-
-};
-
-
-//======================================================================================================================
-
-
-/**
- * Get 1D array of particles
- * @returns {Array} array of particles
- */
-A.Model.prototype.getLinearParticles = function(){
-
-
-    var particlesLinear=[];
-
-    //---------------------------------------------Convert particles to 1D particles
-
-    var particles2Linear = function(particles,position,rotation,size){//todo move to prototype
-
-        if(typeof position === 'undefined')position=false;
         if(typeof rotation === 'undefined')rotation=0;
         if(typeof size === 'undefined')size=1;
 
+        this.rotation+=rotation;
+        this.size=this.size*size;
 
-        if(position===false){
-            position={
-                x:0,
-                y:0,
-                z:0
-            };
+    };
+
+
+
+
+
+    /**
+     * @param {string} dimension x,y,z,xy
+     * @return {number} range
+     */
+    proto$0.range = function(dimension){
+
+        if(dimension=='xy'){
+
+            return T.Math.xy2dist(this.range('x'),this.range('y')*this.size);
+
         }
 
-        particles.forEach(function(particle){
 
-            //particle=deepCopy(particle);
+        var particlesLinear=this.getLinearParticles();
+
+        var max=false,min=false,max_,min_;
+        for(var i in particlesLinear){
+
+
+            min_=particlesLinear[i].position[dimension];
+            max_=particlesLinear[i].position[dimension]+particlesLinear[i].size[dimension];
+
+            //todo feature reverse
+
+            if(max===false)max=max_;
+            if(min===false)min=min_;
+
+
+            if(max_>max)max=max_;
+            if(min_<min)min=min_;
+
+        }
+
+
+        return(Math.abs(min-max)/*this.size*/);//todo rotation
 
 
 
-            //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Default params of particle, group or link
-            if(!particle.position){
-                particle.position={
+    };
+
+
+
+    /**
+     * @param {number} move_x
+     * @param {number} move_y
+     * @param {number} move_z
+     */
+    proto$0.moveBy = function(move_x,move_y,move_z){
+
+        if(typeof move_x === 'undefined')move_x=0;
+        if(typeof move_y === 'undefined')move_y=0;
+        if(typeof move_z === 'undefined')move_z=0;
+
+        for(var i in this.particles){
+
+
+            this.particles[i].position.x+=move_x;
+            this.particles[i].position.y+=move_y;
+            this.particles[i].position.z+=move_z;
+
+        }
+
+
+
+    };
+
+    
+    
+    
+    /**
+     * Return Z of joining model
+     * @param {object} Model
+     * @param {number} move_x
+     * @param {number} move_y
+     */
+    proto$0.joinModelZ = function(model,move_x,move_y){//todo second param should be position
+
+        //var  model_=deepCopyModel(model);
+        //model_.moveBy(move_x,move_y);//todo maybe delete moveBy
+
+        //var max_z=this.range('z');
+
+
+        var this_linear_particles=this.getLinearParticles();
+        var model_linear_particles=model.getLinearParticles();
+
+
+        var distances=[0];
+        for(var i in model_linear_particles){
+
+            model_linear_particles[i].position.x+=move_x;
+            model_linear_particles[i].position.y+=move_y;
+
+            for(var ii in this_linear_particles){//todo maybe optimize by pre-sorting
+
+
+                if(Particles.collision2D(this_linear_particles[ii],model_linear_particles[i])){
+
+                    r(this_linear_particles[ii],model_linear_particles[i]);
+
+
+                    distances.push(this_linear_particles[ii].position.z+this_linear_particles[ii].size.z);
+
+                }
+
+
+
+            }
+
+        }
+
+        var max_z=Math.max.apply(Math,distances);
+
+        return max_z;
+
+    };
+    
+    
+    
+    
+    /**
+     * Join models together
+     * @param {object} Model
+     * @param {number} move_x
+     * @param {number} move_y
+     */
+    proto$0.joinModel = function(model,move_x,move_y){//todo second param should be position
+
+        var max_z=this.joinModelZ(model,move_x,move_y);
+
+
+        this.particles=[
+            JSON.parse(JSON.stringify(this)),
+            JSON.parse(JSON.stringify(model))
+        ];
+
+        this.particles[1].position={
+            x:move_x,
+            y:move_y,
+            z:max_z
+        };
+
+        this.rotation=0;
+        this.size=1;
+
+    };
+
+
+
+
+    /**
+     * Deep copy this and converts links to raw data
+     * @returns {object} Model
+     */
+    proto$0.getDeepCopyWithoutLinks = function() {
+
+
+        var model = this.clone();
+
+        //---------------------------------------------Convert links to raw data
+
+
+        var findParticleByName = function(particles, name) {//todo move to prototype
+
+            for (var i in particles) {
+
+                if (particles[i].name == name) {
+                    return (particles[i]);
+                }
+
+                if (typeof(particles[i].particles)!='undefined') {
+                    var finded_particle = findParticleByName(particles[i].particles, name);
+
+                    if (finded_particle !== false) {
+                        return (finded_particle);
+                    }
+
+                }
+
+
+            }
+
+            return (false);
+
+        };
+
+
+        var particlesLinks = function(particles) {//todo move to prototype
+
+
+            //r(particles);
+
+            for (var i in particles) {
+
+
+                //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Link
+                if (typeof(particles[i].link)!='undefined') {
+
+
+                    var linked_particle = findParticleByName(model.particles, particles[i].link);
+
+                    if (linked_particle === false) {
+                        throw new Error('Invalid link ' + particle.link);
+                    }
+
+                    linked_particle = JSON.parse(JSON.stringify(linked_particle));
+
+                    if (typeof(particles[i].rotation)!='undefined') {
+                        linked_particle.rotation = particles[i].rotation;
+                    }
+                    if (typeof(particles[i].size)!='undefined') {
+                        linked_particle.size = particles[i].size;
+                    }
+                    if (typeof(particles[i].position)!='undefined') {
+                        linked_particle.position = particles[i].position;
+                    }
+                    //todo skew
+
+
+                    particles[i] = linked_particle;
+                }
+                //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+                //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Group
+                if (typeof(particles[i].particles)!='undefined') {
+
+                    particlesLinks(particles[i].particles);
+
+                }
+                //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+            }
+
+        };
+
+
+        particlesLinks(model.particles);
+
+        return(model);
+
+    };
+
+
+
+
+    /**
+     * Get 1D array of particles
+     * @returns {Array} array of particles
+     */
+    proto$0.getLinearParticles = function(){
+
+
+        var particlesLinear=[];
+
+        //---------------------------------------------Convert particles to 1D particles
+
+        var particles2Linear = function(particles,position,rotation,size){//todo move to prototype
+
+            if(typeof position === 'undefined')position=false;
+            if(typeof rotation === 'undefined')rotation=0;
+            if(typeof size === 'undefined')size=1;
+
+
+            if(position===false){
+                position={
                     x:0,
                     y:0,
                     z:0
+                };
+            }
+
+            particles.forEach(function(particle){
+
+                //particle=deepCopy(particle);
+
+
+
+                //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Default params of particle, group or link
+                if(!particle.position){
+                    particle.position={
+                        x:0,
+                        y:0,
+                        z:0
+                    };
                 }
-            }
-            if(typeof(particle.rotation)=='undefined')particle.rotation=0;
-            if(typeof(particle.size)=='undefined')particle.size=1;
-            //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                if(typeof(particle.rotation)=='undefined')particle.rotation=0;
+                if(typeof(particle.size)=='undefined')particle.size=1;
+                //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-            //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Position, Rotation and size //todo skew
+                //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Position, Rotation and size //todo skew
 
-            var distDeg = T.Math.xy2distDeg(particle.position.x, particle.position.y);
+                var distDeg = T.Math.xy2distDeg(particle.position.x, particle.position.y);
 
-            distDeg.dist = distDeg.dist * size;
-            distDeg.deg += rotation;
+                distDeg.dist = distDeg.dist * size;
+                distDeg.deg += rotation;
 
-            var xy = T.Math.distDeg2xy(distDeg.dist, distDeg.deg);
+                var xy = T.Math.distDeg2xy(distDeg.dist, distDeg.deg);
 
-            particle.rotation += rotation;
+                particle.rotation += rotation;
 
-            particle.position.x = xy.x;
-            particle.position.y = xy.y;
-            particle.position.z = particle.position.z * size;
+                particle.position.x = xy.x;
+                particle.position.y = xy.y;
+                particle.position.z = particle.position.z * size;
 
-            particle.position.x += position.x;
-            particle.position.y += position.y;
-            particle.position.z += position.z;
+                particle.position.x += position.x;
+                particle.position.y += position.y;
+                particle.position.z += position.z;
 
-            if(typeof particle.size == 'number') {
+                if(typeof particle.size == 'number') {
 
-                particle.size = particle.size * size;
+                    particle.size = particle.size * size;
 
-            }else{
+                }else{
 
-                particle.size.x = particle.size.x * size;
-                particle.size.y = particle.size.y * size;
-                particle.size.z = particle.size.z * size;
+                    particle.size.x = particle.size.x * size;
+                    particle.size.y = particle.size.y * size;
+                    particle.size.z = particle.size.z * size;
 
-            }
+                }
 
-            //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
+                //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 
-            //------------------------------------------Particle
-            if(typeof(particle.particles)!='undefined'){
 
-                particles2Linear(particle.particles,particle.position,particle.rotation,particle.size);
+                //------------------------------------------Particle
+                if(typeof(particle.particles)!='undefined'){
 
-            }else
-            //------------------------------------------Group
-            if(typeof(particle.shape)!='undefined'){
+                    particles2Linear(particle.particles,particle.position,particle.rotation,particle.size);
 
-                particlesLinear.push(particle);
+                }else
+                //------------------------------------------Group
+                if(typeof(particle.shape)!='undefined'){
 
-            }
-            //------------------------------------------
+                    particlesLinear.push(particle);
 
+                }
+                //------------------------------------------
+
+
+
+            });
+
+
+        };
+
+        var model=this.getDeepCopyWithoutLinks();
+
+        particles2Linear(model.particles,false,model.rotation,model.size);
+
+        //todo strict mode//delete model;
+
+        return(particlesLinear);
+
+    };
+
+
+    /**
+     *
+     * @param path
+     * @returns {object} part of this
+     */
+    proto$0.filterPath = function(path){
+
+        var model=this;
+
+        if(typeof(path.forEach)=='undefined'){
+            r(path);
+            throw new Error('Path is not correct array.');
+        }
+
+
+        path.forEach(function(i){
+            model = model.particles[i];
+        });
+
+
+        return(model);
+
+    };
+
+
+
+
+    /**
+     *
+     * @param path
+     * @returns {object} part of this
+     */
+    proto$0.filterPathSiblings = function(path){
+
+        var model=this.getDeepCopyWithoutLinks();
+        var current=model;
+
+        if(typeof(path.forEach)=='undefined'){
+            r(path);
+            throw new Error('Path is not correct array.');
+        }
+
+
+        path.forEach(function(particle_i,path_ii){
+
+            /*if(path_ii<path.length-1){
+
+             current = current.particles[particle_i];
+
+             }else{*/
+
+            var me = current.particles[particle_i];
+
+            current.particles = [me];
+
+            current=me;
+            //}
 
 
         });
 
+        return(model);
 
     };
 
-    var model=this.getDeepCopyWithoutLinks();
 
-    particles2Linear(model.particles,false,model.rotation,model.size);
+    
+    
 
-    //todo strict mode//delete model;
-
-    return(particlesLinear);
-
-};
-
-//======================================================================================================================
-
-/**
- *
- * @param path
- * @returns {object} part of this
- */
-A.Model.prototype.filterPath = function(path){
-
-    var model=this;
-
-    if(typeof(path.forEach)=='undefined'){
-        r(path);
-        throw new Error('Path is not correct array.');
-    }
-
-
-    path.forEach(function(i){
-        model = model.particles[i];
-    });
-
-
-    return(model);
-
-};
-
-
-
-//======================================================================================================================
-
-/**
- *
- * @param path
- * @returns {object} part of this
- */
-A.Model.prototype.filterPathSiblings = function(path){
-
-    var model=this.getDeepCopyWithoutLinks();
-    var current=model;
-
-    if(typeof(path.forEach)=='undefined'){
-        r(path);
-        throw new Error('Path is not correct array.');
-    }
-
-
-    path.forEach(function(particle_i,path_ii){
-
-        /*if(path_ii<path.length-1){
-
-         current = current.particles[particle_i];
-
-         }else{*/
-
-        var me = current.particles[particle_i];
-
-        current.particles = [me];
-
-        current=me;
-        //}
-
-
-    });
-
-    return(model);
-
-};
+MIXIN$0(constructor$0.prototype,proto$0);proto$0=void 0;return constructor$0;})());
 
 
 /**
@@ -1635,6 +1633,7 @@ A.Particles.get3D = function(particle){
         resource.points=[];
         resource.polygons=[[],[]];
         resource.polygons2D=[[],[]];
+        var base;
 
         for(var level=0;level<2;level++){
 
@@ -1642,15 +1641,17 @@ A.Particles.get3D = function(particle){
             //---------------------------
 
 
-            if(level==0){
-                var base=particle.shape.bottom;
+            if(level=== 0){
+                base=particle.shape.bottom;
 
             }else{
-                var base=particle.shape.top;
+                base=particle.shape.top;
             }
 
 
             //--------
+
+            var x__,y__,z__;
 
             for(var n = 0;n<particle.shape.n;n++){
 
@@ -1658,26 +1659,24 @@ A.Particles.get3D = function(particle){
 
                 if(!is(particle.shape.rotated)){
 
-                    var x__=0.5*x_*Math.cos(n/particle.shape.n*Math.PI*2+T.Math.deg2rad(180+180/particle.shape.n))*base+x_*(level*particle.skew.z.x),
-                        y__=0.5*y_*Math.sin(n/particle.shape.n*Math.PI*2+T.Math.deg2rad(180+180/particle.shape.n))*base+y_*(level*particle.skew.z.y),
-                        z__=z_*level;
+                    x__=0.5*x_*Math.cos(n/particle.shape.n*Math.PI*2+T.Math.deg2rad(180+180/particle.shape.n))*base+x_*(level*particle.skew.z.x);
+                    y__=0.5*y_*Math.sin(n/particle.shape.n*Math.PI*2+T.Math.deg2rad(180+180/particle.shape.n))*base+y_*(level*particle.skew.z.y);
+                    z__=z_*level;
 
                 }else{
 
                     var tmp=(2-(Math.cos(T.Math.deg2rad(180/particle.shape.n))));//todo better
 
-                    var x__=x_*((level*2)-1);//*(level-0.5);//+x_*(level*particle.skew.z.x),
+                    x__=x_*((level*2)-1);//*(level-0.5);//+x_*(level*particle.skew.z.x),
 
-                        y__=0.5*y_*Math.sin(n/particle.shape.n*Math.PI*2+T.Math.deg2rad(180+180/particle.shape.n));//+y_*(level*particle.skew.z.y),
-
-
-                        z__=(1)*0.5*(
+                    y__=0.5*y_*Math.sin(n/particle.shape.n*Math.PI*2+T.Math.deg2rad(180+180/particle.shape.n));//+y_*(level*particle.skew.z.y),
 
 
-                                z_*Math.cos(n/particle.shape.n*Math.PI*2+T.Math.deg2rad(180+180/particle.shape.n))*tmp
+                    z__=(1)*0.5*(
 
+                                z_*Math.cos(n/particle.shape.n*Math.PI*2+T.Math.deg2rad(180+180/particle.shape.n))*tmp+
+                                z_*((Math.cos(T.Math.deg2rad(180/particle.shape.n))))*tmp
 
-                                +z_*((Math.cos(T.Math.deg2rad(180/particle.shape.n))))*tmp
                             );
 
                 }
@@ -1702,7 +1701,7 @@ A.Particles.get3D = function(particle){
 
 
 
-                if(level==0){
+                if(level=== 0){
 
                     //r(n,1,particle.shape.n,(n+1+particle.shape.n));
                     resource.polygons[0].push(n+1);
@@ -1713,10 +1712,10 @@ A.Particles.get3D = function(particle){
 
 
                     resource.polygons.push([
-                        (n!=0?n:particle.shape.n),
+                        (n!== 0?n:particle.shape.n),
                         n+1,
                         n+1+particle.shape.n,
-                        (n!=0?n:particle.shape.n)+particle.shape.n
+                        (n!== 0?n:particle.shape.n)+particle.shape.n
 
                     ]);
 
@@ -1764,15 +1763,19 @@ A.Particles.get2Dlines = function(particle,base){
 
         }*/
 
+        var point1,point2;
+
         for(var i=-1,l=polygons2D[pn].length;i<l-1;i++){
 
 
-            if(i!=-1)
-                var point1=i;
-            else
-                var point1=l-1;
+            if(i!=-1){
+                point1=i;
+            }else{
+                point1=l-1;
+            }
 
-            var point2=i+1;
+
+            point2=i+1;
 
 
             //r(resource.polygons[pn],point1);
@@ -1875,14 +1878,16 @@ A.Particles.collision2D = function(particle1,particle2){
 
             var k=100;
 
+            var outer,inner;
+
             for(i=0;i<2;i++){
 
-                if(i==0){
-                    var outer=JSON.parse(JSON.stringify(lines2));
-                    var inner=/*deepCopy*/(lines1[0]);
+                if(i=== 0){
+                    outer=JSON.parse(JSON.stringify(lines2));
+                    inner=/*deepCopy*/(lines1[0]);
                 }else{
-                    var outer=JSON.parse(JSON.stringify(lines1));
-                    var inner=/*deepCopy*/(lines2[0]);
+                    outer=JSON.parse(JSON.stringify(lines1));
+                    inner=/*deepCopy*/(lines2[0]);
                 }
 
 
@@ -1972,397 +1977,406 @@ A.Particles.collision2D = function(particle1,particle2){
  */
 //======================================================================================================================
 T.Objects = T.Objects || {};
-var A/*Actual Namespace*/ = T.Objects;
 
 
 
-
-//todo ES6 style:     A.Array = class extends Array{
-
-
-/**
- *
- * @param {Array} objects
- * @constructor
- */
-A.Array = function(objects){
-
-    this.objects = [];
-
-    if(objects instanceof Array)
-        objects.forEach(this.push,this);
-
-};
-
-
-A.Array.prototype.getAll = function(){
-    return this.objects;
-};
+//todo T.Objects.Array = class extends Array{
 
 
 
-A.Array.prototype.forEach = function(){
-    return this.objects.forEach.apply(this.objects,arguments);
-};
+T.Objects.Array = ((function(){"use strict";var static$0={},proto$0={};
+
+
+    /**
+     *
+     * @param {Array} objects
+     * todo ????????? @constructor
+     */
+    function constructor$0(objects){
+
+        this.objects = [];
+
+        if(objects instanceof Array)
+            objects.forEach(this.push,this);
+
+    }DP$0(constructor$0,"prototype",{"configurable":false,"enumerable":false,"writable":false});
+
+
+    proto$0.getAll = function(){
+        return this.objects;
+    };
 
 
 
-A.Array.initInstance = function(object) {
-
-    //----------------------------------
-    if (object.type == 'building') {
-
-        object = new T.Objects.Building(object);
-
-    } else if (object.type == 'terrain') {
-
-        object = new T.Objects.Terrain(object);
-
-    } else if (object.type == 'story') {
-
-        object = new T.Objects.Story(object);
-
-    } else if (object.type == 'natural') {
-
-        object = new T.Objects.Natural(object);
-
-    } else {
-        throw new Error('Cant put item into Towns Objects Array because of unrecognized object type ' + object.type);
-    }
-    //----------------------------------
-
-    return(object);
+    proto$0.forEach = function(){
+        return this.objects.forEach.apply(this.objects,arguments);
+    };
 
 
-};
 
+    static$0.initInstance = function(object) {
 
-A.Array.prototype.push = function(object){
-    return this.objects.push(T.Objects.Array.initInstance(object));
-};
+        //----------------------------------
+        if (object.type == 'building') {
 
+            object = new T.Objects.Building(object);
 
-/**
- *
- * @param {string} id
- * @returns {object}
- */
-A.Array.prototype.getById = function(id){
+        } else if (object.type == 'terrain') {
 
-    if(typeof id!=='string')throw new Error('getById: id should be string');
+            object = new T.Objects.Terrain(object);
 
-    for(var i in this.objects){
-        if(this.objects[i].id==id)return this.objects[i];
-    }
+        } else if (object.type == 'story') {
 
-    return null;
-};
+            object = new T.Objects.Story(object);
 
+        } else if (object.type == 'natural') {
 
-/**
- *
- * @param {string} id
- * @param {object} object
- * @returns {boolean}
- */
-A.Array.prototype.setById = function(id,object){
+            object = new T.Objects.Natural(object);
 
-    if(typeof id!=='string')throw new Error('setById: id should be string');
-
-    for(var i in this.objects){
-        if(this.objects[i].id==id){
-
-            this.objects[i]=T.Objects.Array.initInstance(object);
-            return(true);
-
+        } else {
+            throw new Error('Cant put item into Towns Objects Array because of unrecognized object type ' + object.type);
         }
-    }
+        //----------------------------------
 
-    return false;
-};
-
+        return(object);
 
 
+    };
 
-/**
- *
- * @param {string} id
- * @returns {boolean}
- */
-A.Array.prototype.removeId = function(id,object){
 
-    if(typeof id!=='string')throw new Error('removeId: id should be string');
+    proto$0.push = function(object){
+        return this.objects.push(T.Objects.Array.initInstance(object));
+    };
 
-    for(var i in this.objects){
-        if(this.objects[i].id==id){
 
-            this.objects.splice(i,1);
-            return(true);
+    /**
+     *
+     * @param {string} id
+     * @returns {object}
+     */
+    proto$0.getById = function(id){
 
+        if(typeof id!=='string')throw new Error('getById: id should be string');
+
+        for(var i in this.objects){
+            if(this.objects[i].id==id)return this.objects[i];
         }
-    }
-
-    return false;
-};
-
-
-
-
-/**
- * @param {string} type
- * @returns {T.Objects.Array}
- */
-A.Array.prototype.filterTypes = function(){
-
-    var filtered_objects=new T.Objects.Array();
-    var types=Array.prototype.slice.call(arguments);
-
-    this.forEach(function(object){
-
-        if(types.indexOf(object.type)==-1)return;
-
-        filtered_objects.push(object);
-
-    });
-
-    return(filtered_objects);
-};
-
-
-/**
- *
- * @param {T.Position} center
- * @param {number} radius
- * @returns {Array}
- */
-A.Array.prototype.getMapOfTerrainCodes = function(center,radius){//todo maybe refactor to getTerrainCodes2DArray or getTerrainCodesMap
-
-    /*var radius = size/2;
-    var center ={
-        x: topleft.x+radius,
-        y: topleft.y+radius
-    };*/
-
-    //--------------------------Create empty array
-    var map_array=[];
-    for (var y = 0; y < radius*2; y++) {
-        map_array[y]=[];
-        for (var x = 0; x < radius*2; x++) {
-            map_array[y][x]=false;
-        }
-    }
-
-    //--------------------------
-
-    //--------------------------Fill array
-
-
-    this.objects.forEach(function(object){
-
-        if(object.type!='terrain')return;
-
-        if(object.design.data.size==1) {//todo is this optimalization effective?
-            //--------------------------
-
-            var x = Math.floor(object.x - center.x + radius);
-            var y = Math.floor(object.y - center.y + radius);
-
-            map_array[y][x] = object.getCode();
-
-            //--------------------------
-        }else {
-            //--------------------------
-
-            var x_from = Math.floor(object.x - center.x + radius - object.design.data.size);
-            var x_to = Math.ceil(object.x - center.x + radius + object.design.data.size);
-
-            var y_from = Math.floor(object.y - center.y + radius - object.design.data.size);
-            var y_to = Math.ceil(object.y - center.y + radius + object.design.data.size);
-
-
-            var xc = radius + center.x - object.x;
-            var yc = radius + center.y - object.y;
-
-
-            for (var y = y_from; y <= y_to; y++) {
-
-                if (typeof map_array[y] === 'undefined')continue;
-
-                for (var x = x_from; x <= x_to; x++) {
-
-
-                    if (typeof map_array[y][x] === 'undefined')continue;
-
-
-                    if (T.Math.xy2dist(x - xc, y - yc) <= object.design.data.size) {
-
-                        map_array[y][x] = object.getCode();
-
-
-                    }
-                }
-            }
-
-            //--------------------------
-        }
-
-    });
-    //--------------------------
-
-    return map_array;
-
-
-};
-
-
-/**
- *
- * @returns {T.Objects.Array}
- */
-A.Array.prototype.get1x1TerrainObjects = function(){
-
-
-    var terrain_objects_1x1=new T.Objects.Array();
-
-
-    var terrain_objects = this.filterTypes('terrain').getAll().reverse();//normal Array
-
-    //--------------------------Fill array
-
-    var blocked_positions={};
-
-    terrain_objects.forEach(function(object){
-
-
-        if(object.design.data.size==1) {
-            //--------------------------
-
-            var object_1x1 = object;
-
-            var key = 'x'+object_1x1.x+'y'+object_1x1.y;
-            if(typeof blocked_positions[key]=='undefined'){
-                blocked_positions[key]=true;
-
-                terrain_objects_1x1.push(object_1x1);
-
-            }
-
-            //--------------------------
-        }else {
-            //--------------------------
-
-            var x_from = Math.floor(- object.design.data.size);
-            var x_to = Math.ceil(object.design.data.size);
-
-            var y_from = Math.floor(- object.design.data.size);
-            var y_to = Math.ceil(object.design.data.size);
-
-
-
-
-            for (var y = y_from; y <= y_to; y++) {
-                for (var x = x_from; x <= x_to; x++) {
-
-                    if (T.Math.xy2dist(x,y) <= object.design.data.size) {
-
-                        var object_1x1 = object.clone();
-
-                        object_1x1.design.data.size=1;
-                        object_1x1.x+=x;
-                        object_1x1.y+=y;
-
-                        var key = 'x'+object_1x1.x+'y'+object_1x1.y;
-                        if(typeof blocked_positions[key]=='undefined'){
-                            blocked_positions[key]=true;
-
-                            terrain_objects_1x1.push(object_1x1);
-
-                        }
-
-
-
-                    }
-                }
-            }
-
-            //--------------------------
-        }
-
-    });
-    //--------------------------
-
-    return terrain_objects_1x1;
-
-
-};
-
-
-
-
-//todo jsdoc
-A.Array.prototype.getTerrainOnPosition = function(position){
-
-
- for(var i=this.objects.length-1;i>=0;i--){
-     if (this.objects[i].type != 'terrain')continue;
-
-
-     if(this.objects[i].design.data.size<=position.getDistance(new T.Position(this.objects[i].x,this.objects[i].y))){
-         return(this.objects[i]);
-     }
- }
-
- return(null);
-
-};
-
-
-
-
-//todo jsdoc
-A.Array.prototype.getNearestTerrainPositionWithCode = function(position,terrain_code){
-
-    var terrain_objects_1x1 = this.get1x1TerrainObjects();
-
-    var min_distance=-1;
-    var nearest_terrain_1x1=false;
-
-    terrain_objects_1x1.forEach(function(terrain_1x1){
-
-        var distance = terrain_1x1.getPosition().getDistance(position);
-
-        if(min_distance===-1 || min_distance>distance){
-            min_distance=distance;
-            nearest_terrain_1x1=terrain_1x1;
-        }
-
-    });
-
-    if(nearest_terrain_1x1===false){
 
         return null;
-
-    }else{
-
-        return nearest_terrain_1x1.getPosition();
-
-    }
+    };
 
 
+    /**
+     *
+     * @param {string} id
+     * @param {object} object
+     * @returns {boolean}
+     */
+    proto$0.setById = function(id,object){
+
+        if(typeof id!=='string')throw new Error('setById: id should be string');
+
+        for(var i in this.objects){
+            if(this.objects[i].id==id){
+
+                this.objects[i]=T.Objects.Array.initInstance(object);
+                return(true);
+
+            }
+        }
+
+        return false;
+    };
 
 
 
-};
+
+    /**
+     *
+     * @param {string} id
+     * @returns {boolean}
+     */
+    proto$0.removeId = function(id,object){
+
+        if(typeof id!=='string')throw new Error('removeId: id should be string');
+
+        for(var i in this.objects){
+            if(this.objects[i].id==id){
+
+                this.objects.splice(i,1);
+                return(true);
+
+            }
+        }
+
+        return false;
+    };
 
 
 
-/*
 
- A.Array.prototype.getMapOfCollisionCodes = function(real_objects,position){
- return Terrain;
- };
+    /**
+     * @param {string} type
+     * @returns {T.Objects.Array}
+     */
+    proto$0.filterTypes = function(){
 
- */
+        var filtered_objects=new T.Objects.Array();
+        var types=Array.prototype.slice.call(arguments);
+
+        this.forEach(function(object){
+
+            if(types.indexOf(object.type)==-1)return;
+
+            filtered_objects.push(object);
+
+        });
+
+        return(filtered_objects);
+    };
+
+
+    /**
+     *
+     * @param {T.Position} center
+     * @param {number} radius
+     * @returns {Array}
+     */
+    proto$0.getMapOfTerrainCodes = function(center,radius){//todo maybe refactor to getTerrainCodes2DArray or getTerrainCodesMap
+
+        /*var radius = size/2;
+         var center ={
+         x: topleft.x+radius,
+         y: topleft.y+radius
+         };*/
+
+        //--------------------------Create empty array
+        var map_array=[];
+        for (var y = 0; y < radius*2; y++) {
+            map_array[y]=[];
+            for (var x = 0; x < radius*2; x++) {
+                map_array[y][x]=false;
+            }
+        }
+
+        //--------------------------
+
+        //--------------------------Fill array
+
+
+        this.objects.forEach(function(object){
+
+            if(object.type!='terrain')return;
+
+            var x,y;
+
+            if(object.design.data.size==1) {//todo is this optimalization effective?
+                //--------------------------
+
+                x = Math.floor(object.x - center.x + radius);
+                y = Math.floor(object.y - center.y + radius);
+
+                map_array[y][x] = object.getCode();
+
+                //--------------------------
+            }else {
+                //--------------------------
+
+                var x_from = Math.floor(object.x - center.x + radius - object.design.data.size);
+                var x_to = Math.ceil(object.x - center.x + radius + object.design.data.size);
+
+                var y_from = Math.floor(object.y - center.y + radius - object.design.data.size);
+                var y_to = Math.ceil(object.y - center.y + radius + object.design.data.size);
+
+
+                var xc = radius + center.x - object.x;
+                var yc = radius + center.y - object.y;
+
+
+                for (y = y_from; y <= y_to; y++) {
+
+                    if (typeof map_array[y] === 'undefined')continue;
+
+                    for (x = x_from; x <= x_to; x++) {
+
+
+                        if (typeof map_array[y][x] === 'undefined')continue;
+
+
+                        if (T.Math.xy2dist(x - xc, y - yc) <= object.design.data.size) {
+
+                            map_array[y][x] = object.getCode();
+
+
+                        }
+                    }
+                }
+
+                //--------------------------
+            }
+
+        });
+        //--------------------------
+
+        return map_array;
+
+
+    };
+
+
+    /**
+     *
+     * @returns {T.Objects.Array}
+     */
+    proto$0.get1x1TerrainObjects = function(){
+
+
+        var terrain_objects_1x1=new T.Objects.Array();
+
+
+        var terrain_objects = this.filterTypes('terrain').getAll().reverse();//normal Array
+
+        //--------------------------Fill array
+
+        var blocked_positions={};
+
+        terrain_objects.forEach(function(object){
+
+            var object_1x1,key;
+
+            if(object.design.data.size==1) {
+                //--------------------------
+
+                object_1x1 = object;
+
+                key = 'x'+object_1x1.x+'y'+object_1x1.y;
+                if(typeof blocked_positions[key]=='undefined'){
+                    blocked_positions[key]=true;
+
+                    terrain_objects_1x1.push(object_1x1);
+
+                }
+
+                //--------------------------
+            }else {
+                //--------------------------
+
+                var x_from = Math.floor(- object.design.data.size);
+                var x_to = Math.ceil(object.design.data.size);
+
+                var y_from = Math.floor(- object.design.data.size);
+                var y_to = Math.ceil(object.design.data.size);
+
+
+
+
+                for (var y = y_from; y <= y_to; y++) {
+                    for (var x = x_from; x <= x_to; x++) {
+
+                        if (T.Math.xy2dist(x,y) <= object.design.data.size) {
+
+                            object_1x1 = object.clone();
+
+                            object_1x1.design.data.size=1;
+                            object_1x1.x+=x;
+                            object_1x1.y+=y;
+
+                            key = 'x'+object_1x1.x+'y'+object_1x1.y;
+                            if(typeof blocked_positions[key]=='undefined'){
+                                blocked_positions[key]=true;
+
+                                terrain_objects_1x1.push(object_1x1);
+
+                            }
+
+
+
+                        }
+                    }
+                }
+
+                //--------------------------
+            }
+
+        });
+        //--------------------------
+
+        return terrain_objects_1x1;
+
+
+    };
+
+
+
+
+    //todo jsdoc
+    proto$0.getTerrainOnPosition = function(position){
+
+
+        for(var i=this.objects.length-1;i>=0;i--){
+            if (this.objects[i].type != 'terrain')continue;
+
+
+            if(this.objects[i].design.data.size<=position.getDistance(new T.Position(this.objects[i].x,this.objects[i].y))){
+                return(this.objects[i]);
+            }
+        }
+
+        return(null);
+
+    };
+
+
+
+
+    //todo jsdoc
+    proto$0.getNearestTerrainPositionWithCode = function(position,terrain_code){
+
+        var terrain_objects_1x1 = this.get1x1TerrainObjects();
+
+        var min_distance=-1;
+        var nearest_terrain_1x1=false;
+
+        terrain_objects_1x1.forEach(function(terrain_1x1){
+
+            var distance = terrain_1x1.getPosition().getDistance(position);
+
+            if(min_distance===-1 || min_distance>distance){
+                min_distance=distance;
+                nearest_terrain_1x1=terrain_1x1;
+            }
+
+        });
+
+        if(nearest_terrain_1x1===false){
+
+            return null;
+
+        }else{
+
+            return nearest_terrain_1x1.getPosition();
+
+        }
+
+
+
+
+
+    };
+
+
+
+    /*
+
+     getMapOfCollisionCodes(real_objects,position){
+     return Terrain;
+     };
+
+     */
+
+    
+
+MIXIN$0(constructor$0,static$0);MIXIN$0(constructor$0.prototype,proto$0);static$0=proto$0=void 0;return constructor$0;})());
 
 
 
@@ -2373,12 +2387,11 @@ A.Array.prototype.getNearestTerrainPositionWithCode = function(position,terrain_
  */
 //======================================================================================================================
 T.Objects = T.Objects || {};
-var A/*Actual Namespace*/ = T.Objects;
 
 
 
 
-A.Object = ((function(){"use strict";var proto$0={};
+T.Objects.Object = ((function(){"use strict";var proto$0={};
 
     function constructor$0(object){
 
@@ -2407,12 +2420,11 @@ MIXIN$0(constructor$0.prototype,proto$0);proto$0=void 0;return constructor$0;})(
  */
 //======================================================================================================================
 T.Objects = T.Objects || {};
-var A/*Actual Namespace*/ = T.Objects;
 
 
 
 
-A.Building = ((function(super$0){"use strict";super$0=A.Object;function constructor$0() {if(super$0!==null)super$0.apply(this, arguments)}if(!PRS$0)MIXIN$0(constructor$0, super$0);if(super$0!==null)SP$0(constructor$0,super$0);constructor$0.prototype = OC$0(super$0!==null?super$0.prototype:null,{"constructor":{"value":constructor$0,"configurable":true,"writable":true}});DP$0(constructor$0,"prototype",{"configurable":false,"enumerable":false,"writable":false});var proto$0={};
+T.Objects.Building = ((function(super$0){"use strict";super$0=A.Object;function constructor$0() {if(super$0!==null)super$0.apply(this, arguments)}if(!PRS$0)MIXIN$0(constructor$0, super$0);if(super$0!==null)SP$0(constructor$0,super$0);constructor$0.prototype = OC$0(super$0!==null?super$0.prototype:null,{"constructor":{"value":constructor$0,"configurable":true,"writable":true}});DP$0(constructor$0,"prototype",{"configurable":false,"enumerable":false,"writable":false});var proto$0={};
 
 
     proto$0.clone = function(){//todo all classes should have this method
@@ -2437,12 +2449,11 @@ MIXIN$0(constructor$0.prototype,proto$0);proto$0=void 0;return constructor$0;})(
  */
 //======================================================================================================================
 T.Objects = T.Objects || {};
-var A/*Actual Namespace*/ = T.Objects;
 
 
 
 
-A.Natural = ((function(super$0){"use strict";super$0=A.Object;function constructor$0() {if(super$0!==null)super$0.apply(this, arguments)}if(!PRS$0)MIXIN$0(constructor$0, super$0);if(super$0!==null)SP$0(constructor$0,super$0);constructor$0.prototype = OC$0(super$0!==null?super$0.prototype:null,{"constructor":{"value":constructor$0,"configurable":true,"writable":true}});DP$0(constructor$0,"prototype",{"configurable":false,"enumerable":false,"writable":false});var proto$0={};
+T.Objects.Natural = ((function(super$0){"use strict";super$0=A.Object;function constructor$0() {if(super$0!==null)super$0.apply(this, arguments)}if(!PRS$0)MIXIN$0(constructor$0, super$0);if(super$0!==null)SP$0(constructor$0,super$0);constructor$0.prototype = OC$0(super$0!==null?super$0.prototype:null,{"constructor":{"value":constructor$0,"configurable":true,"writable":true}});DP$0(constructor$0,"prototype",{"configurable":false,"enumerable":false,"writable":false});var proto$0={};
 
     proto$0.clone = function(){//todo all classes should have this method
         return(new T.Objects.Natural(JSON.parse(JSON.stringify(this))));
@@ -2464,12 +2475,11 @@ MIXIN$0(constructor$0.prototype,proto$0);proto$0=void 0;return constructor$0;})(
  */
 //======================================================================================================================
 T.Objects = T.Objects || {};
-var A/*Actual Namespace*/ = T.Objects;
 
 
 
 
-A.Story = ((function(super$0){"use strict";super$0=A.Object;function constructor$0() {if(super$0!==null)super$0.apply(this, arguments)}if(!PRS$0)MIXIN$0(constructor$0, super$0);if(super$0!==null)SP$0(constructor$0,super$0);constructor$0.prototype = OC$0(super$0!==null?super$0.prototype:null,{"constructor":{"value":constructor$0,"configurable":true,"writable":true}});DP$0(constructor$0,"prototype",{"configurable":false,"enumerable":false,"writable":false});var proto$0={};
+T.Objects.Story = ((function(super$0){"use strict";super$0=A.Object;function constructor$0() {if(super$0!==null)super$0.apply(this, arguments)}if(!PRS$0)MIXIN$0(constructor$0, super$0);if(super$0!==null)SP$0(constructor$0,super$0);constructor$0.prototype = OC$0(super$0!==null?super$0.prototype:null,{"constructor":{"value":constructor$0,"configurable":true,"writable":true}});DP$0(constructor$0,"prototype",{"configurable":false,"enumerable":false,"writable":false});var proto$0={};
 
     proto$0.clone = function(){//todo all classes should have this method
         return(new T.Objects.Story(JSON.parse(JSON.stringify(this))));
@@ -2491,12 +2501,10 @@ MIXIN$0(constructor$0.prototype,proto$0);proto$0=void 0;return constructor$0;})(
  */
 //======================================================================================================================
 T.Objects = T.Objects || {};
-var A/*Actual Namespace*/ = T.Objects;//todo refactor this should not be under MapGenerator namespace
 
 
 
-
-A.Terrain = ((function(super$0){"use strict";super$0=A.Object;function constructor$0() {if(super$0!==null)super$0.apply(this, arguments)}if(!PRS$0)MIXIN$0(constructor$0, super$0);if(super$0!==null)SP$0(constructor$0,super$0);constructor$0.prototype = OC$0(super$0!==null?super$0.prototype:null,{"constructor":{"value":constructor$0,"configurable":true,"writable":true}});DP$0(constructor$0,"prototype",{"configurable":false,"enumerable":false,"writable":false});var proto$0={};
+T.Objects.Terrain = ((function(super$0){"use strict";super$0=A.Object;function constructor$0() {if(super$0!==null)super$0.apply(this, arguments)}if(!PRS$0)MIXIN$0(constructor$0, super$0);if(super$0!==null)SP$0(constructor$0,super$0);constructor$0.prototype = OC$0(super$0!==null?super$0.prototype:null,{"constructor":{"value":constructor$0,"configurable":true,"writable":true}});DP$0(constructor$0,"prototype",{"configurable":false,"enumerable":false,"writable":false});var proto$0={};
 
 
     proto$0.clone = function(){//todo all classes should have this method
@@ -2533,10 +2541,9 @@ MIXIN$0(constructor$0.prototype,proto$0);proto$0=void 0;return constructor$0;})(
  * @fileOverview Creates class Position 3D
  */
 //======================================================================================================================
-var A/*Actual Namespace*/ = T;
 
 
-A.Position3D = ((function(){"use strict";var proto$0={};
+T.Position3D = ((function(){"use strict";var proto$0={};
 
 
     function constructor$0(x,y,z){
@@ -2582,10 +2589,9 @@ MIXIN$0(constructor$0.prototype,proto$0);proto$0=void 0;return constructor$0;})(
  * @fileOverview Creates class Position
  */
 //======================================================================================================================
-var A/*Actual Namespace*/ = T;
 
 
-A.Position = ((function(){"use strict";var proto$0={};
+T.Position = ((function(){"use strict";var proto$0={};
 
     function constructor$0(x,y){
 
@@ -2642,8 +2648,6 @@ MIXIN$0(constructor$0.prototype,proto$0);proto$0=void 0;return constructor$0;})(
  * @fileOverview Creates class Resources
  */
 //======================================================================================================================
-var A/*Actual Namespace*/ = T;
-
 
 
 
@@ -2651,339 +2655,339 @@ var A/*Actual Namespace*/ = T;
  * @param {object} Resources
  * @constructor
  */
-A.Resources = function(resources){
-
-    for(var key in resources){
-        if(typeof resources[key]=='number') {
-            this[key] = Math.ceil(resources[key]);
-        }
-    }
-
-};
+T.Resources = ((function(){"use strict";var proto$0={};
 
 
+    function constructor$0(resources)
+    {
 
-
-
-/**
- * @static
- * @return {array} new Resources
- */
-A.Resources.newSingles = function(resources){
-
-    var resources_array=[];
-
-    for(var key in resources){
-        if(typeof resources[key]=='number') {
-            if(resources[key]>0) {
-
-                var resources_={};
-                resources_[key]=resources[key];
-
-                resources_array.push(new T.Resources(resources_));
-
+        for (var key in resources) {
+            if (typeof resources[key] == 'number') {
+                this[key] = Math.ceil(resources[key]);
             }
         }
-    }
 
-    return resources_array;
-
-};
+    }DP$0(constructor$0,"prototype",{"configurable":false,"enumerable":false,"writable":false});
 
 
+    /**
+     * @static
+     * @return {array} new Resources
+     */
+    proto$0.newSingles = function(resources){
 
+        var resources_array = [];
 
+        for (var key in resources) {
+            if (typeof resources[key] == 'number') {
+                if (resources[key] > 0) {
 
-/**
- * @param {number} k
- * @return {bool} success
- */
-A.Resources.prototype.clone = function(){
+                    var resources_ = {};
+                    resources_[key] = resources[key];
 
-    return new T.Resources(this);
+                    resources_array.push(new T.Resources(resources_));
 
-};
-
-
-
-/**
- * Checks whether this contains a given resources
- * @param {object} Resources
- * @return {bool} contains
- */
-A.Resources.prototype.contains = function(resources){
-
-    for(var key in resources){
-
-        if(typeof this[key]=='number'){
-            return false;
+                }
+            }
         }
 
-        if(this[key]<resources[key]){
-            return false;
-        }
-    }
+        return resources_array;
 
-    return true;
-
-};
+    };
 
 
+    /**
+     * @param {number} k
+     * @return {bool} success
+     */
+    proto$0.clone = function(){
 
-/**
- * Add given resources
- * @param {object} Resources
- * @return {bool} success
- */
-A.Resources.prototype.add = function(resources){
+        return new T.Resources(this);
 
-    for(var key in resources){
-
-        if(typeof this[key]=='undefined'){
-            this[key]=0;
-        }
-
-        if(typeof this[key]=='number') {
-            this[key] += resources[key];
-        }
-
-    }
-
-    return this;
-
-};
+    };
 
 
 
-/**
- * @param {number} k
- * @return this
- */
-A.Resources.prototype.multiply = function(k){
+    /**
+     * Checks whether this contains a given resources
+     * @param {object} Resources
+     * @return {bool} contains
+     */
+    proto$0.contains = function(resources){
 
-    for(var key in this){
+        for (var key in resources) {
 
-        if(typeof this[key]=='number'){//todo better solution
-            this[key] = Math.ceil(this[key] * k);
+            if (typeof this[key] == 'number') {
+                return false;
+            }
+
+            if (this[key] < resources[key]) {
+                return false;
+            }
         }
 
+        return true;
 
-    }
-
-    return this;
-
-};
+    };
 
 
 
-/**
- * @param {number} k
- * @return this
- */
-A.Resources.prototype.signum = function(k){
+    /**
+     * Add given resources
+     * @param {object} Resources
+     * @return {bool} success
+     */
+    proto$0.add = function(resources){
 
-    for(var key in this){
+        for (var key in resources) {
 
-        if(typeof this[key]=='number'){//todo better solution
+            if (typeof this[key] == 'undefined') {
+                this[key] = 0;
+            }
 
-            if(this[key]>0){
-
-                this[key]=1;
-
-            }else{
-
-                this[key]=0
-
+            if (typeof this[key] == 'number') {
+                this[key] += resources[key];
             }
 
         }
 
+        return this;
 
-    }
-
-    return this;
-
-};
+    };
 
 
 
-/**
- * @param {function} modifier
- * @return this
- */
-A.Resources.prototype.apply = function(modifier){
+    /**
+     * @param {number} k
+     * @return this
+     */
+    proto$0.multiply = function(k){
 
-    for(var key in this){
+        for (var key in this) {
 
-        if(typeof this[key]=='number'){//todo better solution
-            this[key] = modifier(this[key]);
+            if (typeof this[key] == 'number') {//todo better solution
+                this[key] = Math.ceil(this[key] * k);
+            }
+
+
         }
 
-    }
+        return this;
 
-    return this;
-
-};
+    };
 
 
-/**
- *
- * @return {Array} all resources keys
-*/
-A.Resources.prototype.extractKeys = function(){
 
-    var keys=[];
+    /**
+     * @param {number} k
+     * @return this
+     */
+    proto$0.signum = function(k){
 
-    for(var key in this){
+        for (var key in this) {
 
-        if(typeof this[key]=='number'){//todo better solution
-            keys.push(key);
+            if (typeof this[key] == 'number') {//todo better solution
+
+                if (this[key] > 0) {
+
+                    this[key] = 1;
+
+                } else {
+
+                    this[key] = 0;
+
+                }
+
+            }
+
+
         }
 
+        return this;
 
-    }
-
-    return(keys);
-
-};
-
-
-/**
- *
- * @param {object} Resoures
- * @return {number} Distance between this and given Resources
- */
-A.Resources.prototype.compare = function(resoures){
-
-    var resources_A=this;
-    var resources_B=resoures;
-
-    var keys=[];
-
-    keys=keys.concat(resources_A.extractKeys());
-    keys=keys.concat(resources_B.extractKeys());
-
-
-    keys=keys.filter(function(value, index, self) {
-        return self.indexOf(value) === index;
-    });
-
-
-    var distance=0;
-
-    for(var i in keys){
-
-        var key = keys[i];
-
-        val_A = resources_A[key];
-        val_B = resources_B[key];
-
-
-        if(typeof val_A=='undefined')val_A=0;
-        if(typeof val_B=='undefined')val_B=0;
-
-        distance+=Math.pow(val_A-val_B,2);
-
-    }
-
-    distance=Math.sqrt(distance);
-
-
-    return(distance);
-
-};
+    };
 
 
 
-/**
- * Remove given resources
- * @param {object} Resources
- * @return {bool} success
- */
-A.Resources.prototype.remove = function(resources){
+    /**
+     * @param {function} modifier
+     * @return this
+     */
+    proto$0.apply = function(modifier){
 
-    if(!this.contains(resources))return false;
+        for (var key in this) {
 
-    for(var key in resources){
-
-        this[key]-=resources[key];
-
-    }
-
-    return true;
-
-};
-
-
-/**
- * Converts Resources to simple string
- * @return {string}
- */
-A.Resources.prototype.toString = function(){
-
-    var strings = [];
-
-    for(var key in this){
-
-        if(typeof this[key]=='number'){//todo better solution
-
-            if(this[key]!=0){
-                strings.push(this[key]+' '+key);
+            if (typeof this[key] == 'number') {//todo better solution
+                this[key] = modifier(this[key]);
             }
 
         }
 
-    }
+        return this;
 
-    return strings.join(', ');
-
-};
+    };
 
 
 
+    /**
+     *
+     * @return {Array} all resources keys
+     */
+    proto$0.extractKeys = function(){
+
+        var keys = [];
+
+        for (var key in this) {
+
+            if (typeof this[key] == 'number') {//todo better solution
+                keys.push(key);
+            }
+
+
+        }
+
+        return (keys);
+
+    };
 
 
 
-A.Resources.prototype.toHTML = function(){//todo put url prefix into params
+    /**
+     *
+     * @param {object} Resoures
+     * @return {number} Distance between this and given Resources
+     */
+    proto$0.compare = function(resoures){
 
-    var strings = [];
+        var resources_A = this;
+        var resources_B = resoures;
 
-    for(var key in this){
+        var keys = [];
 
-        if(typeof this[key]=='number'){//todo better solution
+        keys = keys.concat(resources_A.extractKeys());
+        keys = keys.concat(resources_B.extractKeys());
 
-            if(this[key]!=0){
 
-                var name = Locale.get('resource',key);
-                var value = this[key];
+        keys = keys.filter(function (value, index, self) {
+            return self.indexOf(value) === index;
+        });
 
-                value=value.toLocaleString(/*'en-US''de-DE'*/);//todo todo better solution
 
-                strings.push('<div><img src="/media/image/resources/'+key+'.png" title="'+name+'" alt="'+name+'" >'+value+'</div>');
+        var distance = 0;
+
+        for (var i in keys) {
+
+            var key = keys[i];
+
+            val_A = resources_A[key];
+            val_B = resources_B[key];
+
+
+            if (typeof val_A == 'undefined')val_A = 0;
+            if (typeof val_B == 'undefined')val_B = 0;
+
+            distance += Math.pow(val_A - val_B, 2);
+
+        }
+
+        distance = Math.sqrt(distance);
+
+
+        return (distance);
+
+    };
+
+
+
+    /**
+     * Remove given resources
+     * @param {object} Resources
+     * @return {bool} success
+     */
+    proto$0.remove = function(resources){
+
+        if (!this.contains(resources))return false;
+
+        for (var key in resources) {
+
+            this[key] -= resources[key];
+
+        }
+
+        return true;
+
+    };
+
+
+
+    /**
+     * Converts Resources to simple string
+     * @return {string}
+     */
+    proto$0.toString = function(){
+
+        var strings = [];
+
+        for (var key in this) {
+
+            if (typeof this[key] == 'number') {//todo better solution
+
+                if (this[key] !== 0) {
+                    strings.push(this[key] + ' ' + key);
+                }
+
             }
 
         }
 
-    }
-    strings=strings.join(' ');
-    strings='<div class="resources">'+strings+'</div>';
+        return strings.join(', ');
 
-    return strings;
+    };
 
-};
+
+
+    proto$0.toHTML = function(){//todo put url prefix into params
+
+        var strings = [];
+
+        for (var key in this) {
+
+            if (typeof this[key] == 'number') {//todo better solution
+
+                if (this[key] !== 0) {
+
+                    var name = Locale.get('resource', key);
+                    var value = this[key];
+
+                    value = value.toLocaleString(/*'en-US''de-DE'*/);//todo todo better solution
+
+                    strings.push('<div><img src="/media/image/resources/' + key + '.png" title="' + name + '" alt="' + name + '" >' + value + '</div>');
+                }
+
+            }
+
+        }
+        strings = strings.join(' ');
+        strings = '<div class="resources">' + strings + '</div>';
+
+        return strings;
+
+    };
+
+
+
+MIXIN$0(constructor$0.prototype,proto$0);proto$0=void 0;return constructor$0;})());
 
 /**
  * @author ©Towns.cz
  * @fileOverview ...
  */
 //======================================================================================================================
-T.World = T.World || {};
-var A/*Actual Namespace*/ = T.World;
+T.World = T.World || {};//todo create namespace
 
 
 
-
-A.terrains = [
+T.World.terrains = [
     new T.Objects.Terrain({type:'terrain', design: {type:'terrain', data:{image: 0 ,color: '#000000', size: 1}}, name: 'temnota'}),
     new T.Objects.Terrain({type:'terrain', design: {type:'terrain', data:{image: 1 ,color: '#337EFA', size: 1}}, name: 'moře'}),
     new T.Objects.Terrain({type:'terrain', design: {type:'terrain', data:{image: 2 ,color: '#545454', size: 1}}, name: 'dlažba'}),
@@ -3007,16 +3011,12 @@ A.terrains = [
  * @fileOverview ...
  */
 //======================================================================================================================
-T.World = T.World || {};
-var A/*Actual Namespace*/ = T.World;
+T.World = T.World || {};//todo create namespace
 
 
 
 
-//todo//var z_map_cache={};
-
-
-A.mapGenerator = new T.MapGenerator(
+T.World.mapGenerator = new T.MapGenerator(
 
     T.Math.blurXY(function(x,y){
 
@@ -3066,20 +3066,20 @@ A.mapGenerator = new T.MapGenerator(
 
     new T.MapGenerator.Biotope([
 
-        { amount: 120 , terrain: A.terrains[ 1]},//moře
-        { amount: 40 , terrain: A.terrains[11]},//řeka
-        { amount: 30 , terrain: A.terrains[ 4]},//písek
-        { amount: 20 , terrain: A.terrains[12]},//tráva jaro
-        { amount: 40 , terrain: A.terrains[ 9]},//tráva toxic
-        { amount: 20 , terrain: A.terrains[ 8]},//tráva normal
-        { amount: 20 , terrain: A.terrains[10]},//les
-        { amount: 50 , terrain: A.terrains[ 4]},//písek
-        { amount: 10 , terrain: A.terrains[13]},//tráva pozim
-        { amount: 20 , terrain: A.terrains[ 5]},//kamení
-        { amount: 60 , terrain: A.terrains[ 3]},//sníh/led
-        { amount: 10 , terrain: A.terrains[10]},//les
-        { amount: 60 , terrain: A.terrains[ 7]},//sníh/led
-        { amount: 10 , terrain: A.terrains[ 5]},//kamení
+        { amount: 120 , terrain: T.World.terrains[ 1]},//moře
+        { amount: 40 , terrain: T.World.terrains[11]},//řeka
+        { amount: 30 , terrain: T.World.terrains[ 4]},//písek
+        { amount: 20 , terrain: T.World.terrains[12]},//tráva jaro
+        { amount: 40 , terrain: T.World.terrains[ 9]},//tráva toxic
+        { amount: 20 , terrain: T.World.terrains[ 8]},//tráva normal
+        { amount: 20 , terrain: T.World.terrains[10]},//les
+        { amount: 50 , terrain: T.World.terrains[ 4]},//písek
+        { amount: 10 , terrain: T.World.terrains[13]},//tráva pozim
+        { amount: 20 , terrain: T.World.terrains[ 5]},//kamení
+        { amount: 60 , terrain: T.World.terrains[ 3]},//sníh/led
+        { amount: 10 , terrain: T.World.terrains[10]},//les
+        { amount: 60 , terrain: T.World.terrains[ 7]},//sníh/led
+        { amount: 10 , terrain: T.World.terrains[ 5]},//kamení
 
 
 
@@ -3090,7 +3090,7 @@ A.mapGenerator = new T.MapGenerator(
 
         if(object.type!='terrain')return;
 
-        if(object.design.data.image==5){
+        if(object.design.datT.World.image==5){
             virtual_objects.push(
                 {
 
@@ -3110,7 +3110,7 @@ A.mapGenerator = new T.MapGenerator(
 
 
         }else
-        if(object.design.data.image==10){
+        if(object.design.datT.World.image==10){
                         virtual_objects.push(
                 {
 
@@ -3160,9 +3160,7 @@ A.mapGenerator = new T.MapGenerator(
  * @fileOverview Creates configuration of game conditions
  */
 //======================================================================================================================
-T.World = T.World || {};
-var A/*Actual Namespace*/ = T.World;
-
+T.World = T.World || {};//todo create namespace
 
 
 
@@ -3170,7 +3168,7 @@ var A/*Actual Namespace*/ = T.World;
 var K=0.05;
 
 
-A.game = new T.Game(
+T.World.game = new T.Game(
     {
         //---------------------------------------------Defense
         'defense': new T.Game.ActionType(

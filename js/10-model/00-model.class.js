@@ -32,7 +32,7 @@ T.Model = class{
 
     clone (){
         return(new T.Model(JSON.parse(JSON.stringify(this))));
-    };
+    }
 
 
 
@@ -51,15 +51,6 @@ T.Model = class{
     }
 
 
-
-    
-
-    //todo jsdoc
-    clone(){
-
-        return new T.Model(JSON.parse(JSON.stringify(this)));
-
-    }
 
 
 
@@ -225,7 +216,7 @@ T.Model = class{
         //---------------------------------------------Convert links to raw data
 
 
-        var findParticleByName (particles, name) {//todo move to prototype
+        var findParticleByName = function(particles, name) {//todo move to prototype
 
             for (var i in particles) {
 
@@ -250,7 +241,7 @@ T.Model = class{
         };
 
 
-        var particlesLinks (particles) {//todo move to prototype
+        var particlesLinks = function(particles) {//todo move to prototype
 
 
             //r(particles);
@@ -264,7 +255,7 @@ T.Model = class{
 
                     var linked_particle = findParticleByName(model.particles, particles[i].link);
 
-                    if (linked_particle == false) {
+                    if (linked_particle === false) {
                         throw new Error('Invalid link ' + particle.link);
                     }
 
@@ -321,7 +312,7 @@ T.Model = class{
 
         //---------------------------------------------Convert particles to 1D particles
 
-        var particles2Linear(particles,position,rotation,size){//todo move to prototype
+        var particles2Linear = function(particles,position,rotation,size){//todo move to prototype
 
             if(typeof position === 'undefined')position=false;
             if(typeof rotation === 'undefined')rotation=0;
@@ -348,7 +339,7 @@ T.Model = class{
                         x:0,
                         y:0,
                         z:0
-                    }
+                    };
                 }
                 if(typeof(particle.rotation)=='undefined')particle.rotation=0;
                 if(typeof(particle.size)=='undefined')particle.size=1;
@@ -491,5 +482,5 @@ T.Model = class{
     
     
 
-}
+};
 

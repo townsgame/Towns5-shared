@@ -54,6 +54,6 @@ T.MapGenerator.Biotope = class{
 
 
 
-}
+};
 
 

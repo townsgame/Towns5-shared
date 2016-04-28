@@ -86,6 +86,7 @@ A.Particles.get3D = function(particle){
         resource.points=[];
         resource.polygons=[[],[]];
         resource.polygons2D=[[],[]];
+        var base;
 
         for(var level=0;level<2;level++){
 
@@ -93,15 +94,17 @@ A.Particles.get3D = function(particle){
             //---------------------------
 
 
-            if(level==0){
-                var base=particle.shape.bottom;
+            if(level=== 0){
+                base=particle.shape.bottom;
 
             }else{
-                var base=particle.shape.top;
+                base=particle.shape.top;
             }
 
 
             //--------
+
+            var x__,y__,z__;
 
             for(var n = 0;n<particle.shape.n;n++){
 
@@ -109,26 +112,24 @@ A.Particles.get3D = function(particle){
 
                 if(!is(particle.shape.rotated)){
 
-                    var x__=0.5*x_*Math.cos(n/particle.shape.n*Math.PI*2+T.Math.deg2rad(180+180/particle.shape.n))*base+x_*(level*particle.skew.z.x),
-                        y__=0.5*y_*Math.sin(n/particle.shape.n*Math.PI*2+T.Math.deg2rad(180+180/particle.shape.n))*base+y_*(level*particle.skew.z.y),
-                        z__=z_*level;
+                    x__=0.5*x_*Math.cos(n/particle.shape.n*Math.PI*2+T.Math.deg2rad(180+180/particle.shape.n))*base+x_*(level*particle.skew.z.x);
+                    y__=0.5*y_*Math.sin(n/particle.shape.n*Math.PI*2+T.Math.deg2rad(180+180/particle.shape.n))*base+y_*(level*particle.skew.z.y);
+                    z__=z_*level;
 
                 }else{
 
                     var tmp=(2-(Math.cos(T.Math.deg2rad(180/particle.shape.n))));//todo better
 
-                    var x__=x_*((level*2)-1);//*(level-0.5);//+x_*(level*particle.skew.z.x),
+                    x__=x_*((level*2)-1);//*(level-0.5);//+x_*(level*particle.skew.z.x),
 
-                        y__=0.5*y_*Math.sin(n/particle.shape.n*Math.PI*2+T.Math.deg2rad(180+180/particle.shape.n));//+y_*(level*particle.skew.z.y),
-
-
-                        z__=(1)*0.5*(
+                    y__=0.5*y_*Math.sin(n/particle.shape.n*Math.PI*2+T.Math.deg2rad(180+180/particle.shape.n));//+y_*(level*particle.skew.z.y),
 
 
-                                z_*Math.cos(n/particle.shape.n*Math.PI*2+T.Math.deg2rad(180+180/particle.shape.n))*tmp
+                    z__=(1)*0.5*(
 
+                                z_*Math.cos(n/particle.shape.n*Math.PI*2+T.Math.deg2rad(180+180/particle.shape.n))*tmp+
+                                z_*((Math.cos(T.Math.deg2rad(180/particle.shape.n))))*tmp
 
-                                +z_*((Math.cos(T.Math.deg2rad(180/particle.shape.n))))*tmp
                             );
 
                 }
@@ -153,7 +154,7 @@ A.Particles.get3D = function(particle){
 
 
 
-                if(level==0){
+                if(level=== 0){
 
                     //r(n,1,particle.shape.n,(n+1+particle.shape.n));
                     resource.polygons[0].push(n+1);
@@ -164,10 +165,10 @@ A.Particles.get3D = function(particle){
 
 
                     resource.polygons.push([
-                        (n!=0?n:particle.shape.n),
+                        (n!== 0?n:particle.shape.n),
                         n+1,
                         n+1+particle.shape.n,
-                        (n!=0?n:particle.shape.n)+particle.shape.n
+                        (n!== 0?n:particle.shape.n)+particle.shape.n
 
                     ]);
 
@@ -215,15 +216,19 @@ A.Particles.get2Dlines = function(particle,base){
 
         }*/
 
+        var point1,point2;
+
         for(var i=-1,l=polygons2D[pn].length;i<l-1;i++){
 
 
-            if(i!=-1)
-                var point1=i;
-            else
-                var point1=l-1;
+            if(i!=-1){
+                point1=i;
+            }else{
+                point1=l-1;
+            }
 
-            var point2=i+1;
+
+            point2=i+1;
 
 
             //r(resource.polygons[pn],point1);
@@ -326,14 +331,16 @@ A.Particles.collision2D = function(particle1,particle2){
 
             var k=100;
 
+            var outer,inner;
+
             for(i=0;i<2;i++){
 
-                if(i==0){
-                    var outer=JSON.parse(JSON.stringify(lines2));
-                    var inner=/*deepCopy*/(lines1[0]);
+                if(i=== 0){
+                    outer=JSON.parse(JSON.stringify(lines2));
+                    inner=/*deepCopy*/(lines1[0]);
                 }else{
-                    var outer=JSON.parse(JSON.stringify(lines1));
-                    var inner=/*deepCopy*/(lines2[0]);
+                    outer=JSON.parse(JSON.stringify(lines1));
+                    inner=/*deepCopy*/(lines2[0]);
                 }
 
 

@@ -80,7 +80,7 @@ T.Math.prettyNumber = function(number,number_of_non_zero_digits){
  */
 T.Math.angleDiff = function(deg1,deg2){
     var a = deg1 - deg2;
-    var a = (a + 180) % 360 - 180;
+    a = (a + 180) % 360 - 180;
     return(a);
 };
 
@@ -126,8 +126,8 @@ T.Math.xy2distDeg = function(x,y){
 
     var output={};
 
-    output['dist'] = this.xy2dist(x,y);
-    output['deg'] = this.rad2deg(Math.atan2(y,x));
+    output.dist = this.xy2dist(x,y);
+    output.deg = this.rad2deg(Math.atan2(y,x));
 
     return(output);
 
@@ -142,8 +142,8 @@ T.Math.distDeg2xy = function(dist,deg){
 
     var output={};
 
-    output['x'] = Math.cos(rad)*dist;
-    output['y'] = Math.sin(rad)*dist;
+    output.x = Math.cos(rad)*dist;
+    output.y = Math.sin(rad)*dist;
 
     return(output);
 
@@ -161,8 +161,8 @@ T.Math.xyRotate = function(x,y,deg){
     rad += this.deg2rad(deg);
 
     var output={};
-    output['x'] = Math.cos(rad)*dist;
-    output['y'] = Math.sin(rad)*dist;
+    output.x = Math.cos(rad)*dist;
+    output.y = Math.sin(rad)*dist;
 
     return(output);
 
@@ -264,9 +264,10 @@ T.Math.lineCollision = function(a1x,a1y,a2x,a2y,b1x,b1y,b2x,b2y){
     var denominator = ((a2x - a1x) * (b2y - b1y)) - ((a2y - a1y) * (b2x - b1x));
     var numerator1 = ((a1y - b1y) * (b2x - b1x)) - ((a1x - b1x) * (b2y - b1y));
     var numerator2 = ((a1y - b1y) * (a2x - a1x)) - ((a1x - b1x) * (a2y - a1y));
+    var collision;
 
     // Detect coincident lines (has a problem, read below)
-    if (denominator == 0){
+    if (denominator === 0){
 
         //var collision= (numerator1 == 0 && numerator2 == 0);
         collision=false;
@@ -276,14 +277,14 @@ T.Math.lineCollision = function(a1x,a1y,a2x,a2y,b1x,b1y,b2x,b2y){
         var r = numerator1 / denominator;
         var s = numerator2 / denominator;
 
-        var collision=((r >= 0 && r <= 1) && (s >= 0 && s <= 1));
+        collision=((r >= 0 && r <= 1) && (s >= 0 && s <= 1));
 
     }
 
 
 
 
-    //-------------------------------Debug TDD
+    //-------------------------------Debug TDD do not delete
 
     /*var size=50;
     var src=createCanvasViaFunctionAndConvertToSrc(
@@ -313,7 +314,7 @@ T.Math.lineCollision = function(a1x,a1y,a2x,a2y,b1x,b1y,b2x,b2y){
 
     //-------------------------------
 
-    //console.log(collision);
+
 
     return collision;
 
@@ -356,7 +357,7 @@ T.Math.blurXY = function(generator,blur) {
 
 T.Math.bytesToSize = function(bytes) {
     var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
-    if (bytes == 0) return '0 Byte';
+    if (bytes === 0) return '0 Byte';
     var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
     return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i];
 };

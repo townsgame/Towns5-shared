@@ -9,6 +9,7 @@ var rename = require('gulp-rename');
 var es6transpiler = require('gulp-es6-transpiler');
 var uglify = require('gulp-uglify');
 var fs = require("fs");
+var jshint = require('gulp-jshint');
 
 
 
@@ -90,5 +91,19 @@ gulp.task('develop', function() {
     gulp.start("build");
     gulp.watch(['./js/*.js','./js/*/*.js'], ['build']);
 
+
+});
+
+
+
+
+
+
+gulp.task("test", function() {
+    gulp.src(['./js/*.js','./js/*/*.js'])
+        .pipe(jshint({esversion:6,laxcomma:true}))
+        .pipe(jshint.reporter("default"));
+
+    //todo my tests
 
 });
