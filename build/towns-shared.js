@@ -3155,12 +3155,107 @@ T.Position3D = ((function(){"use strict";var proto$0={};
 
 
     /**
+     * Return deep clone of this.
+     * @returns {T.Resources}
+     */
+    proto$0.clone = function(){
+        return new T.Position3D(this);
+    };
+
+
+
+    /**
      * Converts Position3D to simple string
      * @return {string}
      */
     proto$0.toString = function(){
 
         return '['+this.x+','+this.y+','+this.z+']';
+
+    };
+
+
+
+MIXIN$0(constructor$0.prototype,proto$0);proto$0=void 0;return constructor$0;})());
+
+
+
+
+
+/**
+ * @author ©Towns.cz
+ * @fileOverview Creates class PositionPolar
+ */
+//======================================================================================================================
+
+
+T.PositionPolar = ((function(){"use strict";var proto$0={};
+
+    function constructor$0(distance,degrees){
+
+        if(typeof distance == 'number' && typeof degrees == 'number'){
+
+            this.distance= distance;
+            this.degrees= degrees;
+
+        }
+        //todo check
+
+    }DP$0(constructor$0,"prototype",{"configurable":false,"enumerable":false,"writable":false});
+
+
+    /**
+     * Return deep clone of this.
+     * @returns {T.Resources}
+     */
+    proto$0.clone = function(){
+        return new T.PositionPolar(this);
+    };
+
+
+
+    proto$0.toPosition = function(){
+
+        var radians = this.getRadians();
+
+        return(new T.Position(
+            output.x = Math.cos(radians)*this.distance,
+            output.y = Math.sin(radians)*this.distance
+        ));
+
+
+    };
+
+
+    proto$0.getDistance = function(){
+
+        return this.distance;
+
+    };
+
+
+    proto$0.getDegrees = function(){
+
+        return this.degrees;
+
+    };
+
+
+    proto$0.getRadians = function(){
+
+        return T.Math.deg2rad(this.degrees);
+
+    };
+
+
+
+    /**
+     * Converts Position to simple string
+     * @return {string}
+     */
+    proto$0.toString = function(){
+
+        return ''+this.distance+','+this.degrees+'°';
 
     };
 
@@ -3183,24 +3278,66 @@ T.Position = ((function(){"use strict";var proto$0={};
 
     function constructor$0(x,y){
 
+
         if(typeof x == 'object'){
 
             this.x= x.x;
             this.y= x.y;
 
-        }else{
+        }else
+        if(/^[+-]?\d+(\.\d+)?,[+-]?\d+(\.\d+)?$/.test(x)){
+
+            x= x.split(',');
+            this.x= parseFloat(x[0]);
+            this.y= parseFloat(x[1]);
+
+        }else
+        if(typeof x == 'number' && typeof y == 'number'){
 
             this.x= x;
             this.y= y;
 
         }
+        //todo check
 
     }DP$0(constructor$0,"prototype",{"configurable":false,"enumerable":false,"writable":false});
 
 
-    proto$0.getMoved = function(x,y){
+    /**
+     * Return deep clone of this.
+     * @returns {T.Resources}
+     */
+    proto$0.clone = function(){
+        return new T.Position(this);
+    };
 
-        return new T.Position(this.x+x,this.y+y);
+
+
+    proto$0.plus = function(position){
+
+        this.x+=position.x;
+        this.y+=position.y;
+        return this;
+
+    };
+
+
+    proto$0.multiply = function(k){
+
+        this.x=this.x*k;
+        this.y=this.y*k;
+        return this;
+
+    };
+
+
+
+    proto$0.toPositionPolar = function(){
+
+        return(new T.PositionPolar(
+            T.Math.xy2dist(this.x,this.y),
+            T.Math.rad2deg(Math.atan2(this.y,this.x))
+        ));
 
     };
 
@@ -3212,14 +3349,13 @@ T.Position = ((function(){"use strict";var proto$0={};
     };
 
 
-
     /**
      * Converts Position to simple string
      * @return {string}
      */
     proto$0.toString = function(){
 
-        return '['+this.x+','+this.y+']';
+        return ''+this.x+','+this.y+'';
 
     };
 
@@ -3285,13 +3421,11 @@ T.Resources = ((function(){"use strict";var static$0={},proto$0={};
 
 
     /**
-     * @param {number} k
-     * @return {bool} success
+     * Return deep clone of this.
+     * @returns {T.Resources}
      */
     proto$0.clone = function(){
-
         return new T.Resources(this);
-
     };
 
 

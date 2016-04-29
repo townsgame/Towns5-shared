@@ -52,13 +52,11 @@ T.Resources = class{
 
 
     /**
-     * @param {number} k
-     * @return {bool} success
+     * Return deep clone of this.
+     * @returns {T.Resources}
      */
     clone(){
-
         return new T.Resources(this);
-
     }
 
 

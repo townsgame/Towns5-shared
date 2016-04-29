@@ -34,8 +34,8 @@
 
             var map_radius = 2;
             var map_center = new T.Position({x: 20600, y: 378535});
-            var position1 =  map_center.getMoved(1,2);
-            var position2 =  map_center.getMoved(-8,1);
+            var position1 =  map_center.clone().plus(new T.Position(1,2));
+            var position2 =  map_center.clone().plus(new T.Position(-8,1));
 
 
 

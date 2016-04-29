@@ -29,6 +29,16 @@ T.Position3D = class{
 
 
     /**
+     * Return deep clone of this.
+     * @returns {T.Resources}
+     */
+    clone(){
+        return new T.Position3D(this);
+    }
+
+
+
+    /**
      * Converts Position3D to simple string
      * @return {string}
      */
