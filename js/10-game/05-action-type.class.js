@@ -1,6 +1,6 @@
 /**
  * @author ©Towns.cz
- * @fileOverview Creates class actions
+ * @fileOverview Creates class T.Game.ActionType
  */
 //======================================================================================================================
 

@@ -1,10 +1,13 @@
 /**
  * @author ©Towns.cz
- * @fileOverview Creates class Position
+ * @fileOverview Creates class T.Position
  */
 //======================================================================================================================
 
 
+/**
+ * Global position on towns map
+ */
 T.Position = class{
 
     constructor(x,y){

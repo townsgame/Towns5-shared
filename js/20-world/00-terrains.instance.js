@@ -1,7 +1,7 @@
 
 /**
  * @author ©Towns.cz
- * @fileOverview ...
+ * @fileOverview Creates instance T.World.terrains
  */
 //======================================================================================================================
 T.setNamespace('World');

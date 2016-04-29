@@ -1,7 +1,7 @@
 
 /**
  * @author ©Towns.cz
- * @fileOverview ...
+ * @fileOverview Creates class T.Objects.Array
  */
 //======================================================================================================================
 T.setNamespace('Objects');

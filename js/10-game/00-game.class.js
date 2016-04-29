@@ -1,15 +1,18 @@
 /**
  * @author ©Towns.cz
- * @fileOverview Creates static class game
+ * @fileOverview Creates class T.Game
  */
 //======================================================================================================================
 
+/**
+ * Game conditions
+ */
 T.Game = class{
     
     
      /**
      *
-     * @param {array} action_type_list
+     * @param {todo array of T.Game.ActionType} action_type_list
      * @param {function} max_life_modifier
      * @param {function} price_key_modifier
      * @constructor

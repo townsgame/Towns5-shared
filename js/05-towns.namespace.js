@@ -1,10 +1,13 @@
 /**
  * @author ©Towns.cz
- * @fileOverview Creating namespace Towns
+ * @fileOverview Initialize namespace Towns
  */
 //======================================================================================================================
 
-
+/**
+ * Towns namespace - under this object are all Towns classes and instances.
+ * @type {object}
+ */
 global.Towns = {};
 module.exports = global.Towns;
 

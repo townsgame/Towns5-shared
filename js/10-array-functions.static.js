@@ -1,12 +1,12 @@
 /**
  * @author ©Towns.cz
- * @fileOverview Creates object T.ArrayFunctions with static methods
+ * @fileOverview Creates static T.ArrayFunctions
  */
 //======================================================================================================================
 
 
 /**
- * Additional functions to manipulate with array
+ * Additional functions to manipulate with array.
  */
 T.ArrayFunctions=class {
 

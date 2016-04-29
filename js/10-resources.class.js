@@ -1,6 +1,6 @@
 /**
  * @author ©Towns.cz
- * @fileOverview Creates class Resources
+ * @fileOverview Creates class T.Resources
  */
 //======================================================================================================================
 
