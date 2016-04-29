@@ -1,10 +1,13 @@
 var PRS$0 = (function(o,t){o["__proto__"]={"a":t};return o["a"]===t})({},{});var DP$0 = Object.defineProperty;var GOPD$0 = Object.getOwnPropertyDescriptor;var MIXIN$0 = function(t,s){for(var p in s){if(s.hasOwnProperty(p)){DP$0(t,p,GOPD$0(s,p));}}return t};var SP$0 = Object.setPrototypeOf||function(o,p){if(PRS$0){o["__proto__"]=p;}else {DP$0(o,"__proto__",{"value":p,"configurable":true,"enumerable":false,"writable":true});}return o};var OC$0 = Object.create;/**
  * @author ©Towns.cz
- * @fileOverview Creating namespace Towns
+ * @fileOverview Initialize namespace Towns
  */
 //======================================================================================================================
 
-
+/**
+ * Towns namespace - under this object are all Towns classes and instances.
+ * @type {object}
+ */
 global.Towns = {};
 module.exports = global.Towns;
 
@@ -49,13 +52,13 @@ T.setNamespace = function(namespace){
 };
 /**
  * @author ©Towns.cz
- * @fileOverview Creates object T.ArrayFunctions with static methods
+ * @fileOverview Creates static T.ArrayFunctions
  */
 //======================================================================================================================
 
 
 /**
- * Additional functions to manipulate with array
+ * Additional functions to manipulate with array.
  */
 T.ArrayFunctions=((function(){"use strict";function constructor$0() {}DP$0(constructor$0,"prototype",{"configurable":false,"enumerable":false,"writable":false});var static$0={};
 
@@ -296,11 +299,13 @@ T.ArrayFunctions=((function(){"use strict";function constructor$0() {}DP$0(const
 MIXIN$0(constructor$0,static$0);static$0=void 0;return constructor$0;})());
 /**
  * @author ©Towns.cz
- * @fileOverview Creates class Color
+ * @fileOverview Creates class T.Color
  */
 //======================================================================================================================
 
-
+/**
+ * Object which represents RGBA color.
+ */
 T.Color = ((function(){"use strict";var static$0={},proto$0={};
 
     /**
@@ -414,16 +419,19 @@ MIXIN$0(constructor$0,static$0);MIXIN$0(constructor$0.prototype,proto$0);static$
 
 /**
  * @author ©Towns.cz
- * @fileOverview Creates static class game
+ * @fileOverview Creates class T.Game
  */
 //======================================================================================================================
 
+/**
+ * Game conditions
+ */
 T.Game = ((function(){"use strict";var proto$0={};
     
     
      /**
      *
-     * @param {array} action_type_list
+     * @param {todo array of T.Game.ActionType} action_type_list
      * @param {function} max_life_modifier
      * @param {function} price_key_modifier
      * @constructor
@@ -641,7 +649,7 @@ T.Game = ((function(){"use strict";var proto$0={};
 MIXIN$0(constructor$0.prototype,proto$0);proto$0=void 0;return constructor$0;})());
 /**
  * @author ©Towns.cz
- * @fileOverview Creates class actions
+ * @fileOverview Creates class T.Game.ActionType
  */
 //======================================================================================================================
 
@@ -674,7 +682,7 @@ T.Game.ActionType = ((function(){"use strict";
 
 /**
  * @author ©Towns.cz
- * @fileOverview Creates class T.
+ * @fileOverview Creates class T.MapGenerator
  */
 //======================================================================================================================
 
@@ -920,7 +928,7 @@ MIXIN$0(constructor$0.prototype,proto$0);proto$0=void 0;return constructor$0;})(
 
 /**
  * @author ©Towns.cz
- * @fileOverview Creates class T.
+ * @fileOverview Creates class T.MapGenerator.Biotope
  */
 //======================================================================================================================
 
@@ -979,7 +987,7 @@ MIXIN$0(constructor$0.prototype,proto$0);proto$0=void 0;return constructor$0;})(
 
 /**
  * @author ©Towns.cz
- * @fileOverview Additional methods to object Math
+ * @fileOverview Creates static class T.Math
  */
 //======================================================================================================================
 
@@ -1350,7 +1358,7 @@ T.Math=((function(){"use strict";function constructor$0() {}DP$0(constructor$0,"
 MIXIN$0(constructor$0,static$0);static$0=void 0;return constructor$0;})());
 /**
  * @author ©Towns.cz
- * @fileOverview Creates Class Model
+ * @fileOverview Creates class T.Model
  */
 //======================================================================================================================
 
@@ -1837,7 +1845,7 @@ MIXIN$0(constructor$0.prototype,proto$0);proto$0=void 0;return constructor$0;})(
 
 /**
  * @author Towns.cz
- * @fileOverview Creates object Particles with static methods
+ * @fileOverview Creates static class T.Model.Particles
  */
 //======================================================================================================================
 
@@ -2257,7 +2265,7 @@ MIXIN$0(constructor$0,static$0);static$0=void 0;return constructor$0;})());
 
 /**
  * @author ©Towns.cz
- * @fileOverview Creates class T.
+ * @fileOverview Creates class T.Objects.Array
  */
 //======================================================================================================================
 T.setNamespace('Objects');
@@ -2667,7 +2675,7 @@ MIXIN$0(constructor$0,static$0);MIXIN$0(constructor$0.prototype,proto$0);static$
 
 /**
  * @author ©Towns.cz
- * @fileOverview Creates class T.
+ * @fileOverview Creates class T.Objects.Object
  */
 //======================================================================================================================
 
@@ -2698,7 +2706,7 @@ MIXIN$0(constructor$0.prototype,proto$0);proto$0=void 0;return constructor$0;})(
 
 /**
  * @author ©Towns.cz
- * @fileOverview Creates class T.
+ * @fileOverview Creates class T.Objects.Building
  */
 //======================================================================================================================
 
@@ -2725,7 +2733,7 @@ MIXIN$0(constructor$0.prototype,proto$0);proto$0=void 0;return constructor$0;})(
 
 /**
  * @author ©Towns.cz
- * @fileOverview Creates class T.
+ * @fileOverview Creates class T.Objects.Natural
  */
 //======================================================================================================================
 
@@ -2750,7 +2758,7 @@ MIXIN$0(constructor$0.prototype,proto$0);proto$0=void 0;return constructor$0;})(
 
 /**
  * @author ©Towns.cz
- * @fileOverview Creates class T.
+ * @fileOverview Creates class T.Objects.Story
  */
 //======================================================================================================================
 
@@ -2774,7 +2782,7 @@ MIXIN$0(constructor$0.prototype,proto$0);proto$0=void 0;return constructor$0;})(
 
 /**
  * @author ©Towns.cz
- * @fileOverview Creates class T.
+ * @fileOverview Creates class T.Objects.Story
  */
 //======================================================================================================================
 
@@ -2819,15 +2827,17 @@ MIXIN$0(constructor$0.prototype,proto$0);proto$0=void 0;return constructor$0;})(
 //======================================================================================================================
 
 
+
 T.Path = ((function(){"use strict";var static$0={},proto$0={};
 
 
     /**
-     * @param {object} Position start
-     * @param {object} Position end
+     * @param {T.Position} start
+     * @param {T.Position} end
      * @param {number} speed in parcel/s
      * @param {array} map collision
      * @param {object} Position map_topleft center of collision map
+     //todo colision map
      * @constructor
      */
     function constructor$0(start, end, speed, map, map_topleft) {
@@ -3126,7 +3136,7 @@ T.Path = ((function(){"use strict";var static$0={},proto$0={};
 MIXIN$0(constructor$0,static$0);MIXIN$0(constructor$0.prototype,proto$0);static$0=proto$0=void 0;return constructor$0;})());
 /**
  * @author ©Towns.cz
- * @fileOverview Creates class Position 3D
+ * @fileOverview Creates class T.Position3D
  */
 //======================================================================================================================
 
@@ -3214,7 +3224,7 @@ T.PositionPolar = ((function(){"use strict";var proto$0={};
 
 
 
-    proto$0.toPosition = function(){
+    proto$0.getPosition = function(){
 
         var radians = this.getRadians();
 
@@ -3269,11 +3279,14 @@ MIXIN$0(constructor$0.prototype,proto$0);proto$0=void 0;return constructor$0;})(
 
 /**
  * @author ©Towns.cz
- * @fileOverview Creates class Position
+ * @fileOverview Creates class T.Position
  */
 //======================================================================================================================
 
 
+/**
+ * Global position on towns map
+ */
 T.Position = ((function(){"use strict";var proto$0={};
 
     function constructor$0(x,y){
@@ -3332,7 +3345,7 @@ T.Position = ((function(){"use strict";var proto$0={};
 
 
 
-    proto$0.toPositionPolar = function(){
+    proto$0.getPositionPolar = function(){
 
         return(new T.PositionPolar(
             T.Math.xy2dist(this.x,this.y),
@@ -3369,7 +3382,7 @@ MIXIN$0(constructor$0.prototype,proto$0);proto$0=void 0;return constructor$0;})(
 
 /**
  * @author ©Towns.cz
- * @fileOverview Creates class Resources
+ * @fileOverview Creates class T.Resources
  */
 //======================================================================================================================
 
@@ -3702,7 +3715,7 @@ MIXIN$0(constructor$0,static$0);MIXIN$0(constructor$0.prototype,proto$0);static$
 
 /**
  * @author ©Towns.cz
- * @fileOverview Creates class T.
+ * @fileOverview Creates instance T.World.terrains
  */
 //======================================================================================================================
 T.setNamespace('World');
@@ -3730,7 +3743,7 @@ T.World.terrains = [
 
 /**
  * @author ©Towns.cz
- * @fileOverview Creates class T.
+ * @fileOverview Creates instance T.World.mapGenerator
  */
 //======================================================================================================================
 
@@ -3877,7 +3890,7 @@ T.World.mapGenerator = new T.MapGenerator(
 
 /**
  * @author ©Towns.cz
- * @fileOverview Creates configuration of game conditions
+ * @fileOverview Creates configuration of game conditions via instance T.World.game
  */
 //======================================================================================================================
 

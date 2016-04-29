@@ -30,7 +30,7 @@ T.PositionPolar = class{
 
 
 
-    toPosition(){
+    getPosition(){
 
         var radians = this.getRadians();
 

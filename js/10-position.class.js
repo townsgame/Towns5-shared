@@ -66,7 +66,7 @@ T.Position = class{
 
 
 
-    toPositionPolar(){
+    getPositionPolar(){
 
         return(new T.PositionPolar(
             T.Math.xy2dist(this.x,this.y),
