@@ -3229,8 +3229,8 @@ T.PositionPolar = ((function(){"use strict";var proto$0={};
         var radians = this.getRadians();
 
         return(new T.Position(
-            output.x = Math.cos(radians)*this.distance,
-            output.y = Math.sin(radians)*this.distance
+            Math.cos(radians)*this.distance,
+            Math.sin(radians)*this.distance
         ));
 
 
