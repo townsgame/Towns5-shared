@@ -5,15 +5,17 @@
 //======================================================================================================================
 
 
+
 T.Path = class {
 
 
     /**
-     * @param {object} Position start
-     * @param {object} Position end
+     * @param {T.Position} start
+     * @param {T.Position} end
      * @param {number} speed in parcel/s
      * @param {array} map collision
      * @param {object} Position map_topleft center of collision map
+     //todo colision map
      * @constructor
      */
     constructor(start, end, speed, map, map_topleft) {

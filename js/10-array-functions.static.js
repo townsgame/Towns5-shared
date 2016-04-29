@@ -6,7 +6,7 @@
 
 
 /**
- * Additional functions to manipulate with array
+ * Additional functions to manipulate with array.
  */
 T.ArrayFunctions=class {
 
