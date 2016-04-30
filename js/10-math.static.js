@@ -364,7 +364,30 @@ T.Math=class{
         var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
         return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i];
     }
-    
+
+
+    /**
+     *
+     * @param {number} a_start
+     * @param {number} a_position
+     * @param {number} a_end
+     * @param {number} b_start
+     * @param {number} b_end
+     * @returns {number}
+     */
+    static proportions(a_start,a_position,a_end,b_start,b_end){
+
+
+        var a_whole = a_end-a_start;
+        var b_whole = b_end-b_start;
+
+        var a_part = a_end-a_position;
+        var b_part = (b_whole*a_part)/a_whole;
+
+        return(b_end-b_part);
+
+
+    }
 
     
     
