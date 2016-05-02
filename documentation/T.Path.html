@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-	<title>Documentation Class: Array</title>
+	<title>Documentation Class: Path</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -63,13 +63,13 @@
 		<div id="main">
 			
 
-	<h1 class="page-title">Class: Array</h1>
+	<h1 class="page-title">Class: Path</h1>
 <section>
 
 <header>
     
         <h2>
-        Array
+        Path
         </h2>
         
     
@@ -82,7 +82,7 @@
         
 <hr>
 <dt>
-    <h4 class="name" id="Array"><span class="type-signature"></span>new Array(objects)</h4>
+    <h4 class="name" id="Path"><span class="type-signature"></span>new Path(start, end, speed, map, Position)</h4>
     
     
 </dt>
@@ -121,13 +121,13 @@
 
         <tr>
             
-                <td class="name"><code>objects</code></td>
+                <td class="name"><code>start</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Array</span>
+<span class="param-type"><a href="T.Position.html">T.Position</a></span>
 
 
 
@@ -138,7 +138,104 @@
 
             
 
-            <td class="description last"><p>todo ????????? @constructor</p></td>
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>end</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="T.Position.html">T.Position</a></span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>speed</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>in parcel/s</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>map</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">array</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>collision</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>Position</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>map_topleft center of collision map
+     //todo colision map</p></td>
         </tr>
 
     
@@ -224,7 +321,7 @@
             
 <hr>
 <dt>
-    <h4 class="name" id="filterTypes"><span class="type-signature"></span>filterTypes(type)</h4>
+    <h4 class="name" id=".is"><span class="type-signature">&lt;static> </span>is()</h4>
     
     
 </dt>
@@ -263,13 +360,13 @@
 
         <tr>
             
-                <td class="name"><code>type</code></td>
+                <td class="name"><code>T.Path</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">string</span>
+<span class="param-type">object</span>
 
 
 
@@ -343,6 +440,10 @@
     <h5>Returns:</h5>
     
             
+<div class="param-desc">
+    <p>true = inserted object is path and it is in progress</p>
+</div>
+
 
 
 <dl>
@@ -351,7 +452,7 @@
     </dt>
     <dd>
         
-<span class="param-type"><a href="T.Objects.Array.html">T.Objects.Array</a></span>
+<span class="param-type">boolean</span>
 
 
 
@@ -368,7 +469,7 @@
             
 <hr>
 <dt>
-    <h4 class="name" id="get1x1TerrainObjects"><span class="type-signature"></span>get1x1TerrainObjects()</h4>
+    <h4 class="name" id="inProgress"><span class="type-signature"></span>inProgress()</h4>
     
     
 </dt>
@@ -437,6 +538,10 @@
     <h5>Returns:</h5>
     
             
+<div class="param-desc">
+    <p>is this in progress = true, finished or not yet started=false</p>
+</div>
+
 
 
 <dl>
@@ -445,7 +550,7 @@
     </dt>
     <dd>
         
-<span class="param-type"><a href="T.Objects.Array.html">T.Objects.Array</a></span>
+<span class="param-type">boolean</span>
 
 
 
@@ -462,7 +567,7 @@
             
 <hr>
 <dt>
-    <h4 class="name" id="getById"><span class="type-signature"></span>getById(id)</h4>
+    <h4 class="name" id="recount"><span class="type-signature"></span>recount()</h4>
     
     
 </dt>
@@ -475,56 +580,6 @@
     
 
     
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>id</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
     
 
     
@@ -581,6 +636,10 @@
     <h5>Returns:</h5>
     
             
+<div class="param-desc">
+    <p>Position current</p>
+</div>
+
 
 
 <dl>
@@ -606,7 +665,7 @@
             
 <hr>
 <dt>
-    <h4 class="name" id="getMapOfTerrainCodes"><span class="type-signature"></span>getMapOfTerrainCodes(center, radius)</h4>
+    <h4 class="name" id="rotation"><span class="type-signature"></span>rotation()</h4>
     
     
 </dt>
@@ -620,456 +679,74 @@
 
     
     
-        <h5>Parameters:</h5>
-        
 
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
+    
+<dl class="details">
     
 
-        <tr>
-            
-                <td class="name"><code>center</code></td>
-            
+	
 
-            <td class="type">
-            
-                
-<span class="param-type"><a href="T.Position.html">T.Position</a></span>
+	
 
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
+	
 
     
 
-        <tr>
-            
-                <td class="name"><code>radius</code></td>
-            
+    
 
-            <td class="type">
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
             
-                
+<div class="param-desc">
+    <p>current rotation in degrees</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
 <span class="param-type">number</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <h5>Returns:</h5>
-    
-            
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Array</span>
-
-
-
-    </dd>
-</dl>
-
-
-        
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt>
-    <h4 class="name" id="removeId"><span class="type-signature"></span>removeId(id)</h4>
-    
-    
-</dt>
-<dd>
-
-    
-
-    
-
-    
-
-    
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>id</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <h5>Returns:</h5>
-    
-            
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">boolean</span>
-
-
-
-    </dd>
-</dl>
-
-
-        
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt>
-    <h4 class="name" id="setById"><span class="type-signature"></span>setById(id, object)</h4>
-    
-    
-</dt>
-<dd>
-
-    
-
-    
-
-    
-
-    
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>id</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>object</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <h5>Returns:</h5>
-    
-            
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">boolean</span>
 
 
 

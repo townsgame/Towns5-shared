@@ -27,12 +27,13 @@
 
             var horizont=Math.pow(2,10+9);
 
-            var map_size_px = 1.3,
-                map_radius = 200 / on_row,
-                map_center = {
-                    x: (Math.random()-0.5)*horizont,
-                    y: (Math.random()-0.5)*horizont
-                };
+            var map_size_px = 1.3;
+            var map_radius = 200 / on_row;
+            var map_center = new T.Position(
+                    (Math.random()-0.5)*horizont,
+                    (Math.random()-0.5)*horizont
+            );
+            var map_not_center=map_center.clone().plus(new T.Position(60,0));
 
 
             var jQueryCanvas = $('<canvas></canvas>');
@@ -52,7 +53,7 @@
 
 
             var objects = [];
-            objects = T.World.mapGenerator.getCompleteObjects(objects, map_center, map_radius/*, false*/);
+            objects = T.World.mapGenerator.getCompleteObjects(objects, map_center, map_radius,null,map_not_center);
 
             objects.forEach(function(object){
 

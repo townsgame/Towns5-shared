@@ -12,7 +12,7 @@ T.Game = class{
     
      /**
      *
-     * @param {todo array of T.Game.ActionType} action_type_list
+     * @param {Object.<T.Game.ActionType>} action_type_list
      * @param {function} max_life_modifier
      * @param {function} price_key_modifier
      * @constructor

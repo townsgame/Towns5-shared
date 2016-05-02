@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-	<title>Documentation Class: Color</title>
+	<title>Documentation Class: Position</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -63,16 +63,16 @@
 		<div id="main">
 			
 
-	<h1 class="page-title">Class: Color</h1>
+	<h1 class="page-title">Class: Position</h1>
 <section>
 
 <header>
     
         <h2>
-        Color
+        Position
         </h2>
         
-            <div class="class-description"><p>Object which represents RGBA color.</p></div>
+            <div class="class-description"><p>Global position on towns map</p></div>
         
     
 </header>
@@ -84,7 +84,7 @@
         
 <hr>
 <dt>
-    <h4 class="name" id="Color"><span class="type-signature"></span>new Color(r, g, b, a)</h4>
+    <h4 class="name" id="Position"><span class="type-signature"></span>new Position()</h4>
     
     
 </dt>
@@ -97,104 +97,6 @@
     
 
     
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>r</code></td>
-            
-
-            <td class="type">
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>red from 0 to 255</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>g</code></td>
-            
-
-            <td class="type">
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>green from 0 to 255</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>b</code></td>
-            
-
-            <td class="type">
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>blue from 0 to 255</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>a</code></td>
-            
-
-            <td class="type">
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>alpha from 0 to 255</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
     
 
     
@@ -274,7 +176,7 @@
             
 <hr>
 <dt>
-    <h4 class="name" id=".createFromHex"><span class="type-signature">&lt;static> </span>createFromHex(hex)</h4>
+    <h4 class="name" id="clone"><span class="type-signature"></span>clone()</h4>
     
     
 </dt>
@@ -282,7 +184,7 @@
 
     
     <div class="description">
-        <p>Creates new T.Color form hex code of color</p>
+        <p>Return deep clone of this.</p>
     </div>
     
 
@@ -291,56 +193,6 @@
     
 
     
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>hex</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>code of color eg. #00ff00</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
     
 
     
@@ -397,10 +249,6 @@
     <h5>Returns:</h5>
     
             
-<div class="param-desc">
-    <p>Color</p>
-</div>
-
 
 
 <dl>
@@ -409,7 +257,7 @@
     </dt>
     <dd>
         
-<span class="param-type"><a href="T.Color.html">T.Color</a></span>
+<span class="param-type"><a href="T.Resources.html">T.Resources</a></span>
 
 
 
@@ -426,7 +274,7 @@
             
 <hr>
 <dt>
-    <h4 class="name" id="getCssColor"><span class="type-signature"></span>getCssColor()</h4>
+    <h4 class="name" id="toString"><span class="type-signature"></span>toString()</h4>
     
     
 </dt>
@@ -434,7 +282,7 @@
 
     
     <div class="description">
-        <p>Get css representation of this color</p>
+        <p>Converts Position to simple string</p>
     </div>
     
 
@@ -499,112 +347,6 @@
     <h5>Returns:</h5>
     
             
-<div class="param-desc">
-    <p>eg. rgb(100,200,200)</p>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">string</span>
-
-
-
-    </dd>
-</dl>
-
-
-        
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt>
-    <h4 class="name" id="getHex"><span class="type-signature"></span>getHex()</h4>
-    
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        <p>Get hex representation of this color (ignores alpha chanel.)</p>
-    </div>
-    
-
-    
-
-    
-
-    
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <h5>Returns:</h5>
-    
-            
-<div class="param-desc">
-    <p>eg. #00ff00</p>
-</div>
-
 
 
 <dl>

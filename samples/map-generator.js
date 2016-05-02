@@ -9,17 +9,15 @@
 var T = require(__dirname+'/../build/towns-shared.js');
 
 
-map_radius = 20,
-    map_center = {
-        x: 10000,
-        y: 100
-    };
+var map_radius = 20;
+var map_center = new T.Position(10000,100);
+var map_not_center = map_center.clone().plus(new T.Position(-30,0));
 var ascii=['  ',' ~','##','~~','::','XX','Y@','~/','tt','--','||','^^','.~','\\\\','//'];
 
 
 var objects = new T.Objects.Array();
 
-var objects = T.World.mapGenerator.getCompleteObjects(objects,map_center,map_radius,false);
+var objects = T.World.mapGenerator.getCompleteObjects(objects,map_center,map_radius,true,map_not_center);
 
 var map = objects.getMapOfTerrainCodes(map_center,map_radius);
 

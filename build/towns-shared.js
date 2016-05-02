@@ -837,18 +837,71 @@ T.MapGenerator = ((function(){"use strict";var proto$0={};
      *
      * @param {T.Position} center
      * @param {number} radius
+     * @param {T.Position} not_center
      * @returns {Array}
      * @private
      */
-    proto$0.getPureMap = function(center,radius){
+    proto$0.getPureMap = function(center,radius){var not_center = arguments[2];if(not_center === void 0)not_center = false;
+
+        //console.log(center,not_center);
 
         var center_integer={
             x: Math.floor(center.x),
             y: Math.floor(center.y)
         };
 
-        var map_array = this.getMapArrayCircle(center_integer,radius);
-        var objects = this.convertMapArrayToObjects(map_array,center_integer,radius);
+        if(not_center)
+        not_center={
+            x: not_center.x-center_integer.x,
+            y: not_center.y-center_integer.y
+        };
+
+
+
+        /*var map_array = this.getMapArrayCircle(center_integer,radius);
+        var objects = this.convertMapArrayToObjects(map_array,center_integer,radius);/**/
+
+
+        var objects= new T.Objects.Array();
+
+        var x,y,z,t,object;
+        for(y=0;y<=radius*2;y++){
+            for(x=0;x<=radius*2;x++){
+
+
+                if(
+                    Math.pow(x-radius+1/2,2)+
+                    Math.pow(y-radius+1/2,2)>
+                    Math.pow(radius,2)
+                )continue;
+
+
+                if(not_center)
+                if(
+                    Math.pow(x+not_center.x-radius+1/2,2)+
+                    Math.pow(y+not_center.y-radius+1/2,2)<=
+                    Math.pow(radius,2)
+                )continue;
+
+
+                z = this.getZ(x-radius+center_integer.x,y-radius+center_integer.y);
+                z = this.z_normalizing_table[Math.floor(z * this.z_normalizing_table.length)];
+
+                t = this.biotope.getZTerrain(z);
+
+                //console.log(t);
+
+                object= new T.Objects.Terrain(t);
+                object.x=center_integer.x-radius+x;
+                object.y=center_integer.y-radius+y;
+
+
+                objects.push(object)
+
+            }
+        }
+
+
         return(objects);
 
     };
@@ -888,13 +941,14 @@ T.MapGenerator = ((function(){"use strict";var proto$0={};
      * @param {T.Position} center
      * @param {number} radius
      * @param {boolean} virtual_objects
+     * @param {T.Position} not_center Dont get objects near this center.
      * @returns {T.Objects.Array}}
      */
-    proto$0.getCompleteObjects = function(real_objects,center,radius){var natural_objects = arguments[3];if(natural_objects === void 0)natural_objects = true;
+    proto$0.getCompleteObjects = function(real_objects,center,radius){var natural_objects = arguments[3];if(natural_objects === void 0)natural_objects = true;var not_center = arguments[4];if(not_center === void 0)not_center = false;
 
 
 
-        var complete_objects = this.getPureMap(center, radius);
+        var complete_objects = this.getPureMap(center, radius, not_center);
 
 
 
