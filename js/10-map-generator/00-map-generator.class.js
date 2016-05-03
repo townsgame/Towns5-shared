@@ -197,8 +197,8 @@ T.MapGenerator = class{
 
                 if(not_center)
                 if(
-                    Math.pow(x+not_center.x-radius+1/2,2)+
-                    Math.pow(y+not_center.y-radius+1/2,2)<=
+                    Math.pow(x-not_center.x-radius+1/2,2)+
+                    Math.pow(y-not_center.y-radius+1/2,2)<=
                     Math.pow(radius,2)
                 )continue;
 

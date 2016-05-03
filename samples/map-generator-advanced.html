@@ -33,7 +33,7 @@
                     (Math.random()-0.5)*horizont,
                     (Math.random()-0.5)*horizont
             );
-            var map_not_center=map_center.clone().plus(new T.Position(60,0));
+            var map_not_center=map_center.clone().plus(new T.Position(/*60,0*/600,0));
 
 
             var jQueryCanvas = $('<canvas></canvas>');
@@ -53,7 +53,7 @@
 
 
             var objects = [];
-            objects = T.World.mapGenerator.getCompleteObjects(objects, map_center, map_radius,null,map_not_center);
+            objects = T.World.mapGenerator.getCompleteObjects(objects, map_center, map_radius,true,map_not_center);
 
             objects.forEach(function(object){
 
