@@ -71,9 +71,24 @@ T.Objects.Array = class{
 
     }
 
-
+    /**
+     * Push new object into Objects Array
+     * @param object
+     * @returns {Number}
+     */
     push(object){
         return this.objects.push(T.Objects.Array.initInstance(object));
+    }
+
+
+    /**
+     * Update or push object into Objects Array
+     * @param object
+     */
+    update(object){
+        if(!this.setById(object.id,object)){
+            this.push(object);
+        }
     }
 
 

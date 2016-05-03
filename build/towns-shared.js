@@ -2412,9 +2412,24 @@ T.Objects.Array = ((function(){"use strict";var static$0={},proto$0={};
 
     };
 
-
+    /**
+     * Push new object into Objects Array
+     * @param object
+     * @returns {Number}
+     */
     proto$0.push = function(object){
         return this.objects.push(T.Objects.Array.initInstance(object));
+    };
+
+
+    /**
+     * Update or push object into Objects Array
+     * @param object
+     */
+    proto$0.update = function(object){
+        if(!this.setById(object.id,object)){
+            this.push(object);
+        }
     };
 
 
