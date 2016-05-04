@@ -915,14 +915,16 @@ T.MapGenerator = ((function(){"use strict";var proto$0={};
      */
     proto$0.getVirtualObjectsFromTerrainObjects = function(objects){
 
-        var self = this;
 
         var virtual_objects = [];
-        objects.get1x1TerrainObjects().forEach(function(object){
+        var objects_1x1_raw = objects.get1x1TerrainObjects().getAll();
 
-            self.virtualObjectGenerator(object,virtual_objects);
 
-        });
+        for(var i=0,l=objects_1x1_raw.length;i<l;i++){
+
+            this.virtualObjectGenerator(objects_1x1_raw[i],virtual_objects);
+
+        }
 
         return(virtual_objects);
 
@@ -2547,12 +2549,15 @@ T.Objects.Array = ((function(){"use strict";var static$0={},proto$0={};
 
         //--------------------------Fill array
 
+        var terrain_objects_raw = this.filterTypes('terrain').getAll();//.slice().reverse();
 
-        this.objects.forEach(function(object){
+        var x,y;
 
-            if(object.type!='terrain')return;
 
-            var x,y;
+        var object;
+        for(var i=0,l=terrain_objects_raw.length;i<l;i++){
+            object=terrain_objects_raw[i];
+
 
             if(object.design.data.size==1) {//todo is this optimalization effective?
                 //--------------------------
@@ -2573,8 +2578,8 @@ T.Objects.Array = ((function(){"use strict";var static$0={},proto$0={};
                 var y_to = Math.ceil(object.y - center.y + radius + object.design.data.size);
 
 
-                var xc = radius + center.x - object.x;
-                var yc = radius + center.y - object.y;
+                var xc = object.x - center.x + radius;
+                var yc = object.y - center.y + radius;
 
 
                 for (y = y_from; y <= y_to; y++) {
@@ -2599,7 +2604,7 @@ T.Objects.Array = ((function(){"use strict";var static$0={},proto$0={};
                 //--------------------------
             }
 
-        });
+        };
         //--------------------------
 
         return map_array;
@@ -2618,61 +2623,64 @@ T.Objects.Array = ((function(){"use strict";var static$0={},proto$0={};
         var terrain_objects_1x1=new T.Objects.Array();
 
 
-        var terrain_objects = this.filterTypes('terrain').getAll().reverse();//normal Array
+        var terrain_objects_raw = this.filterTypes('terrain').getAll().slice().reverse();//normal Array
 
         //--------------------------Fill array
 
         var blocked_positions={};
+        var object_1x1, key;
 
-        terrain_objects.forEach(function(object){
 
-            var object_1x1,key;
 
-            if(object.design.data.size==1) {
+        var object;
+        for(var i=0,l=terrain_objects_raw.length;i<l;i++){
+            object=terrain_objects_raw[i];
+
+
+            if (object.design.data.size == 1) {
                 //--------------------------
 
                 object_1x1 = object;
 
-                key = 'x'+object_1x1.x+'y'+object_1x1.y;
-                if(typeof blocked_positions[key]=='undefined'){
-                    blocked_positions[key]=true;
+                key = 'x' + Math.round(object_1x1.x) + 'y' + Math.round(object_1x1.y);
+
+                if (typeof blocked_positions[key] === 'undefined') {
+                    blocked_positions[key] = true;
 
                     terrain_objects_1x1.push(object_1x1);
 
                 }
 
                 //--------------------------
-            }else {
+            } else {
                 //--------------------------
 
-                var x_from = Math.floor(- object.design.data.size);
+                var x_from = Math.floor(-object.design.data.size);
                 var x_to = Math.ceil(object.design.data.size);
 
-                var y_from = Math.floor(- object.design.data.size);
+                var y_from = Math.floor(-object.design.data.size);
                 var y_to = Math.ceil(object.design.data.size);
-
-
 
 
                 for (var y = y_from; y <= y_to; y++) {
                     for (var x = x_from; x <= x_to; x++) {
 
-                        if (T.Math.xy2dist(x,y) <= object.design.data.size) {
+                        if (T.Math.xy2dist(x, y) <= object.design.data.size) {
 
                             object_1x1 = object.clone();
 
-                            object_1x1.design.data.size=1;
-                            object_1x1.x+=x;
-                            object_1x1.y+=y;
+                            object_1x1.design.data.size = 1;
+                            object_1x1.x = Math.round(object_1x1.x+x);
+                            object_1x1.y = Math.round(object_1x1.y+y);
 
-                            key = 'x'+object_1x1.x+'y'+object_1x1.y;
-                            if(typeof blocked_positions[key]=='undefined'){
-                                blocked_positions[key]=true;
+                            key = 'x' + object_1x1.x + 'y' + object_1x1.y;
+
+                            if (typeof blocked_positions[key] == 'undefined') {
+                                blocked_positions[key] = true;
 
                                 terrain_objects_1x1.push(object_1x1);
 
                             }
-
 
 
                         }
@@ -2682,7 +2690,7 @@ T.Objects.Array = ((function(){"use strict";var static$0={},proto$0={};
                 //--------------------------
             }
 
-        });
+        }
         //--------------------------
 
         return terrain_objects_1x1;
@@ -3783,7 +3791,7 @@ T.Resources = ((function(){"use strict";var static$0={},proto$0={};
 
                 if (this[key] !== 0) {
 
-                    var name = Locale.get('resource', key);
+                    var name = T.Locale.get('resource', key);
                     var value = this[key];
 
                     value = value.toLocaleString(/*'en-US''de-DE'*/);//todo todo better solution

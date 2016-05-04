@@ -234,14 +234,16 @@ T.MapGenerator = class{
      */
     getVirtualObjectsFromTerrainObjects(objects){
 
-        var self = this;
 
         var virtual_objects = [];
-        objects.get1x1TerrainObjects().forEach(function(object){
+        var objects_1x1_raw = objects.get1x1TerrainObjects().getAll();
 
-            self.virtualObjectGenerator(object,virtual_objects);
 
-        });
+        for(var i=0,l=objects_1x1_raw.length;i<l;i++){
+
+            this.virtualObjectGenerator(objects_1x1_raw[i],virtual_objects);
+
+        }
 
         return(virtual_objects);
 

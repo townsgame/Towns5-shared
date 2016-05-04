@@ -309,7 +309,7 @@ T.Resources = class{
 
                 if (this[key] !== 0) {
 
-                    var name = Locale.get('resource', key);
+                    var name = T.Locale.get('resource', key);
                     var value = this[key];
 
                     value = value.toLocaleString(/*'en-US''de-DE'*/);//todo todo better solution
