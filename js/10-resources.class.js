@@ -6,13 +6,13 @@
 
 
 
-/**
- * @param {object} Resources
- * @constructor
- */
+
 T.Resources = class{
 
-
+    /**
+     * @param {object} Resources
+     * @constructor
+     */
     constructor(resources)
     {
 
