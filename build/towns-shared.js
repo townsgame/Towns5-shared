@@ -2405,6 +2405,8 @@ T.Objects.Array = ((function(){"use strict";var static$0={},proto$0={};
             object = new T.Objects.Natural(object);
 
         } else {
+
+            console.log(object);
             throw new Error('Cant put item into Towns Objects Array because of unrecognized object type ' + object.type);
         }
         //----------------------------------
@@ -3488,13 +3490,13 @@ MIXIN$0(constructor$0.prototype,proto$0);proto$0=void 0;return constructor$0;})(
 
 
 
-/**
- * @param {object} Resources
- * @constructor
- */
+
 T.Resources = ((function(){"use strict";var static$0={},proto$0={};
 
-
+    /**
+     * @param {object} Resources
+     * @constructor
+     */
     function constructor$0(resources)
     {
 
@@ -3812,6 +3814,71 @@ T.Resources = ((function(){"use strict";var static$0={},proto$0={};
 
 
 MIXIN$0(constructor$0,static$0);MIXIN$0(constructor$0.prototype,proto$0);static$0=proto$0=void 0;return constructor$0;})());
+/**
+ * @author ©Towns.cz
+ * @fileOverview Creates class T.Resources
+ */
+//======================================================================================================================
+
+
+T.User = ((function(){"use strict";var proto$0={};
+
+
+    /**
+     * @param {object} user raw user data
+     */
+    function constructor$0(user){
+
+        for(var key in user){
+            var this_key = key;
+            this[this_key] = user[key];
+        }
+
+    }DP$0(constructor$0,"prototype",{"configurable":false,"enumerable":false,"writable":false});
+
+
+    /**
+     *
+     * @returns {string} HTML code of users signature
+     */
+    proto$0.getSignatureHTML = function(){
+
+        var name;
+
+        if(this.profile.name || this.profile.surname){
+
+            name = this.profile.name+' '+this.profile.surname;
+
+        }else{
+
+            name = this.profile.username;
+
+        }
+
+
+        var email_md5 = md5(this.profile.email);
+
+
+        var signature_html = ("\
+\n\
+\n                <div class=\"user-signature\">\
+\n                    <img class=\"user-image\" src=\"https://1.gravatar.com/avatar/") + email_md5 + ("?s=80&r=pg&d=mm\">\
+\n\
+\n                    <div class=\"user-signature-text\">\
+\n                        <h1 class=\"user-name\">")+name+("</h1>\
+\n                        <p>")+this.profile.description.html2text()+("</p>\
+\n                    </div>\
+\n\
+\n                </div>\
+\n\
+\n            ");
+
+        return(signature_html);
+
+    };
+
+
+MIXIN$0(constructor$0.prototype,proto$0);proto$0=void 0;return constructor$0;})());
 
 /**
  * @author ©Towns.cz

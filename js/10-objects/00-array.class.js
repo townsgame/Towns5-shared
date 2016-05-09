@@ -62,6 +62,8 @@ T.Objects.Array = class{
             object = new T.Objects.Natural(object);
 
         } else {
+
+            console.log(object);
             throw new Error('Cant put item into Towns Objects Array because of unrecognized object type ' + object.type);
         }
         //----------------------------------
