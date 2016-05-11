@@ -226,5 +226,20 @@ T.Game = class{
         return(price);
     
     }
+
+
+
+    createAction(action_key,object){
+
+        var action_type = this.action_type_list[action_key];
+        var action_config = object.actions[action_key];
+
+        if(typeof action_type=='undefined')throw new Error('Unknown action type '+action_key+'.');
+        if(typeof action_config=='undefined')throw new Error('Object '+object.name+' has no action '+action_key+'.');
+
+        var action = new T.Game.Action(action_type,action_config);
+
+        return(action);
+    }
     
 };

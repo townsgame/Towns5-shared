@@ -10,7 +10,7 @@ T.Game.ActionType = class{
 
     /**
      *
-     * @param {string} type enum('active', 'passive', 'triggered') //todo refactor
+     * @param {string} type enum('ACTIVE', 'PASSIVE', 'triggered') //todo refactor
      * @param {object} params {param: type}
      * @param {function} price_base
      * @param {array} price_resources_list
@@ -18,12 +18,19 @@ T.Game.ActionType = class{
      * @constructor
      */
      constructor(type, params, price_base, price_resources_list, perform){
+
+        if(['ACTIVE','PASSIVE'].indexOf(type)==-1)throw new Error('Unknown type of T.Game.ActionType '+type);
+
+
+
         this.type = type;
         this.params = params;
         this.price_base = price_base;
         this.price_resources_list = price_resources_list;
         this.perform = perform;
     }
+
+
 
 };
 

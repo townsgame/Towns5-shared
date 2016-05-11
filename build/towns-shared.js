@@ -659,7 +659,7 @@ T.Game.ActionType = ((function(){"use strict";
 
     /**
      *
-     * @param {string} type enum('active', 'passive', 'triggered') //todo refactor
+     * @param {string} type enum('ACTIVE', 'PASSIVE', 'triggered') //todo refactor
      * @param {object} params {param: type}
      * @param {function} price_base
      * @param {array} price_resources_list
@@ -667,6 +667,8 @@ T.Game.ActionType = ((function(){"use strict";
      * @constructor
      */
      function constructor$0(type, params, price_base, price_resources_list, perform){
+
+        if(['ACTIVE','PASSIVE'].indexOf(type)==-1)throw new Error('Unknown type of T.Game.ActionType');
         this.type = type;
         this.params = params;
         this.price_base = price_base;
@@ -4078,7 +4080,7 @@ T.World.game = new T.Game(
     {
         //---------------------------------------------Defense
         'defense': new T.Game.ActionType(
-            'passive',
+            'PASSIVE',
             {
                 'defense': 'number'
             },
@@ -4094,7 +4096,7 @@ T.World.game = new T.Game(
         ),
         //---------------------------------------------Regenerate
         'regenerate': new T.Game.ActionType(
-            'passive',
+            'PASSIVE',
             {
                 'regenerate': 'number'
             },
@@ -4110,7 +4112,7 @@ T.World.game = new T.Game(
         ),
         //---------------------------------------------Repair
         'repair': new T.Game.ActionType(
-            'active',
+            'ACTIVE',
             {
                 'repair': 'number'
             },
@@ -4129,7 +4131,7 @@ T.World.game = new T.Game(
         ),
         //---------------------------------------------Mine
         'mine': new T.Game.ActionType(
-            'passive',
+            'PASSIVE',
             {
                 'resource': 'string',
                 'amount': 'number'
@@ -4146,7 +4148,7 @@ T.World.game = new T.Game(
         ),
         //---------------------------------------------Attack
         'attack': new T.Game.ActionType(
-            'active',
+            'ACTIVE',
             {
                 'distance': 'number',
                 'strength': 'number',
@@ -4168,7 +4170,7 @@ T.World.game = new T.Game(
         ),
         //---------------------------------------------Move
         'move': new T.Game.ActionType(
-            'active',
+            'ACTIVE',
             {
                 'speed': 'number'
             },
@@ -4187,7 +4189,7 @@ T.World.game = new T.Game(
         ),
         //---------------------------------------------Throughput
         'throughput': new T.Game.ActionType(
-            'passive',
+            'PASSIVE',
             {
                 'throughput': 'number'
             },

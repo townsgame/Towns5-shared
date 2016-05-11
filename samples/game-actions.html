@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Towns-shared object price sample</title>
+
+
+
+
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
+    <script>
+        var module={};
+        var global=window;
+    </script>
+    <script src="../build/towns-shared.js"></script>
+
+
+
+
+
+    <script>
+
+        $(function(){
+
+
+
+            $.ajax({
+                url: 'http://api.towns.cz/objects/prototypes'
+            }).done(function(response) {
+
+
+
+                var objects = new T.Objects.Array(response);
+                var buildings = objects.filterTypes('building');
+
+
+
+                actionCall = T.World.game.createAction('attack',buildings[1]).createActionCall(buildings[2]);
+
+                console.log(actionCall);
+
+                var resources = new T.Resources({wood:300});
+
+                var result = actionCall.execute(resources);
+
+
+            });
+
+
+        });
+
+    </script>
+    <style>
+
+
+
+    </style>
+</head>
+<body>
+
+
+<textarea id="object-json"></textarea>
+
+
+
+
+<div id="object-price"></div>
+
+
+</body>
+</html>

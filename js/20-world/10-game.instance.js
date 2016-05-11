@@ -12,7 +12,7 @@ T.World.game = new T.Game(
     {
         //---------------------------------------------Defense
         'defense': new T.Game.ActionType(
-            'passive',
+            'PASSIVE',
             {
                 'defense': 'number'
             },
@@ -28,7 +28,7 @@ T.World.game = new T.Game(
         ),
         //---------------------------------------------Regenerate
         'regenerate': new T.Game.ActionType(
-            'passive',
+            'PASSIVE',
             {
                 'regenerate': 'number'
             },
@@ -44,7 +44,7 @@ T.World.game = new T.Game(
         ),
         //---------------------------------------------Repair
         'repair': new T.Game.ActionType(
-            'active',
+            'ACTIVE',
             {
                 'repair': 'number'
             },
@@ -63,7 +63,7 @@ T.World.game = new T.Game(
         ),
         //---------------------------------------------Mine
         'mine': new T.Game.ActionType(
-            'passive',
+            'PASSIVE',
             {
                 'resource': 'string',
                 'amount': 'number'
@@ -80,7 +80,7 @@ T.World.game = new T.Game(
         ),
         //---------------------------------------------Attack
         'attack': new T.Game.ActionType(
-            'active',
+            'ACTIVE',
             {
                 'distance': 'number',
                 'strength': 'number',
@@ -102,7 +102,7 @@ T.World.game = new T.Game(
         ),
         //---------------------------------------------Move
         'move': new T.Game.ActionType(
-            'active',
+            'ACTIVE',
             {
                 'speed': 'number'
             },
@@ -121,7 +121,7 @@ T.World.game = new T.Game(
         ),
         //---------------------------------------------Throughput
         'throughput': new T.Game.ActionType(
-            'passive',
+            'PASSIVE',
             {
                 'throughput': 'number'
             },
