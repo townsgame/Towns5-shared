@@ -50,7 +50,7 @@ T.User = class{
 
                     <div class="user-signature-text">
                         <h1 class="user-name">`+name+`</h1>
-                        <p>`+this.profile.description.html2text()+`</p>
+                        <p>`+this.profile.signature.html2text()+`</p>
                     </div>
 
                 </div>
