@@ -106,22 +106,33 @@ describe('deg2rad', function() {
 
 
 
-/*
+
 //xy2dist(x,y);
 describe('xy2dist', function() {
 
-    it('xxxx', function () {
-        expect(T.Math.xy2dist(xxxxxxxx)).toBe(xxxxx);
+    it('0,0', function () {
+        expect(T.Math.xy2dist(0,0)).toBe(0);
     });
+
+    it('1,1', function () {
+        expect(T.Math.xy2dist(1,1)).toBeCloseTo(1.4);
+    });
+
+    it('0,100', function () {
+        expect(T.Math.xy2dist(0,100)).toBe(100);
+    });
+
 });
 
-
+/*
 //xy2distDeg(x,y);
 describe('xy2distDeg', function() {
 
     it('xxxx', function () {
         expect(T.Math.xy2distDeg(xxxxxxxx)).toBe(xxxxx);
     });
+
+
 });
 
 
@@ -141,40 +152,87 @@ describe('xyRotate', function() {
         expect(T.Math.xyRotate(xxxxxxxx)).toBe(xxxxx);
     });
 });
+*/
 
 
 //randomSeedPosition(seed,position);
 describe('randomSeedPosition', function() {
 
-    it('xxxx', function () {
-        expect(T.Math.randomSeedPosition(xxxxxxxx)).toBe(xxxxx);
+    it('same seeds', function () {
+        expect(T.Math.randomSeedPosition(1,new T.Position(23,48)))
+            .toBe(T.Math.randomSeedPosition(1,new T.Position(23,48)))
+
     });
+
+
+    for(var i=33;i>0;i--) {
+
+        it('>=0', function () {
+            expect(T.Math.randomSeedPosition(Math.random() * 1000, new T.Position(Math.random() * 1000, Math.random() * 1000)))
+                .toBeGreaterThan(0)
+        });
+
+        it('<=1', function () {
+            expect(T.Math.randomSeedPosition(Math.random() * 1000, new T.Position(Math.random() * 1000, Math.random() * 1000)))
+                .toBeLessThan(1)
+        });
+
+    }
+
 });
 
 
 //toFloat(value,defval);
 describe('toFloat', function() {
 
-    it('xxxx', function () {
-        expect(T.Math.toFloat(xxxxxxxx)).toBe(xxxxx);
+    it('1.48', function () {
+        expect(T.Math.toFloat('1.48')).toBe(1.48);
     });
+
+
+    it('NaN', function () {
+        expect(T.Math.toFloat('NaN',5)).toBe(5);
+    });
+
+
+    it('asdf', function () {
+        expect(T.Math.toFloat('asdf',5)).toBe(5);
+    });
+
 });
 
 
 //toInt(value,defval);
 describe('toInt', function() {
 
-    it('xxxx', function () {
-        expect(T.Math.toInt(xxxxxxxx)).toBe(xxxxx);
+    it('1.48', function () {
+        expect(T.Math.toInt('1.48')).toBe(1);
     });
+
+
+    it('NaN', function () {
+        expect(T.Math.toInt('NaN',5)).toBe(5);
+    });
+
+
+    it('asdf', function () {
+        expect(T.Math.toInt('asdf',5)).toBe(5);
+    });
+
 });
 
 
 //bounds(value,min,max);
 describe('bounds', function() {
 
-    it('xxxx', function () {
-        expect(T.Math.bounds(xxxxxxxx)).toBe(xxxxx);
+    it('in', function () {
+        expect(T.Math.bounds(5,0,10)).toBe(5);
+    });
+    it('grater', function () {
+        expect(T.Math.bounds(15,0,10)).toBe(10);
+    });
+    it('lower', function () {
+        expect(T.Math.bounds(-5,0,10)).toBe(0);
     });
 });
 
@@ -182,35 +240,100 @@ describe('bounds', function() {
 //lineCollision(a1x,a1y,a2x,a2y,b1x,b1y,b2x,b2y);
 describe('lineCollision', function() {
 
-    it('xxxx', function () {
-        expect(T.Math.lineCollision(xxxxxxxx)).toBe(xxxxx);
+    it('//', function () {
+        expect(T.Math.lineCollision(0,0,10,10,0,2,10,12)).toBe(false);
     });
+    it('/|', function () {
+        expect(T.Math.lineCollision(0,0,10,10,100,0,100,10)).toBe(false);
+    });
+    it('X', function () {
+        expect(T.Math.lineCollision(0,0,10,10,0,2,2,0)).toBe(true);
+    });
+    it('L', function () {
+        expect(T.Math.lineCollision(0,0,10,10,10,10,10,0)).toBe(true);
+    });
+    it('T', function () {
+        expect(T.Math.lineCollision(0,0,10,0,10,10,10,-10)).toBe(true);
+    });
+    it('/', function () {
+        expect(T.Math.lineCollision(0,0,10,10,2,2,4,4)).toBe(true);
+    });
+
+
 });
 
-
+/*
 //blurXY(generator,blur) ;
 describe('blurXY', function() {
 
     it('xxxx', function () {
         expect(T.Math.blurXY(xxxxxxxx)).toBe(xxxxx);
     });
-});
+});*/
 
 
 //bytesToSize(bytes) ;
 describe('bytesToSize', function() {
 
-    it('xxxx', function () {
-        expect(T.Math.bytesToSize(xxxxxxx
-        x)).toBe(xxxxx);
+    it('1B', function () {
+        expect(T.Math.bytesToSize(1)).toBe('1B');
     });
+    it('1KB', function () {
+        expect(T.Math.bytesToSize(1024)).toBe('1KB');
+    });
+    it('1MB', function () {
+        expect(T.Math.bytesToSize(1024*1024)).toBe('1MB');
+    });
+    it('1GB', function () {
+        expect(T.Math.bytesToSize(1024*1024*1024)).toBe('1GB');
+    });
+    it('1TB', function () {
+        expect(T.Math.bytesToSize(1024*1024*1024*1024)).toBe('1TB');
+    });
+
+
+    it('2B', function () {
+        expect(T.Math.bytesToSize(2)).toBe('2B');
+    });
+    it('2KB', function () {
+        expect(T.Math.bytesToSize(2*1024)).toBe('2KB');
+    });
+    it('2MB', function () {
+        expect(T.Math.bytesToSize(2*1024*1024)).toBe('2MB');
+    });
+    it('2GB', function () {
+        expect(T.Math.bytesToSize(2*1024*1024*1024)).toBe('2GB');
+    });
+    it('2TB', function () {
+        expect(T.Math.bytesToSize(2*1024*1024*1024*1024)).toBe('2TB');
+    });
+
+
+    it('~2KB', function () {
+        expect(T.Math.bytesToSize(2*1024-23)).toBe('2KB');
+    });
+    it('~2MB', function () {
+        expect(T.Math.bytesToSize(2*1024*1024-23)).toBe('2MB');
+    });
+    it('~2GB', function () {
+        expect(T.Math.bytesToSize(2*1024*1024*1024-23)).toBe('2GB');
+    });
+    it('~2TB', function () {
+        expect(T.Math.bytesToSize(2*1024*1024*1024*1024-23)).toBe('2TB');
+    });
+
+
 });
 
 
 //proportions(a_start,a_position,a_end,b_start,b_end);describe('xxxx', function() {
+describe('proportions', function() {
 
-    it('proportions', function () {
-        expect(T.Math.proportions(xxxxxxxx)).toBe(xxxxx);
+    it('', function () {
+        expect(T.Math.proportions(0,5,10,5,15)).toBe(10);
+    });
+    it('', function () {
+        expect(T.Math.proportions(-10,10,10,-70000,15)).toBe(15);
     });
 });
 
