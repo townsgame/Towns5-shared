@@ -4192,9 +4192,9 @@ T.World.game = new T.Game(
                 'iron':   2
             }),function(object_attacker,object_attacked,resources_attacker){
 
-                r(object_attacker.getActionAbility('attack'));
-                r(object_attacker.getActionAbility('defence'));
-                r(object_attacked.getActionAbility('defence'));
+                console.log(object_attacker.getActionAbility('attack'));
+                console.log(object_attacker.getActionAbility('defence'));
+                console.log(object_attacked.getActionAbility('defence'));
 
 
 

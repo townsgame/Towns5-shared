@@ -1,116 +1,91 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Towns-shared simple sample of MapGenerator usage</title>
+<script>
+    $(function(){
 
+        function log(title,json){
+            $('body').append(
+                $('<h3></h3>').text(title)
+            );
+            $('body').append(
+                $('<pre class="prettyprint"></pre>').html(JSON.stringify(json,null,4))
+            );
 
-
-    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
-    <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
-    <script>
-        var module={};
-        var global=window;
-    </script>
-    <script src="../build/towns-shared.js"></script>
-
-
-
-
-    <script>
-        $(function(){
-
-            function log(title,json){
-                $('body').append(
-                    $('<h3></h3>').text(title)
-                );
-                $('body').append(
-                    $('<pre class="prettyprint"></pre>').html(JSON.stringify(json,null,4))
-                );
-
-            }
-
-
-            var map_radius = 2;
-            var map_center = new T.Position({x: 20600, y: 378535});
-            var position1 =  map_center.clone().plus(new T.Position(1,2));
-            var position2 =  map_center.clone().plus(new T.Position(-8,1));
-
-
-
-                $.ajax({
-                    url: 'http://api.towns.cz/objects/?x='+map_center.x+'&y='+map_center.y+'&radius='+map_radius
-                }).done(function(response){
-
-
-
-                    var server_objects = new T.Objects.Array(response/*[
-                     {
-                     "type": "terrain",
-                     "design": {
-                     "type": "terrain",
-                     "data": {
-                     "image": 7,
-                     "color": "#EFF7FB",
-                     "size": 1
-                     }
-                     },
-                     "name": "My own terrain object",
-                     "x": -1,
-                     "y": -2
-                     }
-                     ]*/);
-
-                    log('Objects from API near '+map_center,server_objects);
-
-                    var map_array = server_objects.getMapOfTerrainCodes(map_center, map_radius);
-                    log('Getting map array created from that objects',map_array)//todo map of codes
-
-
-                    var complete_objects = T.World.mapGenerator.getCompleteObjects(server_objects, map_center, map_radius, true);
-                    log('Getting complete objects via MapGenerator.completeObjects',complete_objects);
-
-
-                    var map_array = complete_objects.getMapOfTerrainCodes(map_center, map_radius);
-                    log('Getting map of terrain codes created from that objects',map_array);
-
-
-                    var terrain1 = complete_objects.getTerrainOnPosition(position1);
-                    log('Getting terrain on '+position1,terrain1);
-
-
-                    var position3 = complete_objects.getNearestTerrainPositionWithCode(position2,terrain1.getCode());
-                    log('Getting position of nearest terrain from '+position2+' with code '+terrain1.getCode(),position3);
-
-
-                    log('Distance between these two terrains is',terrain1.getPosition().getDistance(position2));
-
-
-
-                });
-
-        });
-
-
-    </script>
-    <style>
-
-        .mapCircle{
-
-            display: inline-block;
-
-            border: 2px solid #444;
-            border-radius: 9999px;
-
-            /**/
         }
 
 
-    </style>
-</head>
-<body>
+        var map_radius = 2;
+        var map_center = new T.Position({x: 20600, y: 378535});
+        var position1 =  map_center.clone().plus(new T.Position(1,2));
+        var position2 =  map_center.clone().plus(new T.Position(-8,1));
 
 
-</body>
-</html>
+
+            $.ajax({
+                url: 'http://api.towns.cz/objects/?x='+map_center.x+'&y='+map_center.y+'&radius='+map_radius
+            }).done(function(response){
+
+
+
+                var server_objects = new T.Objects.Array(response/*[
+                 {
+                 "type": "terrain",
+                 "design": {
+                 "type": "terrain",
+                 "data": {
+                 "image": 7,
+                 "color": "#EFF7FB",
+                 "size": 1
+                 }
+                 },
+                 "name": "My own terrain object",
+                 "x": -1,
+                 "y": -2
+                 }
+                 ]*/);
+
+                log('Objects from API near '+map_center,server_objects);
+
+                var map_array = server_objects.getMapOfTerrainCodes(map_center, map_radius);
+                log('Getting map array created from that objects',map_array)//todo map of codes
+
+
+                var complete_objects = T.World.mapGenerator.getCompleteObjects(server_objects, map_center, map_radius, true);
+                log('Getting complete objects via MapGenerator.completeObjects',complete_objects);
+
+
+                var map_array = complete_objects.getMapOfTerrainCodes(map_center, map_radius);
+                log('Getting map of terrain codes created from that objects',map_array);
+
+
+                var terrain1 = complete_objects.getTerrainOnPosition(position1);
+                log('Getting terrain on '+position1,terrain1);
+
+
+                var position3 = complete_objects.getNearestTerrainPositionWithCode(position2,terrain1.getCode());
+                log('Getting position of nearest terrain from '+position2+' with code '+terrain1.getCode(),position3);
+
+
+                log('Distance between these two terrains is',terrain1.getPosition().getDistance(position2));
+
+
+
+            });
+
+    });
+
+
+</script>
+
+<style>
+
+    .mapCircle{
+
+        display: inline-block;
+
+        border: 2px solid #444;
+        border-radius: 9999px;
+
+        /**/
+    }
+
+
+</style>

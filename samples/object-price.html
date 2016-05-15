@@ -1,20 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Towns-shared object price sample</title>
+
+
+<textarea id="object-json"></textarea>
+<div id="object-price"></div>
 
 
 
+<style>
 
-    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
-    <script>
-        var module={};
-        var global=window;
-    </script>
-    <script src="../build/towns-shared.js"></script>
 
+    #object-json{
+        display: inline-block;
+        vertical-align: top;
+        width: calc(50vw - 35px);
+        height: calc(100vh - 35px);
+    }
+
+
+    #object-price{
+        display: inline-block;
+        vertical-align: top;
+        text-align: right;
+        width: 400px;
+        max-width: calc(50vw - 35px);
+        height: calc(100vh - 35px);
+    }
+
+</style>
 
 
 
@@ -85,38 +96,3 @@
     });
 
 </script>
-<style>
-
-
-    #object-json{
-        display: inline-block;
-        vertical-align: top;
-        width: calc(50vw - 35px);
-        height: calc(100vh - 35px);
-    }
-
-
-    #object-price{
-        display: inline-block;
-        vertical-align: top;
-        text-align: right;
-        width: 400px;
-        max-width: calc(50vw - 35px);
-        height: calc(100vh - 35px);
-    }
-
-</style>
-</head>
-<body>
-
-
-<textarea id="object-json"></textarea>
-
-
-
-
-<div id="object-price"></div>
-
-
-</body>
-</html>

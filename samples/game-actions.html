@@ -1,71 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Towns-shared object price sample</title>
+
+
+<textarea id="object-json"></textarea>
+<div id="object-price"></div>
 
 
 
+<script>
 
-    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
-    <script>
-        var module={};
-        var global=window;
-    </script>
-    <script src="../build/towns-shared.js"></script>
+    $(function(){
 
 
 
-
-
-    <script>
-
-        $(function(){
-
-
-
-            $.ajax({
-                url: 'http://api.towns.cz/objects/prototypes'
-            }).done(function(response) {
+        $.ajax({
+            url: 'http://api.towns.cz/objects/prototypes'
+        }).done(function(response) {
 
 
 
-                var objects = new T.Objects.Array(response);
-                var buildings = objects.filterTypes('building');
+            var objects = new T.Objects.Array(response);
+            var buildings = objects.filterTypes('building');
 
 
-                var resources = new T.Resources({wood:300});
+            var resources = new T.Resources({wood:300});
 
 
-                result = T.World.game.getAction('attack').execute(buildings[1],buildings[2],resources);
+            result = T.World.game.getAction('attack').execute(buildings[0],buildings[1],resources);
 
-                console.log(result);
+            console.log(result);
 
-
-
-            });
 
 
         });
 
-    </script>
-    <style>
+
+    });
+
+</script>
 
 
 
-    </style>
-</head>
-<body>
-
-
-<textarea id="object-json"></textarea>
-
-
-
-
-<div id="object-price"></div>
-
-
-</body>
-</html>
