@@ -35,14 +35,13 @@
                 var buildings = objects.filterTypes('building');
 
 
-
-                actionCall = T.World.game.createAction('attack',buildings[1]).createActionCall(buildings[2]);
-
-                console.log(actionCall);
-
                 var resources = new T.Resources({wood:300});
 
-                var result = actionCall.execute(resources);
+
+                result = T.World.game.getAction('attack').execute(buildings[1],buildings[2],resources);
+
+                console.log(result);
+
 
 
             });

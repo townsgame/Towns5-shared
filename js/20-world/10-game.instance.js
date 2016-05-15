@@ -11,7 +11,7 @@ var K=0.05;
 T.World.game = new T.Game(
     {
         //---------------------------------------------Defense
-        'defense': new T.Game.ActionType(
+        'defense': new T.Game.Action(
             'PASSIVE',
             {
                 'defense': 'number'
@@ -27,7 +27,7 @@ T.World.game = new T.Game(
             })
         ),
         //---------------------------------------------Regenerate
-        'regenerate': new T.Game.ActionType(
+        'regenerate': new T.Game.Action(
             'PASSIVE',
             {
                 'regenerate': 'number'
@@ -43,7 +43,7 @@ T.World.game = new T.Game(
             })
         ),
         //---------------------------------------------Repair
-        'repair': new T.Game.ActionType(
+        'repair': new T.Game.Action(
             'ACTIVE',
             {
                 'repair': 'number'
@@ -57,12 +57,12 @@ T.World.game = new T.Game(
                 'stone':  3,
                 'iron':   4
             }),
-            function(object,params){
+            function(object,by){
 
             }
         ),
         //---------------------------------------------Mine
-        'mine': new T.Game.ActionType(
+        'mine': new T.Game.Action(
             'PASSIVE',
             {
                 'resource': 'string',
@@ -79,7 +79,7 @@ T.World.game = new T.Game(
             })
         ),
         //---------------------------------------------Attack
-        'attack': new T.Game.ActionType(
+        'attack': new T.Game.Action(
             'ACTIVE',
             {
                 'distance': 'number',
@@ -95,13 +95,19 @@ T.World.game = new T.Game(
                 'clay':   0,
                 'stone':  3,
                 'iron':   2
-            }),
-            function(object,params){
+            }),function(object_attacker,object_attacked,resources_attacker){
+
+                r(object_attacker.getActionAbility('attack'));
+                r(object_attacker.getActionAbility('defence'));
+                r(object_attacked.getActionAbility('defence'));
+
+
+
 
             }
         ),
         //---------------------------------------------Move
-        'move': new T.Game.ActionType(
+        'move': new T.Game.Action(
             'ACTIVE',
             {
                 'speed': 'number'
@@ -115,12 +121,12 @@ T.World.game = new T.Game(
                 'stone':  0,
                 'iron':   1
             }),
-            function(object,params){
+            function(object,position,objects){
 
             }
         ),
         //---------------------------------------------Throughput
-        'throughput': new T.Game.ActionType(
+        'throughput': new T.Game.Action(
             'PASSIVE',
             {
                 'throughput': 'number'
@@ -134,7 +140,7 @@ T.World.game = new T.Game(
                 'stone':  1,
                 'iron':   0
             })
-        )
+        )/**/
         //---------------------------------------------
 
 

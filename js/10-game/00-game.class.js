@@ -12,14 +12,14 @@ T.Game = class{
     
      /**
      *
-     * @param {Object.<T.Game.ActionType>} action_type_list
+     * @param {Object.<T.Game.Action>} action_list
      * @param {function} max_life_modifier
      * @param {function} price_key_modifier
      * @constructor
      */
-    constructor(action_type_list,max_life_modifier,price_key_modifier){
+    constructor(action_list,max_life_modifier,price_key_modifier){
     
-        this.action_type_list = action_type_list;
+        this.action_list = action_list;
         this.max_life_modifier = max_life_modifier;
         this.price_key_modifier = price_key_modifier;
     
@@ -43,29 +43,30 @@ T.Game = class{
         }
     
     
-        object.actions.forEach(function(action){
+        object.actions.forEach(function(actionAbility){
     
     
-            if(typeof self.action_type_list[action.type]!='undefined'){
+            if(typeof self.action_list[actionAbility.type]!=='undefined'){
     
-                var action_type = self.action_type_list[action.type];
+                var action = self.action_list[actionAbility.type];
     
                 //---------------Checking params
-                for(var param in action_type.params){
-                    var param_type = action_type.params[param];
+
+                for(var param in actionAbility.params){
+                    var param_type = action.ability_params[param];
     
-                    if(typeof action.params[param]!=param_type){
-                        throw new Error('Param '+param+' should be '+param_type+' in action '+action.type);
+                    if(typeof actionAbility.params[param]!==param_type){
+                        throw new Error('Param '+param+' should be '+param_type+' instead of '+typeof(actionAbility.ability_params[param])+' in action ability '+actionAbility.type);
                     }
     
                 }
                 //---------------
-    
-                var price_base = Math.ceil(action_type.price_base(action.params));//
+
+                var price_base = Math.ceil(action.ability_price_base(actionAbility.params));//
     
                 //---------------Checking non negative value
                 if(price_base<0){
-                    throw new Error('Params in action '+action.type+' should not make this action negative');
+                    throw new Error('Params in action ability '+actionAbility.type+' should not make this action negative');
                 }
                 //---------------
     
@@ -73,7 +74,7 @@ T.Game = class{
                 price_bases.push(price_base);
     
             }else{
-                throw new Error('Unknown action type '+action.type);
+                throw new Error('Unknown action type '+actionAbility.type);
             }
     
     
@@ -129,17 +130,17 @@ T.Game = class{
     
         object.actions.forEach(function(action,i){
     
-            var action_type = self.action_type_list[action.type];
+            var action = self.action_list[action.type];
     
     
-            action_type.price_resources_list.sort(function(a,b){//todo is it safe?
+            action.ability_price_resources_list.sort(function(a,b){//todo is it safe?
     
                 return design_resources.compare(a.clone().signum())-design_resources.compare(b.clone().signum());
     
             });
     
     
-            var price_resources = action_type.price_resources_list[0].clone();
+            var price_resources = action.ability_price_resources_list[0].clone();
     
     
             price_resources.multiply(price_bases[i]);
@@ -229,15 +230,12 @@ T.Game = class{
 
 
 
-    createAction(action_key,object){
+    getAction(action_key){
 
-        var action_type = this.action_type_list[action_key];
-        var action_config = object.actions[action_key];
+        var action = this.action_list[action_key];
 
-        if(typeof action_type=='undefined')throw new Error('Unknown action type '+action_key+'.');
-        if(typeof action_config=='undefined')throw new Error('Object '+object.name+' has no action '+action_key+'.');
+        if(typeof action=='undefined')throw new Error('Unknown action type '+action_key+'.');
 
-        var action = new T.Game.Action(action_type,action_config);
 
         return(action);
     }

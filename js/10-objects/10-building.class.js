@@ -23,4 +23,11 @@ T.Objects.Building = class extends T.Objects.Object{
         return(this.design.data);
     }
 
+
+    getActionAbility(action_key){
+
+        return this.actions[action_key];
+
+    }
+
 };

@@ -100,6 +100,8 @@ gulp.task('build', function () {
         .pipe(gulp.dest('./build'))
     ;
 
+    gulp.start("documentation");
+
 });
 
 
