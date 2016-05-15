@@ -128,9 +128,9 @@ T.Game = class{
     
         var design_resources = self.getObjectDesignPrice(object);
     
-        object.actions.forEach(function(action,i){
+        object.actions.forEach(function(action_ability,i){
     
-            var action = self.action_list[action.type];
+            var action = self.action_list[action_ability.type];
     
     
             action.ability_price_resources_list.sort(function(a,b){//todo is it safe?

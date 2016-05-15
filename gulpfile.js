@@ -10,6 +10,8 @@ var es6transpiler = require('gulp-es6-transpiler');
 var uglify = require('gulp-uglify');
 var fs = require("fs");
 var jshint = require('gulp-jshint');
+var jasmine = require('gulp-jasmine');
+
 
 
 
@@ -100,7 +102,7 @@ gulp.task('build', function () {
         .pipe(gulp.dest('./build'))
     ;
 
-    gulp.start("documentation");
+    //gulp.start("documentation");
 
 });
 
@@ -124,10 +126,28 @@ gulp.task('develop', function() {
 
 
 gulp.task("test", function() {
+
+
+
     gulp.src(includes)
         .pipe(jshint({esversion:6,laxcomma:true}))
         .pipe(jshint.reporter("default"));
 
-    //todo my tests
+
+
+    gulp.start("build",function(){
+
+        global.T = require('./build/towns-shared.js');
+
+        gulp.src('./test/*.js')
+            .pipe(jasmine());
+
+
+
+    });
+
+
+
+
 
 });

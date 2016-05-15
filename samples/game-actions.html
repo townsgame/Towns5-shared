@@ -21,10 +21,29 @@
             var buildings = objects.filterTypes('building');
 
 
+
+
+
+
+            console.log(buildings);
+
+
+
+
+
+
             var resources = new T.Resources({wood:300});
 
 
+            $('html').append('<div>'+buildings[0]+' vs. '+buildings[1]+'</div>');
+
+
             result = T.World.game.getAction('attack').execute(buildings[0],buildings[1],resources);
+
+
+
+
+
 
             console.log(result);
 

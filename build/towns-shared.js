@@ -547,9 +547,9 @@ T.Game = ((function(){"use strict";var proto$0={};
     
         var design_resources = self.getObjectDesignPrice(object);
     
-        object.actions.forEach(function(action,i){
+        object.actions.forEach(function(action_ability,i){
     
-            var action = self.action_list[action.type];
+            var action = self.action_list[action_ability.type];
     
     
             action.ability_price_resources_list.sort(function(a,b){//todo is it safe?
@@ -2565,12 +2565,13 @@ T.Objects.Array = ((function(){"use strict";var static$0={},proto$0={};
          x: topleft.x+radius,
          y: topleft.y+radius
          };*/
+        var x,y;
 
         //--------------------------Create empty array
         var map_array=[];
-        for (var y = 0; y < radius*2; y++) {
+        for (y = 0; y < radius*2; y++) {
             map_array[y]=[];
-            for (var x = 0; x < radius*2; x++) {
+            for (x = 0; x < radius*2; x++) {
                 map_array[y][x]=false;
             }
         }
@@ -2581,7 +2582,6 @@ T.Objects.Array = ((function(){"use strict";var static$0={},proto$0={};
 
         var terrain_objects_raw = this.filterTypes('terrain').getAll();//.slice().reverse();
 
-        var x,y;
 
 
         var object;
@@ -2634,7 +2634,7 @@ T.Objects.Array = ((function(){"use strict";var static$0={},proto$0={};
                 //--------------------------
             }
 
-        };
+        }
         //--------------------------
 
         return map_array;

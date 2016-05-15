@@ -194,12 +194,13 @@ T.Objects.Array = class{
          x: topleft.x+radius,
          y: topleft.y+radius
          };*/
+        var x,y;
 
         //--------------------------Create empty array
         var map_array=[];
-        for (var y = 0; y < radius*2; y++) {
+        for (y = 0; y < radius*2; y++) {
             map_array[y]=[];
-            for (var x = 0; x < radius*2; x++) {
+            for (x = 0; x < radius*2; x++) {
                 map_array[y][x]=false;
             }
         }
@@ -210,7 +211,6 @@ T.Objects.Array = class{
 
         var terrain_objects_raw = this.filterTypes('terrain').getAll();//.slice().reverse();
 
-        var x,y;
 
 
         var object;
@@ -263,7 +263,7 @@ T.Objects.Array = class{
                 //--------------------------
             }
 
-        };
+        }
         //--------------------------
 
         return map_array;
