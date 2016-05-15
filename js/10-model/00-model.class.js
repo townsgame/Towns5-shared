@@ -479,6 +479,48 @@ T.Model = class{
     }
 
 
+    /**
+     * Aggregate volume of each resource used in model
+     * @returns {T.Resources}
+     */
+    aggregateResourcesVolumes(){
+
+
+        var price = new T.Resources({});
+
+
+        var linear_particles = this.getLinearParticles();
+
+
+        linear_particles.forEach(function(linear_particle){
+
+            var volume=//todo all shapes
+                linear_particle.size.x *
+                linear_particle.size.y *
+                linear_particle.size.z;
+
+            var material=linear_particle.material.split('_');
+            material=material[0];
+
+            var price_={};
+            price_[material]=volume;
+
+            price.add(price_);
+
+        });
+
+        /*console.log('price of');
+         console.log(object.design.data);
+         console.log(price);*/
+
+        //price.multiply(0.01);
+
+        return(price);
+
+
+    }
+
+
     
     
 

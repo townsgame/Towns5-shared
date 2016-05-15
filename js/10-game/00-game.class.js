@@ -183,48 +183,12 @@ T.Game = class{
 
 
     /**
-     * todo maybe this should be under model.class.js?
-     * @param {object} Object
-     * @return {object} Resources - design amount of resources
+     * @param {T.Objects.Building} Object
+     * @return {T.Resources} design amount of resources
      */
     getObjectDesignPrice(object){
-    
-        if(!object.hasOwnProperty('design'))throw new Error('Object should have design!');
-        if(object.design.type!='model')throw new Error('Object should have design of type model!');
-    
-    
-        var price = new T.Resources({});
-    
-    
-        var model = new T.Model(object.design.data);
-    
-        var linear_particles = model.getLinearParticles();
-    
-    
-        linear_particles.forEach(function(linear_particle){
-    
-            var volume=
-                linear_particle.size.x *
-                linear_particle.size.y *
-                linear_particle.size.z;
-    
-            var material=linear_particle.material.split('_');
-            material=material[0];
-    
-            var price_={};
-            price_[material]=volume;
-    
-            price.add(price_);
-    
-        });
-    
-        /*console.log('price of');
-        console.log(object.design.data);
-        console.log(price);*/
-    
-        //price.multiply(0.01);
-    
-        return(price);
+
+        return object.getModel().aggregateResourcesVolumes();
     
     }
 

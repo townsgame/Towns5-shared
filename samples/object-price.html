@@ -59,13 +59,13 @@
 
             var object_json = $('#object-json').val();
 
-            object_json=JSON.parse(object_json);
+            building=new T.Objects.Building(JSON.parse(object_json));
 
-            var price_bases = T.World.game.getObjectPriceBases(object_json);
-            var max_life = T.World.game.getObjectMaxLife(object_json);
-            var prices = T.World.game.getObjectPrices(object_json);
-            var price = T.World.game.getObjectPrice(object_json);
-            var design_price = T.World.game.getObjectDesignPrice(object_json);
+            var price_bases = T.World.game.getObjectPriceBases(building);
+            var max_life = T.World.game.getObjectMaxLife(building);
+            var prices = T.World.game.getObjectPrices(building);
+            var price = T.World.game.getObjectPrice(building);
+            var design_price = T.World.game.getObjectDesignPrice(building);
 
             $('#object-price').html('');
 
