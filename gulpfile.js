@@ -135,16 +135,23 @@ gulp.task("test", function() {
 
 
 
-    gulp.start("build",function(){
-
-        global.T = require('./build/towns-shared.js');
-
-        gulp.src('./test/*.js')
-            .pipe(jasmine());
+    setTimeout(function(){
 
 
+        gulp.start("build",function(){
 
-    });
+            global.T = require('./build/towns-shared.js');
+
+            gulp.src('./test/*.js')
+                .pipe(jasmine());
+
+
+
+        });
+
+
+    },10);
+
 
 
 

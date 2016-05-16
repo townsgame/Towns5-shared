@@ -57,6 +57,14 @@ describe('angleDiff', function() {
     it('23,28', function () {
         expect(T.Math.angleDiff(23,28)).toBe(5);
     });
+
+    it('355,5', function () {
+        expect(T.Math.angleDiff(355,5)).toBe(10);
+    });
+
+    it('90,270', function () {
+        expect(T.Math.angleDiff(90,270)).toBe(180);
+    });
 });
 
 
@@ -115,7 +123,7 @@ describe('xy2dist', function() {
     });
 
     it('1,1', function () {
-        expect(T.Math.xy2dist(1,1)).toBeCloseTo(1.4);
+        expect(T.Math.xy2dist(1,1)).toBeCloseTo(1.414);
     });
 
     it('0,100', function () {
@@ -237,6 +245,32 @@ describe('bounds', function() {
 });
 
 
+//isOnLine(x, y, endx, endy, px, py)
+describe('isOnLine', function() {
+
+    it('/.', function () {
+        expect(T.Math.isOnLine(0,0,10,10,10,2)).toBe(false);
+    });
+    it('!', function () {
+        expect(T.Math.isOnLine(0,0,0,10,0,-2)).toBe(false);
+    });
+    it('i', function () {
+        expect(T.Math.isOnLine(0,0,0,10,0,12)).toBe(false);
+    });
+    it('`.', function () {
+        expect(T.Math.isOnLine(0,10,2,8,10,0)).toBe(false);
+    });
+    it('|', function () {
+        expect(T.Math.isOnLine(1,0,1,10,1,1)).toBe(true);
+    });
+    it('/', function () {
+        expect(T.Math.isOnLine(0,0,10,10,5,5)).toBe(true);
+    });
+
+});
+
+
+
 //lineCollision(a1x,a1y,a2x,a2y,b1x,b1y,b2x,b2y);
 describe('lineCollision', function() {
 
@@ -256,7 +290,10 @@ describe('lineCollision', function() {
         expect(T.Math.lineCollision(0,0,10,0,10,10,10,-10)).toBe(true);
     });
     it('/', function () {
-        expect(T.Math.lineCollision(0,0,10,10,2,2,4,4)).toBe(true);
+        expect(T.Math.lineCollision(0,0,10,10,1,1,9,9)).toBe(true);
+    });
+    it('!', function () {
+        expect(T.Math.lineCollision(0,0,0,2,0,4,0,10)).toBe(false);
     });
 
 

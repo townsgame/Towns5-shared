@@ -76,14 +76,14 @@ T.Math=class{
     /**
      * Difference between two angeles
      * @static
-     * @param {number} degrees 1
-     * @param {number} degrees 2
-     * @return {number} degrees difference
+     * @param {number} deg1
+     * @param {number} deg2
+     * @return {number} <0;180> degrees difference
      */
     static angleDiff(deg1,deg2){
-        var a = deg1 - deg2;
-        a = (a + 180) % 360 - 180;
-        return(a);
+        var deg = Math.abs(deg1 - deg2)%360;
+        if(deg>180)deg=360-deg;
+        return(deg);
     }
 
     //-------------------------
@@ -94,7 +94,7 @@ T.Math=class{
      * @return {number} degrees
      */
     static rad2deg(radians){
-        return(radians * (180/Math.PI));
+        return (radians * (180/Math.PI))%360;
     }
 
     //-------------------------
@@ -105,7 +105,7 @@ T.Math=class{
      * @return {number} radians
      */
     static deg2rad(degrees){
-        return(degrees * (Math.PI/180));
+        return(degrees%360 * (Math.PI/180));
     }
 
     //-------------------------
@@ -244,22 +244,58 @@ T.Math=class{
     }
 
 
-    //----------------------------------------------------------
+    /**
+     * Is point[b1x,b1y] colliding line?
+     * @param {number} a1x
+     * @param {number} a1y
+     * @param {number} a2x
+     * @param {number} a2y
+     * @param {number} b1x
+     * @param {number} b1y
+     * @returns {boolean}
+     */
+    static isOnLine(a1x,a1y,a2x,a2y,b1x,b1y) {
+
+        a2x-=a1x;
+        a2y-=a1y;
+
+        b1x-=a1x;
+        b1y-=a1y;
+
+
+
+        var aSlope=a2y/a2x;
+        var bSlope=b1y/b1x;
+
+
+        if(aSlope!=bSlope)return false;
+
+
+        var aDist = this.xy2dist(a2y,a2x);
+        var bDist = this.xy2dist(b1y,b1x);
+
+        return (aDist>=bDist);
+
+    }
+
+
+
 
     /**
      * Is line A colliding line B?
      * @static
-     * @param a1x
-     * @param a1y
-     * @param a2x
-     * @param a2y
-     * @param b1x
-     * @param b1y
-     * @param b2x
-     * @param b2y
+     * @param {number} a1x
+     * @param {number} a1y
+     * @param {number} a2x
+     * @param {number} a2y
+     * @param {number} b1x
+     * @param {number} b1y
+     * @param {number} b2x
+     * @param {number} b2y
      * @return {boolean}
      */
     static lineCollision(a1x,a1y,a2x,a2y,b1x,b1y,b2x,b2y){
+
 
 
 
@@ -268,11 +304,19 @@ T.Math=class{
         var numerator2 = ((a1y - b1y) * (a2x - a1x)) - ((a1x - b1x) * (a2y - a1y));
         var collision;
 
+        //console.log(denominator,numerator1,numerator2);
+
         // Detect coincident lines (has a problem, read below)
         if (denominator === 0){
 
             //var collision= (numerator1 == 0 && numerator2 == 0);
-            collision=false;
+            //collision=false;
+
+            var bOnA = this.isOnLine(a1x,a1y,a2x,a2y,b1x,b1y);
+            var aOnB = this.isOnLine(b1x,b1y,b2x,b2y,a1x,a1y);
+
+            return(bOnA || aOnB);
+
 
         }else{
 
@@ -321,8 +365,6 @@ T.Math=class{
         return collision;
 
     }
-
-
 
 
 

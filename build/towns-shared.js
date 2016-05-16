@@ -1105,14 +1105,14 @@ T.Math=((function(){"use strict";function constructor$0() {}DP$0(constructor$0,"
     /**
      * Difference between two angeles
      * @static
-     * @param {number} degrees 1
-     * @param {number} degrees 2
-     * @return {number} degrees difference
+     * @param {number} deg1
+     * @param {number} deg2
+     * @return {number} <0;180> degrees difference
      */
     static$0.angleDiff = function(deg1,deg2){
-        var a = deg1 - deg2;
-        a = (a + 180) % 360 - 180;
-        return(a);
+        var deg = Math.abs(deg1 - deg2)%360;
+        if(deg>180)deg=360-deg;
+        return(deg);
     };
 
     //-------------------------
@@ -1123,7 +1123,7 @@ T.Math=((function(){"use strict";function constructor$0() {}DP$0(constructor$0,"
      * @return {number} degrees
      */
     static$0.rad2deg = function(radians){
-        return(radians * (180/Math.PI));
+        return (radians * (180/Math.PI))%360;
     };
 
     //-------------------------
@@ -1134,7 +1134,7 @@ T.Math=((function(){"use strict";function constructor$0() {}DP$0(constructor$0,"
      * @return {number} radians
      */
     static$0.deg2rad = function(degrees){
-        return(degrees * (Math.PI/180));
+        return(degrees%360 * (Math.PI/180));
     };
 
     //-------------------------
@@ -1273,22 +1273,58 @@ T.Math=((function(){"use strict";function constructor$0() {}DP$0(constructor$0,"
     };
 
 
-    //----------------------------------------------------------
+    /**
+     * Is point[b1x,b1y] colliding line?
+     * @param {number} a1x
+     * @param {number} a1y
+     * @param {number} a2x
+     * @param {number} a2y
+     * @param {number} b1x
+     * @param {number} b1y
+     * @returns {boolean}
+     */
+    static$0.isOnLine = function(a1x,a1y,a2x,a2y,b1x,b1y) {
+
+        a2x-=a1x;
+        a2y-=a1y;
+
+        b1x-=a1x;
+        b1y-=a1y;
+
+
+
+        var aSlope=a2y/a2x;
+        var bSlope=b1y/b1x;
+
+
+        if(aSlope!=bSlope)return false;
+
+
+        var aDist = this.xy2dist(a2y,a2x);
+        var bDist = this.xy2dist(b1y,b1x);
+
+        return (aDist>=bDist);
+
+    };
+
+
+
 
     /**
      * Is line A colliding line B?
      * @static
-     * @param a1x
-     * @param a1y
-     * @param a2x
-     * @param a2y
-     * @param b1x
-     * @param b1y
-     * @param b2x
-     * @param b2y
+     * @param {number} a1x
+     * @param {number} a1y
+     * @param {number} a2x
+     * @param {number} a2y
+     * @param {number} b1x
+     * @param {number} b1y
+     * @param {number} b2x
+     * @param {number} b2y
      * @return {boolean}
      */
     static$0.lineCollision = function(a1x,a1y,a2x,a2y,b1x,b1y,b2x,b2y){
+
 
 
 
@@ -1297,11 +1333,19 @@ T.Math=((function(){"use strict";function constructor$0() {}DP$0(constructor$0,"
         var numerator2 = ((a1y - b1y) * (a2x - a1x)) - ((a1x - b1x) * (a2y - a1y));
         var collision;
 
+        //console.log(denominator,numerator1,numerator2);
+
         // Detect coincident lines (has a problem, read below)
         if (denominator === 0){
 
             //var collision= (numerator1 == 0 && numerator2 == 0);
-            collision=false;
+            //collision=false;
+
+            var bOnA = this.isOnLine(a1x,a1y,a2x,a2y,b1x,b1y);
+            var aOnB = this.isOnLine(b1x,b1y,b2x,b2y,a1x,a1y);
+
+            return(bOnA || aOnB);
+
 
         }else{
 
@@ -1355,8 +1399,6 @@ T.Math=((function(){"use strict";function constructor$0() {}DP$0(constructor$0,"
 
 
 
-
-
     static$0.blurXY = function(generator,blur) {
 
         return(function (x, y) {
@@ -1388,10 +1430,10 @@ T.Math=((function(){"use strict";function constructor$0() {}DP$0(constructor$0,"
 
 
     static$0.bytesToSize = function(bytes) {
-        var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
-        if (bytes === 0) return '0 Byte';
+        var sizes = ['B', 'KB', 'MB', 'GB', 'TB'];
+        if (bytes === 0) return '0B';
         var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
-        return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i];
+        return Math.round(bytes / Math.pow(1024, i), 2) + '' + sizes[i];
     };
 
 
