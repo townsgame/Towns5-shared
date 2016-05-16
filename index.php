@@ -25,111 +25,36 @@
 
     <script>
 
-        $(function(){
+        T.Locale = class{
 
+            static get(){
+                return(Array.join(arguments,' '));
+            }
 
-
-
-        });
+        }
 
     </script>
-    <style>
-
-        body {
-            padding: 5px;
-            font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 
 
-            padding-top: 100px;
-        }
-
-
-        nav{
-
-            position:fixed;
-            top: 0px;
-            right: 0px;
-            left: 0px;
-            /*float: right;*/
-
-
-
-        }
-
-        nav h1{
-
-
-            display: block;
-
-            background-color: #AAD5F0;
-
-
-            margin:0px;
-            padding:10px;
-
-            text-align: center;
-
-            font-size: 1.2em;
-            font-weight: bold;
-
-
-        }
-
-        nav ul{
-            margin:0px;
-            padding:0px;
-            background-color: #a1b7cc;
-
-
-        }
-
-        nav li{
-
-            display: inline-block;
-            list-style: none;
-
-            /*border: 2px solid #999;*/
-
-            margin:0px;
-
-            padding: 10px;
-            padding-left: 20px;
-            padding-right: 20px;
-
-
-            /*min-width: 200px;*/
-
-
-            color: #000000;
-            text-decoration: none;
-
-
-            text-align: center;
-
-        }
-
-
-        nav li.selected{
-
-            background-color: #AAD5F0;
-            font-weight: bold;
-
-
-        }
+    <link rel="stylesheet" href="style-samples.js.css" />
 
 
 
 
 
 
-    </style>
 </head>
 <body>
 
 
 <?php
 
-    $pages = array_merge(glob('samples/*.html'),glob('samples/**/*.html'));
+    $pages = array_merge(
+        glob('samples/*.html')
+        ,glob('samples/**/*.html')
+        //,array('documentation/index.html')
+
+    );
 
     if(!isset($_GET['page'])){
         $current_page=$pages[0];
@@ -150,10 +75,10 @@
 
         <?php foreach($pages as $page){ ?>
 
-        --><a href="?page=<?=$page?>"><li <?=($page===$current_page?'class="selected"':'')?>><?=basename($page,'.html')?></li></a><!--
+        --><a href="?page=<?=$page?>"><li <?=($page===$current_page?'class="selected"':'')?>><?=ucfirst(str_replace('-',' ',basename($page,'.html')))?></li></a><!--
 
         <?php } ?>
-    --></ul>
+    --><a href="./documentation" target="_blank"><li>Documentation</li></a></ul>
 </nav>
 
 

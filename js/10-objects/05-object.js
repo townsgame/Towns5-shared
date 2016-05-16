@@ -9,6 +9,9 @@
 
 T.Objects.Object = class{
 
+    /**
+     * @param {object} object
+     */
     constructor(object){
 
         for(var key in object){
@@ -25,6 +28,15 @@ T.Objects.Object = class{
     //todo jsdoc
     getPosition(){
         return(new T.Position(this.x,this.y));
+    }
+
+
+    /**
+     *
+     * @returns {string}
+     */
+    toString(){
+        return('['+this.name+']');
     }
 
 };

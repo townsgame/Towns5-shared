@@ -1,0 +1,124 @@
+/**
+ * @author Towns.cz
+ * @fileOverview Only for samples
+ */
+
+
+
+
+body {
+    padding: 5px;
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+
+
+    padding-top: 100px;
+}
+
+
+nav{
+
+    position:fixed;
+    top: 0px;
+    right: 0px;
+    left: 0px;
+    /*float: right;*/
+
+
+
+}
+
+nav h1{
+
+
+    display: block;
+
+    background-color: #AAD5F0;
+
+
+    margin:0px;
+    padding:10px;
+
+    text-align: center;
+
+    font-size: 1.2em;
+    font-weight: bold;
+
+
+}
+
+nav ul{
+    margin:0px;
+    padding:0px;
+    background-color: #a1b7cc;
+
+
+}
+
+nav li{
+
+    display: inline-block;
+    list-style: none;
+
+    /*border: 2px solid #999;*/
+
+    margin:0px;
+
+    padding: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+
+
+    /*min-width: 200px;*/
+
+
+    color: #000000;
+    text-decoration: none;
+
+
+    text-align: center;
+
+}
+
+
+nav li.selected{
+
+    background-color: #AAD5F0;
+    font-weight: bold;
+
+
+}
+
+
+
+
+
+
+.object-building-profile{
+
+    display: inline-block;
+    width: 300px;
+
+    background: rgba(100,100,100,0.1);
+    border-radius: 3px;
+
+}
+.object-building-profile h2{
+    text-align: center;
+}
+
+
+
+.action-ability-profile{
+
+    background: rgba(100,100,100,0.1);
+    border-radius: 3px;
+
+    width: 100%;
+
+}
+
+.action-ability-profile th{
+
+    background: rgba(100,100,100,0.1);
+
+}

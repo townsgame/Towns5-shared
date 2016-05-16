@@ -21,13 +21,8 @@
             var buildings = objects.filterTypes('building');
 
 
-
-
-
-
-            console.log(buildings);
-
-
+            var attacker = buildings.getAll()[0];
+            var attacked = buildings.getAll()[1];
 
 
 
@@ -35,13 +30,19 @@
             var resources = new T.Resources({wood:300});
 
 
-            $('html').append('<div>'+buildings[0]+' vs. '+buildings[1]+'</div>');
+            var profile_params = [
 
 
-            result = T.World.game.getAction('attack').execute(buildings[0],buildings[1],resources);
+            ];
+            $('html').append('<div>'+attacker.createHtmlProfile(profile_params)+' <div style="display: inline-block;font-size: 44px;">vs.</div> '+attacked.createHtmlProfile(profile_params)+'</div>');
 
 
 
+            result = T.World.game.getAction('attack').execute(attacker,attacked,resources);
+
+
+            $('html').append('<h2>result:</h2>');
+            $('html').append('<div>'+attacker.createHtmlProfile(profile_params)+' vs. '+attacked.createHtmlProfile(profile_params)+'</div>');
 
 
 

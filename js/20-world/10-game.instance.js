@@ -97,11 +97,87 @@ T.World.game = new T.Game(
                 'iron':   2
             }),function(object_attacker,object_attacked,resources_attacker){
 
-                console.log(object_attacker.getActionAbility('attack'));
-                console.log(object_attacker.getActionAbility('defence'));
-                console.log(object_attacked.getActionAbility('defence'));
+                var attacker_attack = object_attacker.getActionAbility('attack');
+                var attacker_defence = object_attacker.getActionAbility('defense');
+                var attacked_attack = object_attacked.getActionAbility('attack');
+                var attacked_defence = object_attacked.getActionAbility('defense');
+
+                
+                //---------------------Conditions
+                
+
+                if(!attacker_attack instanceof T.Game.ActionAbility){
+                    throw new Error('Attacker has not ability to attack');
+                }
 
 
+                //---------------------Empty params
+
+                if(attacker_defence instanceof T.Game.ActionAbility){}else{
+                    attacker_defence = new T.Game.ActionAbility({
+                        type: 'defense',
+                        params: {defense: 0}
+                    });
+                }
+                if(attacked_attack instanceof T.Game.ActionAbility){}else{
+                    attacked_attack = new T.Game.ActionAbility({
+                        type: 'attack',
+                        params: {
+                            cooldown: 1,
+                            distance: 1,
+                            rounds: 0,
+                            strength: 0
+                        }
+                    });
+                }
+                if(attacked_defence instanceof T.Game.ActionAbility){}else{
+                    attacked_defence = new T.Game.ActionAbility({
+                        type: 'defense',
+                        params: {defense: 0}
+                    });
+                }
+
+
+                attacker_attack=attacker_attack.clone();
+                attacker_defence=attacker_defence.clone();
+                attacked_attack=attacked_attack.clone();
+                attacked_defence=attacked_defence.clone();
+                //---------------------Defense
+
+                attacker_attack.params.attack-=
+                    attacked_defence.params.defense;
+                if(attacker_attack.params.attack<0)attacker_attack.params.attack=0;
+
+
+                
+                attacked_attack.params.attack-=
+                    attacker_defence.params.defense;
+                if(attacked_attack.params.attack<0)attacked_attack.params.attack=0;
+
+
+                //---------------------
+
+
+                while(
+                    attacker_attack.params.rounds || attacked_attack.params.rounds
+                    && attacker.life>1
+                    && attacked.life>1
+                    ){
+
+                    attacker.life-=attacker_attack.params.attack;
+                    attacked.life-=attacker_attack.params.attack;
+
+
+                    attacker_attack.params.rounds--;
+                    attacked_attack.params.rounds--;
+                }
+
+
+                //---------------------
+
+
+                if(attacker.life<1)attacker.life=1;
+                if(attacked.life<1)attacked.life=1;
 
 
             }
