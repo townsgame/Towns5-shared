@@ -122,13 +122,3 @@ T.World.game.installActionClass(
     }
 );
 
-
-
-
-
-/*{
-    'distance': {type:'number',default:0},
-    'strength': {type:'number',default:0},
-    'rounds': {type:'number',default:1},
-    'cooldown': {type:'number',default:1}
-}*/

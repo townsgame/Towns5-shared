@@ -14,51 +14,34 @@ T.World.game.installActionClass(
 
 
         static getType(){
-            return('action');
+            return('move');
         }
 
 
         countPriceBase(){
-            return(0);
+            return((Math.pow(this.params.speed,2))*10*K);
         }
 
 
         getPriceResources(){
 
             return([
-                //new T.Resources({'wood':   0}),
+                new T.Resources({'wood':   2}),
                 //new T.Resources({'clay':   0}),
                 //new T.Resources({'stone':  0}),
-                //new T.Resources({'iron':   0})
+                new T.Resources({'iron':   1})
             ]);
         }
 
 
-        static execute(){
+        /*static execute(){
         }
 
 
+        static tick(){//todo maybe ??? todo
+        }*/
 
 
     }
 );
 
-//---------------------------------------------Move
-'move': new T.Game.Action(
-    'ACTIVE',
-    {
-        'speed': 'number'
-    },
-    function(params){
-        return((Math.pow(params.speed,2))*10*K);
-    },
-    T.Resources.newSingles({
-        'wood':   2,
-        'clay':   0,
-        'stone':  0,
-        'iron':   1
-    }),
-    function(object,position,objects){
-
-    }
-),

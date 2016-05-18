@@ -18,7 +18,7 @@ T.Game = class{
      */
     constructor(max_life_modifier,price_key_modifier){
     
-        this.action_list = [];
+        this.action_classes = [];
         this.max_life_modifier = max_life_modifier;
         this.price_key_modifier = price_key_modifier;
     
@@ -156,18 +156,29 @@ T.Game = class{
 
 
 
-    installActionClass(action_class){
-        this.action_list.push(action_class);
+    installActionClass(action_empty_instance_params,action_class){
+
+        var action_empty_instance = new action_class({
+            type: action_class.getType(),
+            params: action_empty_instance_params
+        });
+        
+        this.action_classes.push(action_class);
+
+        this.action_empty_instances[action_empty_instance.type]=action_empty_instance;
+    
+    
+    
     }
 
 
 
     getActionClass(action){
 
-        for(var i= 0,l=this.action_list.length;i<l;i++){
-            if(this.action_list[i].getType()==action.type){
+        for(var i= 0,l=this.action_classes.length;i<l;i++){
+            if(this.action_classes[i].getType()==action.type){
 
-                return this.action_list[i];
+                return this.action_classes[i];
 
             }
         }
@@ -205,8 +216,15 @@ T.Game = class{
 
 
 
-    getActionEmptyInstance(action){
+    getActionEmptyInstance(action_type){
 
+        var action_instance = this.action_instances[action_type];
+
+        if(typeof action_instance==='undefined'){
+            throw new Error('In this game instance thare is no action class type '+action_type);
+        }
+
+        return(action_instance);
 
 
     }
@@ -215,7 +233,7 @@ T.Game = class{
 
     /*getActionExecute(action_key){
 
-        var action = this.action_list[action_key];
+        var action = this.action_classes[action_key];
 
         if(typeof action=='undefined')throw new Error('Unknown action type '+action_key+'.');
 

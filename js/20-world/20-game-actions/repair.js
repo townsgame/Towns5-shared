@@ -14,28 +14,29 @@ T.World.game.installActionClass(
 
 
         static getType(){
-            return('action');
+            return('repair');
         }
 
 
         countPriceBase(){
-            return(0);
+            return((1/(this.params.repair/100))*1000*K);
         }
 
 
         getPriceResources(){
 
             return([
-                //new T.Resources({'wood':   0}),
-                //new T.Resources({'clay':   0}),
-                //new T.Resources({'stone':  0}),
-                //new T.Resources({'iron':   0})
+                new T.Resources({'wood':   4}),
+                new T.Resources({'clay':   2}),
+                new T.Resources({'stone':  3}),
+                new T.Resources({'iron':   4})
             ]);
         }
 
 
-        static execute(){
-        }
+        /*static execute(){
+            //todo
+        }*/
 
 
 
@@ -44,31 +45,3 @@ T.World.game.installActionClass(
 );
 
 
-
-/*
- 'repair': new T.Game.Action(
- 'ACTIVE',
- {
- 'repair': 'number'
- },
- function(params){
- return((1/(params.repair/100))*1000*K);
- },
- T.Resources.newSingles({
- 'wood':   4,
- 'clay':   2,
- 'stone':  3,
- 'iron':   4
- }),
- function(object,by){
-
- }
- ),
- */
-
-/*{
- 'distance': {type:'number',default:0},
- 'strength': {type:'number',default:0},
- 'rounds': {type:'number',default:1},
- 'cooldown': {type:'number',default:1}
- }*/

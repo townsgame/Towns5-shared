@@ -8,34 +8,34 @@
 
 T.World.game.installActionClass(
     {
-        regenerate:   0,
+        regenerate:   100,
     },
     class extends T.Game.Action{
 
 
         static getType(){
-            return('action');
+            return('regenerate');
         }
 
 
         countPriceBase(){
-            return(0);
+            return((1/this.params.regenerate)*3600*K);
         }
 
 
         getPriceResources(){
 
             return([
-                //new T.Resources({'wood':   0}),
-                //new T.Resources({'clay':   0}),
-                //new T.Resources({'stone':  0}),
-                //new T.Resources({'iron':   0})
+                new T.Resources({'wood':   4}),
+                new T.Resources({'clay':   2}),
+                new T.Resources({'stone':  2}),
+                new T.Resources({'iron':   2})
             ]);
         }
 
 
-        static execute(){
-        }
+        /*static execute(){//todo maybe tick????
+        }*/
 
 
 
@@ -43,24 +43,3 @@ T.World.game.installActionClass(
     }
 );
 
-
-
-
- function(params){
- return((1/params.regenerate)*3600*K);
- },
- T.Resources.newSingles({
- 'wood':   4,
- 'clay':   2,
- 'stone':  2,
- 'iron':   2
- })
- ),
- */
-
-/*{
- 'distance': {type:'number',default:0},
- 'strength': {type:'number',default:0},
- 'rounds': {type:'number',default:1},
- 'cooldown': {type:'number',default:1}
- }*/

@@ -17,28 +17,28 @@ T.World.game.installActionClass(
 
 
         static getType(){
-            return('action');
+            return('mine');
         }
 
 
         countPriceBase(){
-            return(0);
+            return((this.params.amount)*3600*K);
         }
 
 
         getPriceResources(){
 
             return([
-                //new T.Resources({'wood':   0}),
-                //new T.Resources({'clay':   0}),
-                //new T.Resources({'stone':  0}),
-                //new T.Resources({'iron':   0})
+                new T.Resources({'wood':   3}),
+                new T.Resources({'clay':   2}),
+                new T.Resources({'stone':  2}),
+                new T.Resources({'iron':   4})
             ]);
         }
 
 
-        static execute(){
-        }
+        /*static tick(){//todo or maybe execute
+        }*/
 
 
 
@@ -47,21 +47,3 @@ T.World.game.installActionClass(
 );
 
 
-
-
-'mine': new T.Game.Action(
-    'PASSIVE',
-    {
-        'resource': 'string',
-        'amount': 'number'
-    },
-    function(params){
-        return((params.amount)*3600*K);
-    },
-    T.Resources.newSingles({
-        'wood':   3,
-        'clay':   2,
-        'stone':  2,
-        'iron':   4
-    })
-),

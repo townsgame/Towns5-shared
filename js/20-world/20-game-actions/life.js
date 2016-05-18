@@ -14,29 +14,24 @@ T.World.game.installActionClass(
 
 
         static getType(){
-            return('action');
+            return('life');
         }
 
 
         countPriceBase(){
-            return(0);
+            return(this.params.life*K);
         }
 
 
         getPriceResources(){
 
             return([
-                //new T.Resources({'wood':   0}),
-                //new T.Resources({'clay':   0}),
-                //new T.Resources({'stone':  0}),
-                //new T.Resources({'iron':   0})
+                new T.Resources({'wood':   1}),
+                new T.Resources({'clay':   1}),
+                new T.Resources({'stone':  1}),
+                new T.Resources({'iron':   1})
             ]);
         }
-
-
-        static execute(){
-        }
-
 
 
 
@@ -46,11 +41,3 @@ T.World.game.installActionClass(
 
 
 
-
-
-/*{
- 'distance': {type:'number',default:0},
- 'strength': {type:'number',default:0},
- 'rounds': {type:'number',default:1},
- 'cooldown': {type:'number',default:1}
- }*/
