@@ -8,9 +8,10 @@
 
 T.World.game.installActionClass(
     {
-        xxx:   0,
-        xxx:   0,
-        xxx:   1
+        wood:   0,
+        iron:   0,
+        clay:   0,
+        stone:   0
     },
     class extends T.Game.Action{
 
@@ -48,10 +49,19 @@ T.World.game.installActionClass(
 
 
 
-
-/*{
- 'distance': {type:'number',default:0},
- 'strength': {type:'number',default:0},
- 'rounds': {type:'number',default:1},
- 'cooldown': {type:'number',default:1}
- }*/
+'mine': new T.Game.Action(
+    'PASSIVE',
+    {
+        'resource': 'string',
+        'amount': 'number'
+    },
+    function(params){
+        return((params.amount)*3600*K);
+    },
+    T.Resources.newSingles({
+        'wood':   3,
+        'clay':   2,
+        'stone':  2,
+        'iron':   4
+    })
+),

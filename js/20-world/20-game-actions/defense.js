@@ -8,9 +8,7 @@
 
 T.World.game.installActionClass(
     {
-        xxx:   0,
-        xxx:   0,
-        xxx:   1
+        defense:   0
     },
     class extends T.Game.Action{
 
@@ -47,11 +45,7 @@ T.World.game.installActionClass(
 
 /*
 //---------------------------------------------Defense
-'defense': new T.Game.Action(
-    'PASSIVE',
-    {
-        'defense': 'number'
-    },
+
     function(params){
         return((params.defense)*800*K);
     },

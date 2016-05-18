@@ -89,9 +89,10 @@ nav li.selected{
 }
 
 
-
-
-
+.big {
+    display: inline-block;
+    font-size: 44px;
+}
 
 .object-building-profile{
 

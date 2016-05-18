@@ -17,7 +17,12 @@ T.Objects.Building = class extends T.Objects.Object{
 
 
         for(var i= 0,l=this.actions.length;i<l;i++){
-            this.actions[i]=new T.Game.ActionAbility(this.actions[i]);
+            this.actions[i]=T.World.game.createActionInstance(this.actions[i]);
+        }
+
+
+        if(typeof this.actions==='undefined'){
+            this.actions=[];
         }
 
 

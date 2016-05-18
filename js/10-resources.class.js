@@ -25,31 +25,6 @@ T.Resources = class{
     }
 
 
-    /**
-     * @static
-     * @return {array} new Resources
-     */
-    static newSingles(resources){
-
-        var resources_array = [];
-
-        for (var key in resources) {
-            if (typeof resources[key] == 'number') {
-                if (resources[key] > 0) {
-
-                    var resources_ = {};
-                    resources_[key] = resources[key];
-
-                    resources_array.push(new T.Resources(resources_));
-
-                }
-            }
-        }
-
-        return resources_array;
-
-    }
-
 
     /**
      * Return deep clone of this.

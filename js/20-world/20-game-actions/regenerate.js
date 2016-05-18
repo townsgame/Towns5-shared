@@ -8,9 +8,7 @@
 
 T.World.game.installActionClass(
     {
-        xxx:   0,
-        xxx:   0,
-        xxx:   1
+        regenerate:   0,
     },
     class extends T.Game.Action{
 
@@ -48,6 +46,17 @@ T.World.game.installActionClass(
 
 
 
+ function(params){
+ return((1/params.regenerate)*3600*K);
+ },
+ T.Resources.newSingles({
+ 'wood':   4,
+ 'clay':   2,
+ 'stone':  2,
+ 'iron':   2
+ })
+ ),
+ */
 
 /*{
  'distance': {type:'number',default:0},

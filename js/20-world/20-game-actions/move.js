@@ -8,9 +8,7 @@
 
 T.World.game.installActionClass(
     {
-        xxx:   0,
-        xxx:   0,
-        xxx:   1
+        speed:   0
     },
     class extends T.Game.Action{
 
@@ -45,13 +43,22 @@ T.World.game.installActionClass(
     }
 );
 
+//---------------------------------------------Move
+'move': new T.Game.Action(
+    'ACTIVE',
+    {
+        'speed': 'number'
+    },
+    function(params){
+        return((Math.pow(params.speed,2))*10*K);
+    },
+    T.Resources.newSingles({
+        'wood':   2,
+        'clay':   0,
+        'stone':  0,
+        'iron':   1
+    }),
+    function(object,position,objects){
 
-
-
-
-/*{
- 'distance': {type:'number',default:0},
- 'strength': {type:'number',default:0},
- 'rounds': {type:'number',default:1},
- 'cooldown': {type:'number',default:1}
- }*/
+    }
+),

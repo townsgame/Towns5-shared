@@ -1,9 +1,5 @@
 
 
-<textarea id="object-json"></textarea>
-<div id="object-price"></div>
-
-
 
 <script>
 
@@ -30,19 +26,18 @@
             var resources = new T.Resources({wood:300});
 
 
-            var profile_params = [
-
-
-            ];
-            $('html').append('<div>'+attacker.createHtmlProfile(profile_params)+' <div style="display: inline-block;font-size: 44px;">vs.</div> '+attacked.createHtmlProfile(profile_params)+'</div>');
+            $('html').append(attacker.createHtmlProfile()+' <div class="big">vs.</div> '+attacked.createHtmlProfile());
 
 
 
-            result = T.World.game.getAction('attack').execute(attacker,attacked,resources);
+            result = T.World.game.executeAction('attack')(attacker,attacked,resources);
 
 
-            $('html').append('<h2>result:</h2>');
-            $('html').append('<div>'+attacker.createHtmlProfile(profile_params)+' vs. '+attacked.createHtmlProfile(profile_params)+'</div>');
+
+
+
+            $('html').append('<div class="big">=</div>');
+            $('html').append(attacker.createHtmlProfile()+attacked.createHtmlProfile());
 
 
 

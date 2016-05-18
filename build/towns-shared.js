@@ -431,14 +431,13 @@ T.Game = ((function(){"use strict";var proto$0={};
     
      /**
      *
-     * @param {Object.<T.Game.Action>} action_list
      * @param {function} max_life_modifier
      * @param {function} price_key_modifier
      * @constructor
      */
-    function constructor$0(action_list,max_life_modifier,price_key_modifier){
+    function constructor$0(max_life_modifier,price_key_modifier){
     
-        this.action_list = action_list;
+        this.action_list = [];
         this.max_life_modifier = max_life_modifier;
         this.price_key_modifier = price_key_modifier;
     
@@ -613,15 +612,36 @@ T.Game = ((function(){"use strict";var proto$0={};
 
 
 
-    proto$0.getAction = function(action_key){
+
+
+    proto$0.installAction = function(action_class){
+        action_list.push(action_class);
+    };
+
+
+
+
+    /*getActionExecute(action_key){
 
         var action = this.action_list[action_key];
 
         if(typeof action=='undefined')throw new Error('Unknown action type '+action_key+'.');
 
+        var game = this;
 
-        return(action);
-    };
+
+
+        var execute = function(){
+
+            var args = [game].push.call(arguments);
+            return action.execute_callback.apply(this,args);
+
+        };
+
+
+
+        return(execute);
+    }*/
     
 MIXIN$0(constructor$0.prototype,proto$0);proto$0=void 0;return constructor$0;})());
 /**
@@ -631,36 +651,73 @@ MIXIN$0(constructor$0.prototype,proto$0);proto$0=void 0;return constructor$0;})(
 //======================================================================================================================
 
 
-T.Game.Action = ((function(){"use strict";
+T.Game.Action = ((function(){"use strict";var proto$0={};
 
 
-    /**
-     *
-     * @param {string} type 'ACTIVE' or 'PASSIVE'
-     * @param {object} ability_params {param: type}
-     * @param {function} ability_price_base
-     * @param {Array} ability_price_resources_list
-     * @param {function} execute
-     * @constructor
-     */
-     function constructor$0(type, ability_params, ability_price_base, ability_price_resources_list){var execute = arguments[4];if(execute === void 0)execute = false;
+
+    function constructor$0(action){
+
+        if(!this.hasOwnProperty('getType'))throw new Error('You must extend T.Game.Action and add method getType before creating instances!');
 
 
-        if(['ACTIVE','PASSIVE'].indexOf(type)==-1)throw new Error('Unknown type of T.Game.Action '+type);
-        if(execute===false && type==='ACTIVE')throw new Error('ACTIVE T.Game.Action must have execute function');
-        if(execute!==false && type==='PASSIVE')throw new Error('PASSIVE T.Game.Action can not have execute function');
+        if(action.type==this.getType())throw new Error('This is attack not '+action.type+' class!');
 
-
-        this.type = type;
-        this.ability_params = ability_params;
-        this.ability_price_base = ability_price_base;
-        this.ability_price_resources_list = ability_price_resources_list;
-        this.execute = execute;
+        for(var key in action){
+            var this_key = key;
+            this[this_key] = action[key];
+        }
     }DP$0(constructor$0,"prototype",{"configurable":false,"enumerable":false,"writable":false});
 
 
+    proto$0.countPriceBase = function(){
+        return(0);
+    };
 
-;return constructor$0;})());
+
+    proto$0.getPriceResources = function(){
+        return([]);
+    };
+
+
+
+    /**
+     * @returns {T.Game.ActionAbility}
+     */
+    /*clone(){
+        return(new T.Game.ActionAbility(JSON.parse(JSON.stringify(this))));
+    }*/
+
+
+    /**
+     * Creates html profile of action ability
+     * @returns {string}
+     */
+    proto$0.createHtmlProfile = function(){
+
+        var html='<table class="action-ability-profile">';
+
+        html+=("\
+\n            <tr>\
+\n                <th colspan=\"2\">")+ T.Locale.get('object','actionability',this.type)+("</th>\
+\n            </tr>\
+\n            ");
+
+        for(var param in this.params){
+            html+=("\
+\n            <tr>\
+\n                <td>")+ T.Locale.get('object','actionability',this.type,param)+("</td>\
+\n                <td>")+this.params[param]+("</td>\
+\n            </tr>\
+\n            ");
+        }
+
+
+        html+='</table>';
+
+        return(html);
+    };
+
+MIXIN$0(constructor$0.prototype,proto$0);proto$0=void 0;return constructor$0;})());
 
 
 
@@ -2855,6 +2912,9 @@ MIXIN$0(constructor$0,static$0);MIXIN$0(constructor$0.prototype,proto$0);static$
 
 T.Objects.Object = ((function(){"use strict";var proto$0={};
 
+    /**
+     * @param {object} object
+     */
     function constructor$0(object){
 
         for(var key in object){
@@ -2873,6 +2933,15 @@ T.Objects.Object = ((function(){"use strict";var proto$0={};
         return(new T.Position(this.x,this.y));
     };
 
+
+    /**
+     *
+     * @returns {string}
+     */
+    proto$0.toString = function(){
+        return('['+this.name+']');
+    };
+
 MIXIN$0(constructor$0.prototype,proto$0);proto$0=void 0;return constructor$0;})());
 
 
@@ -2884,14 +2953,34 @@ MIXIN$0(constructor$0.prototype,proto$0);proto$0=void 0;return constructor$0;})(
 
 
 
-T.Objects.Building = ((function(super$0){"use strict";super$0=T.Objects.Object;function constructor$0() {if(super$0!==null)super$0.apply(this, arguments)}if(!PRS$0)MIXIN$0(constructor$0, super$0);if(super$0!==null)SP$0(constructor$0,super$0);constructor$0.prototype = OC$0(super$0!==null?super$0.prototype:null,{"constructor":{"value":constructor$0,"configurable":true,"writable":true}});DP$0(constructor$0,"prototype",{"configurable":false,"enumerable":false,"writable":false});var proto$0={};
+T.Objects.Building = ((function(super$0){"use strict";super$0=T.Objects.Object;if(!PRS$0)MIXIN$0(constructor$0, super$0);var proto$0={};
+
+    /**
+     * @param {object} object
+     */
+    function constructor$0(object){
+        super$0.call(this, object);
 
 
+        for(var i= 0,l=this.actions.length;i<l;i++){
+            this.actions[i]=new T.Game.ActionAbility(this.actions[i]);
+        }
+
+
+    }if(super$0!==null)SP$0(constructor$0,super$0);constructor$0.prototype = OC$0(super$0!==null?super$0.prototype:null,{"constructor":{"value":constructor$0,"configurable":true,"writable":true}});DP$0(constructor$0,"prototype",{"configurable":false,"enumerable":false,"writable":false});
+
+
+    /**
+     * @returns {T.Objects}
+     */
     proto$0.clone = function(){//todo all classes should have this method
         return(new T.Objects.Building(JSON.parse(JSON.stringify(this))));
     };
 
 
+    /**
+     * @returns {T.Model}
+     */
     proto$0.getModel = function(){
         if(!(this.design.data instanceof T.Model)){
             this.design.data=new T.Model(this.design.data);
@@ -2901,12 +2990,53 @@ T.Objects.Building = ((function(super$0){"use strict";super$0=T.Objects.Object;f
     };
 
 
-    proto$0.getActionAbility = function(action_key){
 
-        return this.actions[action_key];
+    /**
+     *
+     * @param action_type
+     * @returns {T.Game.ActionAbility}
+     */
+    proto$0.getActionAbility = function(action_type){
+
+        for(var i= 0,l=this.actions.length;i<l;i++){
+
+            if(this.actions[i].type==action_type){
+
+                return(this.actions[i]);
+            }
+        }
+
+        return null;
 
     };
 
+
+
+    proto$0.createHtmlProfile = function(){
+
+        var actions_profile='';
+        for(var i= 0,l=this.actions.length;i<l;i++){
+            actions_profile+=this.actions[i].createHtmlProfile();
+        }
+
+
+
+        return(("\
+\n\
+\n            <div class=\"object-building-profile\">\
+\n\
+\n                <h2>")+this.name+("</h2>\
+\n\
+\n\
+\n                ")+actions_profile+("\
+\n\
+\n\
+\n\
+\n            </div>\
+\n\
+\n        "));
+
+    };
 MIXIN$0(constructor$0.prototype,proto$0);proto$0=void 0;return constructor$0;})());
 
 
@@ -3568,7 +3698,7 @@ MIXIN$0(constructor$0.prototype,proto$0);proto$0=void 0;return constructor$0;})(
 
 
 
-T.Resources = ((function(){"use strict";var static$0={},proto$0={};
+T.Resources = ((function(){"use strict";var proto$0={};
 
     /**
      * @param {object} Resources
@@ -3585,31 +3715,6 @@ T.Resources = ((function(){"use strict";var static$0={},proto$0={};
 
     }DP$0(constructor$0,"prototype",{"configurable":false,"enumerable":false,"writable":false});
 
-
-    /**
-     * @static
-     * @return {array} new Resources
-     */
-    static$0.newSingles = function(resources){
-
-        var resources_array = [];
-
-        for (var key in resources) {
-            if (typeof resources[key] == 'number') {
-                if (resources[key] > 0) {
-
-                    var resources_ = {};
-                    resources_[key] = resources[key];
-
-                    resources_array.push(new T.Resources(resources_));
-
-                }
-            }
-        }
-
-        return resources_array;
-
-    };
 
 
     /**
@@ -3890,7 +3995,7 @@ T.Resources = ((function(){"use strict";var static$0={},proto$0={};
 
 
 
-MIXIN$0(constructor$0,static$0);MIXIN$0(constructor$0.prototype,proto$0);static$0=proto$0=void 0;return constructor$0;})());
+MIXIN$0(constructor$0.prototype,proto$0);proto$0=void 0;return constructor$0;})());
 /**
  * @author ©Towns.cz
  * @fileOverview Creates class T.Resources
@@ -4151,7 +4256,7 @@ T.World.mapGenerator = new T.MapGenerator(
 var K=0.05;
 
 
-T.World.game = new T.Game(
+T.World.game = new T.Game(/*
     {
         //---------------------------------------------Defense
         'defense': new T.Game.Action(
@@ -4221,34 +4326,6 @@ T.World.game = new T.Game(
                 'iron':   4
             })
         ),
-        //---------------------------------------------Attack
-        'attack': new T.Game.Action(
-            'ACTIVE',
-            {
-                'distance': 'number',
-                'strength': 'number',
-                'rounds': 'number',
-                'cooldown': 'number'
-            },
-            function(params){
-                return((Math.pow(params.distance,2)*params.strength*params.rounds*(1/params.cooldown))*100*K);
-            },
-            T.Resources.newSingles({
-                'wood':   2,
-                'clay':   0,
-                'stone':  3,
-                'iron':   2
-            }),function(object_attacker,object_attacked,resources_attacker){
-
-                console.log(object_attacker.getActionAbility('attack'));
-                console.log(object_attacker.getActionAbility('defence'));
-                console.log(object_attacked.getActionAbility('defence'));
-
-
-
-
-            }
-        ),
         //---------------------------------------------Move
         'move': new T.Game.Action(
             'ACTIVE',
@@ -4283,12 +4360,141 @@ T.World.game = new T.Game(
                 'stone':  1,
                 'iron':   0
             })
-        )/**/
+        )
         //---------------------------------------------
 
 
-    },
+    },*/
     T.Math.prettyNumber,
     T.Math.prettyNumber
 
 );
+
+
+
+T.World.game.installAction(
+    ((function(super$0){"use strict";super$0=T.Game.Action;function constructor$0() {if(super$0!==null)super$0.apply(this, arguments)}if(!PRS$0)MIXIN$0(constructor$0, super$0);if(super$0!==null)SP$0(constructor$0,super$0);constructor$0.prototype = OC$0(super$0!==null?super$0.prototype:null,{"constructor":{"value":constructor$0,"configurable":true,"writable":true}});DP$0(constructor$0,"prototype",{"configurable":false,"enumerable":false,"writable":false});var proto$0={};
+
+
+        proto$0.getType = function(){
+            return('attack');
+        };
+
+
+        proto$0.countPriceBase = function(){
+            return((Math.pow(this.params.distance,2)*this.params.strength*this.params.rounds*(1/this.params.cooldown))*100*K);
+        };
+
+
+        proto$0.getPriceResources = function(){
+
+            return([
+                new T.Resources({'wood':   2}),
+                //new T.Resources({'clay':   0}),
+                new T.Resources({'stone':  3}),
+                new T.Resources({'iron':   2})
+            ]);
+        };
+
+
+        proto$0.execute = function(game,attacker,attacked,resources_attacker){
+
+            var attacker_attack = attacker.getActionAbility('attack');
+            var attacker_defence = attacker.getActionAbility('defense');
+            var attacked_attack = attacked.getActionAbility('attack');
+            var attacked_defence = attacked.getActionAbility('defense');
+
+
+            //---------------------Missing actionAbility
+
+
+            if(attacker_attack instanceof T.Game.ActionAbility){
+                attacker_attack=attacker_attack.clone();
+            }else{
+                throw new Error('Attacker has not ability to attack');
+            }
+
+
+
+            if(attacker_defence instanceof T.Game.ActionAbility){
+                attacker_defence=attacker_defence.clone();
+            }else{
+                attacker_defence = game.getAction('defence').createDefaultAbility();
+            }
+
+
+            if(attacked_attack instanceof T.Game.ActionAbility){
+                attacked_attack=attacked_attack.clone();
+            }else{
+                attacked_attack = game.getAction('attack').createDefaultAbility();
+
+            }
+
+
+            if(attacked_defence instanceof T.Game.ActionAbility){
+                attacked_defence=attacked_defence.clone();
+            }else{
+                attacked_defence = game.getAction('defence').createDefaultAbility();
+            }
+
+
+
+            //---------------------Defense
+
+            attacker_attack.params.attack-=
+                attacked_defence.params.defense;
+            if(attacker_attack.params.attack<0)attacker_attack.params.attack=0;
+
+
+
+            attacked_attack.params.attack-=
+                attacker_defence.params.defense;
+            if(attacked_attack.params.attack<0)attacked_attack.params.attack=0;
+
+
+            //---------------------
+
+            attacker.life=1000;
+            attacked.life=1000;
+
+
+            while(
+            attacker_attack.params.rounds || attacked_attack.params.rounds
+            && attacker.life>1
+            && attacked.life>1
+                ){
+
+                attacker.life-=attacker_attack.params.attack;
+                attacked.life-=attacker_attack.params.attack;
+
+
+                attacker_attack.params.rounds--;
+                attacked_attack.params.rounds--;
+            }
+
+
+            //---------------------
+
+
+            if(attacker.life<1)attacker.life=1;
+            if(attacked.life<1)attacked.life=1;
+
+
+        };
+
+
+
+
+    MIXIN$0(constructor$0.prototype,proto$0);proto$0=void 0;return constructor$0;})())
+);
+
+
+
+
+
+/*{
+    'distance': {type:'number',default:0},
+    'strength': {type:'number',default:0},
+    'rounds': {type:'number',default:1},
+    'cooldown': {type:'number',default:1}
+}*/

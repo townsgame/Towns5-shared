@@ -8,9 +8,7 @@
 
 T.World.game.installActionClass(
     {
-        xxx:   0,
-        xxx:   0,
-        xxx:   1
+        throughput:   0
     },
     class extends T.Game.Action{
 
@@ -45,13 +43,19 @@ T.World.game.installActionClass(
     }
 );
 
-
-
-
-
-/*{
- 'distance': {type:'number',default:0},
- 'strength': {type:'number',default:0},
- 'rounds': {type:'number',default:1},
- 'cooldown': {type:'number',default:1}
- }*/
+//---------------------------------------------Throughput
+'throughput': new T.Game.Action(
+    'PASSIVE',
+    {
+        'throughput': 'number'
+    },
+    function(params){
+        return((Math.pow(params.throughput/100,2))*10*K);//todo
+    },
+    T.Resources.newSingles({
+        'wood':   2,
+        'clay':   3,
+        'stone':  1,
+        'iron':   0
+    })
+)

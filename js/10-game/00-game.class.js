@@ -12,14 +12,13 @@ T.Game = class{
     
      /**
      *
-     * @param {Object.<T.Game.Action>} action_list
      * @param {function} max_life_modifier
      * @param {function} price_key_modifier
      * @constructor
      */
-    constructor(action_list,max_life_modifier,price_key_modifier){
+    constructor(max_life_modifier,price_key_modifier){
     
-        this.action_list = action_list;
+        this.action_list = [];
         this.max_life_modifier = max_life_modifier;
         this.price_key_modifier = price_key_modifier;
     
@@ -38,44 +37,24 @@ T.Game = class{
         var price_bases=[];
     
     
-        if(typeof object.actions=='undefined'){
-            return([]);
+        if(typeof object.actions.length==0){
+            console.warn('In object '+object+' there are no actions!');//todo all objects should be converted to string like this
         }
     
     
-        object.actions.forEach(function(actionAbility){
+        object.actions.forEach(function(action){
     
-    
-            if(typeof self.action_list[actionAbility.type]!=='undefined'){
-    
-                var action = self.action_list[actionAbility.type];
-    
-                //---------------Checking params
 
-                for(var param in actionAbility.params){
-                    var param_type = action.ability_params[param];
-    
-                    if(typeof actionAbility.params[param]!==param_type){
-                        throw new Error('Param '+param+' should be '+param_type+' instead of '+typeof(actionAbility.ability_params[param])+' in action ability '+actionAbility.type);
-                    }
-    
-                }
-                //---------------
+            var price_base = Math.ceil(action.countPriceBase());//
 
-                var price_base = Math.ceil(action.ability_price_base(actionAbility.params));//
-    
-                //---------------Checking non negative value
-                if(price_base<0){
-                    throw new Error('Params in action ability '+actionAbility.type+' should not make this action negative');
-                }
-                //---------------
-    
-    
-                price_bases.push(price_base);
-    
-            }else{
-                throw new Error('Unknown action type '+actionAbility.type);
+            //---------------Checking non negative value
+            if(price_base<0){
+                throw new Error('Params in action ability '+actionAbility.type+' should not make this action negative');//todo maybe only warn
             }
+            //---------------
+
+            price_bases.push(price_base);
+
     
     
         });
@@ -112,35 +91,30 @@ T.Game = class{
      * @return {array} of Resources
      */
     getObjectPrices(object){
-    
-        //console.log(this);
-    
+
+
         var price_bases=this.getObjectPriceBases(object);
     
     
         var self=this;
         var prices=[];
+
     
+        var design_resources = object.getModel().aggregateResourcesVolumes();
+
+
+        object.actions.forEach(function(action,i){
     
-        if(typeof object.actions=='undefined'){
-            return([]);
-        }
-    
-        var design_resources = self.getObjectDesignPrice(object);
-    
-        object.actions.forEach(function(action_ability,i){
-    
-            var action = self.action_list[action_ability.type];
-    
-    
-            action.ability_price_resources_list.sort(function(a,b){//todo is it safe?
+
+            var price_resources_list =
+            action.getPriceResources().sort(function(a,b){//todo is it safe?
     
                 return design_resources.compare(a.clone().signum())-design_resources.compare(b.clone().signum());
     
             });
     
     
-            var price_resources = action.ability_price_resources_list[0].clone();
+            var price_resources = price_resources_list[0].clone();
     
     
             price_resources.multiply(price_bases[i]);
@@ -179,29 +153,86 @@ T.Game = class{
         return(price);
     
     }
-    
 
 
-    /**
-     * @param {T.Objects.Building} Object
-     * @return {T.Resources} design amount of resources
-     */
-    getObjectDesignPrice(object){
 
-        return object.getModel().aggregateResourcesVolumes();
-    
+    installActionClass(action_class){
+        this.action_list.push(action_class);
     }
 
 
 
-    getAction(action_key){
+    getActionClass(action){
+
+        for(var i= 0,l=this.action_list.length;i<l;i++){
+            if(this.action_list[i].getType()==action.type){
+
+                return this.action_list[i];
+
+            }
+        }
+
+        throw new Error('In this game instance thare is no action class type '+action.type);
+
+    }
+
+
+    createActionInstance(action){
+        action_class = getActionClass(action);
+        return new action_class(action);
+    }
+
+
+
+
+    executeAction(action){
+
+        var game = this;
+
+        action_class = getActionClass(action);
+
+
+        var execute = function(){
+
+            var args = [game].push.call(arguments);
+            return action_class.execute.apply(this,args);
+
+        };
+
+
+        return(execute);
+    }
+
+
+
+    getActionEmptyInstance(action){
+
+
+
+    }
+
+
+
+    /*getActionExecute(action_key){
 
         var action = this.action_list[action_key];
 
         if(typeof action=='undefined')throw new Error('Unknown action type '+action_key+'.');
 
+        var game = this;
 
-        return(action);
-    }
+
+
+        var execute = function(){
+
+            var args = [game].push.call(arguments);
+            return action.execute_callback.apply(this,args);
+
+        };
+
+
+
+        return(execute);
+    }*/
     
 };

@@ -8,9 +8,7 @@
 
 T.World.game.installActionClass(
     {
-        xxx:   0,
-        xxx:   0,
-        xxx:   1
+        repair:   0
     },
     class extends T.Game.Action{
 
@@ -47,7 +45,26 @@ T.World.game.installActionClass(
 
 
 
+/*
+ 'repair': new T.Game.Action(
+ 'ACTIVE',
+ {
+ 'repair': 'number'
+ },
+ function(params){
+ return((1/(params.repair/100))*1000*K);
+ },
+ T.Resources.newSingles({
+ 'wood':   4,
+ 'clay':   2,
+ 'stone':  3,
+ 'iron':   4
+ }),
+ function(object,by){
 
+ }
+ ),
+ */
 
 /*{
  'distance': {type:'number',default:0},

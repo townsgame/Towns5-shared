@@ -49,7 +49,7 @@
             $('#object-json').val(JSON.stringify(response[0],null,4));
             change();
 
-        });
+        });/**/
 
 
 
@@ -65,7 +65,7 @@
             var max_life = T.World.game.getObjectMaxLife(building);
             var prices = T.World.game.getObjectPrices(building);
             var price = T.World.game.getObjectPrice(building);
-            var design_price = T.World.game.getObjectDesignPrice(building);
+            var resources_volumes = building.getModel().aggregateResourcesVolumes();
 
             $('#object-price').html('');
 
@@ -77,8 +77,8 @@
             $('#object-price').append('<br><hr><br>');
 
 
-            $('#object-price').append('<b>Design price of building:</b><br>');
-            $('#object-price').append(design_price.toString());
+            $('#object-price').append('<b>Volume of building resources:</b><br>');
+            $('#object-price').append(resources_volumes.toString());
 
 
             $('#object-price').append('<br><br>');
@@ -90,9 +90,14 @@
 
         };
 
+        //change();
+
         $('#object-json').change(change);
         $('#object-json').keypress(function(){setTimeout(change,100)});
 
     });
+
+
+
 
 </script>

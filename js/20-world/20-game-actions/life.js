@@ -8,9 +8,7 @@
 
 T.World.game.installActionClass(
     {
-        xxx:   0,
-        xxx:   0,
-        xxx:   1
+        life:   1
     },
     class extends T.Game.Action{
 
@@ -44,6 +42,7 @@ T.World.game.installActionClass(
 
     }
 );
+
 
 
 
