@@ -59,13 +59,50 @@ T.Game.Action = class{
     }
 
 
+    /**
+     * In how many seconds can be this action instance executed?
+     * @returns {number}
+     */
+    canBeExecutedIn(){
+
+        if(typeof this.params.cooldown==='number'){
+
+            if(typeof this.last_use==='undefined'){
+                return(0);
+            }
+
+            var s = Math.abs(this.last_use - new Date())/1000;
+
+            if(this.params.cooldown<=s){
+                return(0);
+            }else{
+                return(s);
+            }
+
+        }else{
+
+            return(0);
+
+        }
+    }
+
 
     /**
-     * @returns {T.Game.ActionAbility}
+     * Can be this action instance executed now?
+     * @returns {boolean}
      */
-    /*clone(){
-        return(new T.Game.ActionAbility(JSON.parse(JSON.stringify(this))));
-    }*/
+    canBeExecutedNow(){
+        return(this.canBeExecutedIn()===0);
+    }
+
+
+    /**
+     * Set actual date as date of execution this action instance
+     */
+    nowExecuted(){
+        this.last_use=new Date();
+    }
+
 
 
     /**
