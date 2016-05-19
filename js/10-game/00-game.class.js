@@ -18,7 +18,8 @@ T.Game = class{
      */
     constructor(max_life_modifier,price_key_modifier){
     
-        this.action_classes = [];
+        this.action_classes = {};
+        this.action_empty_instances = {};
         this.max_life_modifier = max_life_modifier;
         this.price_key_modifier = price_key_modifier;
     
@@ -47,9 +48,17 @@ T.Game = class{
 
             var price_base = Math.ceil(action.countPriceBase());//
 
+
+            //---------------Checking NaN  value
+            if(isNaN(price_base)){
+                console.warn('Params in action ability '+action.type+' makes price bese NaN.');
+                price_base=0;
+            }
+            //---------------
+
             //---------------Checking non negative value
             if(price_base<0){
-                throw new Error('Params in action ability '+actionAbility.type+' should not make this action negative');//todo maybe only warn
+                throw new Error('Params in action ability '+action.type+' should not make this action negative');//todo maybe only warn
             }
             //---------------
 
@@ -158,14 +167,24 @@ T.Game = class{
 
     installActionClass(action_empty_instance_params,action_class){
 
+        var type = action_class.getType();
+
+        if(typeof type!=='string'){
+            typeof new Error('Error while installing action class into game instance: action class has no type!');
+        }else
+        if(typeof this.action_classes[type] !== 'undefined'){
+            typeof new Error('Error while installing action class into game instance: there is already installed action with type '+type);
+        }
+
+
+
         var action_empty_instance = new action_class({
-            type: action_class.getType(),
+            type: type,
             params: action_empty_instance_params
         });
         
-        this.action_classes.push(action_class);
-
-        this.action_empty_instances[action_empty_instance.type]=action_empty_instance;
+        this.action_classes[type] = action_class;
+        this.action_empty_instances[type] = action_empty_instance;
     
     
     
@@ -173,34 +192,43 @@ T.Game = class{
 
 
 
-    getActionClass(action){
+    getActionClass(action_type){
 
-        for(var i= 0,l=this.action_classes.length;i<l;i++){
-            if(this.action_classes[i].getType()==action.type){
+        var action_class = this.action_classes[action_type];
 
-                return this.action_classes[i];
+        if(typeof action_class=='undefined'){
 
-            }
+            throw new Error('In this game instance thare is no action class type '+action_type+'. There are only these action types: '+ T.ArrayFunctions.getKeys(this.action_classes).join(', '));
+
         }
 
-        throw new Error('In this game instance thare is no action class type '+action.type);
+        return(action_class);
 
     }
 
 
-    createActionInstance(action){
-        action_class = getActionClass(action);
+    newActionInstance(action){
+
+        //todo solve defense vs. defence
+        if(action.type==='defense'){
+            action.type='defence';
+            action.params.defence=action.params.defense;
+            action.params.defense=undefined;
+        }
+
+        var action_class = this.getActionClass(action.type);
+
         return new action_class(action);
     }
 
 
 
 
-    executeAction(action){
+    executeAction(action_type){
 
         var game = this;
 
-        action_class = getActionClass(action);
+        var action_class = this.getActionClass(action_type);
 
 
         var execute = function(){

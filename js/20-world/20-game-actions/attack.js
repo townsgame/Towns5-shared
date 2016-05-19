@@ -17,7 +17,7 @@ T.World.game.installActionClass(
 
 
         countPriceBase(){
-            return((Math.pow(this.params.distance,2)*this.params.strength*this.params.rounds*(1/this.params.cooldown))*100*K);
+            return((Math.pow(this.params.distance,2)*this.params.strength*this.params.rounds*(1/this.params.cooldown))*100*0.05);
         }
 
 
@@ -35,9 +35,9 @@ T.World.game.installActionClass(
         static execute(game,attacker,attacked,resources_attacker){
 
             var attacker_attack = attacker.getActionAbility('attack');
-            var attacker_defence = attacker.getActionAbility('defense');
+            var attacker_defence = attacker.getActionAbility('defence');
             var attacked_attack = attacked.getActionAbility('attack');
-            var attacked_defence = attacked.getActionAbility('defense');
+            var attacked_defence = attacked.getActionAbility('defence');
 
 
             //---------------------Missing actionAbility
@@ -74,16 +74,16 @@ T.World.game.installActionClass(
 
 
 
-            //---------------------Defense
+            //---------------------Defence
 
             attacker_attack.params.attack-=
-                attacked_defence.params.defense;
+                attacked_defence.params.defence;
             if(attacker_attack.params.attack<0)attacker_attack.params.attack=0;
 
 
 
             attacked_attack.params.attack-=
-                attacker_defence.params.defense;
+                attacker_defence.params.defence;
             if(attacked_attack.params.attack<0)attacked_attack.params.attack=0;
 
 

@@ -19,9 +19,9 @@ var object = {
     life: 80,
     actions:[
         {
-            type: 'defense',
+            type: 'defence',
             params:{
-                defense: 80
+                defence: 80
             }
         },
         {

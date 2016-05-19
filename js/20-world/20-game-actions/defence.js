@@ -8,18 +8,18 @@
 
 T.World.game.installActionClass(
     {
-        defense:   0
+        defence:   0
     },
     class extends T.Game.Action{
 
 
         static getType(){
-            return('defense');
+            return('defence');
         }
 
 
         countPriceBase(){
-            return((this.params.defense)*800*K);
+            return((this.params.defence)*800*0.05);
         }
 
 

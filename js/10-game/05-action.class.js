@@ -11,13 +11,13 @@ T.Game.Action = class{
 
     constructor(action){
 
-        console.log(this.constructor.getType);
-        console.log(this);
-
+        //console.log(this.constructor.getType);
+        //console.log(this);
 
         if(typeof this.constructor.getType === 'undefined')throw new Error('You must extend T.Game.Action and add method getType before creating instances!');
 
         var type = this.constructor.getType();
+
         if(action.type!==type)throw new Error('This is '+type+' not '+action.type+' class!');
 
         for(var key in action){

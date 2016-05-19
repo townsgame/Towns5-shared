@@ -244,4 +244,23 @@ T.ArrayFunctions=class {
     }
 
 
+
+    /**
+     * extract keys from Array
+     * @param {object} object
+     * @returns {Array}
+     */
+    static getKeys(object){
+
+        var keys = [];
+        for(var k in object) keys.push(k);
+        return(keys);
+
+    }
+
+
+
+
+
+
 };

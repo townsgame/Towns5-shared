@@ -13,7 +13,7 @@
         var global=window;
     </script>
     <?php
-    $scripts = array_merge(glob('./js/**.js'),glob('./js/**/*.js'));
+    $scripts = array_merge(glob('./js/*.js'),glob('./js/*/*.js'),glob('./js/*/*/*.js'));
     sort($scripts);
     foreach($scripts as $script){
         echo('<script src="'.$script.'"></script>'."\n");

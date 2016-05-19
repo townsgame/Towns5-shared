@@ -15,7 +15,7 @@ var jasmine = require('gulp-jasmine');
 
 
 
-var includes=['./js/*.js','./js/*/*.js'];
+var includes=['./js/*.js','./js/*/*.js','./js/*/*/*.js'];
 
 
 deleteFolderRecursive = function(path) {

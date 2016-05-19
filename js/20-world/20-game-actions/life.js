@@ -19,7 +19,7 @@ T.World.game.installActionClass(
 
 
         countPriceBase(){
-            return(this.params.life*K);
+            return(this.params.life*0.05);
         }
 
 

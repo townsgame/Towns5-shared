@@ -6,9 +6,9 @@
   "_version": 0,
   "actions": [
     {
-      "type": "defense",
+      "type": "defence",
       "params": {
-        "defense": 1
+        "defence": 1
       }
     },
     {
