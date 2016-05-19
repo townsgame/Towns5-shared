@@ -15,6 +15,7 @@ T.Objects.Building = class extends T.Objects.Object{
     constructor(object) {
         super(object);
 
+        //-----------------------------
         if (typeof this.actions === 'undefined') {
 
             this.actions = [];
@@ -35,9 +36,38 @@ T.Objects.Building = class extends T.Objects.Object{
 
             }
 
+
+
             this.actions = actions_classes;
 
         }
+        //-----------------------------
+
+
+        //-----------------------------
+        var life_action = this.getAction('life');
+        var max_life = T.World.game.getObjectMaxLife(this);
+
+
+        if(life_action==null){
+
+            life_action=T.World.game.newActionInstance({
+                type: 'life',
+                params: {
+                    life: max_life,
+                    max_life: max_life
+                }
+            });
+            actions_classes.push(life_action);
+
+        }else{
+
+            life_action.params.max_life=max_life;
+        }
+        //-----------------------------
+
+
+
 
     }
 
@@ -68,7 +98,7 @@ T.Objects.Building = class extends T.Objects.Object{
      * @param action_type
      * @returns {T.Game.ActionAbility}
      */
-    getActionAbility(action_type){
+    getAction(action_type){
 
         for(var i= 0,l=this.actions.length;i<l;i++){
 

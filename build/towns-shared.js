@@ -662,7 +662,7 @@ T.Game = ((function(){"use strict";var proto$0={};
         if(action.type==='defense'){
             action.type='defence';
             action.params.defence=action.params.defense;
-            action.params.defense=undefined;
+            delete action.params.defense;
         }
 
         var action_class = this.getActionClass(action.type);
@@ -813,14 +813,14 @@ T.Game.Action = ((function(){"use strict";var static$0={},proto$0={};
 
         html+=("\
 \n            <tr>\
-\n                <th colspan=\"2\">")+ T.Locale.get('object','actionability',this.type)+("</th>\
+\n                <th colspan=\"2\">")+ T.Locale.get('object','action',this.type)+("</th>\
 \n            </tr>\
 \n            ");
 
         for(var param in this.params){
             html+=("\
 \n            <tr>\
-\n                <td>")+ T.Locale.get('object','actionability',this.type,param)+("</td>\
+\n                <td>")+ T.Locale.get('object','action',this.type,param)+("</td>\
 \n                <td>")+this.params[param]+("</td>\
 \n            </tr>\
 \n            ");

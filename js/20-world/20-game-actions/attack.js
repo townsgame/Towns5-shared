@@ -34,13 +34,13 @@ T.World.game.installActionClass(
 
         static execute(game,attacker,attacked,resources_attacker){
 
-            var attacker_attack = attacker.getActionAbility('attack');
-            var attacker_defence = attacker.getActionAbility('defence');
-            var attacked_attack = attacked.getActionAbility('attack');
-            var attacked_defence = attacked.getActionAbility('defence');
+            var attacker_attack = attacker.getAction('attack');
+            var attacker_defence = attacker.getAction('defence');
+            var attacked_attack = attacked.getAction('attack');
+            var attacked_defence = attacked.getAction('defence');
 
 
-            //---------------------Missing actionAbility
+            //---------------------Missing action
 
 
             if(attacker_attack instanceof T.Game.Action){

@@ -8,7 +8,8 @@
 
 T.World.game.installActionClass(
     {
-        life:   1
+        life:   1,
+        max_life:   1
     },
     class extends T.Game.Action{
 
@@ -19,18 +20,13 @@ T.World.game.installActionClass(
 
 
         countPriceBase(){
-            return(this.params.life*0.05);
+            return(0);
         }
 
 
         getPriceResources(){
 
-            return([
-                new T.Resources({'wood':   1}),
-                new T.Resources({'clay':   1}),
-                new T.Resources({'stone':  1}),
-                new T.Resources({'iron':   1})
-            ]);
+            return([]);
         }
 
 
