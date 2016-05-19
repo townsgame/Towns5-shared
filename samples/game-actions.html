@@ -25,18 +25,27 @@
             var resources = new T.Resources({wood:300});
 
 
+
             $('html').append(attacker.createHtmlProfile()+' <div class="big">vs.</div> '+attacked.createHtmlProfile());
+
+
+            result = T.World.game.createActionExecute('attack')(attacker,attacked,resources);
+
+
+            console.log(result);
+
+
+            $('html').append('<div class="big">=</div>');
+            $('html').append(attacker.createHtmlProfile()+attacked.createHtmlProfile());
 
 
 
             result = T.World.game.createActionExecute('attack')(attacker,attacked,resources);
 
 
-
-
-
             $('html').append('<div class="big">=</div>');
             $('html').append(attacker.createHtmlProfile()+attacked.createHtmlProfile());
+
 
 
 

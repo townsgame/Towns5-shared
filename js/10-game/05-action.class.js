@@ -76,7 +76,7 @@ T.Game.Action = class{
             if(this.params.cooldown<=s){
                 return(0);
             }else{
-                return(s);
+                return(this.params.cooldown-s);
             }
 
         }else{
@@ -118,6 +118,17 @@ T.Game.Action = class{
                 <th colspan="2">`+ T.Locale.get('object','action',this.type)+`</th>
             </tr>
             `;
+
+
+        if(typeof this.last_use!=='undefined'){
+            html+=`
+            <tr>
+                <td>`+ T.Locale.get('object','action','last_used')+`</td>
+                <td>`+this.last_use+`</td>
+            </tr>
+            `;
+        }
+
 
         for(var param in this.params){
             html+=`
