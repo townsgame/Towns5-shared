@@ -182,6 +182,14 @@ T.Game = class{
             type: type,
             params: action_empty_instance_params
         });
+
+
+        //Adding method clone to installed action class
+        action_class.prototype.clone = function(){
+            return(new action_class(JSON.parse(JSON.stringify(this))));
+        };
+
+
         
         this.action_classes[type] = action_class;
         this.action_empty_instances[type] = action_empty_instance;
@@ -224,7 +232,7 @@ T.Game = class{
 
 
 
-    executeAction(action_type){
+    createActionExecute(action_type){
 
         var game = this;
 
@@ -233,7 +241,9 @@ T.Game = class{
 
         var execute = function(){
 
-            var args = [game].push.call(arguments);
+            var args = Array.prototype.slice.call(arguments);
+            args.unshift(game);
+
             return action_class.execute.apply(this,args);
 
         };
@@ -246,7 +256,7 @@ T.Game = class{
 
     getActionEmptyInstance(action_type){
 
-        var action_instance = this.action_instances[action_type];
+        var action_instance = this.action_empty_instances[action_type];
 
         if(typeof action_instance==='undefined'){
             throw new Error('In this game instance thare is no action class type '+action_type);

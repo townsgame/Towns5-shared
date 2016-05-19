@@ -43,7 +43,7 @@ T.World.game.installActionClass(
             //---------------------Missing actionAbility
 
 
-            if(attacker_attack instanceof T.Game.ActionAbility){
+            if(attacker_attack instanceof T.Game.Action){
                 attacker_attack=attacker_attack.clone();
             }else{
                 throw new Error('Attacker has not ability to attack');
@@ -51,14 +51,14 @@ T.World.game.installActionClass(
 
 
 
-            if(attacker_defence instanceof T.Game.ActionAbility){
+            if(attacker_defence instanceof T.Game.Action){
                 attacker_defence=attacker_defence.clone();
             }else{
                 attacker_defence = game.getActionEmptyInstance('defence');
             }
 
 
-            if(attacked_attack instanceof T.Game.ActionAbility){
+            if(attacked_attack instanceof T.Game.Action){
                 attacked_attack=attacked_attack.clone();
             }else{
                 attacked_attack = game.getActionEmptyInstance('attack');
@@ -66,7 +66,7 @@ T.World.game.installActionClass(
             }
 
 
-            if(attacked_defence instanceof T.Game.ActionAbility){
+            if(attacked_defence instanceof T.Game.Action){
                 attacked_defence=attacked_defence.clone();
             }else{
                 attacked_defence = game.getActionEmptyInstance('defence');

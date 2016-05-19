@@ -12,7 +12,6 @@
         }).done(function(response) {
 
 
-
             var objects = new T.Objects.Array(response);
             var buildings = objects.filterTypes('building');
 
@@ -30,7 +29,7 @@
 
 
 
-            result = T.World.game.executeAction('attack')(attacker,attacked,resources);
+            result = T.World.game.createActionExecute('attack')(attacker,attacked,resources);
 
 
 

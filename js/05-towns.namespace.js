@@ -15,6 +15,9 @@ module.exports = global.Towns;
 var T = global.Towns;
 
 
+var r = console.log.bind(console);
+
+
 /**
  * Checks existence of namespace. If not exists, this function creates it.
  * @param namespace eg. 'Objects.Array'

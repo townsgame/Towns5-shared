@@ -12,19 +12,32 @@ T.Objects.Building = class extends T.Objects.Object{
     /**
      * @param {object} object
      */
-    constructor(object){
+    constructor(object) {
         super(object);
 
+        if (typeof this.actions === 'undefined') {
 
-        for(var i= 0,l=this.actions.length;i<l;i++){
-            this.actions[i]=T.World.game.newActionInstance(this.actions[i]);
+            this.actions = [];
+
+        }else{
+
+
+            var actions_classes = [];
+
+            for (var i = 0, l = this.actions.length; i < l; i++) {
+
+                try {
+                    actions_classes.push(T.World.game.newActionInstance(this.actions[i]));
+                }
+                catch(error) {
+                    console.warn(error);
+                }
+
+            }
+
+            this.actions = actions_classes;
+
         }
-
-
-        if(typeof this.actions==='undefined'){
-            this.actions=[];
-        }
-
 
     }
 
