@@ -38,7 +38,7 @@ T.Game = class{
         var price_bases=[];
     
     
-        if(typeof object.actions.length==0){
+        if(typeof object.actions.length===0){
             console.warn('In object '+object+' there are no actions!');//todo all objects should be converted to string like this
         }
     
@@ -170,10 +170,10 @@ T.Game = class{
         var type = action_class.getType();
 
         if(typeof type!=='string'){
-            typeof new Error('Error while installing action class into game instance: action class has no type!');
+            throw new Error('Error while installing action class into game instance: action class has no type!');
         }else
         if(typeof this.action_classes[type] !== 'undefined'){
-            typeof new Error('Error while installing action class into game instance: there is already installed action with type '+type);
+            throw new Error('Error while installing action class into game instance: there is already installed action with type '+type);
         }
 
 
