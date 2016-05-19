@@ -221,7 +221,7 @@ T.Game = class{
         if(action.type==='defense'){
             action.type='defence';
             action.params.defence=action.params.defense;
-            action.params.defense=undefined;
+            delete action.params.defense;
         }
 
         var action_class = this.getActionClass(action.type);

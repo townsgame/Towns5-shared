@@ -78,14 +78,14 @@ T.Game.Action = class{
 
         html+=`
             <tr>
-                <th colspan="2">`+ T.Locale.get('object','actionability',this.type)+`</th>
+                <th colspan="2">`+ T.Locale.get('object','action',this.type)+`</th>
             </tr>
             `;
 
         for(var param in this.params){
             html+=`
             <tr>
-                <td>`+ T.Locale.get('object','actionability',this.type,param)+`</td>
+                <td>`+ T.Locale.get('object','action',this.type,param)+`</td>
                 <td>`+this.params[param]+`</td>
             </tr>
             `;
