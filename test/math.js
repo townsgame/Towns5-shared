@@ -1,6 +1,6 @@
 
 
-console.log('Testing math.static.js');
+console.log('Testing T.Math');
 
 
 

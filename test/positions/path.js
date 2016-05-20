@@ -1,5 +1,114 @@
-console.log('Testing path.class.js');
 
+console.log('Testing T.Path');
+
+
+
+
+//======================================================================================================================Errors
+
+
+
+describe('Testing path that could not be created', function () {
+
+    beforeAll(function () {
+
+        this.now = new Date();
+        this.future = new Date() + 10000;
+        this.past = new Date() - 10000;
+        this.invalid_date = new Date('xxx');
+
+    });
+
+
+    it('Empty path', function () {
+
+        expect(function(){new T.Path()})
+            .toThrow();
+
+    });
+
+
+    it('Not Positions', function () {
+
+        expect(function(){new T.Path(123, 345)})
+            .toThrow();
+        expect(function(){new T.Path(123, new T.PositionDate(1, 2, this.now))})
+            .toThrow();
+
+    });
+
+
+    it('Only one Position', function () {
+
+        expect(function(){new T.Path(new T.PositionDate(1, 2, this.now))})
+            .toThrow();
+
+    });
+
+
+    it('Invalid date', function () {
+
+        expect(function(){new T.Path(
+            new T.PositionDate(1, 2, this.now),
+            new T.PositionDate(1, 2, this.invalid_date)
+        )})
+            .toThrow();
+
+    });
+
+
+    it('Same date', function () {
+
+        expect(function(){new T.Path(
+            new T.PositionDate(1, 2, this.now),
+            new T.PositionDate(1, 2, this.now)
+        )})
+            .toThrow();
+
+
+        expect(function(){new T.Path(
+            new T.PositionDate(1, 2, this.now),
+            new T.PositionDate(1, 2, this.future),
+            new T.PositionDate(1, 2, this.future)
+        )})
+            .toThrow();
+
+    });
+
+
+    it('Wrong date order', function () {
+
+        expect(function(){new T.Path(
+            new T.PositionDate(1, 2, this.now),
+            new T.PositionDate(1, 2, this.future),
+            new T.PositionDate(1, 2, this.past)
+        )})
+            .toThrow();
+
+
+        expect(function(){new T.Path(
+            new T.PositionDate(1, 2, this.now),
+            new T.PositionDate(1, 2, this.past),
+            new T.PositionDate(1, 2, this.future)
+        )})
+            .toThrow();
+
+    });
+
+
+    it('Correct date order', function () {
+
+        expect(function(){new T.Path(
+            new T.PositionDate(1, 2, this.past),
+            new T.PositionDate(1, 2, this.now),
+            new T.PositionDate(1, 2, this.future)
+        )})
+            .not.toThrow();
+
+    });
+
+
+});
 
 //======================================================================================================================Path from now
 
@@ -97,6 +206,8 @@ console.log('Testing path.class.js');
 
 
 });
+
+
 
 
 //======================================================================================================================Path constant

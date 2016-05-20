@@ -1,4 +1,4 @@
-console.log('Testing game.instance.js');
+console.log('Testing T.World.game');
 
 
 
