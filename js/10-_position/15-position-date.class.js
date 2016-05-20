@@ -23,7 +23,7 @@ T.PositionDate = class extends T.Position{
         }
 
 
-        if(isNaN(date+1)){
+        if(isNaN(date/1)){
             throw new Error('To construct PositionDate is needed valid Date not '+date+'.');
         }
 

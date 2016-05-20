@@ -81,7 +81,7 @@ T.Path = class {
 
 
             distance = last_position.getDistance(position_date);
-            date = new Date(date + distance/speed*1000);
+            date = new Date(date/1 + distance/speed*1000);
 
             last_position=position_date;
 
@@ -162,8 +162,8 @@ T.Path = class {
         A = this.array_position_date[segment];
         B = this.array_position_date[segment+1];
 
-        x = T.Math.proportions(A.date,date,B.date, A.x, B.x);
-        y = T.Math.proportions(A.date,date,B.date, A.y, B.y);
+        x = T.Math.proportions(A.date/1,date/1,B.date/1, A.x, B.x);
+        y = T.Math.proportions(A.date/1,date/1,B.date/1, A.y, B.y);
 
         return(new T.Position(x,y));
 

@@ -12,9 +12,9 @@ describe('Testing path that could not be created because of', function () {
 
     beforeAll(function () {
 
-        this.now = new Date();
-        this.future = new Date() + 10000;
-        this.past = new Date() - 10000;
+        this.now = new Date()/1;
+        this.future = this.now + 10000;
+        this.past = this.now - 10000;
         this.invalid_date = new Date('xxx');
 
     });
@@ -105,9 +105,9 @@ describe('Testing path that could be created because of', function () {
 
     beforeAll(function () {
 
-        this.now = new Date();
-        this.future = new Date() + 10000;
-        this.past = new Date() - 10000;
+        this.now = new Date()/1;
+        this.future = this.now + 10000;
+        this.past = this.now - 10000;
         this.invalid_date = new Date('xxx');
 
     });
@@ -130,13 +130,13 @@ describe('Testing path that could be created because of', function () {
 
 
 [
-    new Date(),
-    new Date()+1,
-    new Date()+10000,
-    new Date()+100000000,
-    new Date()-1,
-    new Date()-10000,
-    new Date()-100000000
+    new Date()/1,
+    new Date()/1+1,
+    new Date()/1+10000,
+    new Date()/1+100000000,
+    new Date()/1-1,
+    new Date()/1-10000,
+    new Date()/1-100000000
 
 ].forEach(function(date) {
 
