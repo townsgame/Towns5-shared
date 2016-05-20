@@ -17,7 +17,7 @@ describe('Building price should', function() {
 
 
     it('be instance of T.Resources', function () {
-        expect(price instanceof T.Resources).toEqual(true);
+        expect(this.price instanceof T.Resources).toEqual(true);
     });
 
 

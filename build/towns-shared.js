@@ -295,11 +295,14 @@ T.Path = ((function(){"use strict";var static$0={},proto$0={};
 
         var A, B, x,y;
         for(var i=0,l=this.array_position_date.length-1;i<l;i++) {
-            A = this.array_position_date[i];
-            B = this.array_position_date[i];
+            A = this.array_position_date[i].date/1;
+            B = this.array_position_date[i+1].date/1;
 
-            if(A.date<=date && B.date>date){
+            //console.log('('+(A-date)+' - '+(B-date)+')');
 
+            if(A<=date && B>date){
+
+                //console.log('<---this');
                 return(i);
 
             }
@@ -334,11 +337,13 @@ T.Path = ((function(){"use strict";var static$0={},proto$0={};
 
         var segment = this.countSegment(date);
 
-        A = this.array_position_date[segment];
-        B = this.array_position_date[segment+1];
+        var A = this.array_position_date[segment];
+        var B = this.array_position_date[segment+1];
 
-        x = T.Math.proportions(A.date/1,date/1,B.date/1, A.x, B.x);
-        y = T.Math.proportions(A.date/1,date/1,B.date/1, A.y, B.y);
+        //console.log((A-date)+' - '+(B-date));
+
+        var x = T.Math.proportions(A.date/1,date/1,B.date/1, A.x, B.x);
+        var y = T.Math.proportions(A.date/1,date/1,B.date/1, A.y, B.y);
 
         return(new T.Position(x,y));
 
@@ -355,12 +360,13 @@ T.Path = ((function(){"use strict";var static$0={},proto$0={};
 
         var segment = this.countSegment(date);
 
-        A = this.array_position_date[segment];
-        B = this.array_position_date[segment+1];
+        var A = this.array_position_date[segment];
+        var B = this.array_position_date[segment+1];
 
-        B.getPosition().moveBy(A.getPosition().multiply(-1));
+        var BA = B.getPosition().plus(A.getPosition().multiply(-1));
 
-        var polar = B.getPositionPolar();
+        var polar = BA.getPositionPolar();
+        //console.log(BA,polar);
 
         return(polar.getDegrees());
 
@@ -375,8 +381,8 @@ T.Path = ((function(){"use strict";var static$0={},proto$0={};
 
         var segment = this.countSegment(date);
 
-        A = this.array_position_date[segment];
-        B = this.array_position_date[segment+1];
+        var A = this.array_position_date[segment];
+        var B = this.array_position_date[segment+1];
 
         var distance = A.getDistance(B);
         var duration= B.date- A.date;
@@ -844,7 +850,7 @@ T.PositionPolar = ((function(){"use strict";var proto$0={};
 
     proto$0.getDegrees = function(){
 
-        return this.degrees;
+        return (this.degrees+360)%360;
 
     };
 

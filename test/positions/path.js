@@ -176,30 +176,42 @@ describe('Testing path that could be created because of', function () {
         });
 
 
+
+        it('countSegment', function () {
+
+            expect(this.path.countSegment(this.date)).toEqual(0);
+            expect(this.path.countSegment(this.date + 1)).toEqual(0);
+            expect(this.path.countSegment(this.date + 1000)).toEqual(1);
+            expect(this.path.countSegment(this.date + 999999999999999999)).toEqual(5);
+
+        });
+
+
+
         it('countPosition', function () {
 
-            expect(this.path.countPosition(this.date)).toEqual(new Position(10, 10));
-            expect(this.path.countPosition(this.date + 1)).x.toBeCloseTo(10);
-            expect(this.path.countPosition(this.date + 1000)).toEqual(new Position(10, 20));
+            expect(this.path.countPosition(this.date)).toEqual(new T.Position(10, 10));
+            expect(this.path.countPosition(this.date + 1).x).toBeCloseTo(10);
+            expect(this.path.countPosition(this.date + 1000)).toEqual(new T.Position(10, 20));
 
         });
 
 
         it('countRotation', function () {
 
-            expect(this.path.countPosition(this.date - 999999)).toEqual(90);
-            expect(this.path.countPosition(this.date)).toEqual(90);
-            expect(this.path.countPosition(this.date + 1)).toEqual(90);
-            expect(this.path.countPosition(this.date + 1000)).toEqual(90);
-            expect(this.path.countPosition(this.date + 1500)).toEqual(90);
-            expect(this.path.countPosition(this.date + 2000)).toEqual(90);
-            expect(this.path.countPosition(this.date + 2001)).toEqual(0);
-            expect(this.path.countPosition(this.date + 3000)).toEqual(0);
-            expect(this.path.countPosition(this.date + 4000)).toEqual(0);
-            expect(this.path.countPosition(this.date + 4010)).toEqual(180 + 45);
-            expect(this.path.countPosition(this.date + 5000)).toEqual(180 + 45);
-            expect(this.path.countPosition(this.date + 6000)).toEqual(180 + 45);
-            expect(this.path.countPosition(this.date + 999999999)).toEqual(180 + 45);
+            expect(this.path.countRotation(this.date - 999999)).toEqual(90);
+            expect(this.path.countRotation(this.date)).toEqual(90);
+            expect(this.path.countRotation(this.date + 1)).toEqual(90);
+            expect(this.path.countRotation(this.date + 1000)).toEqual(90);
+            expect(this.path.countRotation(this.date + 1500)).toEqual(90);
+            expect(this.path.countRotation(this.date + 2000)).toEqual(90);
+            expect(this.path.countRotation(this.date + 2001)).toEqual(0);
+            expect(this.path.countRotation(this.date + 3000)).toEqual(0);
+            expect(this.path.countRotation(this.date + 4000)).toEqual(0);
+            expect(this.path.countRotation(this.date + 4010)).toEqual(180 + 45);
+            expect(this.path.countRotation(this.date + 5000)).toEqual(180 + 45);
+            expect(this.path.countRotation(this.date + 6000)).toEqual(180 + 45);
+            expect(this.path.countRotation(this.date + 999999999)).toEqual(180 + 45);
 
         });
 

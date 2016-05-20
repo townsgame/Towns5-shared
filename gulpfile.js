@@ -9,6 +9,7 @@ var rename = require('gulp-rename');
 var es6transpiler = require('gulp-es6-transpiler');
 var uglify = require('gulp-uglify');
 var fs = require("fs");
+var globby = require('globby');
 var jshint = require('gulp-jshint');
 var jasmine = require('gulp-jasmine');
 
@@ -18,7 +19,7 @@ var jasmine = require('gulp-jasmine');
 var includes=['./js/*.js','./js/*/*.js','./js/*/*/*.js'];
 
 
-deleteFolderRecursive = function(path) {
+var deleteFolderRecursive = function(path) {
     var files = [];
     if( fs.existsSync(path) ) {
         files = fs.readdirSync(path);
@@ -145,16 +146,40 @@ gulp.task("test", function() {
 
     gulp.start("build",function(){
 
-        setTimeout(function(){
-            global.T = require('./build/towns-shared.js');
 
-            gulp.src(['./test/*.js','./test/*/*.js'])
-                .pipe(jasmine());
+        console.log('finiti');
+        global.T = require('./build/towns-shared.js');
 
-        },10);
+        gulp.src(['./test/*.js','./test/*/*.js'])
+            .pipe(jasmine({
+                includeStackTrace: true
+            }));
 
 
     });
+
+
+    /*var paths = globby.sync(includes);
+
+    global.Towns = {};
+    var T = global.Towns;
+
+    for(var i=0,l=paths.length;i<l;i++){
+
+        //var contents = fs.readFileSync(paths[i]).toString();
+        //eval(contents);
+        //console.log(contents);
+        var x = require(paths[i]);
+
+    }
+
+
+    gulp.src(['./test/*.js','./test/* / *.js'])
+        .pipe(jasmine({
+            includeStackTrace: true
+        }));
+        */
+
 
 });
 

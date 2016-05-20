@@ -52,7 +52,7 @@ T.PositionPolar = class{
 
     getDegrees(){
 
-        return this.degrees;
+        return (this.degrees+360)%360;
 
     }
 
