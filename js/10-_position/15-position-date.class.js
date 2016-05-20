@@ -10,7 +10,7 @@
  */
 T.PositionDate = class extends T.Position{
 
-    constructor(x,y,date){
+    constructor(x,y,date=0){
 
         super(x,y);
 
@@ -20,6 +20,11 @@ T.PositionDate = class extends T.Position{
         }else
         if(typeof date==='number'){
             date = new Date(date);
+        }
+
+
+        if(isNaN(date+1)){
+            throw new Error('To construct PositionDate is needed valid Date not '+date+'.');
         }
 
 

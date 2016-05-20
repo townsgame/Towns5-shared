@@ -26,7 +26,7 @@ T.World.game.installActionClass(
 
         getPriceResources(){
 
-            return([]);
+            return([new T.Resources()]);
         }
 
 

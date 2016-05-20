@@ -2,23 +2,22 @@ console.log('Testing T.World.game');
 
 
 
-describe('Building price', function() {
+describe('Building price should', function() {
 
 
     beforeAll(function(){
 
-        this.building = new T.Objects.Building(require(__dirname+'/building-01.json'));
-        this.price = T.World.game.getObjectPrice(this.building);
+        var data = require(__dirname+'/building-01.json');
+        var building = new T.Objects.Building(data);
+        //console.log(building);
+        this.price = T.World.game.getObjectPrice(building);
 
     });
 
 
 
-    it('positive', function () {
-        expect(typeof price.wood).toEqual('number');
-        expect(typeof price.stone).toEqual('number');
-        expect(typeof price.iron).toEqual('number');
-        expect(typeof price.clay).toEqual('number');
+    it('be instance of T.Resources', function () {
+        expect(price instanceof T.Resources).toEqual(true);
     });
 
 

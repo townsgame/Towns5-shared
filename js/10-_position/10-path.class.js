@@ -104,7 +104,7 @@ T.Path = class {
      * @param date
      * @returns {number}
      */
-    private countSegment(date) {
+    countSegment(date) {
 
         //------------------------Not started or finished
 
