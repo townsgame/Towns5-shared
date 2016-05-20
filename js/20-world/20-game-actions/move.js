@@ -34,11 +34,18 @@ T.World.game.installActionClass(
         }
 
 
-        /*static execute(){
+        static execute(game,object,destination_position,objects_nearby,resources){
+
+
+            var start_position=object.getPosition();
+
+            object.path=new T.Path(start_position,destination_position,1);
+
+
         }
 
 
-        static tick(){//todo maybe ??? todo
+        /*static tick(){//todo maybe ??? todo
         }*/
 
 

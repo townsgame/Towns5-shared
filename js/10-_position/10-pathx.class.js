@@ -1,6 +1,6 @@
 /**
  * @author ©Towns.cz
- * @fileOverview Creates class T.Path
+ * @fileOverview Creates class T.PathX
  */
 //======================================================================================================================
 

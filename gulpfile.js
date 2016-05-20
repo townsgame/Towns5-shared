@@ -125,36 +125,42 @@ gulp.task('develop', function() {
 
 
 
-gulp.task("test", function() {
 
-
+gulp.task("test-code", function() {
 
     gulp.src(includes)
         .pipe(jshint({esversion:6,laxcomma:true}))
         .pipe(jshint.reporter("default"));
 
 
+});
 
-    setTimeout(function(){
 
 
-        gulp.start("build",function(){
 
+
+
+
+gulp.task("test", function() {
+
+    gulp.start("build",function(){
+
+        setTimeout(function(){
             global.T = require('./build/towns-shared.js');
 
-            gulp.src('./test/*.js')
+            gulp.src(['./test/*.js','./test/*/*.js'])
                 .pipe(jasmine());
 
+        },10);
 
 
-        });
-
-
-    },10);
-
-
-
-
-
+    });
 
 });
+
+
+
+
+
+
+

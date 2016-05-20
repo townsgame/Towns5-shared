@@ -1,6 +1,6 @@
 /**
  * @author ©Towns.cz
- * @fileOverview Creates class T.PositionTime
+ * @fileOverview Creates class T.PositionDate
  */
 //======================================================================================================================
 
@@ -8,13 +8,13 @@
 /**
  * Global position on towns map with time
  */
-T.PositionTime = class extends T.Position{
+T.PositionDate = class extends T.Position{
 
     constructor(x,y,time){
 
         super(x,y);
 
-        this.time=time;
+        this.date=date;
 
     }
 
@@ -24,7 +24,7 @@ T.PositionTime = class extends T.Position{
      * @returns {T.Resources}
      */
     clone(){
-        return new T.PositionTime(this);
+        return new T.PositionDate(this);
     }
 
 
@@ -36,7 +36,7 @@ T.PositionTime = class extends T.Position{
      */
     toString(){
 
-        return '['+this.x+','+this.y+'] at '+time;
+        return '['+this.x+','+this.y+'] at '+this.date;
 
     }
 

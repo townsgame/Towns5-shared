@@ -24,12 +24,12 @@ console.log('Testing path.class.js');
             this.date = date;
 
             this.path = new T.Path(
-                new T.PositionTime(10, 10, new Date(this.date + 0 * 1000)),
-                new T.PositionTime(10, 20, new Date(this.date + 1 * 1000)),
-                new T.PositionTime(10, 40, new Date(this.date + 2 * 1000)),
-                new T.PositionTime(20, 40, new Date(this.date + 3 * 1000)),
-                new T.PositionTime(40, 40, new Date(this.date + 4 * 1000)),
-                new T.PositionTime(0, 0, new Date(this.date + 5 * 1000))
+                new T.PositionDate(10, 10, new Date(this.date + 0 * 1000)),
+                new T.PositionDate(10, 20, new Date(this.date + 1 * 1000)),
+                new T.PositionDate(10, 40, new Date(this.date + 2 * 1000)),
+                new T.PositionDate(20, 40, new Date(this.date + 3 * 1000)),
+                new T.PositionDate(40, 40, new Date(this.date + 4 * 1000)),
+                new T.PositionDate(0, 0, new Date(this.date + 5 * 1000))
             );
 
 
@@ -110,12 +110,12 @@ describe('Testing path that begins now and it is constant', function() {
 
 
          this.path = T.Path.newConstantSpeed([
-         new T.PositionTime(10,10),
-         new T.PositionTime(10,20),
-         new T.PositionTime(10,40),
-         new T.PositionTime(20,40),
-         new T.PositionTime(40,40),
-         new T.PositionTime( 0, 0)
+         new T.PositionDate(10,10),
+         new T.PositionDate(10,20),
+         new T.PositionDate(10,40),
+         new T.PositionDate(20,40),
+         new T.PositionDate(40,40),
+         new T.PositionDate( 0, 0)
          ],5);
 
 
