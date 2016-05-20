@@ -6,7 +6,7 @@
 
 
 
-T.Path = class {
+T.PathX = class {
 
 
     /**
