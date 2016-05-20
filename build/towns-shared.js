@@ -205,7 +205,7 @@ T.Path = ((function(){"use strict";var static$0={},proto$0={};
             }
             
             if(last_date>=position_date.date){
-                throw new Error('Dates should be consecutive when constructing T.Path.');
+                throw new Error('Dates should be consecutive when constructing T.Path ('+position_date.date+' should be after '+last_date+'). '+this);
             }
 
             last_date=position_date.date;
@@ -256,7 +256,7 @@ T.Path = ((function(){"use strict";var static$0={},proto$0={};
 
 
             distance = last_position.getDistance(position_date);
-            date = new Date(date + distance/speed*1000);
+            date = new Date(date/1 + distance/speed*1000);
 
             last_position=position_date;
 
@@ -337,8 +337,8 @@ T.Path = ((function(){"use strict";var static$0={},proto$0={};
         A = this.array_position_date[segment];
         B = this.array_position_date[segment+1];
 
-        x = T.Math.proportions(A.date,date,B.date, A.x, B.x);
-        y = T.Math.proportions(A.date,date,B.date, A.y, B.y);
+        x = T.Math.proportions(A.date/1,date/1,B.date/1, A.x, B.x);
+        y = T.Math.proportions(A.date/1,date/1,B.date/1, A.y, B.y);
 
         return(new T.Position(x,y));
 
@@ -1003,8 +1003,8 @@ T.PositionDate = ((function(super$0){"use strict";super$0=T.Position;if(!PRS$0)M
         }
 
 
-        if(isNaN(date+1)){
-            throw new Error('To construct PositionDate is needed valid Date not '+date+' '+(date/1)+'.');
+        if(isNaN(date/1)){
+            throw new Error('To construct PositionDate is needed valid Date not '+date+'.');
         }
 
 

@@ -22,6 +22,8 @@ describe('Testing path that could not be created because of', function () {
 
     it('empty path', function () {
 
+        var self=this;
+
         expect(function(){new T.Path()})
             .toThrow();
 
@@ -30,9 +32,11 @@ describe('Testing path that could not be created because of', function () {
 
     it('params are not T.Position', function () {
 
+        var self=this;
+
         expect(function(){new T.Path(123, 345)})
             .toThrow();
-        expect(function(){new T.Path(123, new T.PositionDate(1, 2, this.now))})
+        expect(function(){new T.Path(123, new T.PositionDate(1, 2, self.now))})
             .toThrow();
 
     });
@@ -40,7 +44,9 @@ describe('Testing path that could not be created because of', function () {
 
     it('tahre is only one position', function () {
 
-        expect(function(){new T.Path(new T.PositionDate(1, 2, this.now))})
+        var self=this;
+
+        expect(function(){new T.Path(new T.PositionDate(1, 2, self.now))})
             .toThrow();
 
     });
@@ -48,9 +54,11 @@ describe('Testing path that could not be created because of', function () {
 
     it('invalid date', function () {
 
+        var self=this;
+
         expect(function(){new T.Path(
-            new T.PositionDate(1, 2, this.now),
-            new T.PositionDate(1, 2, this.invalid_date)
+            new T.PositionDate(1, 2, self.now),
+            new T.PositionDate(1, 2, self.invalid_date)
         )})
             .toThrow();
 
@@ -59,17 +67,19 @@ describe('Testing path that could not be created because of', function () {
 
     it('same date', function () {
 
+        var self=this;
+
         expect(function(){new T.Path(
-            new T.PositionDate(1, 2, this.now),
-            new T.PositionDate(1, 2, this.now)
+            new T.PositionDate(1, 2, self.now),
+            new T.PositionDate(1, 2, self.now)
         )})
             .toThrow();
 
 
         expect(function(){new T.Path(
-            new T.PositionDate(1, 2, this.now),
-            new T.PositionDate(1, 2, this.future),
-            new T.PositionDate(1, 2, this.future)
+            new T.PositionDate(1, 2, self.now),
+            new T.PositionDate(1, 2, self.future),
+            new T.PositionDate(1, 2, self.future)
         )})
             .toThrow();
 
@@ -78,18 +88,20 @@ describe('Testing path that could not be created because of', function () {
 
     it('wrong date order', function () {
 
+        var self=this;
+
         expect(function(){new T.Path(
-            new T.PositionDate(1, 2, this.now),
-            new T.PositionDate(1, 2, this.future),
-            new T.PositionDate(1, 2, this.past)
+            new T.PositionDate(1, 2, self.now),
+            new T.PositionDate(1, 2, self.future),
+            new T.PositionDate(1, 2, self.past)
         )})
             .toThrow();
 
 
         expect(function(){new T.Path(
-            new T.PositionDate(1, 2, this.now),
-            new T.PositionDate(1, 2, this.past),
-            new T.PositionDate(1, 2, this.future)
+            new T.PositionDate(1, 2, self.now),
+            new T.PositionDate(1, 2, self.past),
+            new T.PositionDate(1, 2, self.future)
         )})
             .toThrow();
 
@@ -106,18 +118,20 @@ describe('Testing path that could be created because of', function () {
     beforeAll(function () {
 
         this.now = new Date()/1;
-        this.future = this.now + 10000;
-        this.past = this.now - 10000;
+        this.future = this.now + 600000;
+        this.past = this.now - 600000;
         this.invalid_date = new Date('xxx');
 
     });
 
     it('correct date order', function () {
 
+        var self=this;
+
         expect(function(){new T.Path(
-            new T.PositionDate(1, 2, this.past),
-            new T.PositionDate(1, 2, this.now),
-            new T.PositionDate(1, 2, this.future)
+            new T.PositionDate(1, 2, self.past),
+            new T.PositionDate(1, 2, self.now),
+            new T.PositionDate(1, 2, self.future)
         )})
             .not.toThrow();
 
@@ -131,17 +145,18 @@ describe('Testing path that could be created because of', function () {
 
 [
     new Date()/1,
-    new Date()/1+1,
-    new Date()/1+10000,
-    new Date()/1+100000000,
-    new Date()/1-1,
-    new Date()/1-10000,
-    new Date()/1-100000000
+    new Date()/1+6,
+    new Date()/1+60000,
+    new Date()/1+600000000,
+    new Date()/1-6,
+    new Date()/1-60000,
+    new Date()/1-600000000,
+    new Date()/1-6666666666
 
 ].forEach(function(date) {
 
 
-    describe('Testing path that begins ' + date, function () {
+    describe('Testing path that begins ' + (new Date(date)), function () {
 
 
         beforeAll(function () {

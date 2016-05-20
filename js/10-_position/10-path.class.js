@@ -30,7 +30,7 @@ T.Path = class {
             }
             
             if(last_date>=position_date.date){
-                throw new Error('Dates should be consecutive when constructing T.Path.');
+                throw new Error('Dates should be consecutive when constructing T.Path ('+position_date.date+' should be after '+last_date+'). '+this);
             }
 
             last_date=position_date.date;
