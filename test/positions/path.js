@@ -8,7 +8,7 @@ console.log('Testing T.Path');
 
 
 
-describe('Testing path that could not be created', function () {
+describe('Testing path that could not be created because of', function () {
 
     beforeAll(function () {
 
@@ -20,7 +20,7 @@ describe('Testing path that could not be created', function () {
     });
 
 
-    it('Empty path', function () {
+    it('empty path', function () {
 
         expect(function(){new T.Path()})
             .toThrow();
@@ -28,7 +28,7 @@ describe('Testing path that could not be created', function () {
     });
 
 
-    it('Not Positions', function () {
+    it('params are not T.Position', function () {
 
         expect(function(){new T.Path(123, 345)})
             .toThrow();
@@ -38,7 +38,7 @@ describe('Testing path that could not be created', function () {
     });
 
 
-    it('Only one Position', function () {
+    it('tahre is only one position', function () {
 
         expect(function(){new T.Path(new T.PositionDate(1, 2, this.now))})
             .toThrow();
@@ -46,7 +46,7 @@ describe('Testing path that could not be created', function () {
     });
 
 
-    it('Invalid date', function () {
+    it('invalid date', function () {
 
         expect(function(){new T.Path(
             new T.PositionDate(1, 2, this.now),
@@ -57,7 +57,7 @@ describe('Testing path that could not be created', function () {
     });
 
 
-    it('Same date', function () {
+    it('same date', function () {
 
         expect(function(){new T.Path(
             new T.PositionDate(1, 2, this.now),
@@ -76,7 +76,7 @@ describe('Testing path that could not be created', function () {
     });
 
 
-    it('Wrong date order', function () {
+    it('wrong date order', function () {
 
         expect(function(){new T.Path(
             new T.PositionDate(1, 2, this.now),
@@ -95,8 +95,24 @@ describe('Testing path that could not be created', function () {
 
     });
 
+});
 
-    it('Correct date order', function () {
+
+//======================================================================================================================Success
+
+
+describe('Testing path that could be created because of', function () {
+
+    beforeAll(function () {
+
+        this.now = new Date();
+        this.future = new Date() + 10000;
+        this.past = new Date() - 10000;
+        this.invalid_date = new Date('xxx');
+
+    });
+
+    it('correct date order', function () {
 
         expect(function(){new T.Path(
             new T.PositionDate(1, 2, this.past),

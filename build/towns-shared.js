@@ -55,6 +55,856 @@ T.setNamespace = function(namespace){
 };
 /**
  * @author ©Towns.cz
+ * @fileOverview Creates class T.Color
+ */
+//======================================================================================================================
+
+/**
+ * Object which represents RGBA color.
+ */
+T.Color = ((function(){"use strict";var static$0={},proto$0={};
+
+    /**
+     *
+     * @param r red from 0 to 255
+     * @param g green from 0 to 255
+     * @param b blue from 0 to 255
+     * @param a alpha from 0 to 255
+     */
+    function constructor$0(r, g, b){var a = arguments[3];if(a === void 0)a = 255;
+        this.r = r;
+        this.g = g;
+        this.b = b;
+        this.a = a;
+    }DP$0(constructor$0,"prototype",{"configurable":false,"enumerable":false,"writable":false});
+
+
+    /**
+     * Repairs overflowed colors
+     * @private
+     */
+    proto$0.bounds = function(){
+
+        this.r = Math.round(this.r);
+        this.g = Math.round(this.g);
+        this.b = Math.round(this.b);
+        this.a = Math.round(this.a);
+
+        if (this.r > 255) {
+            this.r = 255;
+        }
+        if (this.r < 0) {
+            this.r = 0;
+        }
+        if (this.g > 255) {
+            this.g = 255;
+        }
+        if (this.g < 0) {
+            this.g = 0;
+        }
+        if (this.b > 255) {
+            this.b = 255;
+        }
+        if (this.b < 0) {
+            this.b = 0;
+        }
+
+        if (this.a > 255) {
+            this.a = 255;
+        }
+        if (this.a < 0) {
+            this.a = 0;
+        }
+    };
+
+
+    /**
+     * Get css representation of this color
+     * @returns {string} eg. rgb(100,200,200)
+     */
+    proto$0.getCssColor = function(){
+
+        this.bounds();
+        if (this.a == 255) {
+            return 'rgb(' + this.r + ', ' + this.g + ', ' + this.b + ')';
+        } else {
+            //r('rgba(' + this.r + ', ' + this.g + ', ' + this.b + ', ' + Math.round(this.a/255*100)/100 + ')');
+            return 'rgba(' + this.r + ', ' + this.g + ', ' + this.b + ', ' + Math.round(this.a / 255 * 100) / 100 + ')';
+        }
+
+    };
+
+    /**
+     * Get hex representation of this color (ignores alpha chanel.)
+     * @returns {string} eg. #00ff00
+     */
+    proto$0.getHex = function(){
+        this.bounds();
+        return '#' + ((1 << 24) + (this.r << 16) + (this.g << 8) + this.b).toString(16).slice(1);
+    };
+
+
+    /**
+     * Creates new T.Color form hex code of color
+     * @param {string} hex code of color eg. #00ff00
+     * @returns {T.Color} Color
+     */
+    static$0.createFromHex = function(hex){
+
+        var result, shorthandRegex;
+
+        shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+        hex = hex.replace(shorthandRegex, function (m, r, g, b) {
+            return r + r + g + g + b + b;
+        });
+        result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+        if (result) {
+            return new T.Color(
+                parseInt(result[1], 16),
+                parseInt(result[2], 16),
+                parseInt(result[3], 16)
+            );
+        } else {
+
+            throw new Error('Error while creating T.Color from '+hex);
+
+        }
+    };
+
+MIXIN$0(constructor$0,static$0);MIXIN$0(constructor$0.prototype,proto$0);static$0=proto$0=void 0;return constructor$0;})());
+
+/**
+ * @author ©Towns.cz
+ * @fileOverview Creates class T.Path
+ */
+//======================================================================================================================
+
+
+
+T.Path = ((function(){"use strict";var static$0={},proto$0={};
+
+
+    function constructor$0() {
+
+        this.array_position_date = Array.prototype.slice.call(arguments);
+
+        if(array_position_date.length<2){
+            throw new Error('Thare must be at least 2 params when constructing T.Path.');
+        }
+
+
+        var position_date,last_date=-1;
+        for(var i= 0,l=this.array_position_date.length;i<l;i++) {
+
+            position_date = this.array_position_date[i];
+            
+            if(position_date instanceof T.PositionDate){}else{
+                throw new Error('All Params when constructing T.Path must be T.PositionDate');
+            }
+            
+            if(last_date>=position_date.date){
+                throw new Error('Dates should be consecutive when constructing T.Path.');
+            }
+
+            last_date=position_date.date;
+
+
+        }
+
+    }DP$0(constructor$0,"prototype",{"configurable":false,"enumerable":false,"writable":false});
+
+
+    static$0.newConstantSpeed = function(array_position_date,speed){var date = arguments[2];if(date === void 0)date = 0;
+
+        if(date===0){
+            date = new Date();
+        }else
+        if(typeof date==='number'){
+            date = new Date(date);
+        }
+
+
+        if(array_position_date.length<2){
+            throw new Error('Thare must be at least 2 params when constructing T.Path.');
+        }
+
+        var last_position = array_position_date[0];
+
+
+        var position_date,distance;
+        for(var i=1,l=array_position_date.length;i<l;i++) {
+
+            position_date = array_position_date[i];
+
+
+            if(position_date instanceof T.Position){}else{
+                throw new Error('All Params when constructing T.Path via newConstantSpeed must be T.Position');
+            }
+
+
+            distance = last_position.getDistance(position_date);
+            date = new Date(date + distance/speed*1000);
+
+            last_position=position_date;
+
+
+        }
+
+    };
+
+
+    proto$0.countPosition = function() {
+
+    };
+
+
+
+    proto$0.countRotation = function() {
+
+
+    };
+
+
+    proto$0.countSpeed = function() {
+
+
+    };
+
+
+    proto$0.inProgress = function() {
+
+    };
+
+
+    proto$0.toString = function(){
+
+
+    };
+
+
+
+MIXIN$0(constructor$0,static$0);MIXIN$0(constructor$0.prototype,proto$0);static$0=proto$0=void 0;return constructor$0;})());
+/**
+ * @author ©Towns.cz
+ * @fileOverview Creates class T.PathX
+ */
+//======================================================================================================================
+
+
+
+T.PathX = ((function(){"use strict";var static$0={},proto$0={};
+
+
+    /**
+     * @param {T.Position} start
+     * @param {T.Position} end
+     * @param {number} speed in parcel/s
+     * @param {array} map collision
+     * @param {object} Position map_topleft center of collision map
+     //todo colision map
+     * @constructor
+     */
+    function constructor$0(start, end, speed, map, map_topleft) {
+
+        var distance,xNext,yNext;
+
+        this.positions = [];
+
+        //--------------
+
+
+        if (map[Math.round(end.y) - map_topleft.y][Math.round(end.x) - map_topleft.x] === false) {
+
+            throw 'Wrong Destination';//todo throw real Errors not strings
+        }
+
+
+        //--------------
+
+        T.ArrayFunctions.iterate2D(map, function (y, x) {
+            if (map[y][x] !== false)
+                map[y][x] = true;
+        });
+
+
+        //--------------
+
+        map[Math.round(start.y) - map_topleft.y][Math.round(start.x) - map_topleft.x] = 0;
+
+
+
+
+        var pathfinder1/*todo better name*/ = function (y, x) {
+
+            if (typeof map[y][x] === 'number' && map[y][x] >= 0) {
+
+                for (var yNext = y - 1; yNext <= y + 1; yNext++) {
+                    for (var xNext = x - 1; xNext <= x + 1; xNext++) {
+
+
+                        if (map[yNext][xNext] === true || limit < 2)
+                            if (xNext == x ? yNext != y : yNext == y)
+                                if (!(xNext == x && yNext == y))
+                                    if (xNext >= 0)
+                                        if (yNext >= 0)
+                                            if (xNext < (map_radius * 2))/*todo is it OK to use (map_radius*2)???*/
+                                                if (yNext < (map_radius * 2)) {
+
+                                                    var distance = T.Math.xy2dist(yNext - y, xNext - x);
+                                                    //r(distance,map[y][x] - Math.abs(map[yNext][xNext]),limit);
+                                                    if ((map[yNext][xNext] === true || limit < 2) /*&& map[y][x] - Math.abs(map[yNext][xNext])>distance*/) {
+
+                                                        //r('OK');
+                                                        map[yNext][xNext] = -(map[y][x] + /*map[yNext][xNext]*/distance);
+                                                        //r(map[yNext][xNext],map[y][x] + map[yNext][xNext]);
+                                                    }
+                                                }
+
+
+                    }
+                }
+
+
+            }
+
+
+        };
+
+        var pathfinder2/*todo better name*/ = function (y, x) {
+            if (typeof map[y][x] === 'number')
+                map[y][x] = Math.abs(map[y][x]);
+        };
+
+        var finished = false;
+        for (var limit = 0; limit < 100 && !finished; limit++) {
+
+
+            T.ArrayFunctions.iterate2D(map, pathfinder1);
+
+            T.ArrayFunctions.iterate2D(map, pathfinder2);
+
+
+            //r(map[Math.round(end.y)-map_topleft.y][Math.round(end.x)-map_topleft.x]);
+            if (typeof map[Math.round(end.y) - map_topleft.y][Math.round(end.x) - map_topleft.x] == 'number') {
+                finished = true;
+            }
+
+        }
+
+        //--------------
+
+        //mapWindow(map);
+
+        if (!finished) {
+            throw 'Cant find path';
+        }
+
+        //--------------
+
+
+        finished = false;
+        var x = Math.round(end.x) - map_topleft.x,
+            y = Math.round(end.y) - map_topleft.y;
+
+
+        for (limit = 0; limit < 20 && !finished; limit++) {
+
+            if (limit !== 0)
+                this.positions.push(new T.Position(x + map_topleft.x, y + map_topleft.y));
+
+            distance = 0;
+            xNext = false;
+            yNext = false;
+
+            for (var yTest = y - 1; yTest <= y + 1; yTest++) {
+                for (var xTest = x - 1; xTest <= x + 1; xTest++) {
+
+
+                    //r(xTest-x,yTest-y);
+
+                    if (xTest != x || yNext != y)
+                        if (xTest >= 0)
+                            if (yTest >= 0)
+                                if (xTest < (map_radius * 2))/*todo is it OK to use (map_radius*2)???*/
+                                    if (yTest < (map_radius * 2))
+                                        if (typeof map[yTest][xTest] === 'number') {
+
+                                            //r(map[y][x] - map[yTest][xTest]);
+                                            if (map[y][x] - map[yTest][xTest] >= distance) {
+
+                                                distance = map[y][x] - map[yTest][xTest];
+                                                xNext = xTest;
+                                                yNext = yTest;
+
+                                            }
+
+
+                                        }
+
+                }
+            }
+
+            if (xNext === false || yNext === false)throw new Error('Error in path', xNext, yNext);
+
+            //r(xNext-x,yNext-y,distance);
+            //ewrgfd;
+
+            x = xNext;
+            y = yNext;
+
+            if (x == Math.round(start.x) - map_topleft.x && y == Math.round(start.y) - map_topleft.y) {
+                finished = true;
+            }
+
+
+        }
+
+        //--------------
+
+        this.positions.push(start);
+        this.positions.reverse();
+        this.positions.push(end);
+
+
+        //------------------------------------------
+
+        this.times = [new Date()];
+        var ms = this.times[0].getTime();
+
+        for (var i = 1, l = this.positions.length; i < l; i++) {
+
+            distance = T.Math.xy2dist(this.positions[i].x - this.positions[i - 1].x, this.positions[i].y - this.positions[i - 1].y);
+
+            ms += Math.round(distance * 1000 / speed);
+
+            this.times.push(new Date(ms));
+
+
+        }
+
+
+    }DP$0(constructor$0,"prototype",{"configurable":false,"enumerable":false,"writable":false});
+
+
+//----------------------------------------------------------
+
+    /**
+     * @return {object} Position current
+     */
+    proto$0.recount = function() {
+
+
+        var actualDate = new Date();
+        var actualMs = actualDate.getTime();
+
+
+        for (var i = 0, l = this.times.length - 1; i < l; i++) {
+
+
+            var chunkStartMs = this.times[i].getTime();
+            var chunkStopMs = this.times[i + 1].getTime();
+
+            if (actualMs >= chunkStartMs && actualMs < chunkStopMs) {
+
+                var chunkProgress = (actualMs - chunkStartMs) / (chunkStopMs - chunkStartMs);
+
+                var chunkXDelta = this.positions[i + 1].x - this.positions[i].x;
+                var chunkYDelta = this.positions[i + 1].y - this.positions[i].y;
+
+                return (new T.Position(this.positions[i].x + (chunkXDelta * chunkProgress), this.positions[i].y + (chunkYDelta * chunkProgress)));
+
+
+            }
+
+
+        }
+
+        return (false);
+
+    };
+
+    //----------------------------------------------------------
+
+    /**
+     *
+     * @return {number} current rotation in degrees
+     */
+    proto$0.rotation = function() {
+
+
+        var actualDate = new Date();
+        var actualMs = actualDate.getTime();
+
+
+        for (var i = 0, l = this.times.length - 1; i < l; i++) {
+
+
+            var chunkStartMs = this.times[i].getTime();
+            var chunkStopMs = this.times[i + 1].getTime();
+
+            if (actualMs >= chunkStartMs && actualMs < chunkStopMs) {
+
+                var chunkXDelta = this.positions[i + 1].x - this.positions[i].x;
+                var chunkYDelta = this.positions[i + 1].y - this.positions[i].y;
+
+                var chunkDistDeg = T.Math.xy2distDeg(chunkYDelta, chunkXDelta);
+                return (chunkDistDeg.deg + 90);
+
+
+            }
+
+
+        }
+
+        return (false);
+
+    };
+
+
+    //----------------------------------------------------------
+
+    /**
+     * @return {boolean} is this in progress = true, finished or not yet started=false
+     */
+    proto$0.inProgress = function() {
+
+        var stopMs = this.times[this.times.length - 1];
+
+        var actualDate = new Date();
+        var actualMs = actualDate.getTime();
+
+        return (actualMs < stopMs);
+
+    };
+
+
+    //----------------------------------------------------------
+
+
+    /**
+     * @static
+     * @param {object} T.Path
+     * @return {boolean} true = inserted object is path and it is in progress
+     */
+    static$0.is = function(path) {
+
+
+        if (!is(path)) return false;
+        if (!is(path.inProgress)) return false;
+        if (!path.inProgress()) return false;
+
+        return true;
+
+    };
+
+MIXIN$0(constructor$0,static$0);MIXIN$0(constructor$0.prototype,proto$0);static$0=proto$0=void 0;return constructor$0;})());
+/**
+ * @author ©Towns.cz
+ * @fileOverview Creates class T.Position3D
+ */
+//======================================================================================================================
+
+
+T.Position3D = ((function(){"use strict";var proto$0={};
+
+
+    function constructor$0(x,y,z){
+
+        if(typeof x == 'object'){
+
+            this.x= x.x;
+            this.y= x.y;
+            this.z= x.z;
+
+        }else{
+
+            this.x= x;
+            this.y= y;
+            this.z= z;
+
+        }
+
+    }DP$0(constructor$0,"prototype",{"configurable":false,"enumerable":false,"writable":false});
+
+
+
+    /**
+     * Return deep clone of this.
+     * @returns {T.Resources}
+     */
+    proto$0.clone = function(){
+        return new T.Position3D(this);
+    };
+
+
+
+    /**
+     * Converts Position3D to simple string
+     * @return {string}
+     */
+    proto$0.toString = function(){
+
+        return '['+this.x+','+this.y+','+this.z+']';
+
+    };
+
+
+
+MIXIN$0(constructor$0.prototype,proto$0);proto$0=void 0;return constructor$0;})());
+
+
+
+
+
+/**
+ * @author ©Towns.cz
+ * @fileOverview Creates class PositionPolar
+ */
+//======================================================================================================================
+
+
+T.PositionPolar = ((function(){"use strict";var proto$0={};
+
+    function constructor$0(distance,degrees){
+
+        if(typeof distance == 'number' && typeof degrees == 'number'){
+
+            this.distance= distance;
+            this.degrees= degrees;
+
+        }
+        //todo check
+
+    }DP$0(constructor$0,"prototype",{"configurable":false,"enumerable":false,"writable":false});
+
+
+    /**
+     * Return deep clone of this.
+     * @returns {T.Resources}
+     */
+    proto$0.clone = function(){
+        return new T.PositionPolar(this);
+    };
+
+
+
+    proto$0.getPosition = function(){
+
+        var radians = this.getRadians();
+
+        return(new T.Position(
+            Math.cos(radians)*this.distance,
+            Math.sin(radians)*this.distance
+        ));
+
+
+    };
+
+
+    proto$0.getDistance = function(){
+
+        return this.distance;
+
+    };
+
+
+    proto$0.getDegrees = function(){
+
+        return this.degrees;
+
+    };
+
+
+    proto$0.getRadians = function(){
+
+        return T.Math.deg2rad(this.degrees);
+
+    };
+
+
+
+    /**
+     * Converts Position to simple string
+     * @return {string}
+     */
+    proto$0.toString = function(){
+
+        return ''+this.distance+','+this.degrees+'°';
+
+    };
+
+
+
+MIXIN$0(constructor$0.prototype,proto$0);proto$0=void 0;return constructor$0;})());
+
+
+
+
+
+/**
+ * @author ©Towns.cz
+ * @fileOverview Creates class T.Position
+ */
+//======================================================================================================================
+
+
+/**
+ * Global position on towns map
+ */
+T.Position = ((function(){"use strict";var proto$0={};
+
+    function constructor$0(x,y){
+
+
+        if(typeof x == 'object'){
+
+            this.x= x.x;
+            this.y= x.y;
+
+        }else
+        if(/^[+-]?\d+(\.\d+)?,[+-]?\d+(\.\d+)?$/.test(x)){
+
+            x= x.split(',');
+            this.x= parseFloat(x[0]);
+            this.y= parseFloat(x[1]);
+
+        }else
+        if(typeof x == 'number' && typeof y == 'number'){
+
+            this.x= x;
+            this.y= y;
+
+        }
+        //todo check
+
+    }DP$0(constructor$0,"prototype",{"configurable":false,"enumerable":false,"writable":false});
+
+
+    /**
+     * Return deep clone of this.
+     * @returns {T.Resources}
+     */
+    proto$0.clone = function(){
+        return new T.Position(this);
+    };
+
+
+
+    proto$0.plus = function(position){
+
+        this.x+=position.x;
+        this.y+=position.y;
+        return this;
+
+    };
+
+
+    proto$0.multiply = function(k){
+
+        this.x=this.x*k;
+        this.y=this.y*k;
+        return this;
+
+    };
+
+
+
+    proto$0.getPositionPolar = function(){
+
+        return(new T.PositionPolar(
+            T.Math.xy2dist(this.x,this.y),
+            T.Math.rad2deg(Math.atan2(this.y,this.x))
+        ));
+
+    };
+
+
+    proto$0.getDistance = function(position){
+
+        return T.Math.xy2dist(position.x-this.x,position.y-this.y);
+
+    };
+
+
+    /**
+     * Converts Position to simple string
+     * @return {string}
+     */
+    proto$0.toString = function(){
+
+        return ''+this.x+','+this.y+'';
+
+    };
+
+
+
+MIXIN$0(constructor$0.prototype,proto$0);proto$0=void 0;return constructor$0;})());
+
+
+
+
+
+/**
+ * @author ©Towns.cz
+ * @fileOverview Creates class T.PositionDate
+ */
+//======================================================================================================================
+
+
+/**
+ * Global position on towns map with time
+ */
+T.PositionDate = ((function(super$0){"use strict";super$0=T.Position;if(!PRS$0)MIXIN$0(constructor$0, super$0);var proto$0={};
+
+    function constructor$0(x,y,date){
+
+        super$0.call(this, x,y);
+
+
+        if(date===0){
+            date = new Date();
+        }else
+        if(typeof date==='number'){
+            date = new Date(date);
+        }
+
+
+        this.date=date;
+
+    }if(super$0!==null)SP$0(constructor$0,super$0);constructor$0.prototype = OC$0(super$0!==null?super$0.prototype:null,{"constructor":{"value":constructor$0,"configurable":true,"writable":true}});DP$0(constructor$0,"prototype",{"configurable":false,"enumerable":false,"writable":false});
+
+
+    /**
+     * Return deep clone of this.
+     * @returns {T.Resources}
+     */
+    proto$0.clone = function(){
+        return new T.PositionDate(this);
+    };
+
+
+
+
+    /**
+     * Converts Position to simple string
+     * @return {string}
+     */
+    proto$0.toString = function(){
+
+        return '['+this.x+','+this.y+'] at '+this.date;
+
+    };
+
+
+
+MIXIN$0(constructor$0.prototype,proto$0);proto$0=void 0;return constructor$0;})());
+
+
+
+
+
+/**
+ * @author ©Towns.cz
  * @fileOverview Creates static T.ArrayFunctions
  */
 //======================================================================================================================
@@ -319,126 +1169,6 @@ T.ArrayFunctions=((function(){"use strict";function constructor$0() {}DP$0(const
 
 
 MIXIN$0(constructor$0,static$0);static$0=void 0;return constructor$0;})());
-/**
- * @author ©Towns.cz
- * @fileOverview Creates class T.Color
- */
-//======================================================================================================================
-
-/**
- * Object which represents RGBA color.
- */
-T.Color = ((function(){"use strict";var static$0={},proto$0={};
-
-    /**
-     *
-     * @param r red from 0 to 255
-     * @param g green from 0 to 255
-     * @param b blue from 0 to 255
-     * @param a alpha from 0 to 255
-     */
-    function constructor$0(r, g, b){var a = arguments[3];if(a === void 0)a = 255;
-        this.r = r;
-        this.g = g;
-        this.b = b;
-        this.a = a;
-    }DP$0(constructor$0,"prototype",{"configurable":false,"enumerable":false,"writable":false});
-
-
-    /**
-     * Repairs overflowed colors
-     * @private
-     */
-    proto$0.bounds = function(){
-
-        this.r = Math.round(this.r);
-        this.g = Math.round(this.g);
-        this.b = Math.round(this.b);
-        this.a = Math.round(this.a);
-
-        if (this.r > 255) {
-            this.r = 255;
-        }
-        if (this.r < 0) {
-            this.r = 0;
-        }
-        if (this.g > 255) {
-            this.g = 255;
-        }
-        if (this.g < 0) {
-            this.g = 0;
-        }
-        if (this.b > 255) {
-            this.b = 255;
-        }
-        if (this.b < 0) {
-            this.b = 0;
-        }
-
-        if (this.a > 255) {
-            this.a = 255;
-        }
-        if (this.a < 0) {
-            this.a = 0;
-        }
-    };
-
-
-    /**
-     * Get css representation of this color
-     * @returns {string} eg. rgb(100,200,200)
-     */
-    proto$0.getCssColor = function(){
-
-        this.bounds();
-        if (this.a == 255) {
-            return 'rgb(' + this.r + ', ' + this.g + ', ' + this.b + ')';
-        } else {
-            //r('rgba(' + this.r + ', ' + this.g + ', ' + this.b + ', ' + Math.round(this.a/255*100)/100 + ')');
-            return 'rgba(' + this.r + ', ' + this.g + ', ' + this.b + ', ' + Math.round(this.a / 255 * 100) / 100 + ')';
-        }
-
-    };
-
-    /**
-     * Get hex representation of this color (ignores alpha chanel.)
-     * @returns {string} eg. #00ff00
-     */
-    proto$0.getHex = function(){
-        this.bounds();
-        return '#' + ((1 << 24) + (this.r << 16) + (this.g << 8) + this.b).toString(16).slice(1);
-    };
-
-
-    /**
-     * Creates new T.Color form hex code of color
-     * @param {string} hex code of color eg. #00ff00
-     * @returns {T.Color} Color
-     */
-    static$0.createFromHex = function(hex){
-
-        var result, shorthandRegex;
-
-        shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
-        hex = hex.replace(shorthandRegex, function (m, r, g, b) {
-            return r + r + g + g + b + b;
-        });
-        result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-        if (result) {
-            return new T.Color(
-                parseInt(result[1], 16),
-                parseInt(result[2], 16),
-                parseInt(result[3], 16)
-            );
-        } else {
-
-            throw new Error('Error while creating T.Color from '+hex);
-
-        }
-    };
-
-MIXIN$0(constructor$0,static$0);MIXIN$0(constructor$0.prototype,proto$0);static$0=proto$0=void 0;return constructor$0;})());
-
 /**
  * @author ©Towns.cz
  * @fileOverview Creates class T.Game
@@ -794,13 +1524,50 @@ T.Game.Action = ((function(){"use strict";var static$0={},proto$0={};
     };
 
 
+    /**
+     * In how many seconds can be this action instance executed?
+     * @returns {number}
+     */
+    proto$0.canBeExecutedIn = function(){
+
+        if(typeof this.params.cooldown==='number'){
+
+            if(typeof this.last_use==='undefined'){
+                return(0);
+            }
+
+            var s = Math.abs(this.last_use - new Date())/1000;
+
+            if(this.params.cooldown<=s){
+                return(0);
+            }else{
+                return(this.params.cooldown-s);
+            }
+
+        }else{
+
+            return(0);
+
+        }
+    };
+
 
     /**
-     * @returns {T.Game.ActionAbility}
+     * Can be this action instance executed now?
+     * @returns {boolean}
      */
-    /*clone(){
-        return(new T.Game.ActionAbility(JSON.parse(JSON.stringify(this))));
-    }*/
+    proto$0.canBeExecutedNow = function(){
+        return(this.canBeExecutedIn()===0);
+    };
+
+
+    /**
+     * Set actual date as date of execution this action instance
+     */
+    proto$0.nowExecuted = function(){
+        this.last_use=new Date();
+    };
+
 
 
     /**
@@ -816,6 +1583,17 @@ T.Game.Action = ((function(){"use strict";var static$0={},proto$0={};
 \n                <th colspan=\"2\">")+ T.Locale.get('object','action',this.type)+("</th>\
 \n            </tr>\
 \n            ");
+
+
+        if(typeof this.last_use!=='undefined'){
+            html+=("\
+\n            <tr>\
+\n                <td>")+ T.Locale.get('object','action','last_used')+("</td>\
+\n                <td>")+this.last_use+("</td>\
+\n            </tr>\
+\n            ");
+        }
+
 
         for(var param in this.params){
             html+=("\
@@ -3076,6 +3854,7 @@ T.Objects.Building = ((function(super$0){"use strict";super$0=T.Objects.Object;i
     function constructor$0(object) {
         super$0.call(this, object);
 
+        //-----------------------------
         if (typeof this.actions === 'undefined') {
 
             this.actions = [];
@@ -3096,9 +3875,38 @@ T.Objects.Building = ((function(super$0){"use strict";super$0=T.Objects.Object;i
 
             }
 
+
+
             this.actions = actions_classes;
 
         }
+        //-----------------------------
+
+
+        //-----------------------------
+        var life_action = this.getAction('life');
+        var max_life = T.World.game.getObjectMaxLife(this);
+
+
+        if(life_action==null){
+
+            life_action=T.World.game.newActionInstance({
+                type: 'life',
+                params: {
+                    life: max_life,
+                    max_life: max_life
+                }
+            });
+            actions_classes.push(life_action);
+
+        }else{
+
+            life_action.params.max_life=max_life;
+        }
+        //-----------------------------
+
+
+
 
     }if(super$0!==null)SP$0(constructor$0,super$0);constructor$0.prototype = OC$0(super$0!==null?super$0.prototype:null,{"constructor":{"value":constructor$0,"configurable":true,"writable":true}});DP$0(constructor$0,"prototype",{"configurable":false,"enumerable":false,"writable":false});
 
@@ -3129,7 +3937,7 @@ T.Objects.Building = ((function(super$0){"use strict";super$0=T.Objects.Object;i
      * @param action_type
      * @returns {T.Game.ActionAbility}
      */
-    proto$0.getActionAbility = function(action_type){
+    proto$0.getAction = function(action_type){
 
         for(var i= 0,l=this.actions.length;i<l;i++){
 
@@ -3260,566 +4068,6 @@ T.Objects.Terrain = ((function(super$0){"use strict";super$0=T.Objects.Object;fu
 
 
 MIXIN$0(constructor$0.prototype,proto$0);proto$0=void 0;return constructor$0;})());
-
-
-/**
- * @author ©Towns.cz
- * @fileOverview Creates class T.Path
- */
-//======================================================================================================================
-
-
-
-T.Path = ((function(){"use strict";var static$0={},proto$0={};
-
-
-    /**
-     * @param {T.Position} start
-     * @param {T.Position} end
-     * @param {number} speed in parcel/s
-     * @param {array} map collision
-     * @param {object} Position map_topleft center of collision map
-     //todo colision map
-     * @constructor
-     */
-    function constructor$0(start, end, speed, map, map_topleft) {
-
-        var distance,xNext,yNext;
-
-        this.positions = [];
-
-        //--------------
-
-
-        if (map[Math.round(end.y) - map_topleft.y][Math.round(end.x) - map_topleft.x] === false) {
-
-            throw 'Wrong Destination';//todo throw real Errors not strings
-        }
-
-
-        //--------------
-
-        T.ArrayFunctions.iterate2D(map, function (y, x) {
-            if (map[y][x] !== false)
-                map[y][x] = true;
-        });
-
-
-        //--------------
-
-        map[Math.round(start.y) - map_topleft.y][Math.round(start.x) - map_topleft.x] = 0;
-
-
-
-
-        var pathfinder1/*todo better name*/ = function (y, x) {
-
-            if (typeof map[y][x] === 'number' && map[y][x] >= 0) {
-
-                for (var yNext = y - 1; yNext <= y + 1; yNext++) {
-                    for (var xNext = x - 1; xNext <= x + 1; xNext++) {
-
-
-                        if (map[yNext][xNext] === true || limit < 2)
-                            if (xNext == x ? yNext != y : yNext == y)
-                                if (!(xNext == x && yNext == y))
-                                    if (xNext >= 0)
-                                        if (yNext >= 0)
-                                            if (xNext < (map_radius * 2))/*todo is it OK to use (map_radius*2)???*/
-                                                if (yNext < (map_radius * 2)) {
-
-                                                    var distance = T.Math.xy2dist(yNext - y, xNext - x);
-                                                    //r(distance,map[y][x] - Math.abs(map[yNext][xNext]),limit);
-                                                    if ((map[yNext][xNext] === true || limit < 2) /*&& map[y][x] - Math.abs(map[yNext][xNext])>distance*/) {
-
-                                                        //r('OK');
-                                                        map[yNext][xNext] = -(map[y][x] + /*map[yNext][xNext]*/distance);
-                                                        //r(map[yNext][xNext],map[y][x] + map[yNext][xNext]);
-                                                    }
-                                                }
-
-
-                    }
-                }
-
-
-            }
-
-
-        };
-
-        var pathfinder2/*todo better name*/ = function (y, x) {
-            if (typeof map[y][x] === 'number')
-                map[y][x] = Math.abs(map[y][x]);
-        };
-
-        var finished = false;
-        for (var limit = 0; limit < 100 && !finished; limit++) {
-
-
-            T.ArrayFunctions.iterate2D(map, pathfinder1);
-
-            T.ArrayFunctions.iterate2D(map, pathfinder2);
-
-
-            //r(map[Math.round(end.y)-map_topleft.y][Math.round(end.x)-map_topleft.x]);
-            if (typeof map[Math.round(end.y) - map_topleft.y][Math.round(end.x) - map_topleft.x] == 'number') {
-                finished = true;
-            }
-
-        }
-
-        //--------------
-
-        //mapWindow(map);
-
-        if (!finished) {
-            throw 'Cant find path';
-        }
-
-        //--------------
-
-
-        finished = false;
-        var x = Math.round(end.x) - map_topleft.x,
-            y = Math.round(end.y) - map_topleft.y;
-
-
-        for (limit = 0; limit < 20 && !finished; limit++) {
-
-            if (limit !== 0)
-                this.positions.push(new T.Position(x + map_topleft.x, y + map_topleft.y));
-
-            distance = 0;
-            xNext = false;
-            yNext = false;
-
-            for (var yTest = y - 1; yTest <= y + 1; yTest++) {
-                for (var xTest = x - 1; xTest <= x + 1; xTest++) {
-
-
-                    //r(xTest-x,yTest-y);
-
-                    if (xTest != x || yNext != y)
-                        if (xTest >= 0)
-                            if (yTest >= 0)
-                                if (xTest < (map_radius * 2))/*todo is it OK to use (map_radius*2)???*/
-                                    if (yTest < (map_radius * 2))
-                                        if (typeof map[yTest][xTest] === 'number') {
-
-                                            //r(map[y][x] - map[yTest][xTest]);
-                                            if (map[y][x] - map[yTest][xTest] >= distance) {
-
-                                                distance = map[y][x] - map[yTest][xTest];
-                                                xNext = xTest;
-                                                yNext = yTest;
-
-                                            }
-
-
-                                        }
-
-                }
-            }
-
-            if (xNext === false || yNext === false)throw new Error('Error in path', xNext, yNext);
-
-            //r(xNext-x,yNext-y,distance);
-            //ewrgfd;
-
-            x = xNext;
-            y = yNext;
-
-            if (x == Math.round(start.x) - map_topleft.x && y == Math.round(start.y) - map_topleft.y) {
-                finished = true;
-            }
-
-
-        }
-
-        //--------------
-
-        this.positions.push(start);
-        this.positions.reverse();
-        this.positions.push(end);
-
-
-        //------------------------------------------
-
-        this.times = [new Date()];
-        var ms = this.times[0].getTime();
-
-        for (var i = 1, l = this.positions.length; i < l; i++) {
-
-            distance = T.Math.xy2dist(this.positions[i].x - this.positions[i - 1].x, this.positions[i].y - this.positions[i - 1].y);
-
-            ms += Math.round(distance * 1000 / speed);
-
-            this.times.push(new Date(ms));
-
-
-        }
-
-
-    }DP$0(constructor$0,"prototype",{"configurable":false,"enumerable":false,"writable":false});
-
-
-//----------------------------------------------------------
-
-    /**
-     * @return {object} Position current
-     */
-    proto$0.recount = function() {
-
-
-        var actualDate = new Date();
-        var actualMs = actualDate.getTime();
-
-
-        for (var i = 0, l = this.times.length - 1; i < l; i++) {
-
-
-            var chunkStartMs = this.times[i].getTime();
-            var chunkStopMs = this.times[i + 1].getTime();
-
-            if (actualMs >= chunkStartMs && actualMs < chunkStopMs) {
-
-                var chunkProgress = (actualMs - chunkStartMs) / (chunkStopMs - chunkStartMs);
-
-                var chunkXDelta = this.positions[i + 1].x - this.positions[i].x;
-                var chunkYDelta = this.positions[i + 1].y - this.positions[i].y;
-
-                return (new T.Position(this.positions[i].x + (chunkXDelta * chunkProgress), this.positions[i].y + (chunkYDelta * chunkProgress)));
-
-
-            }
-
-
-        }
-
-        return (false);
-
-    };
-
-    //----------------------------------------------------------
-
-    /**
-     *
-     * @return {number} current rotation in degrees
-     */
-    proto$0.rotation = function() {
-
-
-        var actualDate = new Date();
-        var actualMs = actualDate.getTime();
-
-
-        for (var i = 0, l = this.times.length - 1; i < l; i++) {
-
-
-            var chunkStartMs = this.times[i].getTime();
-            var chunkStopMs = this.times[i + 1].getTime();
-
-            if (actualMs >= chunkStartMs && actualMs < chunkStopMs) {
-
-                var chunkXDelta = this.positions[i + 1].x - this.positions[i].x;
-                var chunkYDelta = this.positions[i + 1].y - this.positions[i].y;
-
-                var chunkDistDeg = T.Math.xy2distDeg(chunkYDelta, chunkXDelta);
-                return (chunkDistDeg.deg + 90);
-
-
-            }
-
-
-        }
-
-        return (false);
-
-    };
-
-
-    //----------------------------------------------------------
-
-    /**
-     * @return {boolean} is this in progress = true, finished or not yet started=false
-     */
-    proto$0.inProgress = function() {
-
-        var stopMs = this.times[this.times.length - 1];
-
-        var actualDate = new Date();
-        var actualMs = actualDate.getTime();
-
-        return (actualMs < stopMs);
-
-    };
-
-
-    //----------------------------------------------------------
-
-
-    /**
-     * @static
-     * @param {object} T.Path
-     * @return {boolean} true = inserted object is path and it is in progress
-     */
-    static$0.is = function(path) {
-
-
-        if (!is(path)) return false;
-        if (!is(path.inProgress)) return false;
-        if (!path.inProgress()) return false;
-
-        return true;
-
-    };
-
-MIXIN$0(constructor$0,static$0);MIXIN$0(constructor$0.prototype,proto$0);static$0=proto$0=void 0;return constructor$0;})());
-/**
- * @author ©Towns.cz
- * @fileOverview Creates class T.Position3D
- */
-//======================================================================================================================
-
-
-T.Position3D = ((function(){"use strict";var proto$0={};
-
-
-    function constructor$0(x,y,z){
-
-        if(typeof x == 'object'){
-
-            this.x= x.x;
-            this.y= x.y;
-            this.z= x.z;
-
-        }else{
-
-            this.x= x;
-            this.y= y;
-            this.z= z;
-
-        }
-
-    }DP$0(constructor$0,"prototype",{"configurable":false,"enumerable":false,"writable":false});
-
-
-
-    /**
-     * Return deep clone of this.
-     * @returns {T.Resources}
-     */
-    proto$0.clone = function(){
-        return new T.Position3D(this);
-    };
-
-
-
-    /**
-     * Converts Position3D to simple string
-     * @return {string}
-     */
-    proto$0.toString = function(){
-
-        return '['+this.x+','+this.y+','+this.z+']';
-
-    };
-
-
-
-MIXIN$0(constructor$0.prototype,proto$0);proto$0=void 0;return constructor$0;})());
-
-
-
-
-
-/**
- * @author ©Towns.cz
- * @fileOverview Creates class PositionPolar
- */
-//======================================================================================================================
-
-
-T.PositionPolar = ((function(){"use strict";var proto$0={};
-
-    function constructor$0(distance,degrees){
-
-        if(typeof distance == 'number' && typeof degrees == 'number'){
-
-            this.distance= distance;
-            this.degrees= degrees;
-
-        }
-        //todo check
-
-    }DP$0(constructor$0,"prototype",{"configurable":false,"enumerable":false,"writable":false});
-
-
-    /**
-     * Return deep clone of this.
-     * @returns {T.Resources}
-     */
-    proto$0.clone = function(){
-        return new T.PositionPolar(this);
-    };
-
-
-
-    proto$0.getPosition = function(){
-
-        var radians = this.getRadians();
-
-        return(new T.Position(
-            Math.cos(radians)*this.distance,
-            Math.sin(radians)*this.distance
-        ));
-
-
-    };
-
-
-    proto$0.getDistance = function(){
-
-        return this.distance;
-
-    };
-
-
-    proto$0.getDegrees = function(){
-
-        return this.degrees;
-
-    };
-
-
-    proto$0.getRadians = function(){
-
-        return T.Math.deg2rad(this.degrees);
-
-    };
-
-
-
-    /**
-     * Converts Position to simple string
-     * @return {string}
-     */
-    proto$0.toString = function(){
-
-        return ''+this.distance+','+this.degrees+'°';
-
-    };
-
-
-
-MIXIN$0(constructor$0.prototype,proto$0);proto$0=void 0;return constructor$0;})());
-
-
-
-
-
-/**
- * @author ©Towns.cz
- * @fileOverview Creates class T.Position
- */
-//======================================================================================================================
-
-
-/**
- * Global position on towns map
- */
-T.Position = ((function(){"use strict";var proto$0={};
-
-    function constructor$0(x,y){
-
-
-        if(typeof x == 'object'){
-
-            this.x= x.x;
-            this.y= x.y;
-
-        }else
-        if(/^[+-]?\d+(\.\d+)?,[+-]?\d+(\.\d+)?$/.test(x)){
-
-            x= x.split(',');
-            this.x= parseFloat(x[0]);
-            this.y= parseFloat(x[1]);
-
-        }else
-        if(typeof x == 'number' && typeof y == 'number'){
-
-            this.x= x;
-            this.y= y;
-
-        }
-        //todo check
-
-    }DP$0(constructor$0,"prototype",{"configurable":false,"enumerable":false,"writable":false});
-
-
-    /**
-     * Return deep clone of this.
-     * @returns {T.Resources}
-     */
-    proto$0.clone = function(){
-        return new T.Position(this);
-    };
-
-
-
-    proto$0.plus = function(position){
-
-        this.x+=position.x;
-        this.y+=position.y;
-        return this;
-
-    };
-
-
-    proto$0.multiply = function(k){
-
-        this.x=this.x*k;
-        this.y=this.y*k;
-        return this;
-
-    };
-
-
-
-    proto$0.getPositionPolar = function(){
-
-        return(new T.PositionPolar(
-            T.Math.xy2dist(this.x,this.y),
-            T.Math.rad2deg(Math.atan2(this.y,this.x))
-        ));
-
-    };
-
-
-    proto$0.getDistance = function(position){
-
-        return T.Math.xy2dist(position.x-this.x,position.y-this.y);
-
-    };
-
-
-    /**
-     * Converts Position to simple string
-     * @return {string}
-     */
-    proto$0.toString = function(){
-
-        return ''+this.x+','+this.y+'';
-
-    };
-
-
-
-MIXIN$0(constructor$0.prototype,proto$0);proto$0=void 0;return constructor$0;})());
-
-
-
 
 
 /**
@@ -4427,17 +4675,21 @@ T.World.game.installActionClass(
 
         static$0.execute = function(game,attacker,attacked,resources_attacker){
 
-            var attacker_attack = attacker.getActionAbility('attack');
-            var attacker_defence = attacker.getActionAbility('defence');
-            var attacked_attack = attacked.getActionAbility('attack');
-            var attacked_defence = attacked.getActionAbility('defence');
+            var attacker_attack = attacker.getAction('attack');
+            var attacker_defence = attacker.getAction('defence');
+            var attacked_attack = attacked.getAction('attack');
+            var attacked_defence = attacked.getAction('defence');
+
+            var attacker_life = attacker.getAction('life').params;
+            var attacked_life = attacked.getAction('life').params;
 
 
-            //---------------------Missing actionAbility
+
+            //---------------------Missing action
 
 
             if(attacker_attack instanceof T.Game.Action){
-                attacker_attack=attacker_attack.clone();
+                attacker_attack=attacker_attack.clone().params;
             }else{
                 throw new Error('Attacker has not ability to attack');
             }
@@ -4445,66 +4697,92 @@ T.World.game.installActionClass(
 
 
             if(attacker_defence instanceof T.Game.Action){
-                attacker_defence=attacker_defence.clone();
+                attacker_defence=attacker_defence.clone().params;
             }else{
-                attacker_defence = game.getActionEmptyInstance('defence');
+                attacker_defence = game.getActionEmptyInstance('defence').params;
             }
 
 
             if(attacked_attack instanceof T.Game.Action){
-                attacked_attack=attacked_attack.clone();
+                attacked_attack=attacked_attack.clone().params;
             }else{
-                attacked_attack = game.getActionEmptyInstance('attack');
+                attacked_attack = game.getActionEmptyInstance('attack').params;
 
             }
 
 
             if(attacked_defence instanceof T.Game.Action){
-                attacked_defence=attacked_defence.clone();
+                attacked_defence=attacked_defence.clone().params;
             }else{
-                attacked_defence = game.getActionEmptyInstance('defence');
+                attacked_defence = game.getActionEmptyInstance('defence').params;
             }
 
+
+            //---------------------Distance
+            var distance = attacker.getPosition().getDistance(attacked.getPosition());
+            if(distance>attacker_attack.distance){
+
+                throw new Error('Objects are too far - '+distance+' fields. Attack distance is only '+attacker_attack.distance+' fields.');
+
+            }
+
+
+            //---------------------Cooldown
+            if(!attacker.getAction('attack').canBeExecutedNow()){
+
+                throw new Error('This action can be executed in '+attacker.getAction('attack').canBeExecutedIn()+' seconds.');
+
+            }
+
+
+            //---------------------Set usage
+            attacker.getAction('attack').nowExecuted();
 
 
             //---------------------Defence
 
-            attacker_attack.params.attack-=
-                attacked_defence.params.defence;
-            if(attacker_attack.params.attack<0)attacker_attack.params.attack=0;
+            r('attack',attacker_attack.strength,attacked_attack.strength);
+            r('defence',attacker_defence.defence,attacked_defence.defence)
+
+            attacker_attack.strength-=
+                attacked_defence.defence;
+            if(attacker_attack.strength<0)attacker_attack.strength=0;
 
 
 
-            attacked_attack.params.attack-=
-                attacker_defence.params.defence;
-            if(attacked_attack.params.attack<0)attacked_attack.params.attack=0;
+            attacked_attack.strength-=
+                attacker_defence.defence;
+            if(attacked_attack.strength<0)attacked_attack.strength=0;
 
 
             //---------------------
 
-            attacker.life=1000;
-            attacked.life=1000;
+            //attacker_life.life=1000;
+            //attacked_life.life=1000;
 
 
             while(
-                    (attacker_attack.params.rounds || attacked_attack.params.rounds) &&
-                    (attacker.life>1 && attacked.life>1)
+                    (attacker_attack.rounds || attacked_attack.rounds) &&
+                    (attacker_life.life>1 && attacked_life.life>1)
                 ){
 
-                attacker.life-=attacker_attack.params.attack;
-                attacked.life-=attacker_attack.params.attack;
+                r('round',attacker_attack.strength,attacked_attack.strength);
+                r('life',attacked_life.life,attacker_life.life);
+
+                attacked_life.life-=attacker_attack.strength;
+                attacker_life.life-=attacked_attack.strength;
 
 
-                attacker_attack.params.rounds--;
-                attacked_attack.params.rounds--;
+                attacker_attack.rounds--;
+                attacked_attack.rounds--;
             }
 
 
             //---------------------
 
 
-            if(attacker.life<1)attacker.life=1;
-            if(attacked.life<1)attacked.life=1;
+            if(attacker_life.life<1)attacker_life.life=1;
+            if(attacked_life.life<1)attacked_life.life=1;
 
 
         };
@@ -4570,7 +4848,8 @@ T.World.game.installActionClass(
 
 T.World.game.installActionClass(
     {
-        life:   1
+        life:   1,
+        max_life:   1
     },
     ((function(super$0){"use strict";super$0=T.Game.Action;function constructor$0() {if(super$0!==null)super$0.apply(this, arguments)}if(!PRS$0)MIXIN$0(constructor$0, super$0);if(super$0!==null)SP$0(constructor$0,super$0);constructor$0.prototype = OC$0(super$0!==null?super$0.prototype:null,{"constructor":{"value":constructor$0,"configurable":true,"writable":true}});DP$0(constructor$0,"prototype",{"configurable":false,"enumerable":false,"writable":false});var static$0={},proto$0={};
 
@@ -4581,18 +4860,13 @@ T.World.game.installActionClass(
 
 
         proto$0.countPriceBase = function(){
-            return(this.params.life*0.05);
+            return(0);
         };
 
 
         proto$0.getPriceResources = function(){
 
-            return([
-                new T.Resources({'wood':   1}),
-                new T.Resources({'clay':   1}),
-                new T.Resources({'stone':  1}),
-                new T.Resources({'iron':   1})
-            ]);
+            return([]);
         };
 
 
@@ -4690,11 +4964,18 @@ T.World.game.installActionClass(
         };
 
 
-        /*static execute(){
-        }
+        static$0.execute = function(game,object,destination_position,objects_nearby,resources){
 
 
-        static tick(){//todo maybe ??? todo
+            var start_position=object.getPosition();
+
+            object.path=new T.Path(start_position,destination_position,1);
+
+
+        };
+
+
+        /*static tick(){//todo maybe ??? todo
         }*/
 
 

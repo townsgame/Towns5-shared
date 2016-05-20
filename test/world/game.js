@@ -7,8 +7,8 @@ describe('Building price', function() {
 
     beforeAll(function(){
 
-        this.building = require('building-01.json');
-        this.price = T.World.game.getObjectPrice(building);
+        this.building = new T.Objects.Building(require(__dirname+'/building-01.json'));
+        this.price = T.World.game.getObjectPrice(this.building);
 
     });
 
