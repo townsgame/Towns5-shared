@@ -222,7 +222,7 @@ T.Path = ((function(){"use strict";var static$0={},proto$0={};
      * @param {Date} date
      * @returns {T.Path}
      */
-    static$0.newConstantSpeed = function(array_position,speed){var date = arguments[2];if(date === void 0)date = 0;
+    static$0.newConstantSpeed = function(array_position,speed){var $D$0;var $D$1;var S_ITER$0 = typeof Symbol!=='undefined'&&Symbol&&Symbol.iterator||'@@iterator';var S_MARK$0 = typeof Symbol!=='undefined'&&Symbol&&Symbol["__setObjectSetter__"];function ITER$0(v,f){if(v){if(Array.isArray(v))return f?v.slice():v;var i,r;if(S_MARK$0)S_MARK$0(v);if(typeof v==='object'&&typeof (f=v[S_ITER$0])==='function'){i=f.call(v);r=[];}else if((v+'')==='[object Generator]'){i=v;r=[];};if(S_MARK$0)S_MARK$0(void 0);if(r) {while((f=i['next']()),f['done']!==true)r.push(f['value']);return r;}}throw new Error(v+' is not iterable')};var date = arguments[2];if(date === void 0)date = 0;
 
         if(date===0){
             date = new Date();
@@ -269,7 +269,9 @@ T.Path = ((function(){"use strict";var static$0={},proto$0={};
         }
 
 
-        return new this.apply(this,array_position_date);
+        //return new this.apply(this,array_position_date);
+        //return Object.create(T.Path,array_position_date);
+        return (($D$1=(($D$0=OC$0(($D$1= T.Path).prototype)),$D$1).apply($D$0, ITER$0(array_position_date)))&&typeof $D$1==='object'?$D$1:$D$0);
 
     };
 
@@ -312,7 +314,7 @@ T.Path = ((function(){"use strict";var static$0={},proto$0={};
         }
 
 
-        throw new Error('Error while counting segment in T.Path');
+        throw new Error('Error while counting segment in T.Path, maybe because of param date is '+date);
 
     };
 
@@ -380,6 +382,10 @@ T.Path = ((function(){"use strict";var static$0={},proto$0={};
      */
     proto$0.countSpeed = function(date) {
 
+        if(this.inProgress(date)===false){
+            return(0);
+        }
+
         var segment = this.countSegment(date);
 
         var A = this.array_position_date[segment];
@@ -388,7 +394,7 @@ T.Path = ((function(){"use strict";var static$0={},proto$0={};
         var distance = A.getDistance(B);
         var duration= B.date- A.date;
 
-        return(distance/duration);
+        return(distance/(duration/1000));
 
     };
 
@@ -1045,7 +1051,9 @@ T.PositionDate = ((function(super$0){"use strict";super$0=T.Position;if(!PRS$0)M
      */
     proto$0.toString = function(){
 
-        return '['+this.x+','+this.y+'] at '+this.date;
+        return '['+this.x+','+this.y+'] at '
+            + (this.date.getDay()+1)+'.'+(this.date.getMonth()+1)+'.'+this.date.getFullYear()
+            +' '+this.date.getHours()+':'+this.date.getMinutes()+':'+this.date.getSeconds();
 
     };
 

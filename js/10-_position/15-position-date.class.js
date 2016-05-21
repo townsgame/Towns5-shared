@@ -58,7 +58,9 @@ T.PositionDate = class extends T.Position{
      */
     toString(){
 
-        return '['+this.x+','+this.y+'] at '+this.date;
+        return '['+this.x+','+this.y+'] at '
+            + (this.date.getDay()+1)+'.'+(this.date.getMonth()+1)+'.'+this.date.getFullYear()
+            +' '+this.date.getHours()+':'+this.date.getMinutes()+':'+this.date.getSeconds();
 
     }
 

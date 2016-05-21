@@ -94,7 +94,9 @@ T.Path = class {
         }
 
 
-        return new this.apply(this,array_position_date);
+        //return new this.apply(this,array_position_date);
+        //return Object.create(T.Path,array_position_date);
+        return new T.Path(...array_position_date);
 
     }
 
@@ -137,7 +139,7 @@ T.Path = class {
         }
 
 
-        throw new Error('Error while counting segment in T.Path');
+        throw new Error('Error while counting segment in T.Path, maybe because of param date is '+date);
 
     }
 
@@ -205,6 +207,10 @@ T.Path = class {
      */
     countSpeed(date) {
 
+        if(this.inProgress(date)===false){
+            return(0);
+        }
+
         var segment = this.countSegment(date);
 
         var A = this.array_position_date[segment];
@@ -213,7 +219,7 @@ T.Path = class {
         var distance = A.getDistance(B);
         var duration= B.date- A.date;
 
-        return(distance/duration);
+        return(distance/(duration/1000));
 
     }
 
