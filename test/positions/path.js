@@ -179,10 +179,19 @@ describe('Testing path that could be created because of', function () {
 
         it('countSegment', function () {
 
+            expect(this.path.countSegment(this.date - 999999)).toEqual(0);
             expect(this.path.countSegment(this.date)).toEqual(0);
             expect(this.path.countSegment(this.date + 1)).toEqual(0);
             expect(this.path.countSegment(this.date + 1000)).toEqual(1);
-            expect(this.path.countSegment(this.date + 999999999999999999)).toEqual(5);
+            expect(this.path.countSegment(this.date + 1500)).toEqual(1);
+            expect(this.path.countSegment(this.date + 2000)).toEqual(2);
+            expect(this.path.countSegment(this.date + 2001)).toEqual(2);
+            expect(this.path.countSegment(this.date + 3000)).toEqual(3);
+            expect(this.path.countSegment(this.date + 4000)).toEqual(4);
+            expect(this.path.countSegment(this.date + 4010)).toEqual(4);
+            expect(this.path.countSegment(this.date + 5000)).toEqual(4);
+            expect(this.path.countSegment(this.date + 6000)).toEqual(4);
+            expect(this.path.countSegment(this.date + 999999999)).toEqual(4);
 
         });
 
@@ -204,10 +213,10 @@ describe('Testing path that could be created because of', function () {
             expect(this.path.countRotation(this.date + 1)).toEqual(90);
             expect(this.path.countRotation(this.date + 1000)).toEqual(90);
             expect(this.path.countRotation(this.date + 1500)).toEqual(90);
-            expect(this.path.countRotation(this.date + 2000)).toEqual(90);
+            expect(this.path.countRotation(this.date + 2000)).toEqual(0);
             expect(this.path.countRotation(this.date + 2001)).toEqual(0);
             expect(this.path.countRotation(this.date + 3000)).toEqual(0);
-            expect(this.path.countRotation(this.date + 4000)).toEqual(0);
+            expect(this.path.countRotation(this.date + 4000)).toEqual(180 + 45);
             expect(this.path.countRotation(this.date + 4010)).toEqual(180 + 45);
             expect(this.path.countRotation(this.date + 5000)).toEqual(180 + 45);
             expect(this.path.countRotation(this.date + 6000)).toEqual(180 + 45);

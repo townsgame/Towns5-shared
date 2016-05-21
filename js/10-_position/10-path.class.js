@@ -112,7 +112,7 @@ T.Path = class {
             return(0);
         }else
         if(this.array_position_date[this.array_position_date.length-1].date<=date){
-            return(this.array_position_date.length-1);
+            return(this.array_position_date.length-2);
         }
 
 
@@ -123,6 +123,7 @@ T.Path = class {
             A = this.array_position_date[i].date/1;
             B = this.array_position_date[i+1].date/1;
 
+            //console.log(i+'('+(A-date)+' - '+(B-date)+')');
             //console.log('('+(A-date)+' - '+(B-date)+')');
 
             if(A<=date && B>date){
