@@ -17,6 +17,7 @@ T.Position = class{
 
             this.x= x.x;
             this.y= x.y;
+            return;
 
         }else
         if(/^[+-]?\d+(\.\d+)?,[+-]?\d+(\.\d+)?$/.test(x)){
@@ -24,15 +25,18 @@ T.Position = class{
             x= x.split(',');
             this.x= parseFloat(x[0]);
             this.y= parseFloat(x[1]);
+            return;
 
         }else
         if(typeof x == 'number' && typeof y == 'number'){
 
             this.x= x;
             this.y= y;
+            return;
 
         }
         //todo check
+        throw new Error('Wrong constructor params while creating T.Position!');
 
     }
 

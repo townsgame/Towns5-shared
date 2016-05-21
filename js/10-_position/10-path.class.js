@@ -56,6 +56,7 @@ T.Path = class {
             date = new Date(date);
         }
 
+        //r(date);
 
         if(array_position.length<2){
             throw new Error('Thare must be at least 2 params when constructing T.Path.');
@@ -67,7 +68,6 @@ T.Path = class {
 
 
         var last_position = array_position[0];
-
 
         var position_date,distance;
         for(var i=1,l=array_position.length;i<l;i++) {
@@ -82,6 +82,7 @@ T.Path = class {
 
             distance = last_position.getDistance(position_date);
             date = new Date(date/1 + distance/speed*1000);
+
 
             last_position=position_date;
 

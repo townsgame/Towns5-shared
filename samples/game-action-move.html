@@ -17,6 +17,8 @@
 
 
             var object = buildings.getAll()[0];
+            object.x=100;
+            object.y=100;
 
 
             var resources = new T.Resources({wood:300});
@@ -25,13 +27,13 @@
 
 
 
-            $('html').append(attacker.createHtmlProfile();
+            $('html').append(object.createHtmlProfile());
 
 
-            result = T.World.game.createActionExecute('move')(object,destination_position,objects_nearby,resources);
+            result = T.World.game.createActionExecute('move')(object,destination_position/*,objects_nearby,resources*/);
 
 
-            $('html').append(attacker.createHtmlProfile();
+            $('html').append(object.createHtmlProfile());
 
 
             console.log(result);

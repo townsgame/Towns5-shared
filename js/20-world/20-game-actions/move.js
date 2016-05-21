@@ -39,7 +39,12 @@ T.World.game.installActionClass(
 
             var start_position=object.getPosition();
 
-            object.path=new T.Path(start_position,destination_position,1);
+            object.path = T.Path.newConstantSpeed([
+                    start_position, destination_position
+                ],1);
+
+            //---------------------Set usage
+            object.getAction('move').nowExecuted();//todo is it needed
 
 
         }
