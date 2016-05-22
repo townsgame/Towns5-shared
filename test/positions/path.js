@@ -278,12 +278,12 @@ describe('Testing path that begins now and it is constant', function() {
         this.date = new Date()/1;
 
          this.path = T.Path.newConstantSpeed([
-         new T.PositionDate(10,10),
-         new T.PositionDate(10,20),
-         new T.PositionDate(10,40),
-         new T.PositionDate(20,40),
-         new T.PositionDate(40,40),
-         new T.PositionDate( 0, 0)
+         new T.Position(10,10),
+         new T.Position(10,20),
+         new T.Position(10,40),
+         new T.Position(20,40),
+         new T.Position(40,40),
+         new T.Position( 0, 0)
          ],5);
 
         //console.log('genereted path --->');
@@ -340,6 +340,45 @@ describe('Testing path that begins now and it is constant', function() {
 
     });
 
+
+
+});
+
+
+
+
+//======================================================================================================================Clonning and JSON
+
+
+
+describe('Testing path can be', function() {
+
+    beforeAll(function () {
+
+        this.date = new Date() / 1;
+
+        this.path = new T.Path(
+            new T.PositionDate(10, 10, new Date(this.date + 0 * 1000)),
+            new T.PositionDate(10, 20, new Date(this.date + 1 * 1000)),
+            new T.PositionDate(10, 40, new Date(this.date + 2 * 1000)),
+            new T.PositionDate(20, 40, new Date(this.date + 3 * 1000)),
+            new T.PositionDate(40, 40, new Date(this.date + 4 * 1000)),
+            new T.PositionDate(0, 0, new Date(this.date + 5 * 1000))
+        );
+
+    });
+
+
+
+    it('converted and deconverted to and from JSON.', function () {
+
+        this.path_clone = new T.Path(JSON.parse(JSON.stringify(this.path)));
+
+        expect(this.path_clone).not.toBe(this.path);
+        expect(this.path_clone).toEqual(this.path);
+
+
+    });
 
 
 });
