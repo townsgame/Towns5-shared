@@ -34,18 +34,27 @@ T.World.game.installActionClass(
         }
 
 
-        static execute(game,object,destination_position,objects_nearby,resources){
+        static execute(game,object,destinations/*,objects_nearby,resources*/){
+
+            //---------------------Checking action//todo maybe auto
+            var action = object.getAction('move');
+            if(action instanceof T.Game.Action){}else{
+                throw new Error('Object has not ability to move');
+            }
+            //---------------------
 
 
             var start_position=object.getPosition();
+            destinations.unshift(start_position);
 
-            object.path = T.Path.newConstantSpeed([
-                    start_position, destination_position
-                ],1);
+            r(destinations);
 
-            //---------------------Set usage
+            object.path = T.Path.newConstantSpeed(destinations,action.params.speed);
+
+
+            //---------------------Set usage//todo maybe auto
             object.getAction('move').nowExecuted();//todo is it needed
-
+            //---------------------
 
         }
 

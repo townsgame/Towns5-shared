@@ -42,7 +42,7 @@ describe('Testing path that could not be created because of', function () {
     });
 
 
-    it('tahre is only one position', function () {
+    it('there is only one position', function () {
 
         var self=this;
 
@@ -355,15 +355,12 @@ describe('Testing path can be', function() {
 
     beforeAll(function () {
 
-        this.date = new Date() / 1;
+        this.date = new Date() / 1 -1000;
 
         this.path = new T.Path(
-            new T.PositionDate(10, 10, new Date(this.date + 0 * 1000)),
-            new T.PositionDate(10, 20, new Date(this.date + 1 * 1000)),
-            new T.PositionDate(10, 40, new Date(this.date + 2 * 1000)),
-            new T.PositionDate(20, 40, new Date(this.date + 3 * 1000)),
-            new T.PositionDate(40, 40, new Date(this.date + 4 * 1000)),
-            new T.PositionDate(0, 0, new Date(this.date + 5 * 1000))
+            new T.PositionDate(10, 10, new Date(this.date + 0 * 60000)),
+            new T.PositionDate(10, 20, new Date(this.date + 1 * 60000)),
+            new T.PositionDate(10, 20, new Date(this.date + 2* 60000))
         );
 
     });
@@ -372,11 +369,24 @@ describe('Testing path can be', function() {
 
     it('converted and deconverted to and from JSON.', function () {
 
-        this.path_clone = new T.Path(JSON.parse(JSON.stringify(this.path)));
+        this.path_clone1 = new T.Path(...JSON.parse(JSON.stringify(this.path)));
+        this.path_clone2 = new T.Path(...JSON.parse(JSON.stringify(this.path_clone1)));
 
-        expect(this.path_clone).not.toBe(this.path);
-        expect(this.path_clone).toEqual(this.path);
+        //console.log(this.path.toString());
+        //console.log(this.path_clone1.toString());
+        //console.log(this.path_clone2);
 
+
+        expect(this.path_clone1).not.toBe(this.path);
+        expect(this.path_clone1).toEqual(this.path);
+
+
+        expect(this.path_clone2).not.toBe(this.path);
+        expect(this.path_clone2).toEqual(this.path);
+
+
+        expect(this.path_clone1).not.toBe(this.path_clone2);
+        expect(this.path_clone1).toEqual(this.path_clone2);
 
     });
 

@@ -44,6 +44,17 @@ T.Objects.Building = class extends T.Objects.Object{
         //-----------------------------
 
 
+
+        //-----------------------------
+        if (typeof this.path == 'object') {
+            r(this.path);
+            this.path=new T.Path(...this.path);
+        }
+        //-----------------------------
+
+
+
+
         //-----------------------------
         var life_action = this.getAction('life');
         var max_life = T.World.game.getObjectMaxLife(this);
@@ -68,6 +79,22 @@ T.Objects.Building = class extends T.Objects.Object{
 
 
 
+
+    }
+
+
+    getPosition(date){
+
+
+        if(typeof this.path==='undefined'){
+
+            return(new T.Position(this.x,this.y));
+
+        }else{
+
+            return this.path.countPosition(date);
+
+        }
 
     }
 
@@ -128,6 +155,7 @@ T.Objects.Building = class extends T.Objects.Object{
             <div class="object-building-profile">
 
                 <h2>`+this.name+`</h2>
+                `+this.getPosition()+`
 
 
                 `+actions_profile+`

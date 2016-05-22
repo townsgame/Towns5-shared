@@ -1,4 +1,4 @@
-var PRS$0 = (function(o,t){o["__proto__"]={"a":t};return o["a"]===t})({},{});var DP$0 = Object.defineProperty;var GOPD$0 = Object.getOwnPropertyDescriptor;var MIXIN$0 = function(t,s){for(var p in s){if(s.hasOwnProperty(p)){DP$0(t,p,GOPD$0(s,p));}}return t};var SP$0 = Object.setPrototypeOf||function(o,p){if(PRS$0){o["__proto__"]=p;}else {DP$0(o,"__proto__",{"value":p,"configurable":true,"enumerable":false,"writable":true});}return o};var OC$0 = Object.create;/**
+var PRS$0 = (function(o,t){o["__proto__"]={"a":t};return o["a"]===t})({},{});var DP$0 = Object.defineProperty;var GOPD$0 = Object.getOwnPropertyDescriptor;var MIXIN$0 = function(t,s){for(var p in s){if(s.hasOwnProperty(p)){DP$0(t,p,GOPD$0(s,p));}}return t};var SP$0 = Object.setPrototypeOf||function(o,p){if(PRS$0){o["__proto__"]=p;}else {DP$0(o,"__proto__",{"value":p,"configurable":true,"enumerable":false,"writable":true});}return o};var OC$0 = Object.create;var S_ITER$0 = typeof Symbol!=='undefined'&&Symbol&&Symbol.iterator||'@@iterator';var S_MARK$0 = typeof Symbol!=='undefined'&&Symbol&&Symbol["__setObjectSetter__"];function ITER$0(v,f){if(v){if(Array.isArray(v))return f?v.slice():v;var i,r;if(S_MARK$0)S_MARK$0(v);if(typeof v==='object'&&typeof (f=v[S_ITER$0])==='function'){i=f.call(v);r=[];}else if((v+'')==='[object Generator]'){i=v;r=[];};if(S_MARK$0)S_MARK$0(void 0);if(r) {while((f=i['next']()),f['done']!==true)r.push(f['value']);return r;}}throw new Error(v+' is not iterable')};/**
  * @author ©Towns.cz
  * @fileOverview Initialize namespace Towns
  */
@@ -188,7 +188,16 @@ T.Path = ((function(){"use strict";var static$0={},proto$0={};
      */
     function constructor$0() {
 
-        this.array_position_date = Array.prototype.slice.call(arguments);
+        var args = Array.prototype.slice.call(arguments);
+
+
+        //todo maybe//if(args.length===1 && args instanceof Array){
+        //todo maybe//    this.array_position_date = args[0];
+        //todo maybe//}else{
+            this.array_position_date = args;
+        //todo maybe//}
+
+
 
         if(this.array_position_date.length<2){
             throw new Error('Thare must be at least 2 params when constructing T.Path.');
@@ -201,7 +210,18 @@ T.Path = ((function(){"use strict";var static$0={},proto$0={};
             position_date = this.array_position_date[i];
             
             if(position_date instanceof T.PositionDate){}else{
-                throw new Error('All Params when constructing T.Path must be T.PositionDate');
+
+                if(position_date instanceof Object){
+
+                    this.array_position_date[i] = new T.PositionDate(this.array_position_date[i]);
+
+                }else{
+
+                    throw new Error('All Params when constructing T.Path must be T.PositionDate');
+                }
+
+
+
             }
             
             if(last_date>=position_date.date){
@@ -215,6 +235,15 @@ T.Path = ((function(){"use strict";var static$0={},proto$0={};
 
     }DP$0(constructor$0,"prototype",{"configurable":false,"enumerable":false,"writable":false});
 
+
+
+    proto$0.toJSON = function(){
+        return(this.array_position_date);
+    };
+
+
+
+
     /**
      *
      * @param {Array.<T.Position>} array_position
@@ -222,7 +251,7 @@ T.Path = ((function(){"use strict";var static$0={},proto$0={};
      * @param {Date} date
      * @returns {T.Path}
      */
-    static$0.newConstantSpeed = function(array_position,speed){var $D$0;var $D$1;var S_ITER$0 = typeof Symbol!=='undefined'&&Symbol&&Symbol.iterator||'@@iterator';var S_MARK$0 = typeof Symbol!=='undefined'&&Symbol&&Symbol["__setObjectSetter__"];function ITER$0(v,f){if(v){if(Array.isArray(v))return f?v.slice():v;var i,r;if(S_MARK$0)S_MARK$0(v);if(typeof v==='object'&&typeof (f=v[S_ITER$0])==='function'){i=f.call(v);r=[];}else if((v+'')==='[object Generator]'){i=v;r=[];};if(S_MARK$0)S_MARK$0(void 0);if(r) {while((f=i['next']()),f['done']!==true)r.push(f['value']);return r;}}throw new Error(v+' is not iterable')};var date = arguments[2];if(date === void 0)date = 0;
+    static$0.newConstantSpeed = function(array_position,speed){var $D$0;var $D$1;var date = arguments[2];if(date === void 0)date = 0;
 
         if(date===0){
             date = new Date();
@@ -231,6 +260,12 @@ T.Path = ((function(){"use strict";var static$0={},proto$0={};
             date = new Date(date);
         }
 
+        if(isNaN(speed/1)){
+            throw new Error('Speed must be valid number.');
+        }
+        if(speed<=0){
+            throw new Error('Speed must be positive.');
+        }
 
         if(array_position.length<2){
             throw new Error('Thare must be at least 2 params when constructing T.Path.');
@@ -242,7 +277,6 @@ T.Path = ((function(){"use strict";var static$0={},proto$0={};
 
 
         var last_position = array_position[0];
-
 
         var position_date,distance;
         for(var i=1,l=array_position.length;i<l;i++) {
@@ -257,6 +291,7 @@ T.Path = ((function(){"use strict";var static$0={},proto$0={};
 
             distance = last_position.getDistance(position_date);
             date = new Date(date/1 + distance/speed*1000);
+
 
             last_position=position_date;
 
@@ -324,7 +359,14 @@ T.Path = ((function(){"use strict";var static$0={},proto$0={};
      * @param {Date} date
      * @returns {T.Position}
      */
-    proto$0.countPosition = function(date) {
+    proto$0.countPosition = function() {var date = arguments[0];if(date === void 0)date = 0;
+
+        if(date===0){
+            date = new Date();
+        }else
+        if(typeof date==='number'){
+            date = new Date(date);
+        }
 
         //------------------------Not started or finished
 
@@ -907,6 +949,7 @@ T.Position = ((function(){"use strict";var proto$0={};
 
             this.x= x.x;
             this.y= x.y;
+            return;
 
         }else
         if(/^[+-]?\d+(\.\d+)?,[+-]?\d+(\.\d+)?$/.test(x)){
@@ -914,15 +957,18 @@ T.Position = ((function(){"use strict";var proto$0={};
             x= x.split(',');
             this.x= parseFloat(x[0]);
             this.y= parseFloat(x[1]);
+            return;
 
         }else
         if(typeof x == 'number' && typeof y == 'number'){
 
             this.x= x;
             this.y= y;
+            return;
 
         }
         //todo check
+        throw new Error('Wrong constructor params while creating T.Position!');
 
     }DP$0(constructor$0,"prototype",{"configurable":false,"enumerable":false,"writable":false});
 
@@ -1005,13 +1051,21 @@ T.PositionDate = ((function(super$0){"use strict";super$0=T.Position;if(!PRS$0)M
 
     function constructor$0(x,y){var date = arguments[2];if(date === void 0)date = 0;
 
+        if(typeof x === 'object'){
+
+            y= x.y;
+            date= x.date;
+            x= x.x;
+
+        }
+
         super$0.call(this, x,y);
 
 
         if(date===0){
             date = new Date();
         }else
-        if(typeof date==='number'){
+        if(typeof date==='number' || typeof date==='string'){
             date = new Date(date);
         }
 
@@ -4013,7 +4067,7 @@ T.Objects.Building = ((function(super$0){"use strict";super$0=T.Objects.Object;i
     /**
      * @param {object} object
      */
-    function constructor$0(object) {
+    function constructor$0(object) {var $D$2;var $D$3;
         super$0.call(this, object);
 
         //-----------------------------
@@ -4045,6 +4099,17 @@ T.Objects.Building = ((function(super$0){"use strict";super$0=T.Objects.Object;i
         //-----------------------------
 
 
+
+        //-----------------------------
+        if (typeof this.path == 'object') {
+            r(this.path);
+            this.path=(($D$3=(($D$2=OC$0(($D$3= T.Path).prototype)),$D$3).apply($D$2, ITER$0(this.path)))&&typeof $D$3==='object'?$D$3:$D$2);
+        ;$D$2 = void 0;$D$3 = void 0}
+        //-----------------------------
+
+
+
+
         //-----------------------------
         var life_action = this.getAction('life');
         var max_life = T.World.game.getObjectMaxLife(this);
@@ -4071,6 +4136,22 @@ T.Objects.Building = ((function(super$0){"use strict";super$0=T.Objects.Object;i
 
 
     }if(super$0!==null)SP$0(constructor$0,super$0);constructor$0.prototype = OC$0(super$0!==null?super$0.prototype:null,{"constructor":{"value":constructor$0,"configurable":true,"writable":true}});DP$0(constructor$0,"prototype",{"configurable":false,"enumerable":false,"writable":false});
+
+
+    proto$0.getPosition = function(date){
+
+
+        if(typeof this.path==='undefined'){
+
+            return(new T.Position(this.x,this.y));
+
+        }else{
+
+            return this.path.countPosition(date);
+
+        }
+
+    };
 
 
     /**
@@ -4129,6 +4210,7 @@ T.Objects.Building = ((function(super$0){"use strict";super$0=T.Objects.Object;i
 \n            <div class=\"object-building-profile\">\
 \n\
 \n                <h2>")+this.name+("</h2>\
+\n                ")+this.getPosition()+("\
 \n\
 \n\
 \n                ")+actions_profile+("\
@@ -5126,13 +5208,27 @@ T.World.game.installActionClass(
         };
 
 
-        static$0.execute = function(game,object,destination_position,objects_nearby,resources){
+        static$0.execute = function(game,object,destinations/*,objects_nearby,resources*/){
+
+            //---------------------Checking action//todo maybe auto
+            var action = object.getAction('move');
+            if(action instanceof T.Game.Action){}else{
+                throw new Error('Object has not ability to move');
+            }
+            //---------------------
 
 
             var start_position=object.getPosition();
+            destinations.unshift(start_position);
 
-            object.path=new T.Path(start_position,destination_position,1);
+            r(destinations);
 
+            object.path = T.Path.newConstantSpeed(destinations,action.params.speed);
+
+
+            //---------------------Set usage//todo maybe auto
+            object.getAction('move').nowExecuted();//todo is it needed
+            //---------------------
 
         };
 

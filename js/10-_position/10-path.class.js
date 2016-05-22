@@ -13,7 +13,16 @@ T.Path = class {
      */
     constructor() {
 
-        this.array_position_date = Array.prototype.slice.call(arguments);
+        var args = Array.prototype.slice.call(arguments);
+
+
+        //todo maybe//if(args.length===1 && args instanceof Array){
+        //todo maybe//    this.array_position_date = args[0];
+        //todo maybe//}else{
+            this.array_position_date = args;
+        //todo maybe//}
+
+
 
         if(this.array_position_date.length<2){
             throw new Error('Thare must be at least 2 params when constructing T.Path.');
@@ -26,7 +35,18 @@ T.Path = class {
             position_date = this.array_position_date[i];
             
             if(position_date instanceof T.PositionDate){}else{
-                throw new Error('All Params when constructing T.Path must be T.PositionDate');
+
+                if(position_date instanceof Object){
+
+                    this.array_position_date[i] = new T.PositionDate(this.array_position_date[i]);
+
+                }else{
+
+                    throw new Error('All Params when constructing T.Path must be T.PositionDate');
+                }
+
+
+
             }
             
             if(last_date>=position_date.date){
@@ -39,6 +59,15 @@ T.Path = class {
         }
 
     }
+
+
+
+    toJSON(){
+        return(this.array_position_date);
+    }
+
+
+
 
     /**
      *
@@ -56,7 +85,12 @@ T.Path = class {
             date = new Date(date);
         }
 
-        //r(date);
+        if(isNaN(speed/1)){
+            throw new Error('Speed must be valid number.');
+        }
+        if(speed<=0){
+            throw new Error('Speed must be positive.');
+        }
 
         if(array_position.length<2){
             throw new Error('Thare must be at least 2 params when constructing T.Path.');
@@ -150,7 +184,14 @@ T.Path = class {
      * @param {Date} date
      * @returns {T.Position}
      */
-    countPosition(date) {
+    countPosition(date=0) {
+
+        if(date===0){
+            date = new Date();
+        }else
+        if(typeof date==='number'){
+            date = new Date(date);
+        }
 
         //------------------------Not started or finished
 

@@ -12,13 +12,21 @@ T.PositionDate = class extends T.Position{
 
     constructor(x,y,date=0){
 
+        if(typeof x === 'object'){
+
+            y= x.y;
+            date= x.date;
+            x= x.x;
+
+        }
+
         super(x,y);
 
 
         if(date===0){
             date = new Date();
         }else
-        if(typeof date==='number'){
+        if(typeof date==='number' || typeof date==='string'){
             date = new Date(date);
         }
 
