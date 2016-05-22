@@ -41,6 +41,19 @@ T.Objects.Array = class{
     }
 
 
+    filter(callback){
+
+        var filtered_objects=new T.Objects.Array();
+
+        //r(filtered_objects.objects);
+
+        filtered_objects.objects = this.objects.filter(callback);
+
+        return(filtered_objects);
+
+    }
+
+
 
     static initInstance(object) {
 
@@ -173,7 +186,7 @@ T.Objects.Array = class{
 
             if(types.indexOf(object.type)==-1)return;
 
-            filtered_objects.push(object);
+            filtered_objects.getAll().push(object);
 
         });
 

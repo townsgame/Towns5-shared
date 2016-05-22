@@ -32,6 +32,14 @@ T.Objects.Object = class{
 
 
     /**
+     * @returns {boolean}
+     */
+    isMoving(){
+        return(false);
+    }
+
+
+    /**
      *
      * @returns {string}
      */

@@ -47,7 +47,7 @@ T.World.game.installActionClass(
             var start_position=object.getPosition();
             destinations.unshift(start_position);
 
-            r(destinations);
+            //r(destinations);
 
             object.path = T.Path.newConstantSpeed(destinations,action.params.speed);
 

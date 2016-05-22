@@ -82,7 +82,11 @@ T.Objects.Building = class extends T.Objects.Object{
 
     }
 
-
+    /**
+     *
+     * @param {Date} date
+     * @returns {T.Position}
+     */
     getPosition(date){
 
 
@@ -93,6 +97,27 @@ T.Objects.Building = class extends T.Objects.Object{
         }else{
 
             return this.path.countPosition(date);
+
+        }
+
+    }
+
+
+    /**
+     *
+     * @param {Date} date
+     * @returns {boolean}
+     */
+    isMoving(date){
+
+
+        if(typeof this.path==='undefined'){
+
+            return(false);
+
+        }else{
+
+            return this.path.inProgress(date);
 
         }
 
