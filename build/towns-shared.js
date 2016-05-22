@@ -1105,9 +1105,9 @@ T.PositionDate = ((function(super$0){"use strict";super$0=T.Position;if(!PRS$0)M
      */
     proto$0.toString = function(){
 
-        return '['+this.x+','+this.y+'] at '
-            + (this.date.getDay()+1)+'.'+(this.date.getMonth()+1)+'.'+this.date.getFullYear()
-            +' '+this.date.getHours()+':'+this.date.getMinutes()+':'+this.date.getSeconds();
+        return '['+this.x+','+this.y+'] at '+
+            (this.date.getDay()+1)+'.'+(this.date.getMonth()+1)+'.'+this.date.getFullYear()+
+            ' '+this.date.getHours()+':'+this.date.getMinutes()+':'+this.date.getSeconds();
 
     };
 
@@ -4101,7 +4101,7 @@ T.Objects.Building = ((function(super$0){"use strict";super$0=T.Objects.Object;i
 
 
         //-----------------------------
-        if (typeof this.path == 'object') {
+        if (typeof this.path === 'object') {
             r(this.path);
             this.path=(($D$3=(($D$2=OC$0(($D$3= T.Path).prototype)),$D$3).apply($D$2, ITER$0(this.path)))&&typeof $D$3==='object'?$D$3:$D$2);
         ;$D$2 = void 0;$D$3 = void 0}
@@ -4115,7 +4115,7 @@ T.Objects.Building = ((function(super$0){"use strict";super$0=T.Objects.Object;i
         var max_life = T.World.game.getObjectMaxLife(this);
 
 
-        if(life_action==null){
+        if(life_action===null){
 
             life_action=T.World.game.newActionInstance({
                 type: 'life',
@@ -4124,7 +4124,7 @@ T.Objects.Building = ((function(super$0){"use strict";super$0=T.Objects.Object;i
                     max_life: max_life
                 }
             });
-            actions_classes.push(life_action);
+            this.actions.push(life_action);
 
         }else{
 
@@ -4985,8 +4985,8 @@ T.World.game.installActionClass(
 
             //---------------------Defence
 
-            r('attack',attacker_attack.strength,attacked_attack.strength);
-            r('defence',attacker_defence.defence,attacked_defence.defence)
+            //r('attack',attacker_attack.strength,attacked_attack.strength);
+            //r('defence',attacker_defence.defence,attacked_defence.defence);
 
             attacker_attack.strength-=
                 attacked_defence.defence;

@@ -46,7 +46,7 @@ T.Objects.Building = class extends T.Objects.Object{
 
 
         //-----------------------------
-        if (typeof this.path == 'object') {
+        if (typeof this.path === 'object') {
             r(this.path);
             this.path=new T.Path(...this.path);
         }
@@ -60,7 +60,7 @@ T.Objects.Building = class extends T.Objects.Object{
         var max_life = T.World.game.getObjectMaxLife(this);
 
 
-        if(life_action==null){
+        if(life_action===null){
 
             life_action=T.World.game.newActionInstance({
                 type: 'life',
@@ -69,7 +69,7 @@ T.Objects.Building = class extends T.Objects.Object{
                     max_life: max_life
                 }
             });
-            actions_classes.push(life_action);
+            this.actions.push(life_action);
 
         }else{
 

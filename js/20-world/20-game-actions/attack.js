@@ -100,8 +100,8 @@ T.World.game.installActionClass(
 
             //---------------------Defence
 
-            r('attack',attacker_attack.strength,attacked_attack.strength);
-            r('defence',attacker_defence.defence,attacked_defence.defence)
+            //r('attack',attacker_attack.strength,attacked_attack.strength);
+            //r('defence',attacker_defence.defence,attacked_defence.defence);
 
             attacker_attack.strength-=
                 attacked_defence.defence;
