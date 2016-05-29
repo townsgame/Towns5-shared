@@ -47,12 +47,138 @@ T.Model.Particles = class{
 
     }
 
+    //======================================================================================================================
+
+
+    static getTriangles(particle,point_class){
+
+        var triangles =[];
+
+        particle=this.addMissingParams(particle);
+
+        if (particle.shape.type == 'prism') {
+
+            //-------------------------------------------------------------------prism
+
+            var x = particle.position.x;
+            var y = particle.position.y;
+            var z = particle.position.z;// * 2;
+
+
+            var x_ = particle.size.x;
+            var y_ = particle.size.y;
+            var z_ = particle.size.z;
+
+            var x__, y__, z__;
+
+            for (var n = 0; n < particle.shape.n; n++) {
+
+
+                for (var level = 0; level < 2; level++) {
+
+
+                    //---------------------------
+
+
+                    if (level === 0) {
+                        base = particle.shape.bottom;
+
+                    } else {
+                        base = particle.shape.top;
+                    }
+
+
+                    //--------
+
+
+                    //------------------XYZ ratio
+
+                    if (!is(particle.shape.rotated)) {
+
+                        x__ = 0.5 * x_ * Math.cos(n / particle.shape.n * Math.PI * 2 + T.Math.deg2rad(180 + 180 / particle.shape.n)) * base + x_ * (level * particle.skew.z.x);
+                        y__ = 0.5 * y_ * Math.sin(n / particle.shape.n * Math.PI * 2 + T.Math.deg2rad(180 + 180 / particle.shape.n)) * base + y_ * (level * particle.skew.z.y);
+                        z__ = z_ * level;
+
+                    } else {
+
+                        var tmp = (2 - (Math.cos(T.Math.deg2rad(180 / particle.shape.n))));//todo better
+
+                        x__ = x_ * ((level * 2) - 1);//*(level-0.5);//+x_*(level*particle.skew.z.x),
+
+                        y__ = 0.5 * y_ * Math.sin(n / particle.shape.n * Math.PI * 2 + T.Math.deg2rad(180 + 180 / particle.shape.n));//+y_*(level*particle.skew.z.y),
+
+
+                        z__ = (1) * 0.5 * (
+
+                                z_ * Math.cos(n / particle.shape.n * Math.PI * 2 + T.Math.deg2rad(180 + 180 / particle.shape.n)) * tmp +
+                                z_ * ((Math.cos(T.Math.deg2rad(180 / particle.shape.n)))) * tmp
+
+                            );
+
+                    }
+
+
+                    //------------------ XY Rotation
+
+                    var DistDeg_ = T.Math.xy2distDeg(x__, y__);//todo refactor all like DistDeg, etc...
+                    DistDeg_.deg += particle.rotation;
+                    var xy_ = T.Math.distDeg2xy(DistDeg_.dist, DistDeg_.deg);
+
+                    x__ = xy_.x;
+                    y__ = xy_.y;
+
+
+                    //------------------
+
+
+                    triangles.push(new point_class(x__,y__,z__));
+
+                    //resource.points.push([x + x__, y + y__, z + z__]);
+
+
+                    /*if (level === 0) {
+
+                        //r(n,1,particle.shape.n,(n+1+particle.shape.n));
+                        resource.polygons[0].push(n + 1);
+                        resource.polygons[1].push(n + 1 + particle.shape.n);
+
+                        resource.polygons2D[0].push(n + 1);
+                        resource.polygons2D[1].push(n + 1 + particle.shape.n);
+
+
+                        resource.polygons.push([
+                            (n !== 0 ? n : particle.shape.n),
+                            n + 1,
+                            n + 1 + particle.shape.n,
+                            (n !== 0 ? n : particle.shape.n) + particle.shape.n
+
+                        ]);
+
+                    }*/
+
+                }
+            }
+
+
+            //-------------------------------------------------------------------
+        } else {
+
+            throw 'Unknown particle shape ' + particle.shape.type;
+
+        }
+
+        return resource;
+
+
+    }
+
 
     //======================================================================================================================
 
     /**
      * Get 3D model from particle
      * @static
+     * @deprecated
      * @param particle
      * @return {object} 3D model
      */

@@ -90,7 +90,7 @@ T.World.mapGenerator = new T.MapGenerator(
 
         if(object.type!='terrain')return;
 
-        if(object.getCode()==5){
+        /*if(object.getCode()==5){
             virtual_objects.push(
                 {
 
@@ -109,24 +109,34 @@ T.World.mapGenerator = new T.MapGenerator(
             );
 
 
-        }else
+        }else*/
         if(object.getCode()==10){
-                        virtual_objects.push(
-                {
 
-                    x: object.x,//todo
-                    y: object.y,//todo
-                    type: 'natural',
-                    design: {
+            if(T.Math.randomSeedPosition(3,{x:object.x,y:object.y})>0.95){
+
+                virtual_objects.push(
+                    {
+
+                        x: object.x,//todo
+                        y: object.y,//todo
                         type: 'natural',
-                        data:{
-                            image:'tree'+Math.floor(T.Math.randomSeedPosition(3,{x:object.x,y:object.y})*10)%10,
-                            size: 1+T.Math.randomSeedPosition(6,{x:object.x,y:object.y})/2
+                        design: {
+                            type: 'natural',
+                            data:{
+                                model:'tree',
+                                size: 3+T.Math.randomSeedPosition(6,{x:object.x,y:object.y})/2,
+                                rotation:{
+                                    x: T.Math.randomSeedPosition(7,{x:object.x,y:object.y})*20-10,
+                                    y: T.Math.randomSeedPosition(7,{x:object.x,y:object.y})*20-10,
+                                    z: T.Math.randomSeedPosition(7,{x:object.x,y:object.y})*360
+                                }
+                            }
                         }
-                    }
 
-                }
-            );
+                    }
+                );
+
+            }
 
 
         }

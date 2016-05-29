@@ -237,7 +237,16 @@ T.Objects.Array = class{
                 x = Math.floor(object.x - center.x + radius);
                 y = Math.floor(object.y - center.y + radius);
 
-                map_array[y][x] = object.getCode();
+                if(
+                    y>=0 &&
+                    x>=0 &&
+                    y<radius*2 &&
+                    x<radius*2
+                ){
+
+                    map_array[y][x] = object.getCode();
+
+                }
 
                 //--------------------------
             }else {
