@@ -198,6 +198,32 @@ T.Objects.Array = class{
      *
      * @param {T.Position} center
      * @param {number} radius
+     * @returns {T.Objects.Array}
+     */
+    filterRadius(center,radius){
+
+        var filtered_objects=new T.Objects.Array();
+
+        this.forEach(function(object){
+
+            if(object.getPosition().getDistance(center)<=radius){
+
+                filtered_objects.getAll().push(object);
+
+            }
+
+        });
+
+        return(filtered_objects);
+    }
+
+
+
+
+    /**
+     *
+     * @param {T.Position} center
+     * @param {number} radius
      * @returns {Array}
      */
     getMapOfTerrainCodes(center,radius){//todo maybe refactor to getTerrainCodes2DArray or getTerrainCodesMap
