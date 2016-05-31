@@ -521,6 +521,13 @@ T.Model = class{
     }
 
 
+
+
+    getHash(){
+        return 'xxx'+JSON.stringify(this.particles).length;//todo better
+    }
+
+
     
     
 
