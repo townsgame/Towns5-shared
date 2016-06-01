@@ -8,29 +8,20 @@
     <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
     <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+
+
     <script>
         var module={};
         var global=window;
     </script>
-    <?php
-    $scripts = array_merge(glob('./js/*.js'),glob('./js/*/*.js'),glob('./js/*/*/*.js'));
-    sort($scripts);
-    foreach($scripts as $script){
-        echo('<script src="'.$script.'"></script>'."\n");
-    }
-    ?>
-
-
-
+    <script src="build/towns-shared.js"></script>
 
     <script>
 
-        T.Locale = class{
-
-            static get(){
-                return(Array.join(arguments,' '));
-            }
-
+        T.Locale={};
+        T.Locale.get = function(){
+            var args = Array.prototype.slice.call(arguments);
+            return(args.join(' '));
         }
 
     </script>

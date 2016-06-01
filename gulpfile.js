@@ -12,11 +12,21 @@ var fs = require("fs");
 var globby = require('globby');
 var jshint = require('gulp-jshint');
 var jasmine = require('gulp-jasmine');
+var ts = require('gulp-typescript');
+var sourcemaps = require('gulp-sourcemaps');
 
 
 
-
-var includes=['./js/*.js','./js/*/*.js','./js/*/*/*.js'];
+var includes_typescript=[
+    './ts/*.ts',
+    './ts/*/*.ts',
+    './ts/*/*/*.ts'
+];
+var includes=[
+    './js/*.js',
+    './js/*/*.js',
+    './js/*/*/*.js'
+];
 
 
 var deleteFolderRecursive = function(path) {
@@ -88,7 +98,22 @@ gulp.task('documentation', function (callback) {
 gulp.task('build', function () {
 
 
-    gulp.src(includes)
+    gulp.src(includes_typescript)
+        .pipe(sourcemaps.init())
+        .pipe(ts({
+            noImplicitAny: true,
+            out: 'towns-shared.js'
+        }))
+        .pipe(sourcemaps.write())
+        .pipe(gulp.dest('./build'))
+
+        //.pipe(uglify())
+        //.pipe(rename({suffix: '.min'}))
+        //.pipe(gulp.dest('./build'))
+    ;
+
+
+    /*gulp.src(includes)
 
         .pipe(sort())
         .pipe(concat('towns-shared.js'))
@@ -101,7 +126,7 @@ gulp.task('build', function () {
         .pipe(uglify())
         .pipe(rename({suffix: '.min'}))
         .pipe(gulp.dest('./build'))
-    ;
+    ;*/
 
     //gulp.start("documentation");
 
@@ -116,7 +141,8 @@ gulp.task('build', function () {
 gulp.task('develop', function() {
 
     gulp.start("build");
-    gulp.watch(includes, ['build']);
+    //gulp.watch(includes, ['build']);
+    gulp.watch(includes_typescript, ['build']);
 
 
 });
