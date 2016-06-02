@@ -303,9 +303,10 @@ T.Model = class{
 
     /**
      * Get 1D array of particles
+     * @param {boolean} ignore_root_rotation_size
      * @returns {Array} array of particles
      */
-    getLinearParticles(){
+    getLinearParticles(ignore_root_rotation_size=false){
 
 
         var particlesLinear=[];
@@ -404,7 +405,16 @@ T.Model = class{
 
         var model=this.getDeepCopyWithoutLinks();
 
-        particles2Linear(model.particles,false,model.rotation,model.size);
+        if(ignore_root_rotation_size){
+
+            particles2Linear(model.particles,false,0,1);
+
+        }else{
+
+            particles2Linear(model.particles,false,model.rotation,model.size);
+
+        }
+
 
         //todo strict mode//delete model;
 

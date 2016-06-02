@@ -14,19 +14,12 @@ var jshint = require('gulp-jshint');
 var jasmine = require('gulp-jasmine');
 var ts = require('gulp-typescript');
 var sourcemaps = require('gulp-sourcemaps');
+var runSequence = require('run-sequence');
 
 
 
-var includes_typescript=[
-    './ts/*.ts',
-    './ts/*/*.ts',
-    './ts/*/*/*.ts'
-];
-var includes=[
-    './js/*.js',
-    './js/*/*.js',
-    './js/*/*/*.js'
-];
+var includes_typescript = globby.sync('./ts/**/*.ts');
+//console.log(includes_typescript);
 
 
 var deleteFolderRecursive = function(path) {
@@ -47,11 +40,26 @@ var deleteFolderRecursive = function(path) {
 
 
 
+gulp.task('build', function() {
+
+    runSequence('documentation','compile', 'test',
+        function(){
+
+            console.log('Build finished!');
+
+        });
+
+});
+
+
+
 
 
 gulp.task('documentation', function (callback) {
 
-    var documentation_config = {
+    console.log('todo documentation for TypeScript');
+    callback();
+    /*var documentation_config = {
         "tags": {
             "allowUnknownTags": true
         },
@@ -82,9 +90,11 @@ gulp.task('documentation', function (callback) {
     deleteFolderRecursive('./documentation');
 
 
-    gulp.src(includes/*, {read: false}*/)
+    gulp.src(includes)
         .pipe(sort())
         .pipe(jsdoc(documentation_config,callback));
+
+        */
 
 
 });
@@ -95,10 +105,10 @@ gulp.task('documentation', function (callback) {
 
 
 
-gulp.task('build', function () {
+gulp.task('compile', function () {
 
 
-    gulp.src(includes_typescript)
+    return gulp.src(includes_typescript)
         .pipe(sourcemaps.init())
         .pipe(ts({
             noImplicitAny: true,
@@ -113,23 +123,6 @@ gulp.task('build', function () {
     ;
 
 
-    /*gulp.src(includes)
-
-        .pipe(sort())
-        .pipe(concat('towns-shared.js'))
-        .pipe(es6transpiler({
-            "disallowUnknownReferences": false,
-            "disallowDuplicated": false
-        }))
-        .pipe(gulp.dest('./build'))
-
-        .pipe(uglify())
-        .pipe(rename({suffix: '.min'}))
-        .pipe(gulp.dest('./build'))
-    ;*/
-
-    //gulp.start("documentation");
-
 });
 
 
@@ -137,7 +130,7 @@ gulp.task('build', function () {
 
 
 
-
+/*todo is this useful task?
 gulp.task('develop', function() {
 
     gulp.start("build");
@@ -146,22 +139,22 @@ gulp.task('develop', function() {
 
 
 });
+/**/
 
 
 
 
 
-
-
+/*todo is this useful task for TypeScript?
 gulp.task("test-code", function() {
 
-    gulp.src(includes)
+gulp.src(includes)
         .pipe(jshint({esversion:6,laxcomma:true}))
         .pipe(jshint.reporter("default"));
 
 
 });
-
+/**/
 
 
 
@@ -170,41 +163,14 @@ gulp.task("test-code", function() {
 
 gulp.task("test", function() {
 
-    gulp.start("build",function(){
 
+    global.T = require('./build/towns-shared.js');
 
-        console.log('finiti');
-        global.T = require('./build/towns-shared.js');
-
-        gulp.src(['./test/*.js','./test/*/*.js'])
-            .pipe(jasmine({
-                includeStackTrace: true
-            }));
-
-
-    });
-
-
-    /*var paths = globby.sync(includes);
-
-    global.Towns = {};
-    var T = global.Towns;
-
-    for(var i=0,l=paths.length;i<l;i++){
-
-        //var contents = fs.readFileSync(paths[i]).toString();
-        //eval(contents);
-        //console.log(contents);
-        var x = require(paths[i]);
-
-    }
-
-
-    gulp.src(['./test/*.js','./test/* / *.js'])
+    return gulp.src(['./test/*.js','./test/*/*.js'])
         .pipe(jasmine({
             includeStackTrace: true
         }));
-        */
+
 
 
 });

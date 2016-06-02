@@ -6,8 +6,6 @@
 //======================================================================================================================
 T.setNamespace('World');
 
-
-
 T.World.terrains = [
     new T.Objects.Terrain({type:'terrain', design: {type:'terrain', data:{image: 0 ,color: '#000000', size: 1}}, name: 'temnota'}),
     new T.Objects.Terrain({type:'terrain', design: {type:'terrain', data:{image: 1 ,color: '#337EFA', size: 1}}, name: 'moře'}),
