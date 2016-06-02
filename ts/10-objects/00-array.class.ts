@@ -219,6 +219,25 @@ T.Objects.Array = class{
 
 
 
+    filterArea(area: Area){
+
+        var filtered_objects=new T.Objects.Array();
+
+        this.forEach(function(object){
+
+            if(area.isContaining(object.getPosition())){
+
+                filtered_objects.getAll().push(object);
+
+            }
+
+        });
+
+        return(filtered_objects);
+    }
+
+
+
 
     /**
      *
