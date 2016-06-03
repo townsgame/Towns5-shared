@@ -239,9 +239,8 @@ T.Game = class{
         var action_class = this.getActionClass(action_type);
 
 
-        var execute = function(){
+        var execute = function (...args){
 
-            var args = Array.prototype.slice.call(arguments);
             args.unshift(game);
 
             return action_class.execute.apply(this,args);

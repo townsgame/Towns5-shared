@@ -5,46 +5,84 @@
  */
 //======================================================================================================================
 
+module T.Objects {
+
+    export class Object {
+
+        public x;
+        public y;
+        public type;
+        public name;
+
+        /**
+         * @param {object} object
+         */
+        constructor(object) {
+
+            for (var key in object) {
+
+                var this_key = key;
+
+                if (this_key == '_id')this_key = 'id';//todo maybe better solution
+
+                this[this_key] = object[key];
+            }
+
+        }
 
 
-T.Objects.Object = class{
+        static init(object) {
 
-    /**
-     * @param {object} object
-     */
-    constructor(object){
+            //----------------------------------
+            if (object.type == 'building') {
 
-        for(var key in object){
+                object = new T.Objects.Building(object);
 
-            var this_key = key;
+            } else if (object.type == 'terrain') {
 
-            if(this_key=='_id')this_key='id';//todo maybe better solution
+                object = new T.Objects.Terrain(object);
 
-            this[this_key] = object[key];
+            } else if (object.type == 'story') {
+
+                object = new T.Objects.Story(object);
+
+            } else if (object.type == 'natural') {
+
+                object = new T.Objects.Natural(object);
+
+            } else {
+
+                console.log(object);
+                throw new Error('Cant put item into Towns Objects Array because of unrecognized object type ' + object.type);
+            }
+            //----------------------------------
+
+            return (object);
+
+        }
+
+
+        getPosition():Position {
+            return (new T.Position(this.x, this.y));
+        }
+
+
+        /**
+         * @returns {boolean}
+         */
+        isMoving():boolean {
+            return (false);
+        }
+
+
+        /**
+         *
+         * @returns {string}
+         */
+        toString():string {
+            return ('[' + this.name + ']');
         }
 
     }
 
-    //todo jsdoc
-    getPosition(){
-        return(new T.Position(this.x,this.y));
-    }
-
-
-    /**
-     * @returns {boolean}
-     */
-    isMoving(){
-        return(false);
-    }
-
-
-    /**
-     *
-     * @returns {string}
-     */
-    toString(){
-        return('['+this.name+']');
-    }
-
-};
+}
