@@ -68,6 +68,12 @@ module T {
         }
 
 
+        getFloored() {
+            return new T.Position(Math.floor( this.x),Math.floor( this.y));
+
+
+        }
+
         getPositionPolar() {
 
             return (new T.PositionPolar(
