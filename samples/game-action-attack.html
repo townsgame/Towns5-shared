@@ -13,12 +13,17 @@
 
 
             var objects = new T.Objects.Array(response);
+
+            r(objects);
+
+
             var buildings = objects.filterTypes('building');
 
 
             var attacker = buildings.getAll()[3];
             var attacked = buildings.getAll()[2];
 
+            r(buildings);
 
             attacker.x=100;
             attacker.y=100;
