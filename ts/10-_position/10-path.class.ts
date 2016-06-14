@@ -129,6 +129,24 @@ module T{
         }
 
 
+
+        getPositions() {
+
+            var positions = [];
+
+            for (var i = 0, l = this.array_position_date.length; i < l; i++) {
+
+                positions.push(this.array_position_date[i].getPosition());
+
+            }
+
+            return(positions);
+        }
+
+
+
+
+
         /**
          * Count in which segment is T.Path progress
          * @param date
@@ -216,7 +234,15 @@ module T{
          * @param date
          * @returns {number} degrees
          */
-        countRotation(date) {
+        countRotation(date = 0) {
+
+
+            if (date === 0) {
+                date = new Date();
+            } else if (typeof date === 'number') {
+                date = new Date(date);
+            }
+
 
             var segment = this.countSegment(date);
 

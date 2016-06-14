@@ -176,6 +176,20 @@ describe('Testing path that could be created because of', function () {
         });
 
 
+        it('getPositions', function () {
+
+            var positions = this.path.getPositions();
+
+            expect(positions[0]).toEqual(new T.Position(10,10));
+            expect(positions[1]).toEqual(new T.Position(10,20));
+            expect(positions[2]).toEqual(new T.Position(10,40));
+            expect(positions[5]).toEqual(new T.Position(0,0));
+
+
+
+        });
+
+
         it('inProgress', function () {
 
             expect(this.path.inProgress(this.date - 999999)).toBe(false);
