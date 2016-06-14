@@ -274,7 +274,7 @@ T.MapGenerator = class{
 
 
         real_objects.forEach(function(object){
-            complete_objects.push(object);
+            complete_objects.objects.push(object);
         });
 
 
@@ -284,7 +284,7 @@ T.MapGenerator = class{
             var virtual_objects = this.getVirtualObjectsFromTerrainObjects(complete_objects);
 
             virtual_objects.forEach(function(object){
-                complete_objects.push(object);
+                complete_objects.objects.push(object);
             });
 
         }

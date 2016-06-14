@@ -25,6 +25,14 @@ module T {
             this.a = a;
         }
 
+        /**
+         * Get deep clone od T.Color
+         * @returns {T.Color}
+         */
+        clone():T.Color{
+            return new T.Color(this.r,this.g,this.b,this.a);
+        }
+
 
         /**
          * Repairs overflowed colors

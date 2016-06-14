@@ -33,6 +33,10 @@ module T.Objects {
 
         static init(object) {
 
+            if(object instanceof T.Objects.Object){
+                return (object);
+            }
+
             //----------------------------------
             if (object.type == 'building') {
 
