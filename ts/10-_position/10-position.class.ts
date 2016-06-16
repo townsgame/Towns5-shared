@@ -59,6 +59,16 @@ module T {
         }
 
 
+
+        minus(position) {
+
+            this.x -= position.x;
+            this.y -= position.y;
+            return this;
+
+        }
+
+
         multiply(k) {
 
             this.x = this.x * k;

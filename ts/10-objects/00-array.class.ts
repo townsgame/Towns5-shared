@@ -298,6 +298,45 @@ module T.Objects {
         }
 
 
+
+
+        getMapOfCollisions(center, radius){
+
+            //--------------------------Terrains
+            var map_of_terrain_codes = this.getMapOfTerrainCodes(center, radius);
+
+            var map_of_collisions = [];
+
+            var x,y;
+
+            for (y = 0; y < radius * 2; y++) {
+                map_of_collisions[y] = [];
+                for (x = 0; x < radius * 2; x++) {
+
+                    if([1,5,11].indexOf(map_of_terrain_codes[y][x])!==-1){
+                        map_of_collisions[y][x] = 1;
+                    }else{
+                        map_of_collisions[y][x] = 0;
+                    }
+
+
+                }
+            }
+            //--------------------------
+
+
+            //--------------------------Objects
+
+            //--------------------------
+
+
+            return(map_of_collisions);
+
+
+        }
+
+
+
         /**
          *
          * @returns {T.Objects.Array}
