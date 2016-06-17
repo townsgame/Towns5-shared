@@ -326,7 +326,28 @@ module T.Objects {
 
 
             //--------------------------Objects
+            this.forEach(function(object){
 
+                if(object.type == 'building' && object.subtype == 'wall'){}else{return;}
+
+                var x=Math.round(object.x)-Math.round(center.x-(radius));
+                var y=Math.round(object.y)-Math.round(center.y-(radius));
+
+                [
+                    {x: x,y: y},
+                    {x: x+1,y: y},
+                    {x: x-1,y: y},
+                    {x: x,y: y+1},
+                    {x: x,y: y-1}
+
+                ].forEach(function(p_){
+                    if(p_.x>=0 && p_.y>=0 && p_.x<radius*2 && p_.y<radius*2){
+                        map_of_collisions[p_.y][p_.x]=1;
+                    }
+                });
+
+
+            });
             //--------------------------
 
 
