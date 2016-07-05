@@ -8,6 +8,18 @@
 module T {
 
 
+    interface position {
+        x: number;
+        y: number;
+    }
+
+    interface positionPolar {
+        dist: number;
+        deg: number;
+    }
+
+
+
     /**
      * Mathematical functions to Towns
      */
@@ -82,7 +94,7 @@ module T {
          * @param {number} deg2
          * @return {number} <0;180> degrees difference
          */
-        static angleDiff(deg1, deg2) {
+        static angleDiff(deg1: number, deg2:number):number {
             var deg = Math.abs(deg1 - deg2) % 360;
             if (deg > 180)deg = 360 - deg;
             return (deg);
@@ -95,7 +107,7 @@ module T {
          * @param {number} radians
          * @return {number} degrees
          */
-        static rad2deg(radians) {
+        static rad2deg(radians:number):number {
             return (radians * (180 / Math.PI)) % 360;
         }
 
@@ -106,7 +118,7 @@ module T {
          * @param {number} degrees
          * @return {number} radians
          */
-        static deg2rad(degrees) {
+        static deg2rad(degrees:number):number {
             return (degrees % 360 * (Math.PI / 180));
         }
 
@@ -118,20 +130,22 @@ module T {
          * @param y
          * @return {number} distance
          */
-        static xy2dist(x, y) {
+        static xy2dist(x:number, y:number):number {
             return (Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2)));
         }
 
 
         //-------------------------
 
-        //todo refactor to position
-        static xy2distDeg(x, y) {
 
-            var output = {};
+        static xy2distDeg(x:number, y:number):positionPolar {
 
-            output.dist = this.xy2dist(x, y);
-            output.deg = this.rad2deg(Math.atan2(y, x));
+            var output = {
+                dist: TMath.xy2dist(x, y),
+                deg:  TMath.rad2deg(Math.atan2(y, x))
+
+            };
+
 
             return (output);
 
@@ -139,15 +153,16 @@ module T {
 
         //-------------------------
 
-        //todo refactor to position
-        static distDeg2xy(dist, deg) {
 
-            var rad = this.deg2rad(deg);
+        static distDeg2xy(dist:number, deg:number):position {
 
-            var output = {};
+            var rad = TMath.deg2rad(deg);
 
-            output.x = Math.cos(rad) * dist;
-            output.y = Math.sin(rad) * dist;
+            var output = {
+                x: Math.cos(rad) * dist,
+                y: Math.sin(rad) * dist
+
+            };
 
             return (output);
 
@@ -156,17 +171,20 @@ module T {
         //-------------------------
 
         //todo mybe refactor to position
-        static xyRotate(x, y, deg) {
+        static xyRotate(x: number, y:number, deg:number):position {
 
-            //nevyuzivam funkce Towns.A.xy2distDeg a A.distDeg2xy, abych nedelal zbytecny prevod do stupnu a spatky
-            var dist = this.xy2dist(x, y);
+
+            var dist = TMath.xy2dist(x, y);
             var rad = Math.atan2(y, x);
 
-            rad += this.deg2rad(deg);
+            rad += TMath.deg2rad(deg);
 
-            var output = {};
-            output.x = Math.cos(rad) * dist;
-            output.y = Math.sin(rad) * dist;
+
+            var output = {
+                x: Math.cos(rad) * dist,
+                y: Math.sin(rad) * dist
+
+            };
 
             return (output);
 
@@ -175,7 +193,7 @@ module T {
         //======================================================================================================================
 
 
-        static randomSeedPosition(seed, position) {
+        static randomSeedPosition(seed:number, position:position) {
 
 
             return (Math.sin(Math.pow((position.x * position.y) - seed, 2)) + 1) / 2;
@@ -192,9 +210,9 @@ module T {
          * @param {number} defval
          * @return {number}
          */
-        static toFloat(value, defval) {
+        static toFloat(value:any, defval=0):number {
 
-            if (typeof defval === 'undefined')defval = 0;
+            //if (typeof defval === 'undefined')defval = 0;
             if (typeof value === 'undefined')return (defval);
 
             value = parseFloat(value);
@@ -215,7 +233,7 @@ module T {
          * @param {number} defval
          * @return {number}
          */
-        static toInt(value, defval) {
+        static toInt(value:any, defval=0):number {
 
             if (typeof(value) === 'undefined')return (defval);
 
@@ -237,7 +255,7 @@ module T {
          * @param {number} max
          * @returns {number}
          */
-        static bounds(value, min, max) {
+        static bounds(value:number, min:number, max:number):number {
 
             if (value < min)return min;
             if (value > max)return max;
@@ -256,7 +274,7 @@ module T {
          * @param {number} b1y
          * @returns {boolean}
          */
-        static isOnLine(a1x, a1y, a2x, a2y, b1x, b1y) {
+        static isOnLine(a1x:number, a1y:number, a2x:number, a2y:number, b1x:number, b1y:number): boolean {
 
             a2x -= a1x;
             a2y -= a1y;
@@ -272,8 +290,8 @@ module T {
             if (aSlope != bSlope)return false;
 
 
-            var aDist = this.xy2dist(a2y, a2x);
-            var bDist = this.xy2dist(b1y, b1x);
+            var aDist = TMath.xy2dist(a2y, a2x);
+            var bDist = TMath.xy2dist(b1y, b1x);
 
             return (aDist >= bDist);
 
@@ -293,7 +311,7 @@ module T {
          * @param {number} b2y
          * @return {boolean}
          */
-        static lineCollision(a1x, a1y, a2x, a2y, b1x, b1y, b2x, b2y) {
+        static lineCollision(a1x:number, a1y:number, a2x:number, a2y:number, b1x:number, b1y:number, b2x:number, b2y:number): boolean {
 
 
             var denominator = ((a2x - a1x) * (b2y - b1y)) - ((a2y - a1y) * (b2x - b1x));
@@ -309,8 +327,8 @@ module T {
                 //var collision= (numerator1 == 0 && numerator2 == 0);
                 //collision=false;
 
-                var bOnA = this.isOnLine(a1x, a1y, a2x, a2y, b1x, b1y);
-                var aOnB = this.isOnLine(b1x, b1y, b2x, b2y, a1x, a1y);
+                var bOnA = TMath.isOnLine(a1x, a1y, a2x, a2y, b1x, b1y);
+                var aOnB = TMath.isOnLine(b1x, b1y, b2x, b2y, a1x, a1y);
 
                 return (bOnA || aOnB);
 
@@ -361,7 +379,7 @@ module T {
         }
 
 
-        static blurXY(generator, blur) {
+        static blurXY(generator:Function, blur:number) {
 
             return (function (x, y) {
 
@@ -389,11 +407,11 @@ module T {
         }
 
 
-        static bytesToSize(bytes) {
+        static bytesToSize(bytes:number):string {
             var sizes = ['B', 'KB', 'MB', 'GB', 'TB'];
             if (bytes === 0) return '0B';
-            var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
-            return Math.round(bytes / Math.pow(1024, i), 2) + '' + sizes[i];
+            var i = Math.floor(Math.floor(Math.log(bytes) / Math.log(1024)));
+            return Math.round(bytes / Math.pow(1024, i)) + '' + sizes[i];
         }
 
 
@@ -406,7 +424,7 @@ module T {
          * @param {number} b_end
          * @returns {number}
          */
-        static proportions(a_start, a_position, a_end, b_start, b_end) {
+        static proportions(a_start:number, a_position:number, a_end:number, b_start:number, b_end:number):number {
 
 
             var a_whole = a_end - a_start;
