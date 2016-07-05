@@ -5,262 +5,254 @@
 //======================================================================================================================
 
 
-/**
- * Additional functions to manipulate with array.
- */
-T.ArrayFunctions=class {
+
+module T {
 
 
     /**
-     * @static
-     * Searches an item with ID in array
-     * @param {object} array Array of objects with ID
-     * @param {*} id Searched ID
-     * @returns {number} Key of object with this ID, -1 if not exist
+     * Additional functions to manipulate with array.
      */
-    static id2i(array, id) {
+    export class ArrayFunctions {
 
-        for (var i in array) {
-            if (array[i].id == id)return i;
+
+        /**
+         * @static
+         * Searches an item with ID in array
+         * @param {object} array Array of objects with ID
+         * @param {*} id Searched ID
+         * @returns {number} Key of object with this ID, -1 if not exist
+         */
+        static id2i(array: Array, id:string):any {
+
+            for (var i in array) {
+                if (array[i].id == id)return i;
+            }
+            return -1;
+
         }
-        return -1;
-
-    }
 
 
 //======================================================================================================================
 
-    /**
-     * @static
-     * Searches an item with ID in array
-     * @param {object} array Array of objects with ID
-     * @param {*} id Searched ID
-     * @param {string} error_message when iten not exists
-     * @returns {object} Object with this ID, null if not exist
-     */
-    static id2item(array, id, error_message = false) {
+        /**
+         * @static
+         * Searches an item with ID in array
+         * @param {object} array Array of objects with ID
+         * @param {*} id Searched ID
+         * @param {string} error_message when iten not exists
+         * @returns {object} Object with this ID, null if not exist
+         */
+        static id2item(array: Array, id: string, error_message = ''):any {
 
-        for (var i in array) {
-            if (array[i].id == id)return array[i];
-        }
-
-        if (error_message) {
-            throw new Error(error_message);
-        } else {
-            return null;
-        }
-
-    }
-
-
-    //======================================================================================================================
-
-    /**
-     * @static
-     * Delete an item with ID in array
-     * @param {object} array Array of objects with ID
-     * @param {*} id Searched ID
-     * @returns {boolean}
-     */
-    static idRemove(array, id) {//todo refactor use this not splice
-
-        for (var i in array) {
-            if (array[i].id == id) {
-                array.splice(i, 1);
-                return true;
+            for (var i in array) {
+                if (array[i].id == id)return array[i];
             }
-        }
-        return false;
 
-    }
-
-
-    //======================================================================================================================
-
-
-    /**
-     * Iterate through 2D array
-     * @static
-     * @param array
-     * @param {function} callback
-     */
-    static iterate2D(array, callback) {
-
-        //r(array);
-
-        for (var y = 0, yLen = array.length; y < yLen; y++) {
-            for (var x = 0, xLen = array[y].length; x < xLen; x++) {
-
-                callback(y, x);
-                /*todo refactor to x,y*/
-
-            }
-        }
-
-    }
-
-    //======================================================================================================================
-
-    /**
-     * @static
-     * @param array
-     * @param from
-     * @param to
-     * @return {array} Removed items
-     */
-    static removeItems(array, from, to) {
-        var rest = array.slice((to || from) + 1 || array.length);
-        array.length = from < 0 ? array.length + from : from;
-        return array.push.apply(array, rest);
-    }
-
-
-    //======================================================================================================================
-
-
-    /** todo should it be under T.ArrayFunctions
-     *
-     * @param {object} obect
-     * @param {array} path
-     */
-    static filterPath(object, path, setValue) {
-
-
-        if (!is(object)) {//todo should it be here?
-            throw new Error('filterPath: Object is undefined.');
-        }
-
-        if (!is(path.forEach)) {
-            r(path);
-            throw new Error('filterPath: T.Path is not correct array.');
-        }
-
-
-        for(var path_i in path) {
-
-            var object_key = path[path_i];
-
-            if (path_i < path.length - 1 || typeof setValue == 'undefined') {
-
-                if (typeof object[object_key] == 'undefined') {
-
-                    return (undefined);
-                    //throw new Error('filterPath: Key \''+object_key+'\' in path in object is undefined');
-                }
-
-                object = object[object_key];
-
+            if (error_message) {
+                throw new Error(error_message);
             } else {
-
-                object[object_key] = setValue;
-
-                return (true);
-
-
+                return null;
             }
 
         }
 
-        return (object);
 
+        //======================================================================================================================
 
-    }
+        /**
+         * @static
+         * Delete an item with ID in array
+         * @param {object} array Array of objects with ID
+         * @param {*} id Searched ID
+         * @returns {boolean}
+         */
+        static idRemove(array: Array, id: string):boolean {//todo refactor use this not splice
 
-
-    //======================================================================================================================
-
-
-    /**
-     *
-     * @param {Array} array
-     * @returns {Array} Array containing only unique values
-     */
-    static unique(array) {
-        var n = {}, r = [];
-        for (var i = 0; i < array.length; i++) {
-            if (!n[array[i]]) {
-                n[array[i]] = array;
-                r.push(array[i]);
+            for (var i=0,l=array.length;i<l;i++) {
+                if (array[i].id == id) {
+                    array.splice(i, 1);
+                    return true;
+                }
             }
+            return false;
+
         }
-        return r;
-    }
 
 
-    //======================================================================================================================
+        //======================================================================================================================
 
 
-    /**
-     * Creates html table from JS array
-     * @param {Array} array array
-     * @param {string} additional_class
-     * @returns {string} html
-     */
-    static array2table(array, additional_class = '') {
-        //todo check
+        /**
+         * Iterate through 2D array
+         * @static
+         * @param array
+         * @param {function} callback
+         */
+        static iterate2D(array: Array, callback: Function):void {
 
-        var html = '';
+            //r(array);
 
-        var rows = array.length;
-        var cols_table = array[0].length;//todo is is best solution?
+            for (var y = 0, yLen = array.length; y < yLen; y++) {
+                for (var x = 0, xLen = array[y].length; x < xLen; x++) {
+
+                    callback(y, x);
+                    /*todo refactor to x,y*/
+
+                }
+            }
+
+        }
+
+        //======================================================================================================================
+
+        /**
+         * @static
+         * @param array
+         * @param from
+         * @param to
+         * @return {array} Removed items
+         */
+        static removeItems(array:Array, from:number, to:number):Array {
+            var rest = array.slice((to || from) + 1 || array.length);
+            array.length = from < 0 ? array.length + from : from;
+            return array.push.apply(array, rest);
+        }
 
 
-        html += '<table class="' + additional_class + '">';
-        for (var row = 0; row < rows; row++) {
+        //======================================================================================================================
 
 
-            html += '<tr>';
+        /** todo should it be under T.ArrayFunctions
+         *
+         * @param {object} obect
+         * @param {array} path
+         */
+        static filterPath(object: Object, path: Array<string>, setValue: any):any {
+            
 
-            var cols = array[row].length;
-            var cols_span = cols_table - cols;
+            for (var path_i in path) {
 
-            for (var col = 0; col < cols; col++) {
+                var object_key = path[path_i];
 
-                if (col == cols - 1 && cols_span !== 0) {
+                if (path_i < path.length - 1 || typeof setValue == 'undefined') {
 
-                    html += '<td colspan="' + (cols_span + 1) + '">';
+                    if (typeof object[object_key] == 'undefined') {
+
+                        return (undefined);
+                        //throw new Error('filterPath: Key \''+object_key+'\' in path in object is undefined');
+                    }
+
+                    object = object[object_key];
 
                 } else {
 
-                    html += '<td>';
+                    object[object_key] = setValue;
+
+                    return (true);
+
 
                 }
 
-
-                html += array[row][col];
-                html += '</td>';
-
-
             }
 
-            html += '</tr>';
+            return (object);
 
 
         }
-        html += '</table>';
 
-        return (html);
+
+        //======================================================================================================================
+
+
+        /**
+         *
+         * @param {Array} array
+         * @returns {Array} Array containing only unique values
+         */
+        static unique(array: Array):Array {
+            var n = {}, r = [];
+            for (var i = 0; i < array.length; i++) {
+                if (!n[array[i]]) {
+                    n[array[i]] = array;
+                    r.push(array[i]);
+                }
+            }
+            return r;
+        }
+
+
+        //======================================================================================================================
+
+
+        /**
+         * Creates html table from JS array
+         * @param {Array} array array
+         * @param {string} additional_class
+         * @returns {string} html
+         */
+        static array2table(array:Array, additional_class = ''):string {
+            //todo check
+
+            var html = '';
+
+            var rows = array.length;
+            var cols_table = array[0].length;//todo is is best solution?
+
+
+            html += '<table class="' + additional_class + '">';
+            for (var row = 0; row < rows; row++) {
+
+
+                html += '<tr>';
+
+                var cols = array[row].length;
+                var cols_span = cols_table - cols;
+
+                for (var col = 0; col < cols; col++) {
+
+                    if (col == cols - 1 && cols_span !== 0) {
+
+                        html += '<td colspan="' + (cols_span + 1) + '">';
+
+                    } else {
+
+                        html += '<td>';
+
+                    }
+
+
+                    html += array[row][col];
+                    html += '</td>';
+
+
+                }
+
+                html += '</tr>';
+
+
+            }
+            html += '</table>';
+
+            return (html);
+
+        }
+
+
+        /**
+         * extract keys from Array
+         * @param {object} object
+         * @returns {Array}
+         */
+        static getKeys(object:Object):Array {
+
+            var keys = [];
+            for (var k in object) keys.push(k);
+            return (keys);
+
+        }
+
 
     }
 
 
-
-    /**
-     * extract keys from Array
-     * @param {object} object
-     * @returns {Array}
-     */
-    static getKeys(object){
-
-        var keys = [];
-        for(var k in object) keys.push(k);
-        return(keys);
-
-    }
-
-
-
-
-
-
-};
+}
