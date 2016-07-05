@@ -62,7 +62,7 @@ T.Model = class{
 
         if(dimension=='xy'){
 
-            return T.Math.xy2dist(this.range('x'),this.range('y')*this.size);
+            return TMath.xy2dist(this.range('x'),this.range('y')*this.size);
 
         }
 
@@ -348,12 +348,12 @@ T.Model = class{
 
                 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Position, Rotation and size //todo skew
 
-                var distDeg = T.Math.xy2distDeg(particle.position.x, particle.position.y);
+                var distDeg = TMath.xy2distDeg(particle.position.x, particle.position.y);
 
                 distDeg.dist = distDeg.dist * size;
                 distDeg.deg += rotation;
 
-                var xy = T.Math.distDeg2xy(distDeg.dist, distDeg.deg);
+                var xy = TMath.distDeg2xy(distDeg.dist, distDeg.deg);
 
                 particle.rotation += rotation;
 

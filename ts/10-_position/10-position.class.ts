@@ -87,8 +87,8 @@ module T {
         getPositionPolar() {
 
             return (new T.PositionPolar(
-                T.Math.xy2dist(this.x, this.y),
-                T.Math.rad2deg(Math.atan2(this.y, this.x))
+                TMath.xy2dist(this.x, this.y),
+                TMath.rad2deg(Math.atan2(this.y, this.x))
             ));
 
         }
@@ -96,7 +96,7 @@ module T {
 
         getDistance(position) {
 
-            return T.Math.xy2dist(position.x - this.x, position.y - this.y);
+            return TMath.xy2dist(position.x - this.x, position.y - this.y);
 
         }
 

@@ -59,7 +59,7 @@ module T {
 
         getRadians() {
 
-            return T.Math.deg2rad(this.degrees);
+            return TMath.deg2rad(this.degrees);
 
         }
 

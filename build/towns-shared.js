@@ -304,8 +304,8 @@ var T;
             var A = this.array_position_date[segment];
             var B = this.array_position_date[segment + 1];
             //console.log((A-date)+' - '+(B-date));
-            var x = T.Math.proportions(A.date / 1, date / 1, B.date / 1, A.x, B.x);
-            var y = T.Math.proportions(A.date / 1, date / 1, B.date / 1, A.y, B.y);
+            var x = TMath.proportions(A.date / 1, date / 1, B.date / 1, A.x, B.x);
+            var y = TMath.proportions(A.date / 1, date / 1, B.date / 1, A.y, B.y);
             return (new T.Position(x, y));
         };
         /**
@@ -444,7 +444,7 @@ var T;
             return (this.degrees + 360) % 360;
         };
         PositionPolar.prototype.getRadians = function () {
-            return T.Math.deg2rad(this.degrees);
+            return TMath.deg2rad(this.degrees);
         };
         /**
          * Converts Position to simple string
@@ -514,10 +514,10 @@ var T;
             return new T.Position(Math.floor(this.x), Math.floor(this.y));
         };
         Position.prototype.getPositionPolar = function () {
-            return (new T.PositionPolar(T.Math.xy2dist(this.x, this.y), T.Math.rad2deg(Math.atan2(this.y, this.x))));
+            return (new T.PositionPolar(TMath.xy2dist(this.x, this.y), TMath.rad2deg(Math.atan2(this.y, this.x))));
         };
         Position.prototype.getDistance = function (position) {
-            return T.Math.xy2dist(position.x - this.x, position.y - this.y);
+            return TMath.xy2dist(position.x - this.x, position.y - this.y);
         };
         /**
          * Converts Position to simple string
@@ -622,7 +622,7 @@ var T;
                     ib = i + 1;
                     if (ib == this.positions.length)
                         ib = 0;
-                    collision = T.Math.lineCollision(this.positions[ia].x, this.positions[ia].y, this.positions[ib].x, this.positions[ib].y, position.x, position.y, position.x, position.y + (testside - 0.5) * 1000000000 //todo better
+                    collision = TMath.lineCollision(this.positions[ia].x, this.positions[ia].y, this.positions[ib].x, this.positions[ib].y, position.x, position.y, position.x, position.y + (testside - 0.5) * 1000000000 //todo better
                     );
                     if (collision == true) {
                         sidecollision = true;
@@ -1286,13 +1286,13 @@ T.MapGenerator.Biotope = (function () {
 }());
 /**
  * @author ©Towns.cz
- * @fileOverview Creates static class T.Math
+ * @fileOverview Creates static class TMath
  */
 //======================================================================================================================
 /**
  * Mathematical functions to Towns
  */
-T.Math = (function () {
+TMath = (function () {
     function class_6() {
     }
     /**
@@ -1329,7 +1329,7 @@ T.Math = (function () {
      */
     class_6.prettyNumber = function (number, number_of_non_zero_digits) {
         number_of_non_zero_digits = number_of_non_zero_digits || 2; //todo refactor like this
-        var digits = Math.ceil(T.Math.baseLog(10, number));
+        var digits = Math.ceil(TMath.baseLog(10, number));
         var k = Math.pow(10, number_of_non_zero_digits - digits);
         //console.log(digits,k);
         number = number * k;
@@ -1639,7 +1639,7 @@ T.Model = (function () {
      */
     class_7.prototype.range = function (dimension) {
         if (dimension == 'xy') {
-            return T.Math.xy2dist(this.range('x'), this.range('y') * this.size);
+            return TMath.xy2dist(this.range('x'), this.range('y') * this.size);
         }
         var particlesLinear = this.getLinearParticles();
         var max = false, min = false, max_, min_;
@@ -1814,10 +1814,10 @@ T.Model = (function () {
                     particle.size = 1;
                 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
                 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Position, Rotation and size //todo skew
-                var distDeg = T.Math.xy2distDeg(particle.position.x, particle.position.y);
+                var distDeg = TMath.xy2distDeg(particle.position.x, particle.position.y);
                 distDeg.dist = distDeg.dist * size;
                 distDeg.deg += rotation;
-                var xy = T.Math.distDeg2xy(distDeg.dist, distDeg.deg);
+                var xy = TMath.distDeg2xy(distDeg.dist, distDeg.deg);
                 particle.rotation += rotation;
                 particle.position.x = xy.x;
                 particle.position.y = xy.y;
@@ -1986,21 +1986,21 @@ T.Model.Particles = (function () {
                     //--------
                     //------------------XYZ ratio
                     if (!is(particle.shape.rotated)) {
-                        x__ = 0.5 * x_ * Math.cos(n / particle.shape.n * Math.PI * 2 + T.Math.deg2rad(180 + 180 / particle.shape.n)) * base + x_ * (level * particle.skew.z.x);
-                        y__ = 0.5 * y_ * Math.sin(n / particle.shape.n * Math.PI * 2 + T.Math.deg2rad(180 + 180 / particle.shape.n)) * base + y_ * (level * particle.skew.z.y);
+                        x__ = 0.5 * x_ * Math.cos(n / particle.shape.n * Math.PI * 2 + TMath.deg2rad(180 + 180 / particle.shape.n)) * base + x_ * (level * particle.skew.z.x);
+                        y__ = 0.5 * y_ * Math.sin(n / particle.shape.n * Math.PI * 2 + TMath.deg2rad(180 + 180 / particle.shape.n)) * base + y_ * (level * particle.skew.z.y);
                         z__ = z_ * level;
                     }
                     else {
-                        var tmp = (2 - (Math.cos(T.Math.deg2rad(180 / particle.shape.n)))); //todo better
+                        var tmp = (2 - (Math.cos(TMath.deg2rad(180 / particle.shape.n)))); //todo better
                         x__ = x_ * ((level * 2) - 1); //*(level-0.5);//+x_*(level*particle.skew.z.x),
-                        y__ = 0.5 * y_ * Math.sin(n / particle.shape.n * Math.PI * 2 + T.Math.deg2rad(180 + 180 / particle.shape.n)); //+y_*(level*particle.skew.z.y),
-                        z__ = (1) * 0.5 * (z_ * Math.cos(n / particle.shape.n * Math.PI * 2 + T.Math.deg2rad(180 + 180 / particle.shape.n)) * tmp +
-                            z_ * ((Math.cos(T.Math.deg2rad(180 / particle.shape.n)))) * tmp);
+                        y__ = 0.5 * y_ * Math.sin(n / particle.shape.n * Math.PI * 2 + TMath.deg2rad(180 + 180 / particle.shape.n)); //+y_*(level*particle.skew.z.y),
+                        z__ = (1) * 0.5 * (z_ * Math.cos(n / particle.shape.n * Math.PI * 2 + TMath.deg2rad(180 + 180 / particle.shape.n)) * tmp +
+                            z_ * ((Math.cos(TMath.deg2rad(180 / particle.shape.n)))) * tmp);
                     }
                     //------------------ XY Rotation
-                    var DistDeg_ = T.Math.xy2distDeg(x__, y__); //todo refactor all like DistDeg, etc...
+                    var DistDeg_ = TMath.xy2distDeg(x__, y__); //todo refactor all like DistDeg, etc...
                     DistDeg_.deg += particle.rotation;
-                    var xy_ = T.Math.distDeg2xy(DistDeg_.dist, DistDeg_.deg);
+                    var xy_ = TMath.distDeg2xy(DistDeg_.dist, DistDeg_.deg);
                     x__ = xy_.x;
                     y__ = xy_.y;
                     //------------------
@@ -2052,21 +2052,21 @@ T.Model.Particles = (function () {
                 for (var n = 0; n < particle.shape.n; n++) {
                     //------------------XYZ ratio
                     if (!is(particle.shape.rotated)) {
-                        x__ = 0.5 * x_ * Math.cos(n / particle.shape.n * Math.PI * 2 + T.Math.deg2rad(180 + 180 / particle.shape.n)) * base + x_ * (level * particle.skew.z.x);
-                        y__ = 0.5 * y_ * Math.sin(n / particle.shape.n * Math.PI * 2 + T.Math.deg2rad(180 + 180 / particle.shape.n)) * base + y_ * (level * particle.skew.z.y);
+                        x__ = 0.5 * x_ * Math.cos(n / particle.shape.n * Math.PI * 2 + TMath.deg2rad(180 + 180 / particle.shape.n)) * base + x_ * (level * particle.skew.z.x);
+                        y__ = 0.5 * y_ * Math.sin(n / particle.shape.n * Math.PI * 2 + TMath.deg2rad(180 + 180 / particle.shape.n)) * base + y_ * (level * particle.skew.z.y);
                         z__ = z_ * level;
                     }
                     else {
-                        var tmp = (2 - (Math.cos(T.Math.deg2rad(180 / particle.shape.n)))); //todo better
+                        var tmp = (2 - (Math.cos(TMath.deg2rad(180 / particle.shape.n)))); //todo better
                         x__ = x_ * ((level * 2) - 1); //*(level-0.5);//+x_*(level*particle.skew.z.x),
-                        y__ = 0.5 * y_ * Math.sin(n / particle.shape.n * Math.PI * 2 + T.Math.deg2rad(180 + 180 / particle.shape.n)); //+y_*(level*particle.skew.z.y),
-                        z__ = (1) * 0.5 * (z_ * Math.cos(n / particle.shape.n * Math.PI * 2 + T.Math.deg2rad(180 + 180 / particle.shape.n)) * tmp +
-                            z_ * ((Math.cos(T.Math.deg2rad(180 / particle.shape.n)))) * tmp);
+                        y__ = 0.5 * y_ * Math.sin(n / particle.shape.n * Math.PI * 2 + TMath.deg2rad(180 + 180 / particle.shape.n)); //+y_*(level*particle.skew.z.y),
+                        z__ = (1) * 0.5 * (z_ * Math.cos(n / particle.shape.n * Math.PI * 2 + TMath.deg2rad(180 + 180 / particle.shape.n)) * tmp +
+                            z_ * ((Math.cos(TMath.deg2rad(180 / particle.shape.n)))) * tmp);
                     }
                     //------------------ XY Rotation
-                    var DistDeg_ = T.Math.xy2distDeg(x__, y__); //todo refactor all like DistDeg, etc...
+                    var DistDeg_ = TMath.xy2distDeg(x__, y__); //todo refactor all like DistDeg, etc...
                     DistDeg_.deg += particle.rotation;
-                    var xy_ = T.Math.distDeg2xy(DistDeg_.dist, DistDeg_.deg);
+                    var xy_ = TMath.distDeg2xy(DistDeg_.dist, DistDeg_.deg);
                     x__ = xy_.x;
                     y__ = xy_.y;
                     //------------------
@@ -2150,7 +2150,7 @@ T.Model.Particles = (function () {
     class_8.collisionLinesDetect = function (lines1, lines2) {
         for (var i1 in lines1) {
             for (var i2 in lines2) {
-                if (T.Math.lineCollision(lines1[i1][0].x, lines1[i1][0].y, lines1[i1][1].x, lines1[i1][1].y, lines2[i2][0].x, lines2[i2][0].y, lines2[i2][1].x, lines2[i2][1].y)) {
+                if (TMath.lineCollision(lines1[i1][0].x, lines1[i1][0].y, lines1[i1][1].x, lines1[i1][1].y, lines2[i2][0].x, lines2[i2][0].y, lines2[i2][1].x, lines2[i2][1].y)) {
                     //r('collision2D is true', particle1, particle2);
                     return (true);
                 }
@@ -2433,7 +2433,7 @@ var T;
                             for (x = x_from; x <= x_to; x++) {
                                 if (typeof map_array[y][x] === 'undefined')
                                     continue;
-                                if (T.Math.xy2dist(x - xc, y - yc) <= object.design.data.size) {
+                                if (TMath.xy2dist(x - xc, y - yc) <= object.design.data.size) {
                                     map_array[y][x] = object.getCode();
                                 }
                             }
@@ -2513,7 +2513,7 @@ var T;
                         var y_to = Math.ceil(object.design.data.size);
                         for (var y = y_from; y <= y_to; y++) {
                             for (var x = x_from; x <= x_to; x++) {
-                                if (T.Math.xy2dist(x, y) <= object.design.data.size) {
+                                if (TMath.xy2dist(x, y) <= object.design.data.size) {
                                     object_1x1 = object.clone();
                                     object_1x1.design.data.size = 1;
                                     object_1x1.x = Math.round(object_1x1.x + x);
@@ -3077,7 +3077,7 @@ T.World.terrains = [
  * @fileOverview Creates instance T.World.mapGenerator
  */
 //======================================================================================================================
-T.World.mapGenerator = new T.MapGenerator(T.Math.blurXY(function (x, y) {
+T.World.mapGenerator = new T.MapGenerator(TMath.blurXY(function (x, y) {
     //todo//var key='x'+x+'y'+y;
     //todo//if(typeof z_map_cache[key]!='undefined'){
     //todo//    return(z_map_cache[key]);
@@ -3093,7 +3093,7 @@ T.World.mapGenerator = new T.MapGenerator(T.Math.blurXY(function (x, y) {
         max_possible_n += div;
         //x=Math.floor(x/3);
         //y=Math.floor(y/3);
-        //var xy = T.Math.xyRotate(x,y,57);
+        //var xy = TMath.xyRotate(x,y,57);
         //x=xy.x;
         //y=xy.y;
         _x = (-y * k) + (x * k_);
@@ -3138,8 +3138,8 @@ T.World.mapGenerator = new T.MapGenerator(T.Math.blurXY(function (x, y) {
                 design: {
                     type: 'natural',
                     data:{
-                        image:'rock'+Math.floor(T.Math.randomSeedPosition(1,{x:object.x,y:object.y})*6)%6+'dark'+Math.floor(T.Math.randomSeedPosition(2,{x:object.x,y:object.y})*4)%4,
-                        size: 0.5+T.Math.randomSeedPosition(5,{x:object.x,y:object.y})*1
+                        image:'rock'+Math.floor(TMath.randomSeedPosition(1,{x:object.x,y:object.y})*6)%6+'dark'+Math.floor(TMath.randomSeedPosition(2,{x:object.x,y:object.y})*4)%4,
+                        size: 0.5+TMath.randomSeedPosition(5,{x:object.x,y:object.y})*1
                     }
                 }
 
@@ -3149,7 +3149,7 @@ T.World.mapGenerator = new T.MapGenerator(T.Math.blurXY(function (x, y) {
 
     }else*/
     if (object.getCode() == 10) {
-        if (T.Math.randomSeedPosition(3, { x: object.x, y: object.y }) > 0.95) {
+        if (TMath.randomSeedPosition(3, { x: object.x, y: object.y }) > 0.95) {
             virtual_objects.push({
                 x: object.x,
                 y: object.y,
@@ -3158,11 +3158,11 @@ T.World.mapGenerator = new T.MapGenerator(T.Math.blurXY(function (x, y) {
                     type: 'natural',
                     data: {
                         model: 'tree',
-                        size: 3 + T.Math.randomSeedPosition(6, { x: object.x, y: object.y }) / 2,
+                        size: 3 + TMath.randomSeedPosition(6, { x: object.x, y: object.y }) / 2,
                         rotation: {
-                            x: T.Math.randomSeedPosition(7, { x: object.x, y: object.y }) * 20 - 10,
-                            y: T.Math.randomSeedPosition(7, { x: object.x, y: object.y }) * 20 - 10,
-                            z: T.Math.randomSeedPosition(7, { x: object.x, y: object.y }) * 360
+                            x: TMath.randomSeedPosition(7, { x: object.x, y: object.y }) * 20 - 10,
+                            y: TMath.randomSeedPosition(7, { x: object.x, y: object.y }) * 20 - 10,
+                            z: TMath.randomSeedPosition(7, { x: object.x, y: object.y }) * 360
                         }
                     }
                 }
@@ -3175,7 +3175,7 @@ T.World.mapGenerator = new T.MapGenerator(T.Math.blurXY(function (x, y) {
  * @fileOverview Creates configuration of game conditions via instance T.World.game
  */
 //======================================================================================================================
-T.World.game = new T.Game(T.Math.prettyNumber, T.Math.prettyNumber);
+T.World.game = new T.Game(TMath.prettyNumber, TMath.prettyNumber);
 T.World.game.installActionClass({
     distance: 0,
     strength: 0,

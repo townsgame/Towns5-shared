@@ -9,7 +9,7 @@
 
 T.World.mapGenerator = new T.MapGenerator(
 
-    T.Math.blurXY(function(x,y){
+    TMath.blurXY(function(x,y){
 
         //todo//var key='x'+x+'y'+y;
         //todo//if(typeof z_map_cache[key]!='undefined'){
@@ -36,7 +36,7 @@ T.World.mapGenerator = new T.MapGenerator(
 
             //x=Math.floor(x/3);
             //y=Math.floor(y/3);
-            //var xy = T.Math.xyRotate(x,y,57);
+            //var xy = TMath.xyRotate(x,y,57);
             //x=xy.x;
             //y=xy.y;
 
@@ -100,8 +100,8 @@ T.World.mapGenerator = new T.MapGenerator(
                     design: {
                         type: 'natural',
                         data:{
-                            image:'rock'+Math.floor(T.Math.randomSeedPosition(1,{x:object.x,y:object.y})*6)%6+'dark'+Math.floor(T.Math.randomSeedPosition(2,{x:object.x,y:object.y})*4)%4,
-                            size: 0.5+T.Math.randomSeedPosition(5,{x:object.x,y:object.y})*1
+                            image:'rock'+Math.floor(TMath.randomSeedPosition(1,{x:object.x,y:object.y})*6)%6+'dark'+Math.floor(TMath.randomSeedPosition(2,{x:object.x,y:object.y})*4)%4,
+                            size: 0.5+TMath.randomSeedPosition(5,{x:object.x,y:object.y})*1
                         }
                     }
 
@@ -112,7 +112,7 @@ T.World.mapGenerator = new T.MapGenerator(
         }else*/
         if(object.getCode()==10){
 
-            if(T.Math.randomSeedPosition(3,{x:object.x,y:object.y})>0.95){
+            if(TMath.randomSeedPosition(3,{x:object.x,y:object.y})>0.95){
 
                 virtual_objects.push(
                     {
@@ -124,11 +124,11 @@ T.World.mapGenerator = new T.MapGenerator(
                             type: 'natural',
                             data:{
                                 model:'tree',
-                                size: 3+T.Math.randomSeedPosition(6,{x:object.x,y:object.y})/2,
+                                size: 3+TMath.randomSeedPosition(6,{x:object.x,y:object.y})/2,
                                 rotation:{
-                                    x: T.Math.randomSeedPosition(7,{x:object.x,y:object.y})*20-10,
-                                    y: T.Math.randomSeedPosition(7,{x:object.x,y:object.y})*20-10,
-                                    z: T.Math.randomSeedPosition(7,{x:object.x,y:object.y})*360
+                                    x: TMath.randomSeedPosition(7,{x:object.x,y:object.y})*20-10,
+                                    y: TMath.randomSeedPosition(7,{x:object.x,y:object.y})*20-10,
+                                    z: TMath.randomSeedPosition(7,{x:object.x,y:object.y})*360
                                 }
                             }
                         }

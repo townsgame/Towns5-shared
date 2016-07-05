@@ -95,23 +95,23 @@ T.Model.Particles = class{
 
                     if (!is(particle.shape.rotated)) {
 
-                        x__ = 0.5 * x_ * Math.cos(n / particle.shape.n * Math.PI * 2 + T.Math.deg2rad(180 + 180 / particle.shape.n)) * base + x_ * (level * particle.skew.z.x);
-                        y__ = 0.5 * y_ * Math.sin(n / particle.shape.n * Math.PI * 2 + T.Math.deg2rad(180 + 180 / particle.shape.n)) * base + y_ * (level * particle.skew.z.y);
+                        x__ = 0.5 * x_ * Math.cos(n / particle.shape.n * Math.PI * 2 + TMath.deg2rad(180 + 180 / particle.shape.n)) * base + x_ * (level * particle.skew.z.x);
+                        y__ = 0.5 * y_ * Math.sin(n / particle.shape.n * Math.PI * 2 + TMath.deg2rad(180 + 180 / particle.shape.n)) * base + y_ * (level * particle.skew.z.y);
                         z__ = z_ * level;
 
                     } else {
 
-                        var tmp = (2 - (Math.cos(T.Math.deg2rad(180 / particle.shape.n))));//todo better
+                        var tmp = (2 - (Math.cos(TMath.deg2rad(180 / particle.shape.n))));//todo better
 
                         x__ = x_ * ((level * 2) - 1);//*(level-0.5);//+x_*(level*particle.skew.z.x),
 
-                        y__ = 0.5 * y_ * Math.sin(n / particle.shape.n * Math.PI * 2 + T.Math.deg2rad(180 + 180 / particle.shape.n));//+y_*(level*particle.skew.z.y),
+                        y__ = 0.5 * y_ * Math.sin(n / particle.shape.n * Math.PI * 2 + TMath.deg2rad(180 + 180 / particle.shape.n));//+y_*(level*particle.skew.z.y),
 
 
                         z__ = (1) * 0.5 * (
 
-                                z_ * Math.cos(n / particle.shape.n * Math.PI * 2 + T.Math.deg2rad(180 + 180 / particle.shape.n)) * tmp +
-                                z_ * ((Math.cos(T.Math.deg2rad(180 / particle.shape.n)))) * tmp
+                                z_ * Math.cos(n / particle.shape.n * Math.PI * 2 + TMath.deg2rad(180 + 180 / particle.shape.n)) * tmp +
+                                z_ * ((Math.cos(TMath.deg2rad(180 / particle.shape.n)))) * tmp
 
                             );
 
@@ -120,9 +120,9 @@ T.Model.Particles = class{
 
                     //------------------ XY Rotation
 
-                    var DistDeg_ = T.Math.xy2distDeg(x__, y__);//todo refactor all like DistDeg, etc...
+                    var DistDeg_ = TMath.xy2distDeg(x__, y__);//todo refactor all like DistDeg, etc...
                     DistDeg_.deg += particle.rotation;
-                    var xy_ = T.Math.distDeg2xy(DistDeg_.dist, DistDeg_.deg);
+                    var xy_ = TMath.distDeg2xy(DistDeg_.dist, DistDeg_.deg);
 
                     x__ = xy_.x;
                     y__ = xy_.y;
@@ -236,23 +236,23 @@ T.Model.Particles = class{
 
                     if (!is(particle.shape.rotated)) {
 
-                        x__ = 0.5 * x_ * Math.cos(n / particle.shape.n * Math.PI * 2 + T.Math.deg2rad(180 + 180 / particle.shape.n)) * base + x_ * (level * particle.skew.z.x);
-                        y__ = 0.5 * y_ * Math.sin(n / particle.shape.n * Math.PI * 2 + T.Math.deg2rad(180 + 180 / particle.shape.n)) * base + y_ * (level * particle.skew.z.y);
+                        x__ = 0.5 * x_ * Math.cos(n / particle.shape.n * Math.PI * 2 + TMath.deg2rad(180 + 180 / particle.shape.n)) * base + x_ * (level * particle.skew.z.x);
+                        y__ = 0.5 * y_ * Math.sin(n / particle.shape.n * Math.PI * 2 + TMath.deg2rad(180 + 180 / particle.shape.n)) * base + y_ * (level * particle.skew.z.y);
                         z__ = z_ * level;
 
                     } else {
 
-                        var tmp = (2 - (Math.cos(T.Math.deg2rad(180 / particle.shape.n))));//todo better
+                        var tmp = (2 - (Math.cos(TMath.deg2rad(180 / particle.shape.n))));//todo better
 
                         x__ = x_ * ((level * 2) - 1);//*(level-0.5);//+x_*(level*particle.skew.z.x),
 
-                        y__ = 0.5 * y_ * Math.sin(n / particle.shape.n * Math.PI * 2 + T.Math.deg2rad(180 + 180 / particle.shape.n));//+y_*(level*particle.skew.z.y),
+                        y__ = 0.5 * y_ * Math.sin(n / particle.shape.n * Math.PI * 2 + TMath.deg2rad(180 + 180 / particle.shape.n));//+y_*(level*particle.skew.z.y),
 
 
                         z__ = (1) * 0.5 * (
 
-                                z_ * Math.cos(n / particle.shape.n * Math.PI * 2 + T.Math.deg2rad(180 + 180 / particle.shape.n)) * tmp +
-                                z_ * ((Math.cos(T.Math.deg2rad(180 / particle.shape.n)))) * tmp
+                                z_ * Math.cos(n / particle.shape.n * Math.PI * 2 + TMath.deg2rad(180 + 180 / particle.shape.n)) * tmp +
+                                z_ * ((Math.cos(TMath.deg2rad(180 / particle.shape.n)))) * tmp
 
                             );
 
@@ -261,9 +261,9 @@ T.Model.Particles = class{
 
                     //------------------ XY Rotation
 
-                    var DistDeg_ = T.Math.xy2distDeg(x__, y__);//todo refactor all like DistDeg, etc...
+                    var DistDeg_ = TMath.xy2distDeg(x__, y__);//todo refactor all like DistDeg, etc...
                     DistDeg_.deg += particle.rotation;
-                    var xy_ = T.Math.distDeg2xy(DistDeg_.dist, DistDeg_.deg);
+                    var xy_ = TMath.distDeg2xy(DistDeg_.dist, DistDeg_.deg);
 
                     x__ = xy_.x;
                     y__ = xy_.y;
@@ -398,7 +398,7 @@ T.Model.Particles = class{
         for (var i1 in lines1) {
             for (var i2 in lines2) {
 
-                if (T.Math.lineCollision(
+                if (TMath.lineCollision(
                         lines1[i1][0].x,
                         lines1[i1][0].y,
                         lines1[i1][1].x,
