@@ -220,8 +220,8 @@ module T{
 
             //console.log((A-date)+' - '+(B-date));
 
-            var x = TMath.proportions(A.date / 1, date / 1, B.date / 1, A.x, B.x);
-            var y = TMath.proportions(A.date / 1, date / 1, B.date / 1, A.y, B.y);
+            var x = T.TMath.proportions(A.date / 1, date / 1, B.date / 1, A.x, B.x);
+            var y = T.TMath.proportions(A.date / 1, date / 1, B.date / 1, A.y, B.y);
 
             return (new T.Position(x, y));
 

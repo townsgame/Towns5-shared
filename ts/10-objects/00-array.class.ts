@@ -277,7 +277,7 @@ module T.Objects {
                             if (typeof map_array[y][x] === 'undefined')continue;
 
 
-                            if (TMath.xy2dist(x - xc, y - yc) <= object.design.data.size) {
+                            if (T.TMath.xy2dist(x - xc, y - yc) <= object.design.data.size) {
 
                                 map_array[y][x] = object.getCode();
 
@@ -409,7 +409,7 @@ module T.Objects {
                     for (var y = y_from; y <= y_to; y++) {
                         for (var x = x_from; x <= x_to; x++) {
 
-                            if (TMath.xy2dist(x, y) <= object.design.data.size) {
+                            if (T.TMath.xy2dist(x, y) <= object.design.data.size) {
 
                                 object_1x1 = object.clone();
 

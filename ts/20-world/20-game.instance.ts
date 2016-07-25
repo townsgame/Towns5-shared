@@ -7,6 +7,6 @@
 
 
 T.World.game = new T.Game(
-    TMath.prettyNumber,
-    TMath.prettyNumber
+    T.TMath.prettyNumber,
+    T.TMath.prettyNumber
 );
