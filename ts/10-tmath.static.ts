@@ -1,6 +1,6 @@
 /**
  * @author ©Towns.cz
- * @fileOverview Creates static class TMath
+ * @fileOverview Creates static class T.TMath
  */
 //======================================================================================================================
 
@@ -67,7 +67,7 @@ module T {
             number_of_non_zero_digits = number_of_non_zero_digits || 2;//todo refactor like this
 
 
-            var digits = Math.ceil(TMath.baseLog(10, number));
+            var digits = Math.ceil(T.TMath.baseLog(10, number));
             var k = Math.pow(10, number_of_non_zero_digits - digits);
 
             //console.log(digits,k);
@@ -141,8 +141,8 @@ module T {
         static xy2distDeg(x:number, y:number):positionPolar {
 
             var output = {
-                dist: TMath.xy2dist(x, y),
-                deg:  TMath.rad2deg(Math.atan2(y, x))
+                dist: T.TMath.xy2dist(x, y),
+                deg:  T.TMath.rad2deg(Math.atan2(y, x))
 
             };
 
@@ -156,7 +156,7 @@ module T {
 
         static distDeg2xy(dist:number, deg:number):position {
 
-            var rad = TMath.deg2rad(deg);
+            var rad = T.TMath.deg2rad(deg);
 
             var output = {
                 x: Math.cos(rad) * dist,
@@ -174,10 +174,10 @@ module T {
         static xyRotate(x: number, y:number, deg:number):position {
 
 
-            var dist = TMath.xy2dist(x, y);
+            var dist = T.TMath.xy2dist(x, y);
             var rad = Math.atan2(y, x);
 
-            rad += TMath.deg2rad(deg);
+            rad += T.TMath.deg2rad(deg);
 
 
             var output = {
@@ -290,8 +290,8 @@ module T {
             if (aSlope != bSlope)return false;
 
 
-            var aDist = TMath.xy2dist(a2y, a2x);
-            var bDist = TMath.xy2dist(b1y, b1x);
+            var aDist = T.TMath.xy2dist(a2y, a2x);
+            var bDist = T.TMath.xy2dist(b1y, b1x);
 
             return (aDist >= bDist);
 
@@ -327,8 +327,8 @@ module T {
                 //var collision= (numerator1 == 0 && numerator2 == 0);
                 //collision=false;
 
-                var bOnA = TMath.isOnLine(a1x, a1y, a2x, a2y, b1x, b1y);
-                var aOnB = TMath.isOnLine(b1x, b1y, b2x, b2y, a1x, a1y);
+                var bOnA = T.TMath.isOnLine(a1x, a1y, a2x, a2y, b1x, b1y);
+                var aOnB = T.TMath.isOnLine(b1x, b1y, b2x, b2y, a1x, a1y);
 
                 return (bOnA || aOnB);
 
