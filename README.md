@@ -37,6 +37,7 @@ we tag master branch with version, please update this also in package.json file.
 # Folder Structure
 
 todo update
+
     [towns5shared]/                 <- root folder
 	├── [game]/                     <- game specific logic
 	|   ├── [classes]/                 
