@@ -9,7 +9,7 @@
 
 T.World.mapGenerator = new T.MapGenerator(
 
-    T.TMath.blurXY(function(x,y){
+    T.TMath.blurXY(function(x: number,y: number){
 
         //todo//var key='x'+x+'y'+y;
         //todo//if(typeof z_map_cache[key]!='undefined'){
@@ -23,7 +23,7 @@ T.World.mapGenerator = new T.MapGenerator(
         var n= 0;
         var max_possible_n=0;
 
-        var _x,_y;
+        var _x: number,_y: number;
 
         var k=0.4;
         var k_=1-k;
