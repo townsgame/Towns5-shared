@@ -2,7 +2,7 @@
 module T.World {
 
 
-    game.installActionClass(
+    World.game.installActionClass(
         {
             distance: 0,
             strength: 0,

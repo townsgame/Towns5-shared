@@ -166,10 +166,6 @@ gulp.task("test", function() {
 
     global.T = require('./build/towns-shared.js');
 
-    console.log('TESTING',global.T);
-
-
-
 
     return gulp.src(['./test/*.js','./test/*/*.js'])
         .pipe(jasmine({

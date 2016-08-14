@@ -6,7 +6,7 @@
 
 module T.World {
 
-    export var game = new Game(
+    export var game = new T.Game(
         T.TMath.prettyNumber,
         T.TMath.prettyNumber
     );

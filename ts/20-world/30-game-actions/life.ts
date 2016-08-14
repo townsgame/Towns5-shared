@@ -6,7 +6,7 @@
 
 module T.World {
 
-    game.installActionClass(
+    World.game.installActionClass(
         {
             life: 1,
             max_life: 1

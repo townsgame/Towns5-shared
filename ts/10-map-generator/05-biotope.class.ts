@@ -6,54 +6,58 @@
 //======================================================================================================================
 
 
-T.MapGenerator.Biotope = class{
-
-    /**
-     *
-     * @param {Array} terrains
-     * @constructor
-     */
-    constructor(terrains){
-
-        var sum=0;
-        terrains.forEach(function(terrain){
-            sum+=terrain.amount;
-        });
+module T.MapGenerator {
 
 
-        var from=0;
-        terrains.forEach(function(terrain){
+    export class Biotope {
 
-            terrain.from=from/sum;
-            from+=terrain.amount;
+        /**
+         *
+         * @param {Array} terrains
+         * @constructor
+         */
+        constructor(terrains) {
 
-        });
-
-        //console.log(terrains);
-        this.terrains = terrains;
-
-    }
-
-
-    /**
-     *
-     * @param {number} z
-     * @returns {T.Objects.Terrain}
-     */
-    getZTerrain(z: number){
+            var sum = 0;
+            terrains.forEach(function (terrain) {
+                sum += terrain.amount;
+            });
 
 
-        for(var i=this.terrains.length-1;i>=0;i--){
+            var from = 0;
+            terrains.forEach(function (terrain) {
 
-            if(z >= this.terrains[i].from ) return(this.terrains[i].terrain);
+                terrain.from = from / sum;
+                from += terrain.amount;
+
+            });
+
+            //console.log(terrains);
+            this.terrains = terrains;
+
+        }
+
+
+        /**
+         *
+         * @param {number} z
+         * @returns {T.Objects.Terrain}
+         */
+        getZTerrain(z:number) {
+
+
+            for (var i = this.terrains.length - 1; i >= 0; i--) {
+
+                if (z >= this.terrains[i].from) return (this.terrains[i].terrain);
+
+            }
+
 
         }
 
 
     }
 
-
-
-};
+}
 
 

@@ -6,7 +6,7 @@
 
 module T.World {
 
-    game.installActionClass(
+    World.game.installActionClass(
         {
             defence: 0
         },

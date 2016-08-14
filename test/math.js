@@ -1,7 +1,6 @@
 
 
 console.log('Testing T.TMath');
-console.log(T);
 
 
 describe('sign', function() {
