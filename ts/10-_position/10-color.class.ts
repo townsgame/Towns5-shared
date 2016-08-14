@@ -104,9 +104,9 @@ module T {
          * @param {string} hex code of color eg. #00ff00
          * @returns {T.Color} Color
          */
-        static createFromHex(hex: string) {
+        static createFromHex(hex: string): Color {
 
-            var result, shorthandRegex;
+            var result:Color , shorthandRegex: RegExp;
 
             shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
             hex = hex.replace(shorthandRegex, function (m, r, g, b) {

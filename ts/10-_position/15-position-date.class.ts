@@ -11,7 +11,7 @@ module T {
      */
     export class PositionDate extends T.Position {//todo is thare solution without using T.?
 
-        constructor(x, y, date = 0) {
+        constructor(x: number, y: number, date = 0) {
 
             if (typeof x === 'object') {
 

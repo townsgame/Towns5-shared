@@ -16,7 +16,7 @@ T.Model = class{
      * @return {boolean} false in case of fail
      * @constructor
      */
-    constructor(json){
+    constructor(json: Object){
 
         if(typeof(json)=='undefined')return false;
 
@@ -40,7 +40,7 @@ T.Model = class{
      * @param {number} rotation
      * @param {number} size
      */
-    addRotationSize(rotation,size){
+    addRotationSize(rotation: number,size: number){
 
         if(typeof rotation === 'undefined')rotation=0;
         if(typeof size === 'undefined')size=1;
@@ -58,7 +58,7 @@ T.Model = class{
      * @param {string} dimension x,y,z,xy
      * @return {number} range
      */
-    range(dimension){
+    range(dimension: string){
 
         if(dimension=='xy'){
 
@@ -69,7 +69,7 @@ T.Model = class{
 
         var particlesLinear=this.getLinearParticles();
 
-        var max=false,min=false,max_,min_;
+        var max=false,min=false,max_: number,min_: number;
         for(var i in particlesLinear){
 
 
@@ -101,11 +101,7 @@ T.Model = class{
      * @param {number} move_y
      * @param {number} move_z
      */
-    moveBy(move_x,move_y,move_z){
-
-        if(typeof move_x === 'undefined')move_x=0;
-        if(typeof move_y === 'undefined')move_y=0;
-        if(typeof move_z === 'undefined')move_z=0;
+    moveBy(move_x=0,move_y=0,move_z=0){
 
         for(var i in this.particles){
 
@@ -129,7 +125,7 @@ T.Model = class{
      * @param {number} move_x
      * @param {number} move_y
      */
-    joinModelZ(model,move_x,move_y){//todo second param should be position
+    joinModelZ(model: T.Model,move_x: number,move_y: number){//todo second param should be position
 
         //var  model_=deepCopyModel(model);
         //model_.moveBy(move_x,move_y);//todo maybe delete moveBy

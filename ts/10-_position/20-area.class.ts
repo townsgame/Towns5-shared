@@ -2,7 +2,7 @@
 module T {
     export class Area {
 
-        public positions;
+        public positions: Array;
 
         constructor(...positions:T.Position[]) {
 
@@ -36,7 +36,11 @@ module T {
 
             //todo working only for convex areas
 
-            var testside,ia,ib,sidecollision,collision;
+            var testside: number,
+                ia: number,
+                ib: number,
+                sidecollision: boolean,
+                collision: boolean;
             for(testside=0;testside<2;testside++) {
 
 

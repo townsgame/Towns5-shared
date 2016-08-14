@@ -12,7 +12,7 @@ module T {
      */
     export class Position {
 
-        constructor(x, y) {
+        constructor(x: number, y: number) {
 
 
             if (typeof x == 'object') {
@@ -50,7 +50,7 @@ module T {
         }
 
 
-        plus(position) {
+        plus(position: Position) {
 
             this.x += position.x;
             this.y += position.y;
@@ -60,7 +60,7 @@ module T {
 
 
 
-        minus(position) {
+        minus(position: Position) {
 
             this.x -= position.x;
             this.y -= position.y;
@@ -69,7 +69,7 @@ module T {
         }
 
 
-        multiply(k) {
+        multiply(k: number) {
 
             this.x = this.x * k;
             this.y = this.y * k;
@@ -94,7 +94,7 @@ module T {
         }
 
 
-        getDistance(position) {
+        getDistance(position: Position) {
 
             return T.TMath.xy2dist(position.x - this.x, position.y - this.y);
 

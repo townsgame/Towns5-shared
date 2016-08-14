@@ -40,7 +40,7 @@ T.MapGenerator.Biotope = class{
      * @param {number} z
      * @returns {T.Objects.Terrain}
      */
-    getZTerrain(z){
+    getZTerrain(z: number){
 
 
         for(var i=this.terrains.length-1;i>=0;i--){

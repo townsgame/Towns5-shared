@@ -16,7 +16,7 @@ T.Game = class{
      * @param {function} price_key_modifier
      * @constructor
      */
-    constructor(max_life_modifier,price_key_modifier){
+    constructor(max_life_modifier: Function,price_key_modifier: Function){
     
         this.action_classes = {};
         this.action_empty_instances = {};
@@ -32,7 +32,7 @@ T.Game = class{
      * @param {object} Object
      * @return {array} of numbers
      */
-    getObjectPriceBases(object){
+    getObjectPriceBases(object: T.Object){
     
         var self=this;
         var price_bases=[];
@@ -43,7 +43,7 @@ T.Game = class{
         }
     
     
-        object.actions.forEach(function(action){
+        object.actions.forEach(function(action: any){
     
 
             var price_base = Math.ceil(action.countPriceBase());//
@@ -79,7 +79,7 @@ T.Game = class{
      * @param {object} Object
      * @return {number} maximum life of object
      */
-    getObjectMaxLife(object){
+    getObjectMaxLife(object: T.Object){
     
         var price_bases=this.getObjectPriceBases(object);
         var price_base = price_bases.reduce(function(pv, cv) { return pv + cv; }, 0);
@@ -112,11 +112,11 @@ T.Game = class{
         var design_resources = object.getModel().aggregateResourcesVolumes();
 
 
-        object.actions.forEach(function(action,i){
+        object.actions.forEach(function(action: any,i: number){
     
 
             var price_resources_list =
-            action.getPriceResources().sort(function(a,b){//todo is it safe?
+            action.getPriceResources().sort(function(a: any,b: any){//todo is it safe?
     
                 return design_resources.compare(a.clone().signum())-design_resources.compare(b.clone().signum());
     
@@ -143,7 +143,7 @@ T.Game = class{
      * @param {object} Object
      * @return {object} Resources - price of object
      */
-    getObjectPrice(object){
+    getObjectPrice(object: T.Objects){
     
         var price = new T.Resources({});
     
@@ -165,7 +165,7 @@ T.Game = class{
 
 
 
-    installActionClass(action_empty_instance_params,action_class){
+    installActionClass(action_empty_instance_params: Object,action_class: any){
 
         var type = action_class.getType();
 
@@ -200,7 +200,7 @@ T.Game = class{
 
 
 
-    getActionClass(action_type){
+    getActionClass(action_type: string){
 
         var action_class = this.action_classes[action_type];
 
@@ -215,7 +215,7 @@ T.Game = class{
     }
 
 
-    newActionInstance(action){
+    newActionInstance(action: any){
 
         //todo solve defense vs. defence
         if(action.type==='defense'){
@@ -232,7 +232,7 @@ T.Game = class{
 
 
 
-    createActionExecute(action_type){
+    createActionExecute(action_type: string){
 
         var game = this;
 
@@ -253,7 +253,7 @@ T.Game = class{
 
 
 
-    getActionEmptyInstance(action_type){
+    getActionEmptyInstance(action_type: string){
 
         var action_instance = this.action_empty_instances[action_type];
 

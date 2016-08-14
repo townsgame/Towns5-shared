@@ -9,7 +9,7 @@ module T {
     export class Position3D {
 
 
-        constructor(x, y, z) {
+        constructor(x: number, y: number, z: number) {
 
             if (typeof x == 'object') {
 

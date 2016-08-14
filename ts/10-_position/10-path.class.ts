@@ -26,7 +26,7 @@ module T{
             }
 
 
-            var position_date, last_date = -1;
+            var position_date: PositionDate, last_date = -1;
             for (var i = 0, l = this.array_position_date.length; i < l; i++) {
 
                 position_date = this.array_position_date[i];
@@ -70,7 +70,7 @@ module T{
          * @param {Date} date
          * @returns {T.Path}
          */
-        static newConstantSpeed(array_position, speed, date = 0) {
+        static newConstantSpeed(array_position: Array, speed: number, date = 0): Path {
 
             if (date === 0) {
                 date = new Date();
@@ -96,7 +96,7 @@ module T{
 
             var last_position = array_position[0];
 
-            var position_date, distance;
+            var position_date: PositionDate, distance: number;
             for (var i = 1, l = array_position.length; i < l; i++) {
 
                 position_date = array_position[i];
@@ -152,7 +152,7 @@ module T{
          * @param date
          * @returns {number}
          */
-        countSegment(date) {
+        countSegment(date: Date) {
 
             //------------------------Not started or finished
 
@@ -165,7 +165,7 @@ module T{
 
             //------------------------In progress
 
-            var A, B, x, y;
+            var A: PositionDate, B:PositionDate, x: number, y: number;
             for (var i = 0, l = this.array_position_date.length - 1; i < l; i++) {
                 A = this.array_position_date[i].date / 1;
                 B = this.array_position_date[i + 1].date / 1;
@@ -263,7 +263,7 @@ module T{
          * @param date
          * @returns {number} fields/s
          */
-        countSpeed(date) {
+        countSpeed(date: Date) {
 
             if (this.inProgress(date) === false) {
                 return (0);
@@ -287,7 +287,7 @@ module T{
          * @param {Date} date
          * @returns {boolean}
          */
-        inProgress(date) {
+        inProgress(date: Date) {
 
             if (this.array_position_date[0].date > date) {
                 return (false);

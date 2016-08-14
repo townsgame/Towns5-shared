@@ -16,7 +16,7 @@ T.MapGenerator = class{
      * @param {function} virtualObjectGenerator
      * @constructor
      */
-    constructor(getZ,z_normalizing_table,biotope,virtualObjectGenerator){
+    constructor(getZ: Function,z_normalizing_table: Array,biotope: Array,virtualObjectGenerator: Function){
 
         this.getZ = getZ;
         this.z_normalizing_table = z_normalizing_table;
@@ -34,7 +34,7 @@ T.MapGenerator = class{
      * @returns {Array}
      * @private
      */
-    getZMapCircle(center_integer,radius){
+    getZMapCircle(center_integer: number,radius: number){
 
         var map=[];
 
@@ -74,7 +74,7 @@ T.MapGenerator = class{
      * @returns {Array}
      * @private
      */
-    terrainMap(map){
+    terrainMap(map: Array){
 
         var map_bg=[];
 
@@ -101,7 +101,7 @@ T.MapGenerator = class{
      * @returns {Array}
      * @private
      */
-    getMapArrayCircle(center_integer,radius){
+    getMapArrayCircle(center_integer: number,radius: number){
 
 
         var bounds=1;
@@ -125,7 +125,7 @@ T.MapGenerator = class{
      * @returns {Array}
      * @private
      */
-    convertMapArrayToObjects(map_array,center_integer,radius){
+    convertMapArrayToObjects(map_array: Array,center_integer: number,radius: number){
 
         var objects= new T.Objects.Array();
 
@@ -160,7 +160,7 @@ T.MapGenerator = class{
      * @returns {Array}
      * @private
      */
-    getPureMap(center,radius, not_center=false){
+    getPureMap(center: Position,radius: number, not_center=false){
 
         //console.log(center,not_center);
 
@@ -183,7 +183,7 @@ T.MapGenerator = class{
 
         var objects= new T.Objects.Array();
 
-        var x,y,z,t,object;
+        var x: number,y: number,z: number,t: number,object: Object;
         for(y=0;y<=radius*2;y++){
             for(x=0;x<=radius*2;x++){
 
@@ -232,7 +232,7 @@ T.MapGenerator = class{
      * @returns {T.Objects.Array}
      * @private
      */
-    getVirtualObjectsFromTerrainObjects(objects){
+    getVirtualObjectsFromTerrainObjects(objects: Array){
 
 
         var virtual_objects = [];
@@ -265,7 +265,7 @@ T.MapGenerator = class{
      * @param {T.Position} not_center Dont get objects near this center.
      * @returns {T.Objects.Array}}
      */
-    getCompleteObjects(real_objects,center,radius,natural_objects=true,not_center=false){
+    getCompleteObjects(real_objects:T.Objects.Array,center:T.Position,radius:number,natural_objects=true,not_center=false){
 
 
 

@@ -9,7 +9,7 @@ T.Game.Action = class{
 
 
 
-    constructor(action){
+    constructor(action: Object){
 
         //console.log(this.constructor.getType);
         //console.log(this);

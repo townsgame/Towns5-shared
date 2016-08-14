@@ -8,7 +8,7 @@ module T {
 
     export class PositionPolar {
 
-        constructor(distance, degrees) {
+        constructor(distance: number, degrees: number) {
 
             if (typeof distance == 'number' && typeof degrees == 'number') {
 
