@@ -29,8 +29,8 @@ module T {
          * Get deep clone od T.Color
          * @returns {T.Color}
          */
-        clone():T.Color{
-            return new T.Color(this.r,this.g,this.b,this.a);
+        clone():Color{
+            return new Color(this.r,this.g,this.b,this.a);
         }
 
 
@@ -114,7 +114,7 @@ module T {
             });
             result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
             if (result) {
-                return new T.Color(
+                return new Color(
                     parseInt(result[1], 16),
                     parseInt(result[2], 16),
                     parseInt(result[3], 16)

@@ -9,19 +9,20 @@
  */
 T.Game = class{
     
-    
+    public action_classes:Object;
+    public action_empty_instances:Object;
+
+
      /**
      *
      * @param {function} max_life_modifier
      * @param {function} price_key_modifier
      * @constructor
      */
-    constructor(max_life_modifier: Function,price_key_modifier: Function){
+    constructor(public max_life_modifier: Function,public price_key_modifier: Function){
     
         this.action_classes = {};
         this.action_empty_instances = {};
-        this.max_life_modifier = max_life_modifier;
-        this.price_key_modifier = price_key_modifier;
     
     }
     

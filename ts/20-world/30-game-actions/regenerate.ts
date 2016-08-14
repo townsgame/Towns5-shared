@@ -4,42 +4,41 @@
  */
 //======================================================================================================================
 
+module T.World {
+
+    game.installActionClass(
+        {
+            regenerate: 100,
+        },
+        class extends T.Game.Action {
 
 
-T.World.game.installActionClass(
-    {
-        regenerate:   100,
-    },
-    class extends T.Game.Action{
+            static getType() {
+                return ('regenerate');
+            }
 
 
-        static getType(){
-            return('regenerate');
+            countPriceBase() {
+                return ((1 / this.params.regenerate) * 3600 * 0.05);
+            }
+
+
+            getPriceResources() {
+
+                return ([
+                    new T.Resources({'wood': 4}),
+                    new T.Resources({'clay': 2}),
+                    new T.Resources({'stone': 2}),
+                    new T.Resources({'iron': 2})
+                ]);
+            }
+
+
+            /*static execute(){//todo maybe tick????
+             }*/
+
+
         }
+    );
 
-
-        countPriceBase(){
-            return((1/this.params.regenerate)*3600*0.05);
-        }
-
-
-        getPriceResources(){
-
-            return([
-                new T.Resources({'wood':   4}),
-                new T.Resources({'clay':   2}),
-                new T.Resources({'stone':  2}),
-                new T.Resources({'iron':   2})
-            ]);
-        }
-
-
-        /*static execute(){//todo maybe tick????
-        }*/
-
-
-
-
-    }
-);
-
+}

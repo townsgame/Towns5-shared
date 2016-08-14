@@ -4,40 +4,38 @@
  */
 //======================================================================================================================
 
+module T.World {
+
+    game.installActionClass(
+        {
+            defence: 0
+        },
+        class extends T.Game.Action {
 
 
-T.World.game.installActionClass(
-    {
-        defence:   0
-    },
-    class extends T.Game.Action{
+            static getType() {
+                return ('defence');
+            }
 
 
-        static getType(){
-            return('defence');
+            countPriceBase() {
+                return ((this.params.defence) * 800 * 0.05);
+            }
+
+
+            getPriceResources() {
+
+                return ([
+                    new T.Resources({'wood': 2}),
+                    new T.Resources({'clay': 2}),
+                    new T.Resources({'stone': 1}),
+                    //new T.Resources({'iron':   0})
+                ]);
+            }
+
+
         }
+    );
 
 
-        countPriceBase(){
-            return((this.params.defence)*800*0.05);
-        }
-
-
-        getPriceResources(){
-
-            return([
-                new T.Resources({'wood':   2}),
-                new T.Resources({'clay':   2}),
-                new T.Resources({'stone':  1}),
-                //new T.Resources({'iron':   0})
-            ]);
-        }
-
-
-
-
-    }
-);
-
-
-
+}

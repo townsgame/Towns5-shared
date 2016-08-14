@@ -9,9 +9,9 @@ module T.Objects {
 
     export class Building extends T.Objects.Object {
 
-        public design;
-        public actions;
-        public path;
+        public design: Object;
+        public actions: Array;
+        public path: Path;
 
         /**
          * @param {object} object

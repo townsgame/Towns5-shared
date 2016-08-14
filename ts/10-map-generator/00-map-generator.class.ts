@@ -16,14 +16,7 @@ T.MapGenerator = class{
      * @param {function} virtualObjectGenerator
      * @constructor
      */
-    constructor(getZ: Function,z_normalizing_table: Array,biotope: Array,virtualObjectGenerator: Function){
-
-        this.getZ = getZ;
-        this.z_normalizing_table = z_normalizing_table;
-        this.biotope = biotope;
-        this.virtualObjectGenerator = virtualObjectGenerator;
-
-
+    constructor(public getZ: Function,public z_normalizing_table: Array,public biotope: Array,public virtualObjectGenerator: Function){
     }
 
 

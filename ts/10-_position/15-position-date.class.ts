@@ -11,6 +11,10 @@ module T {
      */
     export class PositionDate extends T.Position {//todo is thare solution without using T.?
 
+        public x:number;
+        public y:number;
+        public date:Date;
+
         constructor(x: number, y: number, date = 0) {
 
             if (typeof x === 'object') {

@@ -4,9 +4,11 @@
  */
 //======================================================================================================================
 
+module T.World {
 
+    export var game = new Game(
+        T.TMath.prettyNumber,
+        T.TMath.prettyNumber
+    );
 
-T.World.game = new T.Game(
-    T.TMath.prettyNumber,
-    T.TMath.prettyNumber
-);
+}

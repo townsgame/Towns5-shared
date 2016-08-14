@@ -10,7 +10,7 @@ module T.Objects {
 
     export class Natural extends T.Objects.Object {
 
-        public design;
+        public design:Object;
 
         clone() {//todo all classes should have this method
             return (new T.Objects.Natural(JSON.parse(JSON.stringify(this))));

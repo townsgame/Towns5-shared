@@ -8,6 +8,9 @@ module T {
 
     export class PositionPolar {
 
+        public distance:number;
+        public degrees:number;
+
         constructor(distance: number, degrees: number) {
 
             if (typeof distance == 'number' && typeof degrees == 'number') {

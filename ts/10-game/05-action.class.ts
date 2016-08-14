@@ -8,6 +8,7 @@
 T.Game.Action = class{
 
 
+    public last_use:number;
 
     constructor(action: Object){
 

@@ -9,10 +9,10 @@ module T.Objects {
 
     export class Object {
 
-        public x;
-        public y;
-        public type;
-        public name;
+        public x:number;
+        public y:number;
+        public type:string;
+        public name:string;
 
         /**
          * @param {object} object

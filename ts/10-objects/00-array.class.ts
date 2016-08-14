@@ -13,7 +13,7 @@ module T.Objects {
     export class Array {
 
 
-        public objects;
+        public objects:Objects;
 
         /**
          *

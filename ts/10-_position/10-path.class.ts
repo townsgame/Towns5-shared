@@ -8,6 +8,8 @@ module T{
 
     export class Path {
 
+        public array_position_date;
+
         /**
          * @param {...T.PositionDate} Position with date at least 2
          */
