@@ -106,18 +106,18 @@ module T {
          */
         static createFromHex(hex: string): Color {
 
-            var result:Color , shorthandRegex: RegExp;
+            var result:Color , shorthandRegex: RegExp, resultRegex: RegExpExecArray;
 
             shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
             hex = hex.replace(shorthandRegex, function (m, r, g, b) {
                 return r + r + g + g + b + b;
             });
-            result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-            if (result) {
+            resultRegex = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+            if (resultRegex) {
                 return new Color(
-                    parseInt(result[1], 16),
-                    parseInt(result[2], 16),
-                    parseInt(result[3], 16)
+                    parseInt(resultRegex[1], 16),
+                    parseInt(resultRegex[2], 16),
+                    parseInt(resultRegex[3], 16)
                 );
             } else {
 

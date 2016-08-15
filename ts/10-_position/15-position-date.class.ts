@@ -6,6 +6,13 @@
 
 module T {
 
+    interface PositionDateObject {
+        x:number;
+        y:number;
+        date:Date;
+    }
+
+
     /**
      * Global position on towns map with time
      */
@@ -15,32 +22,52 @@ module T {
         public y:number;
         public date:Date;
 
-        constructor(x: number, y: number, date = 0) {
 
-            if (typeof x === 'object') {
 
-                y = x.y;
-                date = x.date;
-                x = x.x;
+        constructor(x_or_object: number | PositionDateObject, y?: number, date?: number | Date = 0) {
+
+            let x:number;
+
+            if (typeof x_or_object === 'object') {
+
+                //var positionDateObject:PositionDateObject;
+                //positionDateObject = x;
+
+                x = x_or_object.x;
+                y = x_or_object.y;
+                date = x_or_object.date;
+
+
+            }else
+            if (typeof x_or_object === 'number') {
+
+                x = x_or_object;
 
             }
+
 
             super(x, y);
 
 
+            var dateObject: Date;
+
             if (date === 0) {
-                date = new Date();
-            } else if (typeof date === 'number' || typeof date === 'string') {
-                date = new Date(date);
+                dateObject = new Date();
+            } else if (typeof date === 'number') {
+                dateObject = new Date(date/1);
+            } else if (typeof date === 'string') {
+                dateObject = new Date(date.toString());
+            }else{
+                dateObject = date;
             }
 
 
-            if (isNaN(date / 1)) {
+            if (isNaN(dateObject / 1)) {
                 throw new Error('To construct PositionDate is needed valid Date not ' + date + '.');
             }
 
 
-            this.date = date;
+            this.date = dateObject;
 
         }
 

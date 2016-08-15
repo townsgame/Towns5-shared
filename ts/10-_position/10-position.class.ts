@@ -7,6 +7,12 @@
 
 module T {
 
+    interface Position {
+        x:number;
+        y:number;
+    }
+
+
     /**
      * Global position on towns map
      */
@@ -15,25 +21,34 @@ module T {
         public x:number;
         public y:number;
 
-        constructor(x: number, y: number) {
+        constructor(x_or_object_or_string: number | Position | string, y?: number) {
 
+            let x:number;
 
-            if (typeof x == 'object') {
+            if (typeof x_or_object_or_string === 'object') {
 
-                this.x = x.x;
-                this.y = x.y;
+                this.x = x_or_object_or_string.x;
+                this.y = x_or_object_or_string.y;
                 return;
 
-            } else if (/^[+-]?\d+(\.\d+)?,[+-]?\d+(\.\d+)?$/.test(x)) {
+            }else
+            if(typeof x_or_object_or_string === 'string'){
 
-                x = x.split(',');
-                this.x = parseFloat(x[0]);
-                this.y = parseFloat(x[1]);
-                return;
+                if (/^[+-]?\d+(\.\d+)?,[+-]?\d+(\.\d+)?$/.test(x_or_object_or_string)) {
 
-            } else if (typeof x == 'number' && typeof y == 'number') {
+                    let x_y:Array;
+                    x_y = x_or_object_or_string.split(',');
+                    this.x = parseFloat(x_y[0]);
+                    this.y = parseFloat(x_y[1]);
+                    return;
 
-                this.x = x;
+                }else{
+                    throw new Error('When creating Position, string must be in format x,y not '+x_or_object_or_string);
+                }
+
+            } else if (typeof x_or_object_or_string === 'number') {
+
+                this.x = x_or_object_or_string;
                 this.y = y;
                 return;
 

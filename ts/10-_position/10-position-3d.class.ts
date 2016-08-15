@@ -6,23 +6,33 @@
 
 module T {
 
+
+    interface Position3DObject {
+        x:number;
+        y:number;
+        z:number;
+    }
+
     export class Position3D {
 
         public x: number;
         public y: number;
         public z: number;
 
-        constructor(x: number, y: number, z: number) {
+        constructor(x_or_object: number | Position3DObject, y?: number, z?: number) {
 
-            if (typeof x == 'object') {
+            let x:number;
 
-                this.x = x.x;
-                this.y = x.y;
-                this.z = x.z;
+            if (typeof x_or_object === 'object') {
 
-            } else {
+                this.x = x_or_object.x;
+                this.y = x_or_object.y;
+                this.z = x_or_object.z;
 
-                this.x = x;
+            } else
+            if (typeof x_or_object === 'number'){
+
+                this.x = x_or_object;
                 this.y = y;
                 this.z = z;
 

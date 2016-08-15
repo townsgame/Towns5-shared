@@ -52,7 +52,7 @@ module T{
                     throw new Error('Dates should be consecutive when constructing T.Path (' + position_date.date + ' should be after ' + last_date + '). ' + this);
                 }
 
-                last_date = position_date.date;
+                last_date = position_date.date/1;
 
 
             }
@@ -72,12 +72,12 @@ module T{
          * @param {Date} date
          * @returns {T.Path}
          */
-        static newConstantSpeed(array_position: Array, speed: number, date = 0): Path {
+        static newConstantSpeed(array_position: Array, speed: number, date: number | Date = 0): Path {
 
             if (date === 0) {
                 date = new Date();
             } else if (typeof date === 'number') {
-                date = new Date(date);
+                date = new Date(date/1);
             }
 
             if (isNaN(speed / 1)) {
@@ -154,7 +154,7 @@ module T{
          * @param date
          * @returns {number}
          */
-        countSegment(date: Date) {
+        countSegment(date: number | Date) {
 
             //------------------------Not started or finished
 
@@ -196,12 +196,12 @@ module T{
          * @param {Date} date
          * @returns {T.Position}
          */
-        countPosition(date = 0) {
+        countPosition(date: number | Date = 0) {
 
             if (date === 0) {
                 date = new Date();
             } else if (typeof date === 'number') {
-                date = new Date(date);
+                date = new Date(date/1);
             }
 
             //------------------------Not started or finished
@@ -236,13 +236,13 @@ module T{
          * @param date
          * @returns {number} degrees
          */
-        countRotation(date = 0) {
+        countRotation(date: number | Date = 0) {
 
 
             if (date === 0) {
                 date = new Date();
             } else if (typeof date === 'number') {
-                date = new Date(date);
+                date = new Date(date/1);
             }
 
 
@@ -265,7 +265,7 @@ module T{
          * @param date
          * @returns {number} fields/s
          */
-        countSpeed(date: Date) {
+        countSpeed(date: number | Date) {
 
             if (this.inProgress(date) === false) {
                 return (0);
@@ -289,7 +289,7 @@ module T{
          * @param {Date} date
          * @returns {boolean}
          */
-        inProgress(date: Date) {
+        inProgress(date: number | Date) {
 
             if (this.array_position_date[0].date > date) {
                 return (false);

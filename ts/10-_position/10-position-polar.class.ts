@@ -8,19 +8,7 @@ module T {
 
     export class PositionPolar {
 
-        public distance:number;
-        public degrees:number;
-
-        constructor(distance: number, degrees: number) {
-
-            if (typeof distance == 'number' && typeof degrees == 'number') {
-
-                this.distance = distance;
-                this.degrees = degrees;
-
-            }
-            //todo check
-
+        constructor(public distance: number,public degrees: number) {
         }
 
 
@@ -29,7 +17,7 @@ module T {
          * @returns {T.Resources}
          */
         clone() {
-            return new T.PositionPolar(this);
+            return new T.PositionPolar(this.distance,this.degrees);
         }
 
 
