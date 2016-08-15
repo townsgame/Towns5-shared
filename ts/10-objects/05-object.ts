@@ -7,11 +7,6 @@
 
 module T.Objects {
 
-    interface DesignObject{
-        type: string;
-        data: T.Model;
-    }
-
 
     export class Object {
 
@@ -20,8 +15,7 @@ module T.Objects {
         public y:number;
         public type:string;
         public name:string;
-        public actions:Array;
-        public design:DesignObject;
+
 
         /**
          * @param {object} object

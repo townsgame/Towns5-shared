@@ -7,11 +7,20 @@
 
 module T.Objects {
 
+    interface DesignObject{
+        type: string;
+        data: T.Model;
+    }
+
+
     export class Building extends T.Objects.Object {
 
-        public design: Object;
-        public actions: Array;
+
+        public design:DesignObject;
+        public actions:T.Game.Action[];
         public path: Path;
+
+
 
         /**
          * @param {object} object
@@ -85,7 +94,7 @@ module T.Objects {
          * @param {Date} date
          * @returns {T.Position}
          */
-        getPosition(date) {
+        getPosition(date?) {
 
 
             if (typeof this.path === 'undefined') {
