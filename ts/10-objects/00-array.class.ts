@@ -13,23 +13,27 @@ module T.Objects {
     export class Array {
 
 
-        public objects:Array/*<T.Objects.Object>*/;
+        public objects:T.Objects.Object[];
 
-        /**
-         *
-         * @param {Array} objects
-         * todo ????????? @constructor
-         */
-        constructor(objects:Array =[]) {
 
-            this.objects = objects.map(function(object){
-                return T.Objects.Object.init(object);
-            });
+        constructor(objects:T.Objects.Object[] = []) {
+
+            //r(objects);
+            //r(objects.length);
+
+            for(var i=0,l=objects.length;i<l;i++){
+
+                //r(i);
+                objects[i] = T.Objects.Object.init(objects[i]);
+
+            }
+
+            this.objects = objects;
 
         }
 
 
-        getAll():Array {
+        getAll():T.Objects.Object[] {
             return this.objects;
         }
 
@@ -362,7 +366,7 @@ module T.Objects {
          *
          * @returns {T.Objects.Array}
          */
-        get1x1TerrainObjects() {
+        get1x1TerrainObjects():T.Objects.Array {
 
 
             var terrain_objects_1x1 = new T.Objects.Array();
@@ -467,7 +471,7 @@ module T.Objects {
             var terrain_objects_1x1 = this.get1x1TerrainObjects();
 
             var min_distance = -1;
-            var nearest_terrain_1x1 = false;
+            var nearest_terrain_1x1: T.Objects.Object;
 
             terrain_objects_1x1.forEach(function (terrain_1x1) {
 
@@ -480,7 +484,7 @@ module T.Objects {
 
             });
 
-            if (nearest_terrain_1x1 === false) {
+            if (nearest_terrain_1x1) {
 
                 return null;
 
