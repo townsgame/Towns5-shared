@@ -7,6 +7,14 @@
 
 module T {
 
+    interface ModelObject{
+        name:string;
+        particles:Array;
+        rotation:number;
+        size:number;
+    }
+
+
     export class Model {
 
 
@@ -21,7 +29,7 @@ module T {
          * @return {boolean} false in case of fail
          * @constructor
          */
-        constructor(json:Object) {
+        constructor(json:ModelObject) {
 
             if (typeof(json) == 'undefined')return false;
 
@@ -70,7 +78,7 @@ module T {
 
             var particlesLinear = this.getLinearParticles();
 
-            var max = false, min = false, max_:number, min_:number;
+            var max:number, min:number, max_:number, min_:number;
             for (var i in particlesLinear) {
 
 
@@ -79,8 +87,8 @@ module T {
 
                 //todo feature reverse
 
-                if (max === false)max = max_;
-                if (min === false)min = min_;
+                if (typeof max === 'undefined')max = max_;
+                if (typeof min === 'undefined')min = min_;
 
 
                 if (max_ > max)max = max_;
@@ -142,7 +150,7 @@ module T {
                 for (var ii in this_linear_particles) {//todo maybe optimize by pre-sorting
 
 
-                    if (Particles.collision2D(this_linear_particles[ii], model_linear_particles[i])) {
+                    if (T.Model.Particles.collision2D(this_linear_particles[ii], model_linear_particles[i])) {
 
                         r(this_linear_particles[ii], model_linear_particles[i]);
 
@@ -243,7 +251,7 @@ module T {
                         var linked_particle = findParticleByName(model.particles, particles[i].link);
 
                         if (linked_particle === false) {
-                            throw new Error('Invalid link ' + particle.link);
+                            throw new Error('Invalid link ' + particles[i].link);
                         }
 
                         linked_particle = JSON.parse(JSON.stringify(linked_particle));
@@ -491,7 +499,7 @@ module T {
                 var material = linear_particle.material.split('_');
                 material = material[0];
 
-                var price_ = {};
+                var price_:T.Resources = new T.Resources({});
                 price_[material] = volume;
 
                 price.add(price_);

@@ -72,7 +72,8 @@ module T.Model {
                 var y_ = particle.size.y;
                 var z_ = particle.size.z;
 
-                var x__, y__, z__;
+                let x__, y__, z__;
+                let base:number;
 
                 for (var n = 0; n < particle.shape.n; n++) {
 
@@ -96,7 +97,7 @@ module T.Model {
 
                         //------------------XYZ ratio
 
-                        if (!is(particle.shape.rotated)) {
+                        if (particle.shape.rotated) {
 
                             x__ = 0.5 * x_ * Math.cos(n / particle.shape.n * Math.PI * 2 + T.TMath.deg2rad(180 + 180 / particle.shape.n)) * base + x_ * (level * particle.skew.z.x);
                             y__ = 0.5 * y_ * Math.sin(n / particle.shape.n * Math.PI * 2 + T.TMath.deg2rad(180 + 180 / particle.shape.n)) * base + y_ * (level * particle.skew.z.y);
@@ -170,13 +171,14 @@ module T.Model {
 
             }
 
-            return resource;
+            return triangles;
 
 
         }
 
 
         //======================================================================================================================
+
 
         /**
          * Get 3D model from particle
@@ -187,7 +189,13 @@ module T.Model {
          */
         static get3D(particle) {
 
-            var resource = {};
+            interface PointsObject{
+                points: Array;
+                polygons: Array<Array>;
+                polygons2D: Array<Array>;
+            }
+
+            var resource:PointsObject;
 
             particle = this.addMissingParams(particle);
 
@@ -207,6 +215,7 @@ module T.Model {
 
                 //r(x_,y_);
                 //r(particle.shape.n);
+
 
 
                 /**/
@@ -237,7 +246,7 @@ module T.Model {
 
                         //------------------XYZ ratio
 
-                        if (!is(particle.shape.rotated)) {
+                        if (particle.shape.rotated) {
 
                             x__ = 0.5 * x_ * Math.cos(n / particle.shape.n * Math.PI * 2 + T.TMath.deg2rad(180 + 180 / particle.shape.n)) * base + x_ * (level * particle.skew.z.x);
                             y__ = 0.5 * y_ * Math.sin(n / particle.shape.n * Math.PI * 2 + T.TMath.deg2rad(180 + 180 / particle.shape.n)) * base + y_ * (level * particle.skew.z.y);
