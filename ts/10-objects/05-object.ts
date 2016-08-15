@@ -13,6 +13,7 @@ module T.Objects {
         public y:number;
         public type:string;
         public name:string;
+        public actions:Array;
 
         /**
          * @param {object} object

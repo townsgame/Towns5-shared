@@ -6,21 +6,38 @@
 
 module T.Game {
 
+
+    interface ActionParamsObject{
+        cooldown: number;
+    }
+    interface ActionObject{
+        type: string;
+        params: ActionParamsObject;
+    }
+
     export class Action {
 
 
         public last_use:number;
+        public type:string;
+        public params:ActionParamsObject;
 
-        constructor(action:Object) {
+
+        constructor(action:ActionObject) {
 
             //console.log(this.constructor.getType);
             //console.log(this);
 
-            if (typeof this.constructor.getType === 'undefined')throw new Error('You must extend T.Game.Action and add method getType before creating instances!');
+            if (typeof this.getType() === 'undefined'){
+                throw new Error('You must extend T.Game.Action and add method getType before creating instances!');
+            }
 
-            var type = this.constructor.getType();
+            var type = this.getType();
 
-            if (action.type !== type)throw new Error('This is ' + type + ' not ' + action.type + ' class!');
+
+            if (action.type !== type){
+                throw new Error('This is ' + type + ' not ' + action.type + ' class!');
+            }
 
             for (var key in action) {
                 var this_key = key;
@@ -44,7 +61,11 @@ module T.Game {
         }
 
 
-        countPriceBase() {
+        getType():string{
+            return ('undefined');
+        }
+
+        countPriceBase():number {
             return (0);
         }
 
@@ -100,7 +121,7 @@ module T.Game {
          * Set actual date as date of execution this action instance
          */
         nowExecuted() {
-            this.last_use = new Date();
+            this.last_use = new Date()/1;
         }
 
 

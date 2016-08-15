@@ -113,7 +113,7 @@ module T.World{
              }else*/
             if(object.getCode()==10){
 
-                if(TMath.randomSeedPosition(3,{x:object.x,y:object.y})>0.95){
+                if(T.TMath.randomSeedPosition(3,{x:object.x,y:object.y})>0.95){
 
                     virtual_objects.push(
                         {
@@ -125,11 +125,11 @@ module T.World{
                                 type: 'natural',
                                 data:{
                                     model:'tree',
-                                    size: 3+TMath.randomSeedPosition(6,{x:object.x,y:object.y})/2,
+                                    size: 3+T.TMath.randomSeedPosition(6,{x:object.x,y:object.y})/2,
                                     rotation:{
-                                        x: TMath.randomSeedPosition(7,{x:object.x,y:object.y})*20-10,
-                                        y: TMath.randomSeedPosition(7,{x:object.x,y:object.y})*20-10,
-                                        z: TMath.randomSeedPosition(7,{x:object.x,y:object.y})*360
+                                        x: T.TMath.randomSeedPosition(7,{x:object.x,y:object.y})*20-10,
+                                        y: T.TMath.randomSeedPosition(7,{x:object.x,y:object.y})*20-10,
+                                        z: T.TMath.randomSeedPosition(7,{x:object.x,y:object.y})*360
                                     }
                                 }
                             }

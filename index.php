@@ -16,16 +16,6 @@
     </script>
     <script src="build/towns-shared.js"></script>
 
-    <script>
-
-        T.Locale={};
-        T.Locale.get = function(){
-            var args = Array.prototype.slice.call(arguments);
-            return(args.join(' '));
-        }
-
-    </script>
-
 
     <link rel="stylesheet" href="style-samples.js.css" />
 

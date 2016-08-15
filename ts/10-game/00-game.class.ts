@@ -36,15 +36,15 @@ module T {
          * @param {object} Object
          * @return {array} of numbers
          */
-        getObjectPriceBases(object:T.Object) {
+        getObjectPriceBases(object:T.Objects.Object) {
 
             var self = this;
             var price_bases = [];
 
 
-            if (typeof object.actions.length === 0) {
+            /*if (object.actions.lenght === 0) {
                 console.warn('In object ' + object + ' there are no actions!');//todo all objects should be converted to string like this
-            }
+            }*/
 
 
             object.actions.forEach(function (action:any) {
@@ -81,7 +81,7 @@ module T {
          * @param {object} Object
          * @return {number} maximum life of object
          */
-        getObjectMaxLife(object:T.Object) {
+        getObjectMaxLife(object:T.Objects.Object) {
 
             var price_bases = this.getObjectPriceBases(object);
             var price_base = price_bases.reduce(function (pv, cv) {
@@ -144,7 +144,7 @@ module T {
          * @param {object} Object
          * @return {object} Resources - price of object
          */
-        getObjectPrice(object:T.Objects) {
+        getObjectPrice(object:T.Objects.Array) {
 
             var price = new T.Resources({});
 
@@ -167,7 +167,7 @@ module T {
 
         installActionClass(action_empty_instance_params:Object, action_class:any) {
 
-            var type = action_class.getType();
+            var type = action_class.prototype.getType();
 
             if (typeof type !== 'string') {
                 throw new Error('Error while installing action class into game instance: action class has no type!');

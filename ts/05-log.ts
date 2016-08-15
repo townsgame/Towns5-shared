@@ -1,6 +1,7 @@
 /**
- * Created by hejny on 14.8.16.
+ * @author ©Towns.cz
+ * @fileOverview Wrapper for console.log
  */
-
+//======================================================================================================================
 
 var r = console.log.bind(console);

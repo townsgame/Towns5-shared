@@ -13,7 +13,7 @@ module T.World {
         class extends T.Game.Action {
 
 
-            static getType() {
+            getType() {
                 return ('regenerate');
             }
 
