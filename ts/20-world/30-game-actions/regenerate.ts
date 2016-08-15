@@ -6,12 +6,18 @@
 
 module T.World {
 
+    interface ActionRegenerateParamsObject{
+        regenerate: number;
+    }
+
+
     World.game.installActionClass(
         {
             regenerate: 100,
         },
         class extends T.Game.Action {
 
+            public params:ActionRegenerateParamsObject;
 
             getType() {
                 return ('regenerate');
@@ -33,9 +39,6 @@ module T.World {
                 ]);
             }
 
-
-            /*static execute(){//todo maybe tick????
-             }*/
 
 
         }

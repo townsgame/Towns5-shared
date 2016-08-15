@@ -6,6 +6,11 @@
 
 module T.World {
 
+    interface ActionLifeParamsObject{
+        life: number;
+        max_life: number;
+    }
+
     World.game.installActionClass(
         {
             life: 1,
@@ -13,6 +18,7 @@ module T.World {
         },
         class extends T.Game.Action {
 
+            public params:ActionLifeParamsObject;
 
             getType() {
                 return ('life');

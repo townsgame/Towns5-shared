@@ -6,12 +6,18 @@
 
 module T.World {
 
+    interface ActionThroughputParamsObject{
+        throughput: number;
+    }
+
+
     World.game.installActionClass(
         {
             throughput: 0
         },
         class extends T.Game.Action {
 
+            public params:ActionThroughputParamsObject;
 
             getType() {
                 return ('throughput');

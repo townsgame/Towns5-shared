@@ -6,12 +6,19 @@
 
 module T.World {
 
+    interface ActionRepairParamsObject{
+        repair: number;
+        cooldown: number;
+    }
+
+
     World.game.installActionClass(
         {
             repair: 0
         },
-        class extends T.Game.Action {
+        class extends T.Game.ActionActive {
 
+            public params:ActionRepairParamsObject;
 
             getType() {
                 return ('repair');

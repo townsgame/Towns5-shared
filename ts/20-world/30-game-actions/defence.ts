@@ -6,12 +6,18 @@
 
 module T.World {
 
+    interface ActionDefenceParamsObject{
+        defence: number;
+    }
+
+
     World.game.installActionClass(
         {
             defence: 0
         },
         class extends T.Game.Action {
 
+            public params:ActionDefenceParamsObject;
 
             getType() {
                 return ('defence');

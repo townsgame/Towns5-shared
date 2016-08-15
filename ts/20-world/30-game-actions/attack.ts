@@ -2,6 +2,14 @@
 module T.World {
 
 
+    interface ActionAttackParamsObject{
+        distance: number;
+        strength: number;
+        rounds: number;
+        cooldown: number;
+    }
+
+
     World.game.installActionClass(
         {
             distance: 0,
@@ -9,7 +17,9 @@ module T.World {
             rounds: 1,
             cooldown: 1
         },
-        class extends T.Game.Action {
+        class extends T.Game.ActionActive {
+
+            public params:ActionAttackParamsObject;
 
 
             getType() {

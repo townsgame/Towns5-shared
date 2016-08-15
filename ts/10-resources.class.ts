@@ -15,13 +15,14 @@ module T {
          * @param {object} Resources
          * @constructor
          */
-        constructor(resources:Object) {
+        constructor(resources?:Object ={}) {
 
             for (var key in resources) {
                 if (typeof resources[key] == 'number') {
                     this[key] = Math.ceil(resources[key]);
                 }
             }
+
 
         }
 
@@ -30,7 +31,7 @@ module T {
          * Return deep clone of this.
          * @returns {Resources}
          */
-        clone():Resources {
+        clone():T.Resources {
             return new Resources(this);
         }
 
@@ -40,7 +41,7 @@ module T {
          * @param {object} Resources
          * @return {bool} contains
          */
-        contains(resources:Resources):boolean {
+        contains(resources:T.Resources):boolean {
 
             for (var key in resources) {
 
@@ -63,7 +64,7 @@ module T {
          * @param {object} Resources
          * @return {bool} success
          */
-        add(resources:Resources):Resources {
+        add(resources:T.Resources):T.Resources {
 
             for (var key in resources) {
 
@@ -86,7 +87,7 @@ module T {
          * @param {number} k
          * @return this
          */
-        multiply(k:number):Resources {
+        multiply(k:number):T.Resources {
 
             for (var key in this) {
 
@@ -106,7 +107,7 @@ module T {
          * @param {number} k
          * @return this
          */
-        signum(k:string):Resources {
+        signum(k:string):T.Resources {
 
             for (var key in this) {
 
@@ -136,7 +137,7 @@ module T {
          * @param {function} modifier
          * @return this
          */
-        apply(modifier:Function):Resources {
+        apply(modifier:Function):T.Resources {
 
             for (var key in this) {
 
@@ -155,7 +156,7 @@ module T {
          *
          * @return {Array} all resources keys
          */
-        extractKeys():Array {
+        extractKeys():string[] {
 
             var keys = [];
 
@@ -178,7 +179,7 @@ module T {
          * @param {object} Resoures
          * @return {number} Distance between this and given Resources
          */
-        compare(resoures:Resources):number {
+        compare(resoures:T.Resources):number {
 
             var resources_A = this;
             var resources_B = resoures;
@@ -224,7 +225,7 @@ module T {
          * @param {object} Resources
          * @return {bool} success
          */
-        remove(resources:Resources):boolean {
+        remove(resources:T.Resources):boolean {
 
             if (!this.contains(resources))return false;
 

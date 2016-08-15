@@ -6,6 +6,14 @@
 
 module T.World {
 
+    interface ActionMineParamsObject{
+        wood: number;
+        iron: number;
+        clay: number;
+        stone: number;
+    }
+
+
     World.game.installActionClass(
         {
             wood: 0,
@@ -15,6 +23,7 @@ module T.World {
         },
         class extends T.Game.Action {
 
+            public params:ActionMineParamsObject;
 
             getType() {
                 return ('mine');
@@ -22,7 +31,8 @@ module T.World {
 
 
             countPriceBase() {
-                return ((this.params.amount) * 3600 * 0.05);
+                var amount = this.params.wood + this.params.iron + this.params.clay + this.params.stone;
+                return amount * 3600 * 0.05;
             }
 
 

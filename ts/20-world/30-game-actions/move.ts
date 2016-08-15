@@ -6,12 +6,20 @@
 
 module T.World {
 
+    interface ActionMoveParamsObject{
+        speed: number;
+        cooldown: number;
+    }
+
+
     World.game.installActionClass(
         {
-            speed: 0
+            speed: 0,
+            cooldown: 0
         },
-        class extends T.Game.Action {
+        class extends T.Game.ActionActive {
 
+            public params:ActionMoveParamsObject;
 
             getType() {
                 return ('move');
