@@ -10,6 +10,8 @@ module T {
 
     export class MapGenerator {
 
+        public biotope:T.MapGenerator.Biotope;
+
         /**
          *
          * @param {function} getZ
@@ -29,7 +31,7 @@ module T {
          * @returns {Array}
          * @private
          */
-        getZMapCircle(center_integer:number, radius:number) {
+        getZMapCircle(center_integer:T.Position, radius:number) {
 
             var map = [];
 
@@ -94,7 +96,7 @@ module T {
          * @returns {Array}
          * @private
          */
-        getMapArrayCircle(center_integer:number, radius:number) {
+        getMapArrayCircle(center_integer:T.Position, radius:number) {
 
 
             var bounds = 1;
@@ -117,7 +119,7 @@ module T {
          * @returns {Array}
          * @private
          */
-        convertMapArrayToObjects(map_array:Array, center_integer:number, radius:number) {
+        convertMapArrayToObjects(map_array:Array, center_integer:T.Position, radius:number) {
 
             var objects = new T.Objects.Array();
 
@@ -152,7 +154,7 @@ module T {
          * @returns {Array}
          * @private
          */
-        getPureMap(center:Position, radius:number, not_center = false) {
+        getPureMap(center:T.Position, radius:number, not_center?:T.Position) {
 
             //console.log(center,not_center);
 
@@ -162,10 +164,10 @@ module T {
             };
 
             if (not_center)
-                not_center = {
-                    x: not_center.x - center_integer.x,
-                    y: not_center.y - center_integer.y
-                };
+                not_center = new T.Position(
+                    not_center.x - center_integer.x,
+                    not_center.y - center_integer.y
+                );
 
 
             /*var map_array = this.getMapArrayCircle(center_integer,radius);
@@ -174,7 +176,7 @@ module T {
 
             var objects = new T.Objects.Array();
 
-            var x:number, y:number, z:number, t:number, object:Object;
+            var x:number, y:number, z:number, t:number, object:T.Objects.Object;
             for (y = 0; y <= radius * 2; y++) {
                 for (x = 0; x <= radius * 2; x++) {
 
@@ -223,11 +225,11 @@ module T {
          * @returns {T.Objects.Array}
          * @private
          */
-        getVirtualObjectsFromTerrainObjects(objects:Array) {
+        getVirtualObjectsFromTerrainObjects(objects:T.Objects.Array) {
 
 
             var virtual_objects = [];
-            var objects_1x1_raw = objects.get1x1TerrainObjects().getAll();
+            var objects_1x1_raw: Array = objects.get1x1TerrainObjects().getAll();
 
 
             for (var i = 0, l = objects_1x1_raw.length; i < l; i++) {
@@ -253,7 +255,7 @@ module T {
          * @param {T.Position} not_center Dont get objects near this center.
          * @returns {T.Objects.Array}}
          */
-        getCompleteObjects(real_objects:T.Objects.Array, center:T.Position, radius:number, natural_objects = true, not_center = false) {
+        getCompleteObjects(real_objects:T.Objects.Array, center:T.Position, radius:number, natural_objects = true, not_center?: T.Position) {
 
 
             var complete_objects = this.getPureMap(center, radius, not_center);

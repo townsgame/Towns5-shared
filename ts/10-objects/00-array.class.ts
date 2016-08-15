@@ -13,14 +13,14 @@ module T.Objects {
     export class Array {
 
 
-        public objects:Objects;
+        public objects:Array/*<T.Objects.Object>*/;
 
         /**
          *
          * @param {Array} objects
          * todo ????????? @constructor
          */
-        constructor(objects=[]) {
+        constructor(objects:Array =[]) {
 
             this.objects = objects.map(function(object){
                 return T.Objects.Object.init(object);

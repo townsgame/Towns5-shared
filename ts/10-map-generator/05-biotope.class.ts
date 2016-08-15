@@ -11,6 +11,9 @@ module T.MapGenerator {
 
     export class Biotope {
 
+
+        public terrains:Array;
+
         /**
          *
          * @param {Array} terrains
