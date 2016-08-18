@@ -15,10 +15,12 @@ var jasmine = require('gulp-jasmine');
 var ts = require('gulp-typescript');
 var sourcemaps = require('gulp-sourcemaps');
 var runSequence = require('run-sequence');
+var typedoc = require("gulp-typedoc");
 
 
 
-var includes_typescript = globby.sync('./ts/**/*.ts');
+
+var includes_typescript = globby.sync('./src/**/*.ts');
 //console.log(includes_typescript);
 
 
@@ -54,7 +56,7 @@ gulp.task('build', function() {
 
 
 
-
+/*
 gulp.task('documentation', function (callback) {
 
     console.log('todo documentation for TypeScript');
@@ -94,10 +96,10 @@ gulp.task('documentation', function (callback) {
         .pipe(sort())
         .pipe(jsdoc(documentation_config,callback));
 
-        */
 
 
-});
+
+});*/
 
 
 
@@ -108,10 +110,21 @@ gulp.task('documentation', function (callback) {
 gulp.task('compile', function () {
 
 
+
+    var tsProject = ts.createProject('tsconfig.json');
+
+
+    var tsResult = tsProject.src() // instead of gulp.src(...)
+        .pipe(ts(tsProject));
+
+    return tsResult.js.pipe(gulp.dest('./'));
+
+
+/*
     return gulp.src(includes_typescript)
         .pipe(sourcemaps.init())
         .pipe(ts({
-            noImplicitAny: true,
+            noImplicitAny: false,
             out: 'towns-shared.js'
         }))
         .pipe(sourcemaps.write())
@@ -121,6 +134,49 @@ gulp.task('compile', function () {
         //.pipe(rename({suffix: '.min'}))
         //.pipe(gulp.dest('./build'))
     ;
+*/
+
+});
+
+
+
+
+
+gulp.task("documentation", function() {
+
+    /*
+    todo make it work
+    return gulp
+        .src(includes_typescript)
+        .pipe(typedoc(
+{
+
+            mode: 'file',
+
+            module: "commonjs",
+            target: "es5",
+            includeDeclarations: true,
+            excludeExternals: true,
+
+
+
+            out: 'towns-shared.js',
+
+
+
+            // TypeDoc options (see typedoc docs)
+            name: "towns-shared",
+            //theme: "/home/hejny/www/towns/towns-shared/node_modules/typedoc-default-themes/bin/minimal",
+            theme: "/home/hejny/www/towns/towns-shared/node_modules/typedoc/lib/output/themes/",
+            plugins: [],
+            //plugins: ["my", "plugins"],
+            ignoreCompilerErrors: false,
+            version: true,
+
+
+        }))
+        ;
+        /**/
 
 
 });

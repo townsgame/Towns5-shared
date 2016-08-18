@@ -8,6 +8,10 @@
 
 module T {
 
+    interface ObjectWithId{
+        id: string | number;
+    }
+
 
     /**
      * Additional functions to manipulate with array.
@@ -22,7 +26,7 @@ module T {
          * @param {*} id Searched ID
          * @returns {number} Key of object with this ID, -1 if not exist
          */
-        static id2i(array: Array, id:string):any {
+        static id2i(array: Array<ObjectWithId>, id:string):number {
 
             for (var i in array) {
                 if (array[i].id == id)return i;
@@ -42,7 +46,7 @@ module T {
          * @param {string} error_message when iten not exists
          * @returns {object} Object with this ID, null if not exist
          */
-        static id2item(array: Array, id: string, error_message = ''):any {
+        static id2item(array: Array<ObjectWithId>, id: string, error_message = ''):ObjectWithId {
 
             for (var i in array) {
                 if (array[i].id == id)return array[i];
@@ -66,7 +70,7 @@ module T {
          * @param {*} id Searched ID
          * @returns {boolean}
          */
-        static idRemove(array: Array, id: string):boolean {//todo refactor use this not splice
+        static idRemove(array: Array<ObjectWithId>, id: string):boolean {//todo refactor use this not splice
 
             for (var i=0,l=array.length;i<l;i++) {
                 if (array[i].id == id) {
@@ -88,7 +92,7 @@ module T {
          * @param array
          * @param {function} callback
          */
-        static iterate2D(array: Array, callback: Function):void {
+        static iterate2D(array: Array<any>, callback: Function):void {
 
             //r(array);
 
@@ -112,7 +116,7 @@ module T {
          * @param to
          * @return {array} Removed items
          */
-        static removeItems(array:Array, from:number, to:number):Array {
+        static removeItems(array:Array<any>, from:number, to:number):Array {
             var rest = array.slice((to || from) + 1 || array.length);
             array.length = from < 0 ? array.length + from : from;
             return array.push.apply(array, rest);
@@ -169,7 +173,7 @@ module T {
          * @param {Array} array
          * @returns {Array} Array containing only unique values
          */
-        static unique(array: Array):Array {
+        static unique(array: Array<any>):Array<any> {
             var n = {}, r = [];
             for (var i = 0; i < array.length; i++) {
                 if (!n[array[i]]) {
@@ -190,7 +194,7 @@ module T {
          * @param {string} additional_class
          * @returns {string} html
          */
-        static array2table(array:Array, additional_class = ''):string {
+        static array2table(array:Array<Array<string>>, additional_class = ''):string {
             //todo check
 
             var html = '';
@@ -243,7 +247,7 @@ module T {
          * @param {object} object
          * @returns {Array}
          */
-        static getKeys(object:Object):Array {
+        static getKeys(object:Object):Array<string> {
 
             var keys = [];
             for (var k in object) keys.push(k);

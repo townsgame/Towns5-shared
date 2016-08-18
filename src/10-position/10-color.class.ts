@@ -19,10 +19,6 @@ module T {
          * @param a alpha from 0 to 255
          */
         constructor(public r: number,public g: number,public b: number,public a = 255) {
-            this.r = r;
-            this.g = g;
-            this.b = b;
-            this.a = a;
         }
 
         /**
