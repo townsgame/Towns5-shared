@@ -28,9 +28,10 @@ module T {
          */
         static id2i(array: Array<ObjectWithId>, id:string):number {
 
-            for (var i in array) {
+            for(var i=0,l=array.length;i<l;i++){
                 if (array[i].id == id)return i;
             }
+
             return -1;
 
         }

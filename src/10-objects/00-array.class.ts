@@ -38,12 +38,12 @@ module T.Objects {
         }
 
 
-        forEach(callback) {
+        forEach(callback: Function): void {
             return this.objects.forEach(callback);
         }
 
 
-        filter(callback):T.Objects.Array {
+        filter(callback: Function):T.Objects.Array {
 
             var filtered_objects = new T.Objects.Array();
 
@@ -62,8 +62,8 @@ module T.Objects {
          * @param object
          * @returns {Number}
          */
-        push(object) {
-            return this.objects.push(T.Objects.Object.init(object));
+        push(object: Object): void {
+            this.objects.push(T.Objects.Object.init(object));
         }
 
 
@@ -71,7 +71,7 @@ module T.Objects {
          * Update or push object into Objects Array
          * @param object
          */
-        update(object) {
+        update(object: T.Objects.Object): void {
             if (!this.setById(object.id, object)) {
                 this.push(object);
             }
@@ -83,7 +83,7 @@ module T.Objects {
          * @param {string} id
          * @returns {object}
          */
-        getById(id) {
+        getById(id: string): T.Objects.Object {
 
             if (typeof id !== 'string')throw new Error('getById: id should be string');
 
@@ -101,7 +101,7 @@ module T.Objects {
          * @param {object} object
          * @returns {boolean}
          */
-        setById(id, object) {
+        setById(id: string, object: T.Objects.Object):boolean {
 
             if (typeof id !== 'string')throw new Error('setById: id should be string');
 
@@ -123,7 +123,7 @@ module T.Objects {
          * @param {string} id
          * @returns {boolean}
          */
-        removeId(id, object) {
+        removeId(id: string, object: T.Objects.Object): boolean {
 
             if (typeof id !== 'string')throw new Error('removeId: id should be string');
 
@@ -144,7 +144,7 @@ module T.Objects {
          * @param {string} type
          * @returns {T.Objects.Array}
          */
-        filterTypes(...types) {
+        filterTypes(...types: string[]): T.Objects.Array {
 
 
             var filtered_objects = new T.Objects.Array();
@@ -167,7 +167,7 @@ module T.Objects {
          * @param {number} radius
          * @returns {T.Objects.Array}
          */
-        filterRadius(center, radius) {
+        filterRadius(center: T.Position, radius: number): T.Objects.Array {
 
             var filtered_objects = new T.Objects.Array();
 
@@ -185,7 +185,7 @@ module T.Objects {
         }
 
 
-        filterArea(area:Area) {
+        filterArea(area:T.Area): T.Objects.Array {
 
             var filtered_objects = new T.Objects.Array();
 
@@ -209,7 +209,7 @@ module T.Objects {
          * @param {number} radius
          * @returns {Array}
          */
-        getMapOfTerrainCodes(center, radius) {//todo maybe refactor to getTerrainCodes2DArray or getTerrainCodesMap
+        getMapOfTerrainCodes(center: T.Position, radius: number): number[][] {//todo maybe refactor to getTerrainCodes2DArray or getTerrainCodesMap
 
             /*var radius = size/2;
              var center ={
@@ -304,7 +304,7 @@ module T.Objects {
 
 
 
-        getMapOfCollisions(center, radius){
+        getMapOfCollisions(center: T.Position, radius:number): boolean[][]{
 
             //--------------------------Terrains
             var map_of_terrain_codes = this.getMapOfTerrainCodes(center, radius);
@@ -448,16 +448,21 @@ module T.Objects {
 
 
         //todo jsdoc
-        getTerrainOnPosition(position) {
+        getTerrainOnPosition(position: T.Position): T.Objects.Terrain {
 
 
             for (var i = this.objects.length - 1; i >= 0; i--) {
-                if (this.objects[i].type != 'terrain')continue;
+                //if (this.objects[i].type != 'terrain')continue;
+                if (this.objects[i] instanceof T.Objects.Terrain){
 
+                    if (this.objects[i].design.data.size <= position.getDistance(new T.Position(this.objects[i].x, this.objects[i].y))) {
+                        return (this.objects[i]);
+                    }
 
-                if (this.objects[i].design.data.size <= position.getDistance(new T.Position(this.objects[i].x, this.objects[i].y))) {
-                    return (this.objects[i]);
                 }
+
+
+
             }
 
             return (null);
@@ -466,7 +471,7 @@ module T.Objects {
 
 
         //todo jsdoc
-        getNearestTerrainPositionWithCode(position, terrain_code) {
+        getNearestTerrainPositionWithCode(position: T.Position, terrain_code: number): T.Position {
 
             var terrain_objects_1x1 = this.get1x1TerrainObjects();
 

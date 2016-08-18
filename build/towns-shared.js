@@ -67,7 +67,7 @@ var T;
          * @returns {number} Key of object with this ID, -1 if not exist
          */
         ArrayFunctions.id2i = function (array, id) {
-            for (var i in array) {
+            for (var i = 0, l = array.length; i < l; i++) {
                 if (array[i].id == id)
                     return i;
             }
@@ -770,6 +770,234 @@ var T;
 })(T || (T = {}));
 /**
  * @author ©Towns.cz
+ * @fileOverview Creates class T.MapGenerator
+ */
+//======================================================================================================================
+var T;
+(function (T) {
+    var MapGenerator = (function () {
+        /**
+         *
+         * @param {function} getZ
+         * @param {Array} z_normalizing_table
+         * @param {T.MapGenerator.Biotope} biotope
+         * @param {function} virtualObjectGenerator
+         * @constructor
+         */
+        function MapGenerator(getZ, z_normalizing_table, biotope, virtualObjectGenerator) {
+            this.getZ = getZ;
+            this.z_normalizing_table = z_normalizing_table;
+            this.biotope = biotope;
+            this.virtualObjectGenerator = virtualObjectGenerator;
+        }
+        /**
+         *
+         * @param {T.Position} center_integer
+         * @param {number} radius
+         * @returns {Array}
+         * @private
+         */
+        MapGenerator.prototype.getZMapCircle = function (center_integer, radius) {
+            var map = [];
+            for (var y = 0; y <= radius * 2; y++) {
+                map[y] = [];
+                for (var x = 0; x <= radius * 2; x++) {
+                    if (Math.pow(x - radius + 1 / 2, 2) +
+                        Math.pow(y - radius + 1 / 2, 2) >
+                        Math.pow(radius, 2))
+                        continue;
+                    var z = this.getZ(x - radius + center_integer.x, y - radius + center_integer.y);
+                    map[y][x] = this.z_normalizing_table[Math.floor(z * this.z_normalizing_table.length)];
+                }
+            }
+            return (map);
+        };
+        /**
+         *
+         * @param {Array} map
+         * @returns {Array}
+         * @private
+         */
+        MapGenerator.prototype.terrainMap = function (map) {
+            var map_bg = [];
+            for (var y = 0, l = map.length; y < l; y++) {
+                map_bg[y] = [];
+                for (var x = 0; x < l; x++) {
+                    if (typeof (map[y][x]) === 'undefined')
+                        continue;
+                    map_bg[y][x] = this.biotope.getZTerrain(map[y][x]);
+                }
+            }
+            return (map_bg);
+        };
+        /**
+         *
+         * @param {T.Position} center_integer
+         * @param {number} radius
+         * @returns {Array}
+         * @private
+         */
+        MapGenerator.prototype.getMapArrayCircle = function (center_integer, radius) {
+            var bounds = 1;
+            var z_map = this.getZMapCircle(center_integer, radius);
+            var map = this.terrainMap(z_map);
+            return (map);
+        };
+        /**
+         *
+         * @param {Array} map_array
+         * @param {T.Position} center_integer
+         * @param {number} radius
+         * @returns {Array}
+         * @private
+         */
+        MapGenerator.prototype.convertMapArrayToObjects = function (map_array, center_integer, radius) {
+            var objects = new T.Objects.Array();
+            for (var y = 0; y < radius * 2; y++) {
+                for (var x = 0; x < radius * 2; x++) {
+                    if (typeof (map_array[y][x]) === 'undefined')
+                        continue;
+                    var object = new T.Objects.Terrain(map_array[y][x]);
+                    object.x = center_integer.x - radius + x;
+                    object.y = center_integer.y - radius + y;
+                    objects.push(object);
+                }
+            }
+            return (objects);
+        };
+        /**
+         *
+         * @param {T.Position} center
+         * @param {number} radius
+         * @param {T.Position} not_center
+         * @returns {Array}
+         * @private
+         */
+        MapGenerator.prototype.getPureMap = function (center, radius, not_center) {
+            //console.log(center,not_center);
+            var center_integer = {
+                x: Math.floor(center.x),
+                y: Math.floor(center.y)
+            };
+            if (not_center)
+                not_center = new T.Position(not_center.x - center_integer.x, not_center.y - center_integer.y);
+            /*var map_array = this.getMapArrayCircle(center_integer,radius);
+             var objects = this.convertMapArrayToObjects(map_array,center_integer,radius);/**/
+            var objects = new T.Objects.Array();
+            var x, y, z, t, object;
+            for (y = 0; y <= radius * 2; y++) {
+                for (x = 0; x <= radius * 2; x++) {
+                    if (Math.pow(x - radius + 1 / 2, 2) +
+                        Math.pow(y - radius + 1 / 2, 2) >
+                        Math.pow(radius, 2))
+                        continue;
+                    if (not_center)
+                        if (Math.pow(x - not_center.x - radius + 1 / 2, 2) +
+                            Math.pow(y - not_center.y - radius + 1 / 2, 2) <=
+                            Math.pow(radius, 2))
+                            continue;
+                    z = this.getZ(x - radius + center_integer.x, y - radius + center_integer.y);
+                    z = this.z_normalizing_table[Math.floor(z * this.z_normalizing_table.length)];
+                    t = this.biotope.getZTerrain(z);
+                    //console.log(t);
+                    object = new T.Objects.Terrain(t);
+                    object.x = center_integer.x - radius + x;
+                    object.y = center_integer.y - radius + y;
+                    objects.push(object);
+                }
+            }
+            return (objects);
+        };
+        /**
+         *
+         * @param {T.Objects.Array} objects
+         * @returns {T.Objects.Array}
+         * @private
+         */
+        MapGenerator.prototype.getVirtualObjectsFromTerrainObjects = function (objects) {
+            var virtual_objects = new T.Objects.Array();
+            var objects_1x1_raw = objects.get1x1TerrainObjects().getAll();
+            for (var i = 0, l = objects_1x1_raw.length; i < l; i++) {
+                this.virtualObjectGenerator(objects_1x1_raw[i], virtual_objects);
+            }
+            return (virtual_objects);
+        };
+        //=================================================PUBLIC===============================================================
+        /**
+         * Complete terrain and virtual objects into Objects Array
+         * @param {T.Objects.Array} real_objects
+         * @param {T.Position} center
+         * @param {number} radius
+         * @param {boolean} natural_objects
+         * @param {T.Position} not_center Dont get objects near this center.
+         * @returns {T.Objects.Array}}
+         */
+        MapGenerator.prototype.getCompleteObjects = function (real_objects, center, radius, natural_objects, not_center) {
+            if (natural_objects === void 0) { natural_objects = true; }
+            var complete_objects = this.getPureMap(center, radius, not_center);
+            real_objects.forEach(function (object) {
+                complete_objects.push(object);
+            });
+            if (natural_objects) {
+                var virtual_objects = this.getVirtualObjectsFromTerrainObjects(complete_objects);
+                virtual_objects.forEach(function (object) {
+                    complete_objects.push(object);
+                });
+            }
+            return (complete_objects);
+        };
+        return MapGenerator;
+    }());
+    T.MapGenerator = MapGenerator;
+})(T || (T = {}));
+/**
+ * @author ©Towns.cz
+ * @fileOverview Creates class T.MapGenerator.Biotope
+ */
+//======================================================================================================================
+var T;
+(function (T) {
+    var MapGenerator;
+    (function (MapGenerator) {
+        var Biotope = (function () {
+            /**
+             *
+             * @param {Array} terrains
+             * @constructor
+             */
+            function Biotope(biotopeItemAmountObjects) {
+                var sum = 0;
+                biotopeItemAmountObjects.forEach(function (biotopeItemAmountObject) {
+                    sum += biotopeItemAmountObject.amount;
+                });
+                var from = 0;
+                this.terrains = biotopeItemAmountObjects.map(function (biotopeItemAmountObject) {
+                    var biotopeItemFromObject = {
+                        from: from / sum,
+                        terrain: biotopeItemAmountObject.terrain
+                    };
+                    from += biotopeItemAmountObject.amount;
+                    return (biotopeItemFromObject);
+                });
+            }
+            /**
+             *
+             * @param {number} z
+             * @returns {T.Objects.Terrain}
+             */
+            Biotope.prototype.getZTerrain = function (z) {
+                for (var i = this.terrains.length - 1; i >= 0; i--) {
+                    if (z >= this.terrains[i].from)
+                        return (this.terrains[i].terrain);
+                }
+            };
+            return Biotope;
+        }());
+        MapGenerator.Biotope = Biotope;
+    })(MapGenerator = T.MapGenerator || (T.MapGenerator = {}));
+})(T || (T = {}));
+/**
+ * @author ©Towns.cz
  * @fileOverview Creates class T.Game
  */
 //======================================================================================================================
@@ -1045,226 +1273,6 @@ var T;
         Game.ActionActive = ActionActive;
     })(Game = T.Game || (T.Game = {}));
 })(T || (T = {}));
-/**
- * @author ©Towns.cz
- * @fileOverview Creates class T.MapGenerator
- */
-//======================================================================================================================
-T.MapGenerator = (function () {
-    /**
-     *
-     * @param {function} getZ
-     * @param {Array} z_normalizing_table
-     * @param {T.MapGenerator.Biotope} biotope
-     * @param {function} virtualObjectGenerator
-     * @constructor
-     */
-    function class_1(getZ, z_normalizing_table, biotope, virtualObjectGenerator) {
-        this.getZ = getZ;
-        this.z_normalizing_table = z_normalizing_table;
-        this.biotope = biotope;
-        this.virtualObjectGenerator = virtualObjectGenerator;
-    }
-    /**
-     *
-     * @param {T.Position} center_integer
-     * @param {number} radius
-     * @returns {Array}
-     * @private
-     */
-    class_1.prototype.getZMapCircle = function (center_integer, radius) {
-        var map = [];
-        for (var y = 0; y <= radius * 2; y++) {
-            map[y] = [];
-            for (var x = 0; x <= radius * 2; x++) {
-                if (Math.pow(x - radius + 1 / 2, 2) +
-                    Math.pow(y - radius + 1 / 2, 2) >
-                    Math.pow(radius, 2))
-                    continue;
-                var z = this.getZ(x - radius + center_integer.x, y - radius + center_integer.y);
-                map[y][x] = this.z_normalizing_table[Math.floor(z * this.z_normalizing_table.length)];
-            }
-        }
-        return (map);
-    };
-    /**
-     *
-     * @param {Array} map
-     * @returns {Array}
-     * @private
-     */
-    class_1.prototype.terrainMap = function (map) {
-        var map_bg = [];
-        for (var y = 0, l = map.length; y < l; y++) {
-            map_bg[y] = [];
-            for (var x = 0; x < l; x++) {
-                if (typeof (map[y][x]) === 'undefined')
-                    continue;
-                map_bg[y][x] = this.biotope.getZTerrain(map[y][x]);
-            }
-        }
-        return (map_bg);
-    };
-    /**
-     *
-     * @param {T.Position} center_integer
-     * @param {number} radius
-     * @returns {Array}
-     * @private
-     */
-    class_1.prototype.getMapArrayCircle = function (center_integer, radius) {
-        var bounds = 1;
-        var z_map = this.getZMapCircle(center_integer, radius);
-        var map = this.terrainMap(z_map);
-        return (map);
-    };
-    /**
-     *
-     * @param {Array} map_array
-     * @param {T.Position} center_integer
-     * @param {number} radius
-     * @returns {Array}
-     * @private
-     */
-    class_1.prototype.convertMapArrayToObjects = function (map_array, center_integer, radius) {
-        var objects = new T.Objects.Array();
-        for (var y = 0; y < radius * 2; y++) {
-            for (var x = 0; x < radius * 2; x++) {
-                if (typeof (map_array[y][x]) === 'undefined')
-                    continue;
-                var object = new T.Objects.Terrain(map_array[y][x]);
-                object.x = center_integer.x - radius + x;
-                object.y = center_integer.y - radius + y;
-                objects.push(object);
-            }
-        }
-        return (objects);
-    };
-    /**
-     *
-     * @param {T.Position} center
-     * @param {number} radius
-     * @param {T.Position} not_center
-     * @returns {Array}
-     * @private
-     */
-    class_1.prototype.getPureMap = function (center, radius, not_center) {
-        //console.log(center,not_center);
-        if (not_center === void 0) { not_center = false; }
-        var center_integer = {
-            x: Math.floor(center.x),
-            y: Math.floor(center.y)
-        };
-        if (not_center)
-            not_center = {
-                x: not_center.x - center_integer.x,
-                y: not_center.y - center_integer.y
-            };
-        /*var map_array = this.getMapArrayCircle(center_integer,radius);
-        var objects = this.convertMapArrayToObjects(map_array,center_integer,radius);/**/
-        var objects = new T.Objects.Array();
-        var x, y, z, t, object;
-        for (y = 0; y <= radius * 2; y++) {
-            for (x = 0; x <= radius * 2; x++) {
-                if (Math.pow(x - radius + 1 / 2, 2) +
-                    Math.pow(y - radius + 1 / 2, 2) >
-                    Math.pow(radius, 2))
-                    continue;
-                if (not_center)
-                    if (Math.pow(x - not_center.x - radius + 1 / 2, 2) +
-                        Math.pow(y - not_center.y - radius + 1 / 2, 2) <=
-                        Math.pow(radius, 2))
-                        continue;
-                z = this.getZ(x - radius + center_integer.x, y - radius + center_integer.y);
-                z = this.z_normalizing_table[Math.floor(z * this.z_normalizing_table.length)];
-                t = this.biotope.getZTerrain(z);
-                //console.log(t);
-                object = new T.Objects.Terrain(t);
-                object.x = center_integer.x - radius + x;
-                object.y = center_integer.y - radius + y;
-                objects.push(object);
-            }
-        }
-        return (objects);
-    };
-    /**
-     *
-     * @param {T.Objects.Array} objects
-     * @returns {T.Objects.Array}
-     * @private
-     */
-    class_1.prototype.getVirtualObjectsFromTerrainObjects = function (objects) {
-        var virtual_objects = [];
-        var objects_1x1_raw = objects.get1x1TerrainObjects().getAll();
-        for (var i = 0, l = objects_1x1_raw.length; i < l; i++) {
-            this.virtualObjectGenerator(objects_1x1_raw[i], virtual_objects);
-        }
-        return (virtual_objects);
-    };
-    //=================================================PUBLIC===============================================================
-    /**
-     * Complete terrain and virtual objects into Objects Array
-     * @param {T.Objects.Array} real_objects
-     * @param {T.Position} center
-     * @param {number} radius
-     * @param {boolean} virtual_objects
-     * @param {T.Position} not_center Dont get objects near this center.
-     * @returns {T.Objects.Array}}
-     */
-    class_1.prototype.getCompleteObjects = function (real_objects, center, radius, natural_objects, not_center) {
-        if (natural_objects === void 0) { natural_objects = true; }
-        if (not_center === void 0) { not_center = false; }
-        var complete_objects = this.getPureMap(center, radius, not_center);
-        real_objects.forEach(function (object) {
-            complete_objects.push(object);
-        });
-        if (natural_objects) {
-            var virtual_objects = this.getVirtualObjectsFromTerrainObjects(complete_objects);
-            virtual_objects.forEach(function (object) {
-                complete_objects.push(object);
-            });
-        }
-        return (complete_objects);
-    };
-    return class_1;
-}());
-/**
- * @author ©Towns.cz
- * @fileOverview Creates class T.MapGenerator.Biotope
- */
-//======================================================================================================================
-T.MapGenerator.Biotope = (function () {
-    /**
-     *
-     * @param {Array} terrains
-     * @constructor
-     */
-    function class_2(terrains) {
-        var sum = 0;
-        terrains.forEach(function (terrain) {
-            sum += terrain.amount;
-        });
-        var from = 0;
-        terrains.forEach(function (terrain) {
-            terrain.from = from / sum;
-            from += terrain.amount;
-        });
-        //console.log(terrains);
-        this.terrains = terrains;
-    }
-    /**
-     *
-     * @param {number} z
-     * @returns {T.Objects.Terrain}
-     */
-    class_2.prototype.getZTerrain = function (z) {
-        for (var i = this.terrains.length - 1; i >= 0; i--) {
-            if (z >= this.terrains[i].from)
-                return (this.terrains[i].terrain);
-        }
-    };
-    return class_2;
-}());
 /**
  * @author ©Towns.cz
  * @fileOverview Creates class T.Model
@@ -1960,7 +1968,7 @@ var T;
              * @returns {Number}
              */
             Array.prototype.push = function (object) {
-                return this.objects.push(T.Objects.Object.init(object));
+                this.objects.push(T.Objects.Object.init(object));
             };
             /**
              * Update or push object into Objects Array
@@ -2212,10 +2220,11 @@ var T;
             //todo jsdoc
             Array.prototype.getTerrainOnPosition = function (position) {
                 for (var i = this.objects.length - 1; i >= 0; i--) {
-                    if (this.objects[i].type != 'terrain')
-                        continue;
-                    if (this.objects[i].design.data.size <= position.getDistance(new T.Position(this.objects[i].x, this.objects[i].y))) {
-                        return (this.objects[i]);
+                    //if (this.objects[i].type != 'terrain')continue;
+                    if (this.objects[i] instanceof T.Objects.Terrain) {
+                        if (this.objects[i].design.data.size <= position.getDistance(new T.Position(this.objects[i].x, this.objects[i].y))) {
+                            return (this.objects[i]);
+                        }
                     }
                 }
                 return (null);
@@ -3279,17 +3288,17 @@ var T;
             rounds: 1,
             cooldown: 1
         }, (function (_super) {
-            __extends(class_3, _super);
-            function class_3() {
+            __extends(class_1, _super);
+            function class_1() {
                 _super.apply(this, arguments);
             }
-            class_3.prototype.getType = function () {
+            class_1.prototype.getType = function () {
                 return ('attack');
             };
-            class_3.prototype.countPriceBase = function () {
+            class_1.prototype.countPriceBase = function () {
                 return ((Math.pow(this.params.distance, 2) * this.params.strength * this.params.rounds * (1 / this.params.cooldown)) * 100 * 0.05);
             };
-            class_3.prototype.getPriceResources = function () {
+            class_1.prototype.getPriceResources = function () {
                 return ([
                     new T.Resources({ 'wood': 2 }),
                     //new T.Resources({'clay':   0}),
@@ -3297,7 +3306,7 @@ var T;
                     new T.Resources({ 'iron': 2 })
                 ]);
             };
-            class_3.execute = function (game, attacker, attacked, resources_attacker) {
+            class_1.execute = function (game, attacker, attacked, resources_attacker) {
                 var attacker_attack = attacker.getAction('attack');
                 var attacker_defence = attacker.getAction('defence');
                 var attacked_attack = attacked.getAction('attack');
@@ -3369,7 +3378,7 @@ var T;
                 if (attacked_life.life < 1)
                     attacked_life.life = 1;
             };
-            return class_3;
+            return class_1;
         }(T.Game.ActionActive)));
     })(World = T.World || (T.World = {}));
 })(T || (T = {}));
@@ -3385,24 +3394,24 @@ var T;
         World.game.installActionClass({
             defence: 0
         }, (function (_super) {
-            __extends(class_4, _super);
-            function class_4() {
+            __extends(class_2, _super);
+            function class_2() {
                 _super.apply(this, arguments);
             }
-            class_4.prototype.getType = function () {
+            class_2.prototype.getType = function () {
                 return ('defence');
             };
-            class_4.prototype.countPriceBase = function () {
+            class_2.prototype.countPriceBase = function () {
                 return ((this.params.defence) * 800 * 0.05);
             };
-            class_4.prototype.getPriceResources = function () {
+            class_2.prototype.getPriceResources = function () {
                 return ([
                     new T.Resources({ 'wood': 2 }),
                     new T.Resources({ 'clay': 2 }),
                     new T.Resources({ 'stone': 1 }),
                 ]);
             };
-            return class_4;
+            return class_2;
         }(T.Game.Action)));
     })(World = T.World || (T.World = {}));
 })(T || (T = {}));
@@ -3419,20 +3428,20 @@ var T;
             life: 1,
             max_life: 1
         }, (function (_super) {
-            __extends(class_5, _super);
-            function class_5() {
+            __extends(class_3, _super);
+            function class_3() {
                 _super.apply(this, arguments);
             }
-            class_5.prototype.getType = function () {
+            class_3.prototype.getType = function () {
                 return ('life');
             };
-            class_5.prototype.countPriceBase = function () {
+            class_3.prototype.countPriceBase = function () {
                 return (0);
             };
-            class_5.prototype.getPriceResources = function () {
+            class_3.prototype.getPriceResources = function () {
                 return ([new T.Resources()]);
             };
-            return class_5;
+            return class_3;
         }(T.Game.Action)));
     })(World = T.World || (T.World = {}));
 })(T || (T = {}));
@@ -3451,18 +3460,18 @@ var T;
             clay: 0,
             stone: 0
         }, (function (_super) {
-            __extends(class_6, _super);
-            function class_6() {
+            __extends(class_4, _super);
+            function class_4() {
                 _super.apply(this, arguments);
             }
-            class_6.prototype.getType = function () {
+            class_4.prototype.getType = function () {
                 return ('mine');
             };
-            class_6.prototype.countPriceBase = function () {
+            class_4.prototype.countPriceBase = function () {
                 var amount = this.params.wood + this.params.iron + this.params.clay + this.params.stone;
                 return amount * 3600 * 0.05;
             };
-            class_6.prototype.getPriceResources = function () {
+            class_4.prototype.getPriceResources = function () {
                 return ([
                     new T.Resources({ 'wood': 3 }),
                     new T.Resources({ 'clay': 2 }),
@@ -3470,7 +3479,7 @@ var T;
                     new T.Resources({ 'iron': 4 })
                 ]);
             };
-            return class_6;
+            return class_4;
         }(T.Game.Action)));
     })(World = T.World || (T.World = {}));
 })(T || (T = {}));
@@ -3487,17 +3496,17 @@ var T;
             speed: 0,
             cooldown: 0
         }, (function (_super) {
-            __extends(class_7, _super);
-            function class_7() {
+            __extends(class_5, _super);
+            function class_5() {
                 _super.apply(this, arguments);
             }
-            class_7.prototype.getType = function () {
+            class_5.prototype.getType = function () {
                 return ('move');
             };
-            class_7.prototype.countPriceBase = function () {
+            class_5.prototype.countPriceBase = function () {
                 return ((Math.pow(this.params.speed, 2)) * 10 * 0.05);
             };
-            class_7.prototype.getPriceResources = function () {
+            class_5.prototype.getPriceResources = function () {
                 return ([
                     new T.Resources({ 'wood': 2 }),
                     //new T.Resources({'clay':   0}),
@@ -3505,7 +3514,7 @@ var T;
                     new T.Resources({ 'iron': 1 })
                 ]);
             };
-            class_7.execute = function (game, object, destinations /*,objects_nearby,resources*/) {
+            class_5.execute = function (game, object, destinations /*,objects_nearby,resources*/) {
                 //---------------------Checking action//todo maybe auto
                 var action = object.getAction('move');
                 if (action instanceof T.Game.Action) {
@@ -3522,7 +3531,7 @@ var T;
                 object.getAction('move').nowExecuted(); //todo is it needed
                 //---------------------
             };
-            return class_7;
+            return class_5;
         }(T.Game.ActionActive)));
     })(World = T.World || (T.World = {}));
 })(T || (T = {}));
@@ -3538,17 +3547,17 @@ var T;
         World.game.installActionClass({
             regenerate: 100,
         }, (function (_super) {
-            __extends(class_8, _super);
-            function class_8() {
+            __extends(class_6, _super);
+            function class_6() {
                 _super.apply(this, arguments);
             }
-            class_8.prototype.getType = function () {
+            class_6.prototype.getType = function () {
                 return ('regenerate');
             };
-            class_8.prototype.countPriceBase = function () {
+            class_6.prototype.countPriceBase = function () {
                 return ((1 / this.params.regenerate) * 3600 * 0.05);
             };
-            class_8.prototype.getPriceResources = function () {
+            class_6.prototype.getPriceResources = function () {
                 return ([
                     new T.Resources({ 'wood': 4 }),
                     new T.Resources({ 'clay': 2 }),
@@ -3556,7 +3565,7 @@ var T;
                     new T.Resources({ 'iron': 2 })
                 ]);
             };
-            return class_8;
+            return class_6;
         }(T.Game.Action)));
     })(World = T.World || (T.World = {}));
 })(T || (T = {}));
@@ -3572,17 +3581,17 @@ var T;
         World.game.installActionClass({
             repair: 0
         }, (function (_super) {
-            __extends(class_9, _super);
-            function class_9() {
+            __extends(class_7, _super);
+            function class_7() {
                 _super.apply(this, arguments);
             }
-            class_9.prototype.getType = function () {
+            class_7.prototype.getType = function () {
                 return ('repair');
             };
-            class_9.prototype.countPriceBase = function () {
+            class_7.prototype.countPriceBase = function () {
                 return ((1 / (this.params.repair / 100)) * 1000 * 0.05);
             };
-            class_9.prototype.getPriceResources = function () {
+            class_7.prototype.getPriceResources = function () {
                 return ([
                     new T.Resources({ 'wood': 4 }),
                     new T.Resources({ 'clay': 2 }),
@@ -3590,7 +3599,7 @@ var T;
                     new T.Resources({ 'iron': 4 })
                 ]);
             };
-            return class_9;
+            return class_7;
         }(T.Game.ActionActive)));
     })(World = T.World || (T.World = {}));
 })(T || (T = {}));
@@ -3606,17 +3615,17 @@ var T;
         World.game.installActionClass({
             throughput: 0
         }, (function (_super) {
-            __extends(class_10, _super);
-            function class_10() {
+            __extends(class_8, _super);
+            function class_8() {
                 _super.apply(this, arguments);
             }
-            class_10.prototype.getType = function () {
+            class_8.prototype.getType = function () {
                 return ('throughput');
             };
-            class_10.prototype.countPriceBase = function () {
+            class_8.prototype.countPriceBase = function () {
                 return ((Math.pow(this.params.throughput / 100, 2)) * 10 * 0.05); //todo
             };
-            class_10.prototype.getPriceResources = function () {
+            class_8.prototype.getPriceResources = function () {
                 return ([
                     new T.Resources({ 'wood': 2 }),
                     new T.Resources({ 'clay': 3 }),
@@ -3624,7 +3633,7 @@ var T;
                     new T.Resources({ 'iron': 0 })
                 ]);
             };
-            return class_10;
+            return class_8;
         }(T.Game.Action)));
     })(World = T.World || (T.World = {}));
 })(T || (T = {}));
