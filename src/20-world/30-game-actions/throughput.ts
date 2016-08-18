@@ -4,7 +4,7 @@
  */
 //======================================================================================================================
 
-module T.World {
+namespace T.World {
 
     interface ActionThroughputParamsObject{
         throughput: number;

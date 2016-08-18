@@ -6,7 +6,7 @@
 //======================================================================================================================
 
 
-module T.World{
+namespace T.World{
 
     export var mapGenerator = new T.MapGenerator(
 

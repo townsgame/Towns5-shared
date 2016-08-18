@@ -5,7 +5,7 @@
  */
 //======================================================================================================================
 
-module T.Objects {
+namespace T.Objects {
 
     export class Story extends T.Objects.Object {
 

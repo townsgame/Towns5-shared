@@ -5,7 +5,7 @@
  */
 //======================================================================================================================
 
-module T.Objects {
+namespace T.Objects {
 
 //todo T.Objects.Array = class extends Array{
 
@@ -14,6 +14,7 @@ module T.Objects {
 
 
         public objects:T.Objects.Object[];
+        //public objects:Array;
 
 
         constructor(objects:T.Objects.Object[] = []) {
@@ -21,12 +22,11 @@ module T.Objects {
             //r(objects);
             //r(objects.length);
 
-            for(var i=0,l=objects.length;i<l;i++){
+            for(let i in objects){
 
-                //r(i);
                 objects[i] = T.Objects.Object.init(objects[i]);
-
             }
+
 
             this.objects = objects;
 

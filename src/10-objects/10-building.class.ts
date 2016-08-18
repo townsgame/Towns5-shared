@@ -5,7 +5,7 @@
  */
 //======================================================================================================================
 
-module T.Objects {
+namespace T.Objects {
 
     interface DesignObject{
         type: string;

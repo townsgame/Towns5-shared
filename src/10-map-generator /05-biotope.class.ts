@@ -6,7 +6,7 @@
 //======================================================================================================================
 
 
-module T.MapGenerator {
+namespace T.MapGenerator {
 
     interface BiotopeItemAmountObject{
         amount: number;

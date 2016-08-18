@@ -1,5 +1,5 @@
 
-module T.World {
+namespace T.World {
 
 
     interface ActionAttackParamsObject{

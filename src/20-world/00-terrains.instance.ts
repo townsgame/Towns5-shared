@@ -4,7 +4,7 @@
  * @fileOverview Creates instance T.World.terrains
  */
 //======================================================================================================================
-module T.World{
+namespace T.World{
 
 
     export var terrains = [

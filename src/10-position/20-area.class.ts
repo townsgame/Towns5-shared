@@ -1,5 +1,5 @@
 
-module T {
+namespace T {
     export class Area {
 
         public positions: Array;

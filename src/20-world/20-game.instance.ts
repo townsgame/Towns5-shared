@@ -4,7 +4,7 @@
  */
 //======================================================================================================================
 
-module T.World {
+namespace T.World {
 
     export var game = new T.Game(
         T.TMath.prettyNumber,

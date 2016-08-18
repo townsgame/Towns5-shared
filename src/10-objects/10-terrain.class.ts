@@ -5,7 +5,7 @@
  */
 //======================================================================================================================
 
-module T.Objects {
+namespace T.Objects {
 
     export class Terrain extends T.Objects.Object {
 

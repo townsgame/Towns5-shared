@@ -6,7 +6,7 @@
 
 
 
-module T {
+namespace T {
 
     interface UserProfile {
         username: 'string';

@@ -6,7 +6,7 @@
 
 
 
-module T {
+namespace T {
 
     interface ObjectWithId{
         id: string | number;
@@ -117,7 +117,7 @@ module T {
          * @param to
          * @return {array} Removed items
          */
-        static removeItems(array:Array<any>, from:number, to:number):Array {
+        static removeItems(array:Array<any>, from:number, to:number):Array<any> {
             var rest = array.slice((to || from) + 1 || array.length);
             array.length = from < 0 ? array.length + from : from;
             return array.push.apply(array, rest);
