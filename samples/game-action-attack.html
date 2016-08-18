@@ -12,7 +12,7 @@
         }).done(function(response) {
 
 
-            var objects = new T.Objects.Array(response);
+            var objects = new TOWNS.Objects.Array(response);
 
             r(objects);
 
@@ -32,14 +32,14 @@
             attacked.y=100;
 
 
-            var resources = new T.Resources({wood:300});
+            var resources = new TOWNS.Resources({wood:300});
 
 
 
             $('html').append(attacker.createHtmlProfile()+' <div class="big">vs.</div> '+attacked.createHtmlProfile());
 
 
-            result = T.World.game.createActionExecute('attack')(attacker,attacked,resources);
+            result = TOWNS.World.game.createActionExecute('attack')(attacker,attacked,resources);
 
 
             console.log(result);
@@ -50,7 +50,7 @@
 
 
 
-            result = T.World.game.createActionExecute('attack')(attacker,attacked,resources);
+            result = TOWNS.World.game.createActionExecute('attack')(attacker,attacked,resources);
 
 
             $('html').append('<div class="big">=</div>');

@@ -1,5 +1,5 @@
 
-console.log('Testing T.Path');
+console.log('Testing TOWNS.Path');
 
 
 
@@ -24,19 +24,19 @@ describe('Testing path that could not be created because of', function () {
 
         var self=this;
 
-        expect(function(){new T.Path()})
+        expect(function(){new TOWNS.Path()})
             .toThrow();
 
     });
 
 
-    it('params are not T.Position', function () {
+    it('params are not TOWNS.Position', function () {
 
         var self=this;
 
-        expect(function(){new T.Path(123, 345)})
+        expect(function(){new TOWNS.Path(123, 345)})
             .toThrow();
-        expect(function(){new T.Path(123, new T.PositionDate(1, 2, self.now))})
+        expect(function(){new TOWNS.Path(123, new TOWNS.PositionDate(1, 2, self.now))})
             .toThrow();
 
     });
@@ -46,7 +46,7 @@ describe('Testing path that could not be created because of', function () {
 
         var self=this;
 
-        expect(function(){new T.Path(new T.PositionDate(1, 2, self.now))})
+        expect(function(){new TOWNS.Path(new TOWNS.PositionDate(1, 2, self.now))})
             .toThrow();
 
     });
@@ -56,9 +56,9 @@ describe('Testing path that could not be created because of', function () {
 
         var self=this;
 
-        expect(function(){new T.Path(
-            new T.PositionDate(1, 2, self.now),
-            new T.PositionDate(1, 2, self.invalid_date)
+        expect(function(){new TOWNS.Path(
+            new TOWNS.PositionDate(1, 2, self.now),
+            new TOWNS.PositionDate(1, 2, self.invalid_date)
         )})
             .toThrow();
 
@@ -69,17 +69,17 @@ describe('Testing path that could not be created because of', function () {
 
         var self=this;
 
-        expect(function(){new T.Path(
-            new T.PositionDate(1, 2, self.now),
-            new T.PositionDate(1, 2, self.now)
+        expect(function(){new TOWNS.Path(
+            new TOWNS.PositionDate(1, 2, self.now),
+            new TOWNS.PositionDate(1, 2, self.now)
         )})
             .toThrow();
 
 
-        expect(function(){new T.Path(
-            new T.PositionDate(1, 2, self.now),
-            new T.PositionDate(1, 2, self.future),
-            new T.PositionDate(1, 2, self.future)
+        expect(function(){new TOWNS.Path(
+            new TOWNS.PositionDate(1, 2, self.now),
+            new TOWNS.PositionDate(1, 2, self.future),
+            new TOWNS.PositionDate(1, 2, self.future)
         )})
             .toThrow();
 
@@ -90,18 +90,18 @@ describe('Testing path that could not be created because of', function () {
 
         var self=this;
 
-        expect(function(){new T.Path(
-            new T.PositionDate(1, 2, self.now),
-            new T.PositionDate(1, 2, self.future),
-            new T.PositionDate(1, 2, self.past)
+        expect(function(){new TOWNS.Path(
+            new TOWNS.PositionDate(1, 2, self.now),
+            new TOWNS.PositionDate(1, 2, self.future),
+            new TOWNS.PositionDate(1, 2, self.past)
         )})
             .toThrow();
 
 
-        expect(function(){new T.Path(
-            new T.PositionDate(1, 2, self.now),
-            new T.PositionDate(1, 2, self.past),
-            new T.PositionDate(1, 2, self.future)
+        expect(function(){new TOWNS.Path(
+            new TOWNS.PositionDate(1, 2, self.now),
+            new TOWNS.PositionDate(1, 2, self.past),
+            new TOWNS.PositionDate(1, 2, self.future)
         )})
             .toThrow();
 
@@ -128,10 +128,10 @@ describe('Testing path that could be created because of', function () {
 
         var self=this;
 
-        expect(function(){new T.Path(
-            new T.PositionDate(1, 2, self.past),
-            new T.PositionDate(1, 2, self.now),
-            new T.PositionDate(1, 2, self.future)
+        expect(function(){new TOWNS.Path(
+            new TOWNS.PositionDate(1, 2, self.past),
+            new TOWNS.PositionDate(1, 2, self.now),
+            new TOWNS.PositionDate(1, 2, self.future)
         )})
             .not.toThrow();
 
@@ -163,13 +163,13 @@ describe('Testing path that could be created because of', function () {
 
             this.date = date;
 
-            this.path = new T.Path(
-                new T.PositionDate(10, 10, new Date(this.date + 0 * 1000)),
-                new T.PositionDate(10, 20, new Date(this.date + 1 * 1000)),
-                new T.PositionDate(10, 40, new Date(this.date + 2 * 1000)),
-                new T.PositionDate(20, 40, new Date(this.date + 3 * 1000)),
-                new T.PositionDate(40, 40, new Date(this.date + 4 * 1000)),
-                new T.PositionDate(0, 0, new Date(this.date + 5 * 1000))
+            this.path = new TOWNS.Path(
+                new TOWNS.PositionDate(10, 10, new Date(this.date + 0 * 1000)),
+                new TOWNS.PositionDate(10, 20, new Date(this.date + 1 * 1000)),
+                new TOWNS.PositionDate(10, 40, new Date(this.date + 2 * 1000)),
+                new TOWNS.PositionDate(20, 40, new Date(this.date + 3 * 1000)),
+                new TOWNS.PositionDate(40, 40, new Date(this.date + 4 * 1000)),
+                new TOWNS.PositionDate(0, 0, new Date(this.date + 5 * 1000))
             );
 
 
@@ -180,10 +180,10 @@ describe('Testing path that could be created because of', function () {
 
             var positions = this.path.getPositions();
 
-            expect(positions[0]).toEqual(new T.Position(10,10));
-            expect(positions[1]).toEqual(new T.Position(10,20));
-            expect(positions[2]).toEqual(new T.Position(10,40));
-            expect(positions[5]).toEqual(new T.Position(0,0));
+            expect(positions[0]).toEqual(new TOWNS.Position(10,10));
+            expect(positions[1]).toEqual(new TOWNS.Position(10,20));
+            expect(positions[2]).toEqual(new TOWNS.Position(10,40));
+            expect(positions[5]).toEqual(new TOWNS.Position(0,0));
 
 
 
@@ -227,9 +227,9 @@ describe('Testing path that could be created because of', function () {
 
         it('countPosition', function () {
 
-            expect(this.path.countPosition(this.date)).toEqual(new T.Position(10, 10));
+            expect(this.path.countPosition(this.date)).toEqual(new TOWNS.Position(10, 10));
             expect(this.path.countPosition(this.date + 1).x).toBeCloseTo(10);
-            expect(this.path.countPosition(this.date + 1000)).toEqual(new T.Position(10, 20));
+            expect(this.path.countPosition(this.date + 1000)).toEqual(new TOWNS.Position(10, 20));
 
         });
 
@@ -291,13 +291,13 @@ describe('Testing path that begins now and it is constant', function() {
 
         this.date = new Date()/1;
 
-         this.path = T.Path.newConstantSpeed([
-         new T.Position(10,10),
-         new T.Position(10,20),
-         new T.Position(10,40),
-         new T.Position(20,40),
-         new T.Position(40,40),
-         new T.Position( 0, 0)
+         this.path = TOWNS.Path.newConstantSpeed([
+         new TOWNS.Position(10,10),
+         new TOWNS.Position(10,20),
+         new TOWNS.Position(10,40),
+         new TOWNS.Position(20,40),
+         new TOWNS.Position(40,40),
+         new TOWNS.Position( 0, 0)
          ],5);
 
         //console.log('genereted path --->');
@@ -311,9 +311,9 @@ describe('Testing path that begins now and it is constant', function() {
 
     it('countPosition', function () {
 
-        expect(this.path.countPosition(this.date)).toEqual(new T.Position(10,10));
+        expect(this.path.countPosition(this.date)).toEqual(new TOWNS.Position(10,10));
         expect(this.path.countPosition(this.date+1).x).toBeCloseTo(10);
-        expect(this.path.countPosition(this.date+9999999)).toEqual(new T.Position(0,0));
+        expect(this.path.countPosition(this.date+9999999)).toEqual(new TOWNS.Position(0,0));
 
     });
 
@@ -371,10 +371,10 @@ describe('Testing path can be', function() {
 
         this.date = new Date() / 1 -1000;
 
-        this.path = new T.Path(
-            new T.PositionDate(10, 10, new Date(this.date + 0 * 60000)),
-            new T.PositionDate(10, 20, new Date(this.date + 1 * 60000)),
-            new T.PositionDate(10, 20, new Date(this.date + 2* 60000))
+        this.path = new TOWNS.Path(
+            new TOWNS.PositionDate(10, 10, new Date(this.date + 0 * 60000)),
+            new TOWNS.PositionDate(10, 20, new Date(this.date + 1 * 60000)),
+            new TOWNS.PositionDate(10, 20, new Date(this.date + 2* 60000))
         );
 
     });
@@ -383,8 +383,8 @@ describe('Testing path can be', function() {
 
     it('converted and deconverted to and from JSON.', function () {
 
-        this.path_clone1 = new T.Path(...JSON.parse(JSON.stringify(this.path)));
-        this.path_clone2 = new T.Path(...JSON.parse(JSON.stringify(this.path_clone1)));
+        this.path_clone1 = new TOWNS.Path(...JSON.parse(JSON.stringify(this.path)));
+        this.path_clone2 = new TOWNS.Path(...JSON.parse(JSON.stringify(this.path_clone1)));
 
         //console.log(this.path.toString());
         //console.log(this.path_clone1.toString());

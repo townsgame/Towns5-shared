@@ -1,11 +1,11 @@
 /**
  * @author ©Towns.cz
- * @fileOverview Creates static class T.TMath
+ * @fileOverview Creates static class TOWNS.TMath
  */
 //======================================================================================================================
 
 
-namespace T {
+namespace TOWNS {
 
 
     interface position {
@@ -141,8 +141,8 @@ namespace T {
         static xy2distDeg(x:number, y:number):positionPolar {
 
             var output = {
-                dist: T.TMath.xy2dist(x, y),
-                deg:  T.TMath.rad2deg(Math.atan2(y, x))
+                dist: TOWNS.TMath.xy2dist(x, y),
+                deg:  TOWNS.TMath.rad2deg(Math.atan2(y, x))
 
             };
 
@@ -156,7 +156,7 @@ namespace T {
 
         static distDeg2xy(dist:number, deg:number):position {
 
-            var rad = T.TMath.deg2rad(deg);
+            var rad = TOWNS.TMath.deg2rad(deg);
 
             var output = {
                 x: Math.cos(rad) * dist,
@@ -174,10 +174,10 @@ namespace T {
         static xyRotate(x: number, y:number, deg:number):position {
 
 
-            var dist = T.TMath.xy2dist(x, y);
+            var dist = TOWNS.TMath.xy2dist(x, y);
             var rad = Math.atan2(y, x);
 
-            rad += T.TMath.deg2rad(deg);
+            rad += TOWNS.TMath.deg2rad(deg);
 
 
             var output = {
@@ -290,8 +290,8 @@ namespace T {
             if (aSlope != bSlope)return false;
 
 
-            var aDist = T.TMath.xy2dist(a2y, a2x);
-            var bDist = T.TMath.xy2dist(b1y, b1x);
+            var aDist = TOWNS.TMath.xy2dist(a2y, a2x);
+            var bDist = TOWNS.TMath.xy2dist(b1y, b1x);
 
             return (aDist >= bDist);
 
@@ -327,8 +327,8 @@ namespace T {
                 //var collision= (numerator1 == 0 && numerator2 == 0);
                 //collision=false;
 
-                var bOnA = T.TMath.isOnLine(a1x, a1y, a2x, a2y, b1x, b1y);
-                var aOnB = T.TMath.isOnLine(b1x, b1y, b2x, b2y, a1x, a1y);
+                var bOnA = TOWNS.TMath.isOnLine(a1x, a1y, a2x, a2y, b1x, b1y);
+                var aOnB = TOWNS.TMath.isOnLine(b1x, b1y, b2x, b2y, a1x, a1y);
 
                 return (bOnA || aOnB);
 

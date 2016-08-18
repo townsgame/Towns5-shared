@@ -1,5 +1,5 @@
 
-console.log('Testing T.Area');
+console.log('Testing TOWNS.Area');
 
 
 
@@ -8,21 +8,21 @@ console.log('Testing T.Area');
 
 
 
-describe('Testing T.Area that could not be created because of', function () {
+describe('Testing TOWNS.Area that could not be created because of', function () {
 
 
     it('less than 2 params', function () {
 
         expect(function () {
-            new T.Area()
+            new TOWNS.Area()
         }).toThrow();
         expect(function () {
-            new T.Area(new T.Position(10, 10))
+            new TOWNS.Area(new TOWNS.Position(10, 10))
         }).toThrow();
         expect(function () {
-            new T.Area(
-                new T.Position(10, 10),
-                new T.Position(10, 15)
+            new TOWNS.Area(
+                new TOWNS.Position(10, 10),
+                new TOWNS.Position(10, 15)
             )
         }).toThrow();
 
@@ -34,10 +34,10 @@ describe('Testing T.Area that could not be created because of', function () {
 
 
         expect(function () {
-            new T.Area(
-                new T.Position(10, 10),
-                new T.Position(10, 15),
-                new T.Position(10, 15)
+            new TOWNS.Area(
+                new TOWNS.Position(10, 10),
+                new TOWNS.Position(10, 15),
+                new TOWNS.Position(10, 15)
             )
         }).toThrow();
 
@@ -49,19 +49,19 @@ describe('Testing T.Area that could not be created because of', function () {
 
 
         expect(function () {
-            new T.Area(
-                new T.Position(10, 10),
-                new T.Position(20, 20),
-                new T.Position(30, 30)
+            new TOWNS.Area(
+                new TOWNS.Position(10, 10),
+                new TOWNS.Position(20, 20),
+                new TOWNS.Position(30, 30)
             )
         }).toThrow();
 
 
         expect(function () {
-            new T.Area(
-                new T.Position(10, 10),
-                new T.Position(-20, -20),
-                new T.Position(30, 30)
+            new TOWNS.Area(
+                new TOWNS.Position(10, 10),
+                new TOWNS.Position(-20, -20),
+                new TOWNS.Position(30, 30)
             )
         }).toThrow();
 
@@ -72,15 +72,15 @@ describe('Testing T.Area that could not be created because of', function () {
 
 
         expect(function () {
-            new T.Area(
-                new T.Position(10, 10),
-                new T.Position(1, 1),
-                new T.Position(5, 5),
-                new T.Position(6, 6),
-                new T.Position(1000000, 1000000),
-                new T.Position(20, 20),
-                new T.Position(-7777, -7777),
-                new T.Position(30, 30)
+            new TOWNS.Area(
+                new TOWNS.Position(10, 10),
+                new TOWNS.Position(1, 1),
+                new TOWNS.Position(5, 5),
+                new TOWNS.Position(6, 6),
+                new TOWNS.Position(1000000, 1000000),
+                new TOWNS.Position(20, 20),
+                new TOWNS.Position(-7777, -7777),
+                new TOWNS.Position(30, 30)
             )
         }).toThrow();
 
@@ -94,16 +94,16 @@ describe('Testing T.Area that could not be created because of', function () {
 
 
 
-describe('Testing T.Area square', function () {
+describe('Testing TOWNS.Area square', function () {
 
 
     beforeAll(function () {
 
-        this.area = new T.Area(
-            new T.Position(0, 0),
-            new T.Position(10, 0),
-            new T.Position(10, 10),
-            new T.Position(0, 10)
+        this.area = new TOWNS.Area(
+            new TOWNS.Position(0, 0),
+            new TOWNS.Position(10, 0),
+            new TOWNS.Position(10, 10),
+            new TOWNS.Position(0, 10)
         );
 
     });
@@ -111,12 +111,12 @@ describe('Testing T.Area square', function () {
 
     it('isContaining', function () {
 
-        expect(this.area.isContaining(new T.Position(0, 0))).toBe(true);
-        expect(this.area.isContaining(new T.Position(10, 0))).toBe(true);
-        expect(this.area.isContaining(new T.Position(5, 5))).toBe(true);
-        expect(this.area.isContaining(new T.Position(6, 6))).toBe(true);
-        expect(this.area.isContaining(new T.Position(-5, 5))).toBe(false);
-        expect(this.area.isContaining(new T.Position(-1, 0))).toBe(false);
+        expect(this.area.isContaining(new TOWNS.Position(0, 0))).toBe(true);
+        expect(this.area.isContaining(new TOWNS.Position(10, 0))).toBe(true);
+        expect(this.area.isContaining(new TOWNS.Position(5, 5))).toBe(true);
+        expect(this.area.isContaining(new TOWNS.Position(6, 6))).toBe(true);
+        expect(this.area.isContaining(new TOWNS.Position(-5, 5))).toBe(false);
+        expect(this.area.isContaining(new TOWNS.Position(-1, 0))).toBe(false);
 
     });
 
@@ -124,15 +124,15 @@ describe('Testing T.Area square', function () {
 
 
 
-describe('Testing T.Area triangle', function () {
+describe('Testing TOWNS.Area triangle', function () {
 
 
     beforeAll(function () {
 
-        this.area = new T.Area(
-            new T.Position(0, 0),
-            new T.Position(10, 0),
-            new T.Position(0, 10)
+        this.area = new TOWNS.Area(
+            new TOWNS.Position(0, 0),
+            new TOWNS.Position(10, 0),
+            new TOWNS.Position(0, 10)
         );
 
     });
@@ -140,12 +140,12 @@ describe('Testing T.Area triangle', function () {
 
     it('isContaining', function () {
 
-        expect(this.area.isContaining(new T.Position(0, 0))).toBe(true);
-        expect(this.area.isContaining(new T.Position(10, 0))).toBe(true);
-        expect(this.area.isContaining(new T.Position(5, 5))).toBe(true);
-        expect(this.area.isContaining(new T.Position(6, 6))).toBe(false);
-        expect(this.area.isContaining(new T.Position(-5, 5))).toBe(false);
-        expect(this.area.isContaining(new T.Position(-1, 0))).toBe(false);
+        expect(this.area.isContaining(new TOWNS.Position(0, 0))).toBe(true);
+        expect(this.area.isContaining(new TOWNS.Position(10, 0))).toBe(true);
+        expect(this.area.isContaining(new TOWNS.Position(5, 5))).toBe(true);
+        expect(this.area.isContaining(new TOWNS.Position(6, 6))).toBe(false);
+        expect(this.area.isContaining(new TOWNS.Position(-5, 5))).toBe(false);
+        expect(this.area.isContaining(new TOWNS.Position(-1, 0))).toBe(false);
 
     });
 

@@ -1,11 +1,11 @@
 /**
  * @author ©Towns.cz
- * @fileOverview Creates class T.Model
+ * @fileOverview Creates class TOWNS.Model
  */
 //======================================================================================================================
 
 
-namespace T {
+namespace TOWNS {
 
     interface ModelObject{
         name:string;
@@ -44,7 +44,7 @@ namespace T {
 
 
         clone() {
-            return (new T.Model(JSON.parse(JSON.stringify(this))));
+            return (new TOWNS.Model(JSON.parse(JSON.stringify(this))));
         }
 
 
@@ -71,7 +71,7 @@ namespace T {
 
             if (dimension == 'xy') {
 
-                return T.TMath.xy2dist(this.range('x'), this.range('y') * this.size);
+                return TOWNS.TMath.xy2dist(this.range('x'), this.range('y') * this.size);
 
             }
 
@@ -129,7 +129,7 @@ namespace T {
          * @param {number} move_x
          * @param {number} move_y
          */
-        joinModelZ(model:T.Model, move_x:number, move_y:number) {//todo second param should be position
+        joinModelZ(model:TOWNS.Model, move_x:number, move_y:number) {//todo second param should be position
 
             //var  model_=deepCopyModel(model);
             //model_.moveBy(move_x,move_y);//todo maybe delete moveBy
@@ -150,7 +150,7 @@ namespace T {
                 for (var ii in this_linear_particles) {//todo maybe optimize by pre-sorting
 
 
-                    if (T.Model.Particles.collision2D(this_linear_particles[ii], model_linear_particles[i])) {
+                    if (TOWNS.Model.Particles.collision2D(this_linear_particles[ii], model_linear_particles[i])) {
 
                         r(this_linear_particles[ii], model_linear_particles[i]);
 
@@ -340,12 +340,12 @@ namespace T {
 
                     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Position, Rotation and size //todo skew
 
-                    var distDeg = T.TMath.xy2distDeg(particle.position.x, particle.position.y);
+                    var distDeg = TOWNS.TMath.xy2distDeg(particle.position.x, particle.position.y);
 
                     distDeg.dist = distDeg.dist * size;
                     distDeg.deg += rotation;
 
-                    var xy = T.TMath.distDeg2xy(distDeg.dist, distDeg.deg);
+                    var xy = TOWNS.TMath.distDeg2xy(distDeg.dist, distDeg.deg);
 
                     particle.rotation += rotation;
 
@@ -478,12 +478,12 @@ namespace T {
 
         /**
          * Aggregate volume of each resource used in model
-         * @returns {T.Resources}
+         * @returns {TOWNS.Resources}
          */
         aggregateResourcesVolumes() {
 
 
-            var price = new T.Resources({});
+            var price = new TOWNS.Resources({});
 
 
             var linear_particles = this.getLinearParticles();
@@ -499,7 +499,7 @@ namespace T {
                 var material = linear_particle.material.split('_');
                 material = material[0];
 
-                var price_:T.Resources = new T.Resources({});
+                var price_:TOWNS.Resources = new TOWNS.Resources({});
                 price_[material] = volume;
 
                 price.add(price_);

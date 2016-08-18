@@ -1,10 +1,10 @@
 /**
  * @author ©Towns.cz
- * @fileOverview Creates class T.Game.Action
+ * @fileOverview Creates class TOWNS.Game.Action
  */
 //======================================================================================================================
 
-namespace T.Game {
+namespace TOWNS.Game {
 
 
     interface ActionObject{
@@ -26,7 +26,7 @@ namespace T.Game {
             //console.log(this);
 
             if (typeof this.getType() === 'undefined'){
-                throw new Error('You must extend T.Game.Action and add method getType before creating instances!');
+                throw new Error('You must extend TOWNS.Game.Action and add method getType before creating instances!');
             }
 
             var type = this.getType();
@@ -82,7 +82,7 @@ namespace T.Game {
 
             html += `
             <tr>
-                <th colspan="2">` + T.Locale.get('object', 'action', this.type) + `</th>
+                <th colspan="2">` + TOWNS.Locale.get('object', 'action', this.type) + `</th>
             </tr>
             `;
 
@@ -90,7 +90,7 @@ namespace T.Game {
             if (typeof this.last_use !== 'undefined') {
                 html += `
             <tr>
-                <td>` + T.Locale.get('object', 'action', 'last_used') + `</td>
+                <td>` + TOWNS.Locale.get('object', 'action', 'last_used') + `</td>
                 <td>` + this.last_use + `</td>
             </tr>
             `;
@@ -100,7 +100,7 @@ namespace T.Game {
             for (var param in this.params) {
                 html += `
             <tr>
-                <td>` + T.Locale.get('object', 'action', this.type, param) + `</td>
+                <td>` + TOWNS.Locale.get('object', 'action', this.type, param) + `</td>
                 <td>` + this.params[param] + `</td>
             </tr>
             `;

@@ -1,12 +1,12 @@
 /**
  * @author ©Towns.cz
- * @fileOverview Creates static T.ArrayFunctions
+ * @fileOverview Creates static TOWNS.ArrayFunctions
  */
 //======================================================================================================================
 
 
 
-namespace T {
+namespace TOWNS {
 
     interface ObjectWithId{
         id: string | number;
@@ -127,15 +127,16 @@ namespace T {
         //======================================================================================================================
 
 
-        /** todo should it be under T.ArrayFunctions
+        /** todo should it be under TOWNS.ArrayFunctions
          *
          * @param {object} obect
          * @param {array} path
          */
         static filterPath(object: Object, path: Array<string>, setValue: any):any {
-            
 
-            for (var path_i in path) {
+
+            for (let path_i=0,path_l=path.length;path_i<path_l;path_i++) {
+
 
                 var object_key = path[path_i];
 

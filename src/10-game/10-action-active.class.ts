@@ -1,10 +1,10 @@
 /**
  * @author ©Towns.cz
- * @fileOverview Creates class T.Game.Action
+ * @fileOverview Creates class TOWNS.Game.Action
  */
 //======================================================================================================================
 
-namespace T.Game {
+namespace TOWNS.Game {
 
 
     interface ActionActiveParamsObject{
@@ -15,7 +15,7 @@ namespace T.Game {
         params: ActionActiveParamsObject;
     }
 
-    export class ActionActive extends T.Game.Action{
+    export class ActionActive extends TOWNS.Game.Action{
 
 
         public last_use:number;

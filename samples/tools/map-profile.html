@@ -40,7 +40,7 @@
                     y = (start.y*(i/points))+(stop.y*((points-i)/points));
 
 
-                var z = T.World.mapGenerator.getZ(x, y);
+                var z = TOWNS.World.mapGenerator.getZ(x, y);
 
                 z = z_normalizing_table[Math.floor(z * z_normalizing_table.length)];
 

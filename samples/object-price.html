@@ -59,12 +59,12 @@
 
             var object_json = $('#object-json').val();
 
-            building=new T.Objects.Building(JSON.parse(object_json));
+            building=new TOWNS.Objects.Building(JSON.parse(object_json));
 
-            var price_bases = T.World.game.getObjectPriceBases(building);
-            var max_life = T.World.game.getObjectMaxLife(building);
-            var prices = T.World.game.getObjectPrices(building);
-            var price = T.World.game.getObjectPrice(building);
+            var price_bases = TOWNS.World.game.getObjectPriceBases(building);
+            var max_life = TOWNS.World.game.getObjectMaxLife(building);
+            var prices = TOWNS.World.game.getObjectPrices(building);
+            var price = TOWNS.World.game.getObjectPrice(building);
             var resources_volumes = building.getModel().aggregateResourcesVolumes();
 
             $('#object-price').html('');

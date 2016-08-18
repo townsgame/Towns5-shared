@@ -1,11 +1,11 @@
 /**
  * @author ©Towns.cz
- * @fileOverview Creates class T.Position
+ * @fileOverview Creates class TOWNS.Position
  */
 //======================================================================================================================
 
 
-namespace T {
+namespace TOWNS {
 
     interface Position {
         x:number;
@@ -54,17 +54,17 @@ namespace T {
 
             }
             //todo check
-            throw new Error('Wrong constructor params while creating T.Position!');
+            throw new Error('Wrong constructor params while creating TOWNS.Position!');
 
         }
 
 
         /**
          * Return deep clone of this.
-         * @returns {T.Resources}
+         * @returns {TOWNS.Resources}
          */
         clone() {
-            return new T.Position(this);
+            return new TOWNS.Position(this);
         }
 
 
@@ -97,16 +97,16 @@ namespace T {
 
 
         getFloored() {
-            return new T.Position(Math.floor( this.x),Math.floor( this.y));
+            return new TOWNS.Position(Math.floor( this.x),Math.floor( this.y));
 
 
         }
 
         getPositionPolar() {
 
-            return (new T.PositionPolar(
-                T.TMath.xy2dist(this.x, this.y),
-                T.TMath.rad2deg(Math.atan2(this.y, this.x))
+            return (new TOWNS.PositionPolar(
+                TOWNS.TMath.xy2dist(this.x, this.y),
+                TOWNS.TMath.rad2deg(Math.atan2(this.y, this.x))
             ));
 
         }
@@ -114,7 +114,7 @@ namespace T {
 
         getDistance(position: Position) {
 
-            return T.TMath.xy2dist(position.x - this.x, position.y - this.y);
+            return TOWNS.TMath.xy2dist(position.x - this.x, position.y - this.y);
 
         }
 

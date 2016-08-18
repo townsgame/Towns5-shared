@@ -13,9 +13,9 @@
 
 
         var map_radius = 2;
-        var map_center = new T.Position({x: 20600, y: 378535});
-        var position1 =  map_center.clone().plus(new T.Position(1,2));
-        var position2 =  map_center.clone().plus(new T.Position(-8,1));
+        var map_center = new TOWNS.Position({x: 20600, y: 378535});
+        var position1 =  map_center.clone().plus(new TOWNS.Position(1,2));
+        var position2 =  map_center.clone().plus(new TOWNS.Position(-8,1));
 
 
 
@@ -25,7 +25,7 @@
 
 
 
-                var server_objects = new T.Objects.Array(response/*[
+                var server_objects = new TOWNS.Objects.Array(response/*[
                  {
                  "type": "terrain",
                  "design": {
@@ -48,7 +48,7 @@
                 log('Getting map array created from that objects',map_array)//todo map of codes
 
 
-                var complete_objects = T.World.mapGenerator.getCompleteObjects(server_objects, map_center, map_radius, true);
+                var complete_objects = TOWNS.World.mapGenerator.getCompleteObjects(server_objects, map_center, map_radius, true);
                 log('Getting complete objects via MapGenerator.completeObjects',complete_objects);
 
 

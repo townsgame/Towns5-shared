@@ -1,10 +1,10 @@
 /**
  * @author ©Towns.cz
- * @fileOverview Creates class T.Position3D
+ * @fileOverview Creates class TOWNS.Position3D
  */
 //======================================================================================================================
 
-namespace T {
+namespace TOWNS {
 
 
     interface Position3DObject {
@@ -43,10 +43,10 @@ namespace T {
 
         /**
          * Return deep clone of this.
-         * @returns {T.Resources}
+         * @returns {TOWNS.Resources}
          */
         clone() {
-            return new T.Position3D(this);
+            return new TOWNS.Position3D(this);
         }
 
 

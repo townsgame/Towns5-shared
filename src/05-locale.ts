@@ -1,11 +1,11 @@
 /**
  * @author ©Towns.cz
- * @fileOverview Initialize namespace Towns
+ * @fileOverview Initialize namespace TOWNSowns
  */
 //======================================================================================================================
 
 
-namespace T{
+namespace TOWNS{
     export class Locale{
 
         /**

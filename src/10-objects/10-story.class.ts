@@ -1,18 +1,18 @@
 
 /**
  * @author ©Towns.cz
- * @fileOverview Creates class T.Objects.Story
+ * @fileOverview Creates class TOWNS.Objects.Story
  */
 //======================================================================================================================
 
-namespace T.Objects {
+namespace TOWNS.Objects {
 
-    export class Story extends T.Objects.Object {
+    export class Story extends TOWNS.Objects.Object {
 
         public content;
 
         clone() {//todo all classes should have this method
-            return (new T.Objects.Story(JSON.parse(JSON.stringify(this))));
+            return (new TOWNS.Objects.Story(JSON.parse(JSON.stringify(this))));
         }
 
         getMarkdown() {

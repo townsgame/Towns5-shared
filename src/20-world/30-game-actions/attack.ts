@@ -1,5 +1,5 @@
 
-namespace T.World {
+namespace TOWNS.World {
 
 
     interface ActionAttackParamsObject{
@@ -17,7 +17,7 @@ namespace T.World {
             rounds: 1,
             cooldown: 1
         },
-        class extends T.Game.ActionActive {
+        class extends TOWNS.Game.ActionActive {
 
             public params:ActionAttackParamsObject;
 
@@ -35,10 +35,10 @@ namespace T.World {
             getPriceResources() {
 
                 return ([
-                    new T.Resources({'wood': 2}),
-                    //new T.Resources({'clay':   0}),
-                    new T.Resources({'stone': 3}),
-                    new T.Resources({'iron': 2})
+                    new TOWNS.Resources({'wood': 2}),
+                    //new TOWNS.Resources({'clay':   0}),
+                    new TOWNS.Resources({'stone': 3}),
+                    new TOWNS.Resources({'iron': 2})
                 ]);
             }
 
@@ -57,21 +57,21 @@ namespace T.World {
                 //---------------------Missing action
 
 
-                if (attacker_attack instanceof T.Game.Action) {
+                if (attacker_attack instanceof TOWNS.Game.Action) {
                     attacker_attack = attacker_attack.clone().params;
                 } else {
                     throw new Error('Attacker has not ability to attack');
                 }
 
 
-                if (attacker_defence instanceof T.Game.Action) {
+                if (attacker_defence instanceof TOWNS.Game.Action) {
                     attacker_defence = attacker_defence.clone().params;
                 } else {
                     attacker_defence = game.getActionEmptyInstance('defence').params;
                 }
 
 
-                if (attacked_attack instanceof T.Game.Action) {
+                if (attacked_attack instanceof TOWNS.Game.Action) {
                     attacked_attack = attacked_attack.clone().params;
                 } else {
                     attacked_attack = game.getActionEmptyInstance('attack').params;
@@ -79,7 +79,7 @@ namespace T.World {
                 }
 
 
-                if (attacked_defence instanceof T.Game.Action) {
+                if (attacked_defence instanceof TOWNS.Game.Action) {
                     attacked_defence = attacked_defence.clone().params;
                 } else {
                     attacked_defence = game.getActionEmptyInstance('defence').params;

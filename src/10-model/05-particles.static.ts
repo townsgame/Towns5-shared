@@ -1,11 +1,11 @@
 /**
  * @author Towns.cz
- * @fileOverview Creates static class T.Model.Particles
+ * @fileOverview Creates static class TOWNS.Model.Particles
  */
 //======================================================================================================================
 
 
-namespace T.Model {
+namespace TOWNS.Model {
 
 
     /**
@@ -99,23 +99,23 @@ namespace T.Model {
 
                         if (particle.shape.rotated) {
 
-                            x__ = 0.5 * x_ * Math.cos(n / particle.shape.n * Math.PI * 2 + T.TMath.deg2rad(180 + 180 / particle.shape.n)) * base + x_ * (level * particle.skew.z.x);
-                            y__ = 0.5 * y_ * Math.sin(n / particle.shape.n * Math.PI * 2 + T.TMath.deg2rad(180 + 180 / particle.shape.n)) * base + y_ * (level * particle.skew.z.y);
+                            x__ = 0.5 * x_ * Math.cos(n / particle.shape.n * Math.PI * 2 + TOWNS.TMath.deg2rad(180 + 180 / particle.shape.n)) * base + x_ * (level * particle.skew.z.x);
+                            y__ = 0.5 * y_ * Math.sin(n / particle.shape.n * Math.PI * 2 + TOWNS.TMath.deg2rad(180 + 180 / particle.shape.n)) * base + y_ * (level * particle.skew.z.y);
                             z__ = z_ * level;
 
                         } else {
 
-                            var tmp = (2 - (Math.cos(T.TMath.deg2rad(180 / particle.shape.n))));//todo better
+                            var tmp = (2 - (Math.cos(TOWNS.TMath.deg2rad(180 / particle.shape.n))));//todo better
 
                             x__ = x_ * ((level * 2) - 1);//*(level-0.5);//+x_*(level*particle.skew.z.x),
 
-                            y__ = 0.5 * y_ * Math.sin(n / particle.shape.n * Math.PI * 2 + T.TMath.deg2rad(180 + 180 / particle.shape.n));//+y_*(level*particle.skew.z.y),
+                            y__ = 0.5 * y_ * Math.sin(n / particle.shape.n * Math.PI * 2 + TOWNS.TMath.deg2rad(180 + 180 / particle.shape.n));//+y_*(level*particle.skew.z.y),
 
 
                             z__ = (1) * 0.5 * (
 
-                                    z_ * Math.cos(n / particle.shape.n * Math.PI * 2 + T.TMath.deg2rad(180 + 180 / particle.shape.n)) * tmp +
-                                    z_ * ((Math.cos(T.TMath.deg2rad(180 / particle.shape.n)))) * tmp
+                                    z_ * Math.cos(n / particle.shape.n * Math.PI * 2 + TOWNS.TMath.deg2rad(180 + 180 / particle.shape.n)) * tmp +
+                                    z_ * ((Math.cos(TOWNS.TMath.deg2rad(180 / particle.shape.n)))) * tmp
 
                                 );
 
@@ -124,9 +124,9 @@ namespace T.Model {
 
                         //------------------ XY Rotation
 
-                        var DistDeg_ = T.TMath.xy2distDeg(x__, y__);//todo refactor all like DistDeg, etc...
+                        var DistDeg_ = TOWNS.TMath.xy2distDeg(x__, y__);//todo refactor all like DistDeg, etc...
                         DistDeg_.deg += particle.rotation;
-                        var xy_ = T.TMath.distDeg2xy(DistDeg_.dist, DistDeg_.deg);
+                        var xy_ = TOWNS.TMath.distDeg2xy(DistDeg_.dist, DistDeg_.deg);
 
                         x__ = xy_.x;
                         y__ = xy_.y;
@@ -248,23 +248,23 @@ namespace T.Model {
 
                         if (particle.shape.rotated) {
 
-                            x__ = 0.5 * x_ * Math.cos(n / particle.shape.n * Math.PI * 2 + T.TMath.deg2rad(180 + 180 / particle.shape.n)) * base + x_ * (level * particle.skew.z.x);
-                            y__ = 0.5 * y_ * Math.sin(n / particle.shape.n * Math.PI * 2 + T.TMath.deg2rad(180 + 180 / particle.shape.n)) * base + y_ * (level * particle.skew.z.y);
+                            x__ = 0.5 * x_ * Math.cos(n / particle.shape.n * Math.PI * 2 + TOWNS.TMath.deg2rad(180 + 180 / particle.shape.n)) * base + x_ * (level * particle.skew.z.x);
+                            y__ = 0.5 * y_ * Math.sin(n / particle.shape.n * Math.PI * 2 + TOWNS.TMath.deg2rad(180 + 180 / particle.shape.n)) * base + y_ * (level * particle.skew.z.y);
                             z__ = z_ * level;
 
                         } else {
 
-                            var tmp = (2 - (Math.cos(T.TMath.deg2rad(180 / particle.shape.n))));//todo better
+                            var tmp = (2 - (Math.cos(TOWNS.TMath.deg2rad(180 / particle.shape.n))));//todo better
 
                             x__ = x_ * ((level * 2) - 1);//*(level-0.5);//+x_*(level*particle.skew.z.x),
 
-                            y__ = 0.5 * y_ * Math.sin(n / particle.shape.n * Math.PI * 2 + T.TMath.deg2rad(180 + 180 / particle.shape.n));//+y_*(level*particle.skew.z.y),
+                            y__ = 0.5 * y_ * Math.sin(n / particle.shape.n * Math.PI * 2 + TOWNS.TMath.deg2rad(180 + 180 / particle.shape.n));//+y_*(level*particle.skew.z.y),
 
 
                             z__ = (1) * 0.5 * (
 
-                                    z_ * Math.cos(n / particle.shape.n * Math.PI * 2 + T.TMath.deg2rad(180 + 180 / particle.shape.n)) * tmp +
-                                    z_ * ((Math.cos(T.TMath.deg2rad(180 / particle.shape.n)))) * tmp
+                                    z_ * Math.cos(n / particle.shape.n * Math.PI * 2 + TOWNS.TMath.deg2rad(180 + 180 / particle.shape.n)) * tmp +
+                                    z_ * ((Math.cos(TOWNS.TMath.deg2rad(180 / particle.shape.n)))) * tmp
 
                                 );
 
@@ -273,9 +273,9 @@ namespace T.Model {
 
                         //------------------ XY Rotation
 
-                        var DistDeg_ = T.TMath.xy2distDeg(x__, y__);//todo refactor all like DistDeg, etc...
+                        var DistDeg_ = TOWNS.TMath.xy2distDeg(x__, y__);//todo refactor all like DistDeg, etc...
                         DistDeg_.deg += particle.rotation;
-                        var xy_ = T.TMath.distDeg2xy(DistDeg_.dist, DistDeg_.deg);
+                        var xy_ = TOWNS.TMath.distDeg2xy(DistDeg_.dist, DistDeg_.deg);
 
                         x__ = xy_.x;
                         y__ = xy_.y;
@@ -410,7 +410,7 @@ namespace T.Model {
             for (var i1 in lines1) {
                 for (var i2 in lines2) {
 
-                    if (T.TMath.lineCollision(
+                    if (TOWNS.TMath.lineCollision(
                             lines1[i1][0].x,
                             lines1[i1][0].y,
                             lines1[i1][1].x,

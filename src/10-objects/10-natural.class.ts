@@ -1,12 +1,12 @@
 
 /**
  * @author ©Towns.cz
- * @fileOverview Creates class T.Objects.Natural
+ * @fileOverview Creates class TOWNS.Objects.Natural
  */
 //======================================================================================================================
 
 
-namespace T.Objects {
+namespace TOWNS.Objects {
 
     interface ImageObject{
         image: any;
@@ -18,7 +18,7 @@ namespace T.Objects {
     }
 
 
-    export class Natural extends T.Objects.Object {
+    export class Natural extends TOWNS.Objects.Object {
 
 
         public design:DesignObject;
@@ -26,7 +26,7 @@ namespace T.Objects {
 
 
         clone() {//todo all classes should have this method
-            return (new T.Objects.Natural(JSON.parse(JSON.stringify(this))));
+            return (new TOWNS.Objects.Natural(JSON.parse(JSON.stringify(this))));
         }
 
 

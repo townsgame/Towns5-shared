@@ -1,10 +1,10 @@
 
-namespace T {
+namespace TOWNS {
     export class Area {
 
         public positions: Array;
 
-        constructor(...positions:T.Position[]) {
+        constructor(...positions:TOWNS.Position[]) {
 
             this.positions = [];
 
@@ -51,7 +51,7 @@ namespace T {
                     ib = i + 1;
                     if (ib == this.positions.length)ib = 0;
 
-                    collision = T.TMath.lineCollision(
+                    collision = TOWNS.TMath.lineCollision(
                         this.positions[ia].x,
                         this.positions[ia].y,
                         this.positions[ib].x,

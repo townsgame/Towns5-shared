@@ -1,5 +1,5 @@
 
-console.log('Testing T.PositionDate');
+console.log('Testing TOWNS.PositionDate');
 
 
 
@@ -9,20 +9,20 @@ describe('Testing 1 position creating with', function () {
 
     it('valid', function () {
 
-        expect(function(){new T.PositionDate(1, 2, new Date());}).not.toThrow();
-        expect(function(){new T.PositionDate(1, 2, new Date('2016-05-22T11:30:41.426Z'));}).not.toThrow();
-        expect(function(){new T.PositionDate(1, 2, new Date('2016-05-22T11:31:17.481Z'));}).not.toThrow();
-        expect(function(){new T.PositionDate(1, 2, 1234567);}).not.toThrow();
+        expect(function(){new TOWNS.PositionDate(1, 2, new Date());}).not.toThrow();
+        expect(function(){new TOWNS.PositionDate(1, 2, new Date('2016-05-22T11:30:41.426Z'));}).not.toThrow();
+        expect(function(){new TOWNS.PositionDate(1, 2, new Date('2016-05-22T11:31:17.481Z'));}).not.toThrow();
+        expect(function(){new TOWNS.PositionDate(1, 2, 1234567);}).not.toThrow();
 
     });
 
 
     it('invalid date', function () {
 
-        expect(function(){new T.PositionDate(1, 2, new Date('xxx'));}).toThrow();
-        expect(function(){new T.PositionDate(1, 2, {aaa:'bbb'});}).toThrow();
-        expect(function(){new T.PositionDate(1, 2, 'hovnoooooo');}).toThrow();
-        expect(function(){new T.PositionDate(1, 2, function(){});}).toThrow();
+        expect(function(){new TOWNS.PositionDate(1, 2, new Date('xxx'));}).toThrow();
+        expect(function(){new TOWNS.PositionDate(1, 2, {aaa:'bbb'});}).toThrow();
+        expect(function(){new TOWNS.PositionDate(1, 2, 'hovnoooooo');}).toThrow();
+        expect(function(){new TOWNS.PositionDate(1, 2, function(){});}).toThrow();
 
     });
 
@@ -42,7 +42,7 @@ describe('Testing position with date can be', function() {
 
     beforeAll(function () {
 
-        this.positionDate = new T.PositionDate(1, 2, new Date('2016-05-22T11:30:41.426Z'));
+        this.positionDate = new TOWNS.PositionDate(1, 2, new Date('2016-05-22T11:30:41.426Z'));
 
     });
 
@@ -50,7 +50,7 @@ describe('Testing position with date can be', function() {
 
     it('converted and deconverted to and from JSON.', function () {
 
-        this.positionDate_clone = new T.PositionDate(JSON.parse(JSON.stringify(this.positionDate)));
+        this.positionDate_clone = new TOWNS.PositionDate(JSON.parse(JSON.stringify(this.positionDate)));
 
 
         expect(this.positionDate_clone).not.toBe(this.positionDate);

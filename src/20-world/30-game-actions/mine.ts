@@ -1,10 +1,10 @@
 /**
  * @author ©Towns.cz
- * @fileOverview Creates configuration of game conditions via instance T.World.game
+ * @fileOverview Creates configuration of game conditions via instance TOWNS.World.game
  */
 //======================================================================================================================
 
-namespace T.World {
+namespace TOWNS.World {
 
     interface ActionMineParamsObject{
         wood: number;
@@ -21,7 +21,7 @@ namespace T.World {
             clay: 0,
             stone: 0
         },
-        class extends T.Game.Action {
+        class extends TOWNS.Game.Action {
 
             public params:ActionMineParamsObject;
 
@@ -39,10 +39,10 @@ namespace T.World {
             getPriceResources() {
 
                 return ([
-                    new T.Resources({'wood': 3}),
-                    new T.Resources({'clay': 2}),
-                    new T.Resources({'stone': 2}),
-                    new T.Resources({'iron': 4})
+                    new TOWNS.Resources({'wood': 3}),
+                    new TOWNS.Resources({'clay': 2}),
+                    new TOWNS.Resources({'stone': 2}),
+                    new TOWNS.Resources({'iron': 4})
                 ]);
             }
 

@@ -1,23 +1,23 @@
 
 /**
  * @author ©Towns.cz
- * @fileOverview Creates class T.Objects.Building
+ * @fileOverview Creates class TOWNS.Objects.Building
  */
 //======================================================================================================================
 
-namespace T.Objects {
+namespace TOWNS.Objects {
 
     interface DesignObject{
         type: string;
-        data: T.Model;
+        data: TOWNS.Model;
     }
 
 
-    export class Building extends T.Objects.Object {
+    export class Building extends TOWNS.Objects.Object {
 
 
         public design:DesignObject;
-        public actions:T.Game.Action[];
+        public actions:TOWNS.Game.Action[];
         public path: Path;
 
 
@@ -41,7 +41,7 @@ namespace T.Objects {
                 for (var i = 0, l = this.actions.length; i < l; i++) {
 
                     try {
-                        actions_classes.push(T.World.game.newActionInstance(this.actions[i]));
+                        actions_classes.push(TOWNS.World.game.newActionInstance(this.actions[i]));
                     }
                     catch (error) {
                         console.warn(error);
@@ -59,19 +59,19 @@ namespace T.Objects {
             //-----------------------------
             if (typeof this.path === 'object') {
                 r(this.path);
-                this.path = new T.Path(...this.path);
+                this.path = new TOWNS.Path(...this.path);
             }
             //-----------------------------
 
 
             //-----------------------------
             var life_action = this.getAction('life');
-            var max_life = T.World.game.getObjectMaxLife(this);
+            var max_life = TOWNS.World.game.getObjectMaxLife(this);
 
 
             if (life_action === null) {
 
-                life_action = T.World.game.newActionInstance({
+                life_action = TOWNS.World.game.newActionInstance({
                     type: 'life',
                     params: {
                         life: max_life,
@@ -92,14 +92,14 @@ namespace T.Objects {
         /**
          *
          * @param {Date} date
-         * @returns {T.Position}
+         * @returns {TOWNS.Position}
          */
         getPosition(date?) {
 
 
             if (typeof this.path === 'undefined') {
 
-                return (new T.Position(this.x, this.y));
+                return (new TOWNS.Position(this.x, this.y));
 
             } else {
 
@@ -132,19 +132,19 @@ namespace T.Objects {
 
 
         /**
-         * @returns {T.Objects}
+         * @returns {TOWNS.Objects}
          */
         clone() {//todo all classes should have this method
-            return (new T.Objects.Building(JSON.parse(JSON.stringify(this))));
+            return (new TOWNS.Objects.Building(JSON.parse(JSON.stringify(this))));
         }
 
 
         /**
-         * @returns {T.Model}
+         * @returns {TOWNS.Model}
          */
         getModel() {
-            if (!(this.design.data instanceof T.Model)) {
-                this.design.data = new T.Model(this.design.data);
+            if (!(this.design.data instanceof TOWNS.Model)) {
+                this.design.data = new TOWNS.Model(this.design.data);
             }
 
             return (this.design.data);
@@ -154,7 +154,7 @@ namespace T.Objects {
         /**
          *
          * @param action_type
-         * @returns {T.Game.ActionAbility}
+         * @returns {TOWNS.Game.ActionAbility}
          */
         getAction(action_type) {
 

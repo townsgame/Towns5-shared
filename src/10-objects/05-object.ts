@@ -1,11 +1,11 @@
 
 /**
  * @author ©Towns.cz
- * @fileOverview Creates class T.Objects.Object
+ * @fileOverview Creates class TOWNS.Objects.Object
  */
 //======================================================================================================================
 
-namespace T.Objects {
+namespace TOWNS.Objects {
 
 
     export class Object {
@@ -36,26 +36,26 @@ namespace T.Objects {
 
         static init(object) {
 
-            if(object instanceof T.Objects.Object){
+            if(object instanceof TOWNS.Objects.Object){
                 return (object);
             }
 
             //----------------------------------
             if (object.type == 'building') {
 
-                object = new T.Objects.Building(object);
+                object = new TOWNS.Objects.Building(object);
 
             } else if (object.type == 'terrain') {
 
-                object = new T.Objects.Terrain(object);
+                object = new TOWNS.Objects.Terrain(object);
 
             } else if (object.type == 'story') {
 
-                object = new T.Objects.Story(object);
+                object = new TOWNS.Objects.Story(object);
 
             } else if (object.type == 'natural') {
 
-                object = new T.Objects.Natural(object);
+                object = new TOWNS.Objects.Natural(object);
 
             } else {
 
@@ -70,7 +70,7 @@ namespace T.Objects {
 
 
         getPosition():Position {
-            return (new T.Position(this.x, this.y));
+            return (new TOWNS.Position(this.x, this.y));
         }
 
 

@@ -5,22 +5,22 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 /**
  * @author ©Towns.cz
- * @fileOverview Initialize namespace Towns
+ * @fileOverview Initialize namespace TOWNSowns
  */
 //======================================================================================================================
 /**
  * Towns namespace - under this object are all Towns classes and instances.
  * @type {object}
  */
-var T = {};
-module.exports = T;
+var TOWNS = {};
+module.exports = TOWNS;
 /**
  * @author ©Towns.cz
- * @fileOverview Initialize namespace Towns
+ * @fileOverview Initialize namespace TOWNSowns
  */
 //======================================================================================================================
-var T;
-(function (T) {
+var TOWNS;
+(function (TOWNS) {
     var Locale = (function () {
         function Locale() {
         }
@@ -38,8 +38,8 @@ var T;
         };
         return Locale;
     }());
-    T.Locale = Locale;
-})(T || (T = {}));
+    TOWNS.Locale = Locale;
+})(TOWNS || (TOWNS = {}));
 /**
  * @author ©Towns.cz
  * @fileOverview Wrapper for console.log
@@ -48,11 +48,11 @@ var T;
 var r = console.log.bind(console);
 /**
  * @author ©Towns.cz
- * @fileOverview Creates static T.ArrayFunctions
+ * @fileOverview Creates static TOWNS.ArrayFunctions
  */
 //======================================================================================================================
-var T;
-(function (T) {
+var TOWNS;
+(function (TOWNS) {
     /**
      * Additional functions to manipulate with array.
      */
@@ -141,13 +141,13 @@ var T;
             return array.push.apply(array, rest);
         };
         //======================================================================================================================
-        /** todo should it be under T.ArrayFunctions
+        /** todo should it be under TOWNS.ArrayFunctions
          *
          * @param {object} obect
          * @param {array} path
          */
         ArrayFunctions.filterPath = function (object, path, setValue) {
-            for (var path_i in path) {
+            for (var path_i = 0, path_l = path.length; path_i < path_l; path_i++) {
                 var object_key = path[path_i];
                 if (path_i < path.length - 1 || typeof setValue == 'undefined') {
                     if (typeof object[object_key] == 'undefined') {
@@ -224,15 +224,15 @@ var T;
         };
         return ArrayFunctions;
     }());
-    T.ArrayFunctions = ArrayFunctions;
-})(T || (T = {}));
+    TOWNS.ArrayFunctions = ArrayFunctions;
+})(TOWNS || (TOWNS = {}));
 /**
  * @author ©Towns.cz
  * @fileOverview Creates class Resources
  */
 //======================================================================================================================
-var T;
-(function (T) {
+var TOWNS;
+(function (TOWNS) {
     var Resources = (function () {
         /**
          * @param {object} Resources
@@ -400,7 +400,7 @@ var T;
             for (var key in this) {
                 if (typeof this[key] == 'number') {
                     if (this[key] !== 0) {
-                        var name = T.Locale.get('resource', key);
+                        var name = TOWNS.Locale.get('resource', key);
                         var value = this[key];
                         value = value.toLocaleString(); //todo todo better solution
                         strings.push('<div><img src="/media/image/resources/' + key + '.png" title="' + name + '" alt="' + name + '" >' + value + '</div>');
@@ -413,15 +413,15 @@ var T;
         };
         return Resources;
     }());
-    T.Resources = Resources;
-})(T || (T = {}));
+    TOWNS.Resources = Resources;
+})(TOWNS || (TOWNS = {}));
 /**
  * @author ©Towns.cz
- * @fileOverview Creates static class T.TMath
+ * @fileOverview Creates static class TOWNS.TMath
  */
 //======================================================================================================================
-var T;
-(function (T) {
+var TOWNS;
+(function (TOWNS) {
     /**
      * Mathematical functions to Towns
      */
@@ -518,14 +518,14 @@ var T;
         //-------------------------
         TMath.xy2distDeg = function (x, y) {
             var output = {
-                dist: T.TMath.xy2dist(x, y),
-                deg: T.TMath.rad2deg(Math.atan2(y, x))
+                dist: TOWNS.TMath.xy2dist(x, y),
+                deg: TOWNS.TMath.rad2deg(Math.atan2(y, x))
             };
             return (output);
         };
         //-------------------------
         TMath.distDeg2xy = function (dist, deg) {
-            var rad = T.TMath.deg2rad(deg);
+            var rad = TOWNS.TMath.deg2rad(deg);
             var output = {
                 x: Math.cos(rad) * dist,
                 y: Math.sin(rad) * dist
@@ -535,9 +535,9 @@ var T;
         //-------------------------
         //todo mybe refactor to position
         TMath.xyRotate = function (x, y, deg) {
-            var dist = T.TMath.xy2dist(x, y);
+            var dist = TOWNS.TMath.xy2dist(x, y);
             var rad = Math.atan2(y, x);
-            rad += T.TMath.deg2rad(deg);
+            rad += TOWNS.TMath.deg2rad(deg);
             var output = {
                 x: Math.cos(rad) * dist,
                 y: Math.sin(rad) * dist
@@ -623,8 +623,8 @@ var T;
             var bSlope = b1y / b1x;
             if (aSlope != bSlope)
                 return false;
-            var aDist = T.TMath.xy2dist(a2y, a2x);
-            var bDist = T.TMath.xy2dist(b1y, b1x);
+            var aDist = TOWNS.TMath.xy2dist(a2y, a2x);
+            var bDist = TOWNS.TMath.xy2dist(b1y, b1x);
             return (aDist >= bDist);
         };
         /**
@@ -650,8 +650,8 @@ var T;
             if (denominator === 0) {
                 //var collision= (numerator1 == 0 && numerator2 == 0);
                 //collision=false;
-                var bOnA = T.TMath.isOnLine(a1x, a1y, a2x, a2y, b1x, b1y);
-                var aOnB = T.TMath.isOnLine(b1x, b1y, b2x, b2y, a1x, a1y);
+                var bOnA = TOWNS.TMath.isOnLine(a1x, a1y, a2x, a2y, b1x, b1y);
+                var aOnB = TOWNS.TMath.isOnLine(b1x, b1y, b2x, b2y, a1x, a1y);
                 return (bOnA || aOnB);
             }
             else {
@@ -729,15 +729,15 @@ var T;
         };
         return TMath;
     }());
-    T.TMath = TMath;
-})(T || (T = {}));
+    TOWNS.TMath = TMath;
+})(TOWNS || (TOWNS = {}));
 /**
  * @author ©Towns.cz
- * @fileOverview Creates class T.Resources
+ * @fileOverview Creates class TOWNS.Resources
  */
 //======================================================================================================================
-var T;
-(function (T) {
+var TOWNS;
+(function (TOWNS) {
     var User = (function () {
         /**
          * @param {object} user raw user data
@@ -766,15 +766,15 @@ var T;
         };
         return User;
     }());
-    T.User = User;
-})(T || (T = {}));
+    TOWNS.User = User;
+})(TOWNS || (TOWNS = {}));
 /**
  * @author ©Towns.cz
- * @fileOverview Creates class T.Game
+ * @fileOverview Creates class TOWNS.Game
  */
 //======================================================================================================================
-var T;
-(function (T) {
+var TOWNS;
+(function (TOWNS) {
     /**
      * Game conditions
      */
@@ -858,7 +858,7 @@ var T;
          * @return {object} Resources - price of object
          */
         Game.prototype.getObjectPrice = function (object) {
-            var price = new T.Resources({});
+            var price = new TOWNS.Resources({});
             //console.log('empty price',price);
             var prices = this.getObjectPrices(object);
             prices.forEach(function (price_) {
@@ -889,7 +889,7 @@ var T;
         Game.prototype.getActionClass = function (action_type) {
             var action_class = this.action_classes[action_type];
             if (typeof action_class == 'undefined') {
-                throw new Error('In this game instance thare is no action class type ' + action_type + '. There are only these action types: ' + T.ArrayFunctions.getKeys(this.action_classes).join(', '));
+                throw new Error('In this game instance thare is no action class type ' + action_type + '. There are only these action types: ' + TOWNS.ArrayFunctions.getKeys(this.action_classes).join(', '));
             }
             return (action_class);
         };
@@ -925,15 +925,15 @@ var T;
         };
         return Game;
     }());
-    T.Game = Game;
-})(T || (T = {}));
+    TOWNS.Game = Game;
+})(TOWNS || (TOWNS = {}));
 /**
  * @author ©Towns.cz
- * @fileOverview Creates class T.Game.Action
+ * @fileOverview Creates class TOWNS.Game.Action
  */
 //======================================================================================================================
-var T;
-(function (T) {
+var TOWNS;
+(function (TOWNS) {
     var Game;
     (function (Game) {
         var Action = (function () {
@@ -941,7 +941,7 @@ var T;
                 //console.log(this.constructor.getType);
                 //console.log(this);
                 if (typeof this.getType() === 'undefined') {
-                    throw new Error('You must extend T.Game.Action and add method getType before creating instances!');
+                    throw new Error('You must extend TOWNS.Game.Action and add method getType before creating instances!');
                 }
                 var type = this.getType();
                 if (action.type !== type) {
@@ -977,12 +977,12 @@ var T;
              */
             Action.prototype.createHtmlProfile = function () {
                 var html = '<table class="action-ability-profile">';
-                html += "\n            <tr>\n                <th colspan=\"2\">" + T.Locale.get('object', 'action', this.type) + "</th>\n            </tr>\n            ";
+                html += "\n            <tr>\n                <th colspan=\"2\">" + TOWNS.Locale.get('object', 'action', this.type) + "</th>\n            </tr>\n            ";
                 if (typeof this.last_use !== 'undefined') {
-                    html += "\n            <tr>\n                <td>" + T.Locale.get('object', 'action', 'last_used') + "</td>\n                <td>" + this.last_use + "</td>\n            </tr>\n            ";
+                    html += "\n            <tr>\n                <td>" + TOWNS.Locale.get('object', 'action', 'last_used') + "</td>\n                <td>" + this.last_use + "</td>\n            </tr>\n            ";
                 }
                 for (var param in this.params) {
-                    html += "\n            <tr>\n                <td>" + T.Locale.get('object', 'action', this.type, param) + "</td>\n                <td>" + this.params[param] + "</td>\n            </tr>\n            ";
+                    html += "\n            <tr>\n                <td>" + TOWNS.Locale.get('object', 'action', this.type, param) + "</td>\n                <td>" + this.params[param] + "</td>\n            </tr>\n            ";
                 }
                 html += '</table>';
                 return (html);
@@ -990,15 +990,15 @@ var T;
             return Action;
         }());
         Game.Action = Action;
-    })(Game = T.Game || (T.Game = {}));
-})(T || (T = {}));
+    })(Game = TOWNS.Game || (TOWNS.Game = {}));
+})(TOWNS || (TOWNS = {}));
 /**
  * @author ©Towns.cz
- * @fileOverview Creates class T.Game.Action
+ * @fileOverview Creates class TOWNS.Game.Action
  */
 //======================================================================================================================
-var T;
-(function (T) {
+var TOWNS;
+(function (TOWNS) {
     var Game;
     (function (Game) {
         var ActionActive = (function (_super) {
@@ -1041,23 +1041,23 @@ var T;
                 this.last_use = new Date() / 1;
             };
             return ActionActive;
-        }(T.Game.Action));
+        }(TOWNS.Game.Action));
         Game.ActionActive = ActionActive;
-    })(Game = T.Game || (T.Game = {}));
-})(T || (T = {}));
+    })(Game = TOWNS.Game || (TOWNS.Game = {}));
+})(TOWNS || (TOWNS = {}));
 /**
  * @author ©Towns.cz
- * @fileOverview Creates class T.MapGenerator
+ * @fileOverview Creates class TOWNS.MapGenerator
  */
 //======================================================================================================================
-var T;
-(function (T) {
+var TOWNS;
+(function (TOWNS) {
     var MapGenerator = (function () {
         /**
          *
          * @param {function} getZ
          * @param {Array} z_normalizing_table
-         * @param {T.MapGenerator.Biotope} biotope
+         * @param {TOWNS.MapGenerator.Biotope} biotope
          * @param {function} virtualObjectGenerator
          * @constructor
          */
@@ -1069,7 +1069,7 @@ var T;
         }
         /**
          *
-         * @param {T.Position} center_integer
+         * @param {TOWNS.Position} center_integer
          * @param {number} radius
          * @returns {Array}
          * @private
@@ -1109,7 +1109,7 @@ var T;
         };
         /**
          *
-         * @param {T.Position} center_integer
+         * @param {TOWNS.Position} center_integer
          * @param {number} radius
          * @returns {Array}
          * @private
@@ -1123,18 +1123,18 @@ var T;
         /**
          *
          * @param {Array} map_array
-         * @param {T.Position} center_integer
+         * @param {TOWNS.Position} center_integer
          * @param {number} radius
          * @returns {Array}
          * @private
          */
         MapGenerator.prototype.convertMapArrayToObjects = function (map_array, center_integer, radius) {
-            var objects = new T.Objects.Array();
+            var objects = new TOWNS.Objects.Array();
             for (var y = 0; y < radius * 2; y++) {
                 for (var x = 0; x < radius * 2; x++) {
                     if (typeof (map_array[y][x]) === 'undefined')
                         continue;
-                    var object = new T.Objects.Terrain(map_array[y][x]);
+                    var object = new TOWNS.Objects.Terrain(map_array[y][x]);
                     object.x = center_integer.x - radius + x;
                     object.y = center_integer.y - radius + y;
                     objects.push(object);
@@ -1144,9 +1144,9 @@ var T;
         };
         /**
          *
-         * @param {T.Position} center
+         * @param {TOWNS.Position} center
          * @param {number} radius
-         * @param {T.Position} not_center
+         * @param {TOWNS.Position} not_center
          * @returns {Array}
          * @private
          */
@@ -1157,10 +1157,10 @@ var T;
                 y: Math.floor(center.y)
             };
             if (not_center)
-                not_center = new T.Position(not_center.x - center_integer.x, not_center.y - center_integer.y);
+                not_center = new TOWNS.Position(not_center.x - center_integer.x, not_center.y - center_integer.y);
             /*var map_array = this.getMapArrayCircle(center_integer,radius);
              var objects = this.convertMapArrayToObjects(map_array,center_integer,radius);/**/
-            var objects = new T.Objects.Array();
+            var objects = new TOWNS.Objects.Array();
             var x, y, z, t, object;
             for (y = 0; y <= radius * 2; y++) {
                 for (x = 0; x <= radius * 2; x++) {
@@ -1177,7 +1177,7 @@ var T;
                     z = this.z_normalizing_table[Math.floor(z * this.z_normalizing_table.length)];
                     t = this.biotope.getZTerrain(z);
                     //console.log(t);
-                    object = new T.Objects.Terrain(t);
+                    object = new TOWNS.Objects.Terrain(t);
                     object.x = center_integer.x - radius + x;
                     object.y = center_integer.y - radius + y;
                     objects.push(object);
@@ -1187,12 +1187,12 @@ var T;
         };
         /**
          *
-         * @param {T.Objects.Array} objects
-         * @returns {T.Objects.Array}
+         * @param {TOWNS.Objects.Array} objects
+         * @returns {TOWNS.Objects.Array}
          * @private
          */
         MapGenerator.prototype.getVirtualObjectsFromTerrainObjects = function (objects) {
-            var virtual_objects = new T.Objects.Array();
+            var virtual_objects = new TOWNS.Objects.Array();
             var objects_1x1_raw = objects.get1x1TerrainObjects().getAll();
             for (var i = 0, l = objects_1x1_raw.length; i < l; i++) {
                 this.virtualObjectGenerator(objects_1x1_raw[i], virtual_objects);
@@ -1202,12 +1202,12 @@ var T;
         //=================================================PUBLIC===============================================================
         /**
          * Complete terrain and virtual objects into Objects Array
-         * @param {T.Objects.Array} real_objects
-         * @param {T.Position} center
+         * @param {TOWNS.Objects.Array} real_objects
+         * @param {TOWNS.Position} center
          * @param {number} radius
          * @param {boolean} natural_objects
-         * @param {T.Position} not_center Dont get objects near this center.
-         * @returns {T.Objects.Array}}
+         * @param {TOWNS.Position} not_center Dont get objects near this center.
+         * @returns {TOWNS.Objects.Array}}
          */
         MapGenerator.prototype.getCompleteObjects = function (real_objects, center, radius, natural_objects, not_center) {
             if (natural_objects === void 0) { natural_objects = true; }
@@ -1225,15 +1225,15 @@ var T;
         };
         return MapGenerator;
     }());
-    T.MapGenerator = MapGenerator;
-})(T || (T = {}));
+    TOWNS.MapGenerator = MapGenerator;
+})(TOWNS || (TOWNS = {}));
 /**
  * @author ©Towns.cz
- * @fileOverview Creates class T.MapGenerator.Biotope
+ * @fileOverview Creates class TOWNS.MapGenerator.Biotope
  */
 //======================================================================================================================
-var T;
-(function (T) {
+var TOWNS;
+(function (TOWNS) {
     var MapGenerator;
     (function (MapGenerator) {
         var Biotope = (function () {
@@ -1260,7 +1260,7 @@ var T;
             /**
              *
              * @param {number} z
-             * @returns {T.Objects.Terrain}
+             * @returns {TOWNS.Objects.Terrain}
              */
             Biotope.prototype.getZTerrain = function (z) {
                 for (var i = this.terrains.length - 1; i >= 0; i--) {
@@ -1271,15 +1271,15 @@ var T;
             return Biotope;
         }());
         MapGenerator.Biotope = Biotope;
-    })(MapGenerator = T.MapGenerator || (T.MapGenerator = {}));
-})(T || (T = {}));
+    })(MapGenerator = TOWNS.MapGenerator || (TOWNS.MapGenerator = {}));
+})(TOWNS || (TOWNS = {}));
 /**
  * @author ©Towns.cz
- * @fileOverview Creates class T.Model
+ * @fileOverview Creates class TOWNS.Model
  */
 //======================================================================================================================
-var T;
-(function (T) {
+var TOWNS;
+(function (TOWNS) {
     var Model = (function () {
         /**
          * @param {object} Model json
@@ -1299,7 +1299,7 @@ var T;
                 this.size = 1;
         }
         Model.prototype.clone = function () {
-            return (new T.Model(JSON.parse(JSON.stringify(this))));
+            return (new TOWNS.Model(JSON.parse(JSON.stringify(this))));
         };
         /**
          * @param {number} rotation
@@ -1319,7 +1319,7 @@ var T;
          */
         Model.prototype.range = function (dimension) {
             if (dimension == 'xy') {
-                return T.TMath.xy2dist(this.range('x'), this.range('y') * this.size);
+                return TOWNS.TMath.xy2dist(this.range('x'), this.range('y') * this.size);
             }
             var particlesLinear = this.getLinearParticles();
             var max, min, max_, min_;
@@ -1370,7 +1370,7 @@ var T;
                 model_linear_particles[i].position.x += move_x;
                 model_linear_particles[i].position.y += move_y;
                 for (var ii in this_linear_particles) {
-                    if (T.Model.Particles.collision2D(this_linear_particles[ii], model_linear_particles[i])) {
+                    if (TOWNS.Model.Particles.collision2D(this_linear_particles[ii], model_linear_particles[i])) {
                         r(this_linear_particles[ii], model_linear_particles[i]);
                         distances.push(this_linear_particles[ii].position.z + this_linear_particles[ii].size.z);
                     }
@@ -1491,10 +1491,10 @@ var T;
                         particle.size = 1;
                     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
                     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Position, Rotation and size //todo skew
-                    var distDeg = T.TMath.xy2distDeg(particle.position.x, particle.position.y);
+                    var distDeg = TOWNS.TMath.xy2distDeg(particle.position.x, particle.position.y);
                     distDeg.dist = distDeg.dist * size;
                     distDeg.deg += rotation;
-                    var xy = T.TMath.distDeg2xy(distDeg.dist, distDeg.deg);
+                    var xy = TOWNS.TMath.distDeg2xy(distDeg.dist, distDeg.deg);
                     particle.rotation += rotation;
                     particle.position.x = xy.x;
                     particle.position.y = xy.y;
@@ -1576,10 +1576,10 @@ var T;
         };
         /**
          * Aggregate volume of each resource used in model
-         * @returns {T.Resources}
+         * @returns {TOWNS.Resources}
          */
         Model.prototype.aggregateResourcesVolumes = function () {
-            var price = new T.Resources({});
+            var price = new TOWNS.Resources({});
             var linear_particles = this.getLinearParticles();
             linear_particles.forEach(function (linear_particle) {
                 var volume = linear_particle.size.x *
@@ -1587,7 +1587,7 @@ var T;
                     linear_particle.size.z;
                 var material = linear_particle.material.split('_');
                 material = material[0];
-                var price_ = new T.Resources({});
+                var price_ = new TOWNS.Resources({});
                 price_[material] = volume;
                 price.add(price_);
             });
@@ -1602,15 +1602,15 @@ var T;
         };
         return Model;
     }());
-    T.Model = Model;
-})(T || (T = {}));
+    TOWNS.Model = Model;
+})(TOWNS || (TOWNS = {}));
 /**
  * @author Towns.cz
- * @fileOverview Creates static class T.Model.Particles
+ * @fileOverview Creates static class TOWNS.Model.Particles
  */
 //======================================================================================================================
-var T;
-(function (T) {
+var TOWNS;
+(function (TOWNS) {
     var Model;
     (function (Model) {
         /**
@@ -1670,21 +1670,21 @@ var T;
                             //--------
                             //------------------XYZ ratio
                             if (particle.shape.rotated) {
-                                x__ = 0.5 * x_ * Math.cos(n / particle.shape.n * Math.PI * 2 + T.TMath.deg2rad(180 + 180 / particle.shape.n)) * base + x_ * (level * particle.skew.z.x);
-                                y__ = 0.5 * y_ * Math.sin(n / particle.shape.n * Math.PI * 2 + T.TMath.deg2rad(180 + 180 / particle.shape.n)) * base + y_ * (level * particle.skew.z.y);
+                                x__ = 0.5 * x_ * Math.cos(n / particle.shape.n * Math.PI * 2 + TOWNS.TMath.deg2rad(180 + 180 / particle.shape.n)) * base + x_ * (level * particle.skew.z.x);
+                                y__ = 0.5 * y_ * Math.sin(n / particle.shape.n * Math.PI * 2 + TOWNS.TMath.deg2rad(180 + 180 / particle.shape.n)) * base + y_ * (level * particle.skew.z.y);
                                 z__ = z_ * level;
                             }
                             else {
-                                var tmp = (2 - (Math.cos(T.TMath.deg2rad(180 / particle.shape.n)))); //todo better
+                                var tmp = (2 - (Math.cos(TOWNS.TMath.deg2rad(180 / particle.shape.n)))); //todo better
                                 x__ = x_ * ((level * 2) - 1); //*(level-0.5);//+x_*(level*particle.skew.z.x),
-                                y__ = 0.5 * y_ * Math.sin(n / particle.shape.n * Math.PI * 2 + T.TMath.deg2rad(180 + 180 / particle.shape.n)); //+y_*(level*particle.skew.z.y),
-                                z__ = (1) * 0.5 * (z_ * Math.cos(n / particle.shape.n * Math.PI * 2 + T.TMath.deg2rad(180 + 180 / particle.shape.n)) * tmp +
-                                    z_ * ((Math.cos(T.TMath.deg2rad(180 / particle.shape.n)))) * tmp);
+                                y__ = 0.5 * y_ * Math.sin(n / particle.shape.n * Math.PI * 2 + TOWNS.TMath.deg2rad(180 + 180 / particle.shape.n)); //+y_*(level*particle.skew.z.y),
+                                z__ = (1) * 0.5 * (z_ * Math.cos(n / particle.shape.n * Math.PI * 2 + TOWNS.TMath.deg2rad(180 + 180 / particle.shape.n)) * tmp +
+                                    z_ * ((Math.cos(TOWNS.TMath.deg2rad(180 / particle.shape.n)))) * tmp);
                             }
                             //------------------ XY Rotation
-                            var DistDeg_ = T.TMath.xy2distDeg(x__, y__); //todo refactor all like DistDeg, etc...
+                            var DistDeg_ = TOWNS.TMath.xy2distDeg(x__, y__); //todo refactor all like DistDeg, etc...
                             DistDeg_.deg += particle.rotation;
-                            var xy_ = T.TMath.distDeg2xy(DistDeg_.dist, DistDeg_.deg);
+                            var xy_ = TOWNS.TMath.distDeg2xy(DistDeg_.dist, DistDeg_.deg);
                             x__ = xy_.x;
                             y__ = xy_.y;
                             //------------------
@@ -1736,21 +1736,21 @@ var T;
                         for (var n = 0; n < particle.shape.n; n++) {
                             //------------------XYZ ratio
                             if (particle.shape.rotated) {
-                                x__ = 0.5 * x_ * Math.cos(n / particle.shape.n * Math.PI * 2 + T.TMath.deg2rad(180 + 180 / particle.shape.n)) * base + x_ * (level * particle.skew.z.x);
-                                y__ = 0.5 * y_ * Math.sin(n / particle.shape.n * Math.PI * 2 + T.TMath.deg2rad(180 + 180 / particle.shape.n)) * base + y_ * (level * particle.skew.z.y);
+                                x__ = 0.5 * x_ * Math.cos(n / particle.shape.n * Math.PI * 2 + TOWNS.TMath.deg2rad(180 + 180 / particle.shape.n)) * base + x_ * (level * particle.skew.z.x);
+                                y__ = 0.5 * y_ * Math.sin(n / particle.shape.n * Math.PI * 2 + TOWNS.TMath.deg2rad(180 + 180 / particle.shape.n)) * base + y_ * (level * particle.skew.z.y);
                                 z__ = z_ * level;
                             }
                             else {
-                                var tmp = (2 - (Math.cos(T.TMath.deg2rad(180 / particle.shape.n)))); //todo better
+                                var tmp = (2 - (Math.cos(TOWNS.TMath.deg2rad(180 / particle.shape.n)))); //todo better
                                 x__ = x_ * ((level * 2) - 1); //*(level-0.5);//+x_*(level*particle.skew.z.x),
-                                y__ = 0.5 * y_ * Math.sin(n / particle.shape.n * Math.PI * 2 + T.TMath.deg2rad(180 + 180 / particle.shape.n)); //+y_*(level*particle.skew.z.y),
-                                z__ = (1) * 0.5 * (z_ * Math.cos(n / particle.shape.n * Math.PI * 2 + T.TMath.deg2rad(180 + 180 / particle.shape.n)) * tmp +
-                                    z_ * ((Math.cos(T.TMath.deg2rad(180 / particle.shape.n)))) * tmp);
+                                y__ = 0.5 * y_ * Math.sin(n / particle.shape.n * Math.PI * 2 + TOWNS.TMath.deg2rad(180 + 180 / particle.shape.n)); //+y_*(level*particle.skew.z.y),
+                                z__ = (1) * 0.5 * (z_ * Math.cos(n / particle.shape.n * Math.PI * 2 + TOWNS.TMath.deg2rad(180 + 180 / particle.shape.n)) * tmp +
+                                    z_ * ((Math.cos(TOWNS.TMath.deg2rad(180 / particle.shape.n)))) * tmp);
                             }
                             //------------------ XY Rotation
-                            var DistDeg_ = T.TMath.xy2distDeg(x__, y__); //todo refactor all like DistDeg, etc...
+                            var DistDeg_ = TOWNS.TMath.xy2distDeg(x__, y__); //todo refactor all like DistDeg, etc...
                             DistDeg_.deg += particle.rotation;
-                            var xy_ = T.TMath.distDeg2xy(DistDeg_.dist, DistDeg_.deg);
+                            var xy_ = TOWNS.TMath.distDeg2xy(DistDeg_.dist, DistDeg_.deg);
                             x__ = xy_.x;
                             y__ = xy_.y;
                             //------------------
@@ -1834,7 +1834,7 @@ var T;
             Particles.collisionLinesDetect = function (lines1, lines2) {
                 for (var i1 in lines1) {
                     for (var i2 in lines2) {
-                        if (T.TMath.lineCollision(lines1[i1][0].x, lines1[i1][0].y, lines1[i1][1].x, lines1[i1][1].y, lines2[i2][0].x, lines2[i2][0].y, lines2[i2][1].x, lines2[i2][1].y)) {
+                        if (TOWNS.TMath.lineCollision(lines1[i1][0].x, lines1[i1][0].y, lines1[i1][1].x, lines1[i1][1].y, lines2[i2][0].x, lines2[i2][0].y, lines2[i2][1].x, lines2[i2][1].y)) {
                             //r('collision2D is true', particle1, particle2);
                             return (true);
                         }
@@ -1927,15 +1927,607 @@ var T;
             return Particles;
         }());
         Model.Particles = Particles;
-    })(Model = T.Model || (T.Model = {}));
-})(T || (T = {}));
+    })(Model = TOWNS.Model || (TOWNS.Model = {}));
+})(TOWNS || (TOWNS = {}));
 /**
  * @author ©Towns.cz
- * @fileOverview Creates class T.Color
+ * @fileOverview Creates class TOWNS.Objects.Array
  */
 //======================================================================================================================
-var T;
-(function (T) {
+var TOWNS;
+(function (TOWNS) {
+    var Objects;
+    (function (Objects) {
+        //todo TOWNS.Objects.Array = class extends Array{
+        var Array = (function () {
+            //public objects:Array<string>;
+            function Array(objects) {
+                //r(objects);
+                //r(objects.length);
+                if (objects === void 0) { objects = []; }
+                for (var i in objects) {
+                    objects[i] = TOWNS.Objects.Object.init(objects[i]);
+                }
+                this.objects = objects;
+            }
+            Array.prototype.getAll = function () {
+                return this.objects;
+            };
+            Array.prototype.forEach = function (callback) {
+                return this.objects.forEach(callback);
+            };
+            Array.prototype.filter = function (callback) {
+                var filtered_objects = new TOWNS.Objects.Array();
+                //r(filtered_objects.objects);
+                filtered_objects.objects = this.objects.filter(callback);
+                return (filtered_objects);
+            };
+            /**
+             * Push new object into Objects Array
+             * @param object
+             * @returns {Number}
+             */
+            Array.prototype.push = function (object) {
+                this.objects.push(TOWNS.Objects.Object.init(object));
+            };
+            /**
+             * Update or push object into Objects Array
+             * @param object
+             */
+            Array.prototype.update = function (object) {
+                if (!this.setById(object.id, object)) {
+                    this.push(object);
+                }
+            };
+            /**
+             *
+             * @param {string} id
+             * @returns {object}
+             */
+            Array.prototype.getById = function (id) {
+                if (typeof id !== 'string')
+                    throw new Error('getById: id should be string');
+                for (var i in this.objects) {
+                    if (this.objects[i].id == id)
+                        return this.objects[i];
+                }
+                return null;
+            };
+            /**
+             *
+             * @param {string} id
+             * @param {object} object
+             * @returns {boolean}
+             */
+            Array.prototype.setById = function (id, object) {
+                if (typeof id !== 'string')
+                    throw new Error('setById: id should be string');
+                for (var i in this.objects) {
+                    if (this.objects[i].id == id) {
+                        this.objects[i] = TOWNS.Objects.Object.init(object);
+                        return (true);
+                    }
+                }
+                return false;
+            };
+            /**
+             *
+             * @param {string} id
+             * @returns {boolean}
+             */
+            Array.prototype.removeId = function (id, object) {
+                if (typeof id !== 'string')
+                    throw new Error('removeId: id should be string');
+                for (var i in this.objects) {
+                    if (this.objects[i].id == id) {
+                        this.objects.splice(i, 1);
+                        return (true);
+                    }
+                }
+                return false;
+            };
+            /**
+             * @param {string} type
+             * @returns {TOWNS.Objects.Array}
+             */
+            Array.prototype.filterTypes = function () {
+                var types = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    types[_i - 0] = arguments[_i];
+                }
+                var filtered_objects = new TOWNS.Objects.Array();
+                this.forEach(function (object) {
+                    if (types.indexOf(object.type) == -1)
+                        return;
+                    filtered_objects.getAll().push(object);
+                });
+                return (filtered_objects);
+            };
+            /**
+             *
+             * @param {TOWNS.Position} center
+             * @param {number} radius
+             * @returns {TOWNS.Objects.Array}
+             */
+            Array.prototype.filterRadius = function (center, radius) {
+                var filtered_objects = new TOWNS.Objects.Array();
+                this.forEach(function (object) {
+                    if (object.getPosition().getDistance(center) <= radius) {
+                        filtered_objects.getAll().push(object);
+                    }
+                });
+                return (filtered_objects);
+            };
+            Array.prototype.filterArea = function (area) {
+                var filtered_objects = new TOWNS.Objects.Array();
+                this.forEach(function (object) {
+                    if (area.isContaining(object.getPosition())) {
+                        filtered_objects.getAll().push(object);
+                    }
+                });
+                return (filtered_objects);
+            };
+            /**
+             *
+             * @param {TOWNS.Position} center
+             * @param {number} radius
+             * @returns {Array}
+             */
+            Array.prototype.getMapOfTerrainCodes = function (center, radius) {
+                /*var radius = size/2;
+                 var center ={
+                 x: topleft.x+radius,
+                 y: topleft.y+radius
+                 };*/
+                var x, y;
+                //--------------------------Create empty array
+                var map_array = [];
+                for (y = 0; y < radius * 2; y++) {
+                    map_array[y] = [];
+                    for (x = 0; x < radius * 2; x++) {
+                        map_array[y][x] = false;
+                    }
+                }
+                //--------------------------
+                //--------------------------Fill array
+                var terrain_objects_raw = this.filterTypes('terrain').getAll(); //.slice().reverse();
+                var object;
+                for (var i = 0, l = terrain_objects_raw.length; i < l; i++) {
+                    object = terrain_objects_raw[i];
+                    if (object.design.data.size == 1) {
+                        //--------------------------
+                        x = Math.floor(object.x - center.x + radius);
+                        y = Math.floor(object.y - center.y + radius);
+                        if (y >= 0 &&
+                            x >= 0 &&
+                            y < radius * 2 &&
+                            x < radius * 2) {
+                            map_array[y][x] = object.getCode();
+                        }
+                    }
+                    else {
+                        //--------------------------
+                        var x_from = Math.floor(object.x - center.x + radius - object.design.data.size);
+                        var x_to = Math.ceil(object.x - center.x + radius + object.design.data.size);
+                        var y_from = Math.floor(object.y - center.y + radius - object.design.data.size);
+                        var y_to = Math.ceil(object.y - center.y + radius + object.design.data.size);
+                        var xc = object.x - center.x + radius;
+                        var yc = object.y - center.y + radius;
+                        for (y = y_from; y <= y_to; y++) {
+                            if (typeof map_array[y] === 'undefined')
+                                continue;
+                            for (x = x_from; x <= x_to; x++) {
+                                if (typeof map_array[y][x] === 'undefined')
+                                    continue;
+                                if (TOWNS.TMath.xy2dist(x - xc, y - yc) <= object.design.data.size) {
+                                    map_array[y][x] = object.getCode();
+                                }
+                            }
+                        }
+                    }
+                }
+                //--------------------------
+                return map_array;
+            };
+            Array.prototype.getMapOfCollisions = function (center, radius) {
+                //--------------------------Terrains
+                var map_of_terrain_codes = this.getMapOfTerrainCodes(center, radius);
+                var map_of_collisions = [];
+                var x, y;
+                for (y = 0; y < radius * 2; y++) {
+                    map_of_collisions[y] = [];
+                    for (x = 0; x < radius * 2; x++) {
+                        if ([1, 5, 11].indexOf(map_of_terrain_codes[y][x]) !== -1) {
+                            map_of_collisions[y][x] = 1;
+                        }
+                        else {
+                            map_of_collisions[y][x] = 0;
+                        }
+                    }
+                }
+                //--------------------------
+                //--------------------------Objects
+                this.forEach(function (object) {
+                    if (object.type == 'building' && object.subtype == 'wall') { }
+                    else {
+                        return;
+                    }
+                    var x = Math.round(object.x) - Math.round(center.x - (radius));
+                    var y = Math.round(object.y) - Math.round(center.y - (radius));
+                    [
+                        { x: x, y: y },
+                        { x: x + 1, y: y },
+                        { x: x - 1, y: y },
+                        { x: x, y: y + 1 },
+                        { x: x, y: y - 1 }
+                    ].forEach(function (p_) {
+                        if (p_.x >= 0 && p_.y >= 0 && p_.x < radius * 2 && p_.y < radius * 2) {
+                            map_of_collisions[p_.y][p_.x] = 1;
+                        }
+                    });
+                });
+                //--------------------------
+                return (map_of_collisions);
+            };
+            /**
+             *
+             * @returns {TOWNS.Objects.Array}
+             */
+            Array.prototype.get1x1TerrainObjects = function () {
+                var terrain_objects_1x1 = new TOWNS.Objects.Array();
+                var terrain_objects_raw = this.filterTypes('terrain').getAll().slice().reverse(); //normal Array
+                //--------------------------Fill array
+                var blocked_positions = {};
+                var object_1x1, key;
+                var object;
+                for (var i = 0, l = terrain_objects_raw.length; i < l; i++) {
+                    object = terrain_objects_raw[i];
+                    if (object.design.data.size == 1) {
+                        //--------------------------
+                        object_1x1 = object;
+                        key = 'x' + Math.round(object_1x1.x) + 'y' + Math.round(object_1x1.y);
+                        if (typeof blocked_positions[key] === 'undefined') {
+                            blocked_positions[key] = true;
+                            terrain_objects_1x1.push(object_1x1);
+                        }
+                    }
+                    else {
+                        //--------------------------
+                        var x_from = Math.floor(-object.design.data.size);
+                        var x_to = Math.ceil(object.design.data.size);
+                        var y_from = Math.floor(-object.design.data.size);
+                        var y_to = Math.ceil(object.design.data.size);
+                        for (var y = y_from; y <= y_to; y++) {
+                            for (var x = x_from; x <= x_to; x++) {
+                                if (TOWNS.TMath.xy2dist(x, y) <= object.design.data.size) {
+                                    object_1x1 = object.clone();
+                                    object_1x1.design.data.size = 1;
+                                    object_1x1.x = Math.round(object_1x1.x + x);
+                                    object_1x1.y = Math.round(object_1x1.y + y);
+                                    key = 'x' + object_1x1.x + 'y' + object_1x1.y;
+                                    if (typeof blocked_positions[key] == 'undefined') {
+                                        blocked_positions[key] = true;
+                                        terrain_objects_1x1.push(object_1x1);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                //--------------------------
+                return terrain_objects_1x1;
+            };
+            //todo jsdoc
+            Array.prototype.getTerrainOnPosition = function (position) {
+                for (var i = this.objects.length - 1; i >= 0; i--) {
+                    //if (this.objects[i].type != 'terrain')continue;
+                    if (this.objects[i] instanceof TOWNS.Objects.Terrain) {
+                        if (this.objects[i].design.data.size <= position.getDistance(new TOWNS.Position(this.objects[i].x, this.objects[i].y))) {
+                            return (this.objects[i]);
+                        }
+                    }
+                }
+                return (null);
+            };
+            //todo jsdoc
+            Array.prototype.getNearestTerrainPositionWithCode = function (position, terrain_code) {
+                var terrain_objects_1x1 = this.get1x1TerrainObjects();
+                var min_distance = -1;
+                var nearest_terrain_1x1;
+                terrain_objects_1x1.forEach(function (terrain_1x1) {
+                    var distance = terrain_1x1.getPosition().getDistance(position);
+                    if (min_distance === -1 || min_distance > distance) {
+                        min_distance = distance;
+                        nearest_terrain_1x1 = terrain_1x1;
+                    }
+                });
+                if (nearest_terrain_1x1) {
+                    return null;
+                }
+                else {
+                    return nearest_terrain_1x1.getPosition();
+                }
+            };
+            return Array;
+        }());
+        Objects.Array = Array;
+    })(Objects = TOWNS.Objects || (TOWNS.Objects = {}));
+})(TOWNS || (TOWNS = {}));
+/**
+ * @author ©Towns.cz
+ * @fileOverview Creates class TOWNS.Objects.Object
+ */
+//======================================================================================================================
+var TOWNS;
+(function (TOWNS) {
+    var Objects;
+    (function (Objects) {
+        var Object = (function () {
+            /**
+             * @param {object} object
+             */
+            function Object(object) {
+                for (var key in object) {
+                    var this_key = key;
+                    if (this_key == '_id')
+                        this_key = 'id'; //todo maybe better solution
+                    this[this_key] = object[key];
+                }
+            }
+            Object.init = function (object) {
+                if (object instanceof TOWNS.Objects.Object) {
+                    return (object);
+                }
+                //----------------------------------
+                if (object.type == 'building') {
+                    object = new TOWNS.Objects.Building(object);
+                }
+                else if (object.type == 'terrain') {
+                    object = new TOWNS.Objects.Terrain(object);
+                }
+                else if (object.type == 'story') {
+                    object = new TOWNS.Objects.Story(object);
+                }
+                else if (object.type == 'natural') {
+                    object = new TOWNS.Objects.Natural(object);
+                }
+                else {
+                    console.log(object);
+                    throw new Error('Cant put item into Towns Objects Array because of unrecognized object type ' + object.type);
+                }
+                //----------------------------------
+                return (object);
+            };
+            Object.prototype.getPosition = function () {
+                return (new TOWNS.Position(this.x, this.y));
+            };
+            /**
+             * @returns {boolean}
+             */
+            Object.prototype.isMoving = function () {
+                return (false);
+            };
+            /**
+             *
+             * @returns {string}
+             */
+            Object.prototype.toString = function () {
+                return ('[' + this.name + ']');
+            };
+            return Object;
+        }());
+        Objects.Object = Object;
+    })(Objects = TOWNS.Objects || (TOWNS.Objects = {}));
+})(TOWNS || (TOWNS = {}));
+/**
+ * @author ©Towns.cz
+ * @fileOverview Creates class TOWNS.Objects.Building
+ */
+//======================================================================================================================
+var TOWNS;
+(function (TOWNS) {
+    var Objects;
+    (function (Objects) {
+        var Building = (function (_super) {
+            __extends(Building, _super);
+            /**
+             * @param {object} object
+             */
+            function Building(object) {
+                _super.call(this, object);
+                //-----------------------------
+                if (typeof this.actions === 'undefined') {
+                    this.actions = [];
+                }
+                else {
+                    var actions_classes = [];
+                    for (var i = 0, l = this.actions.length; i < l; i++) {
+                        try {
+                            actions_classes.push(TOWNS.World.game.newActionInstance(this.actions[i]));
+                        }
+                        catch (error) {
+                            console.warn(error);
+                        }
+                    }
+                    this.actions = actions_classes;
+                }
+                //-----------------------------
+                //-----------------------------
+                if (typeof this.path === 'object') {
+                    r(this.path);
+                    this.path = new ((_a = TOWNS.Path).bind.apply(_a, [void 0].concat(this.path)))();
+                }
+                //-----------------------------
+                //-----------------------------
+                var life_action = this.getAction('life');
+                var max_life = TOWNS.World.game.getObjectMaxLife(this);
+                if (life_action === null) {
+                    life_action = TOWNS.World.game.newActionInstance({
+                        type: 'life',
+                        params: {
+                            life: max_life,
+                            max_life: max_life
+                        }
+                    });
+                    this.actions.push(life_action);
+                }
+                else {
+                    life_action.params.max_life = max_life;
+                }
+                var _a;
+                //-----------------------------
+            }
+            /**
+             *
+             * @param {Date} date
+             * @returns {TOWNS.Position}
+             */
+            Building.prototype.getPosition = function (date) {
+                if (typeof this.path === 'undefined') {
+                    return (new TOWNS.Position(this.x, this.y));
+                }
+                else {
+                    return this.path.countPosition(date);
+                }
+            };
+            /**
+             *
+             * @param {Date} date
+             * @returns {boolean}
+             */
+            Building.prototype.isMoving = function (date) {
+                if (typeof this.path === 'undefined') {
+                    return (false);
+                }
+                else {
+                    return this.path.inProgress(date);
+                }
+            };
+            /**
+             * @returns {TOWNS.Objects}
+             */
+            Building.prototype.clone = function () {
+                return (new TOWNS.Objects.Building(JSON.parse(JSON.stringify(this))));
+            };
+            /**
+             * @returns {TOWNS.Model}
+             */
+            Building.prototype.getModel = function () {
+                if (!(this.design.data instanceof TOWNS.Model)) {
+                    this.design.data = new TOWNS.Model(this.design.data);
+                }
+                return (this.design.data);
+            };
+            /**
+             *
+             * @param action_type
+             * @returns {TOWNS.Game.ActionAbility}
+             */
+            Building.prototype.getAction = function (action_type) {
+                for (var i = 0, l = this.actions.length; i < l; i++) {
+                    if (this.actions[i].type == action_type) {
+                        return (this.actions[i]);
+                    }
+                }
+                return null;
+            };
+            Building.prototype.createHtmlProfile = function () {
+                var actions_profile = '';
+                for (var i = 0, l = this.actions.length; i < l; i++) {
+                    actions_profile += this.actions[i].createHtmlProfile();
+                }
+                return ("\n\n            <div class=\"object-building-profile\">\n\n                <h2>" + this.name + "</h2>\n                " + this.getPosition() + "\n\n\n                " + actions_profile + "\n\n\n\n            </div>\n\n        ");
+            };
+            return Building;
+        }(TOWNS.Objects.Object));
+        Objects.Building = Building;
+    })(Objects = TOWNS.Objects || (TOWNS.Objects = {}));
+})(TOWNS || (TOWNS = {}));
+/**
+ * @author ©Towns.cz
+ * @fileOverview Creates class TOWNS.Objects.Natural
+ */
+//======================================================================================================================
+var TOWNS;
+(function (TOWNS) {
+    var Objects;
+    (function (Objects) {
+        var Natural = (function (_super) {
+            __extends(Natural, _super);
+            function Natural() {
+                _super.apply(this, arguments);
+            }
+            Natural.prototype.clone = function () {
+                return (new TOWNS.Objects.Natural(JSON.parse(JSON.stringify(this))));
+            };
+            Natural.prototype.getCode = function () {
+                return (this.design.data.image);
+            };
+            return Natural;
+        }(TOWNS.Objects.Object));
+        Objects.Natural = Natural;
+    })(Objects = TOWNS.Objects || (TOWNS.Objects = {}));
+})(TOWNS || (TOWNS = {}));
+/**
+ * @author ©Towns.cz
+ * @fileOverview Creates class TOWNS.Objects.Story
+ */
+//======================================================================================================================
+var TOWNS;
+(function (TOWNS) {
+    var Objects;
+    (function (Objects) {
+        var Story = (function (_super) {
+            __extends(Story, _super);
+            function Story() {
+                _super.apply(this, arguments);
+            }
+            Story.prototype.clone = function () {
+                return (new TOWNS.Objects.Story(JSON.parse(JSON.stringify(this))));
+            };
+            Story.prototype.getMarkdown = function () {
+                return (this.content.data);
+            };
+            return Story;
+        }(TOWNS.Objects.Object));
+        Objects.Story = Story;
+    })(Objects = TOWNS.Objects || (TOWNS.Objects = {}));
+})(TOWNS || (TOWNS = {}));
+/**
+ * @author ©Towns.cz
+ * @fileOverview Creates class TOWNS.Objects.Story
+ */
+//======================================================================================================================
+var TOWNS;
+(function (TOWNS) {
+    var Objects;
+    (function (Objects) {
+        var Terrain = (function (_super) {
+            __extends(Terrain, _super);
+            function Terrain() {
+                _super.apply(this, arguments);
+            }
+            Terrain.prototype.clone = function () {
+                return (new TOWNS.Objects.Terrain(JSON.parse(JSON.stringify(this))));
+            };
+            Terrain.prototype.getCode = function (prefered_width) {
+                return (this.design.data.image);
+            };
+            Terrain.prototype.getColor = function () {
+                return (this.design.data.color);
+            };
+            return Terrain;
+        }(TOWNS.Objects.Object));
+        Objects.Terrain = Terrain;
+    })(Objects = TOWNS.Objects || (TOWNS.Objects = {}));
+})(TOWNS || (TOWNS = {}));
+/**
+ * @author ©Towns.cz
+ * @fileOverview Creates class TOWNS.Color
+ */
+//======================================================================================================================
+var TOWNS;
+(function (TOWNS) {
     /**
      * Object which represents RGBA color.
      */
@@ -1955,8 +2547,8 @@ var T;
             this.a = a;
         }
         /**
-         * Get deep clone od T.Color
-         * @returns {T.Color}
+         * Get deep clone od TOWNS.Color
+         * @returns {TOWNS.Color}
          */
         Color.prototype.clone = function () {
             return new Color(this.r, this.g, this.b, this.a);
@@ -2018,9 +2610,9 @@ var T;
             return '#' + ((1 << 24) + (this.r << 16) + (this.g << 8) + this.b).toString(16).slice(1);
         };
         /**
-         * Creates new T.Color form hex code of color
+         * Creates new TOWNS.Color form hex code of color
          * @param {string} hex code of color eg. #00ff00
-         * @returns {T.Color} Color
+         * @returns {TOWNS.Color} Color
          */
         Color.createFromHex = function (hex) {
             var result, shorthandRegex, resultRegex;
@@ -2033,23 +2625,23 @@ var T;
                 return new Color(parseInt(resultRegex[1], 16), parseInt(resultRegex[2], 16), parseInt(resultRegex[3], 16));
             }
             else {
-                throw new Error('Error while creating T.Color from ' + hex);
+                throw new Error('Error while creating TOWNS.Color from ' + hex);
             }
         };
         return Color;
     }());
-    T.Color = Color;
-})(T || (T = {}));
+    TOWNS.Color = Color;
+})(TOWNS || (TOWNS = {}));
 /**
  * @author ©Towns.cz
- * @fileOverview Creates class T.Path
+ * @fileOverview Creates class TOWNS.Path
  */
 //======================================================================================================================
-var T;
-(function (T) {
+var TOWNS;
+(function (TOWNS) {
     var Path = (function () {
         /**
-         * @param {...T.PositionDate} Position with date at least 2
+         * @param {...TOWNS.PositionDate} Position with date at least 2
          */
         function Path() {
             var args = [];
@@ -2062,23 +2654,23 @@ var T;
             this.array_position_date = args;
             //todo maybe//}
             if (this.array_position_date.length < 2) {
-                throw new Error('Thare must be at least 2 params when constructing T.Path.');
+                throw new Error('Thare must be at least 2 params when constructing TOWNS.Path.');
             }
             var position_date, last_date = -1;
             for (var i = 0, l = this.array_position_date.length; i < l; i++) {
                 position_date = this.array_position_date[i];
-                if (position_date instanceof T.PositionDate) {
+                if (position_date instanceof TOWNS.PositionDate) {
                 }
                 else {
                     if (position_date instanceof Object) {
-                        this.array_position_date[i] = new T.PositionDate(this.array_position_date[i]);
+                        this.array_position_date[i] = new TOWNS.PositionDate(this.array_position_date[i]);
                     }
                     else {
-                        throw new Error('All Params when constructing T.Path must be T.PositionDate');
+                        throw new Error('All Params when constructing TOWNS.Path must be TOWNS.PositionDate');
                     }
                 }
                 if (last_date >= position_date.date) {
-                    throw new Error('Dates should be consecutive when constructing T.Path (' + position_date.date + ' should be after ' + last_date + '). ' + this);
+                    throw new Error('Dates should be consecutive when constructing TOWNS.Path (' + position_date.date + ' should be after ' + last_date + '). ' + this);
                 }
                 last_date = position_date.date / 1;
             }
@@ -2088,10 +2680,10 @@ var T;
         };
         /**
          *
-         * @param {Array.<T.Position>} array_position
+         * @param {Array.<TOWNS.Position>} array_position
          * @param {number} speed
          * @param {Date} date
-         * @returns {T.Path}
+         * @returns {TOWNS.Path}
          */
         Path.newConstantSpeed = function (array_position, speed, date) {
             if (date === void 0) { date = 0; }
@@ -2108,28 +2700,28 @@ var T;
                 throw new Error('Speed must be positive.');
             }
             if (array_position.length < 2) {
-                throw new Error('Thare must be at least 2 params when constructing T.Path.');
+                throw new Error('Thare must be at least 2 params when constructing TOWNS.Path.');
             }
             var array_position_date = [
-                new T.PositionDate(array_position[0].x, array_position[0].y, date)
+                new TOWNS.PositionDate(array_position[0].x, array_position[0].y, date)
             ];
             var last_position = array_position[0];
             var position_date, distance;
             for (var i = 1, l = array_position.length; i < l; i++) {
                 position_date = array_position[i];
-                if (position_date instanceof T.Position) {
+                if (position_date instanceof TOWNS.Position) {
                 }
                 else {
-                    throw new Error('All Params when constructing T.Path via newConstantSpeed must be T.Position');
+                    throw new Error('All Params when constructing TOWNS.Path via newConstantSpeed must be TOWNS.Position');
                 }
                 distance = last_position.getDistance(position_date);
                 date = new Date(date / 1 + distance / speed * 1000);
                 last_position = position_date;
-                array_position_date.push(new T.PositionDate(array_position[i].x, array_position[i].y, date));
+                array_position_date.push(new TOWNS.PositionDate(array_position[i].x, array_position[i].y, date));
             }
             //return new this.apply(this,array_position_date);
-            //return Object.create(T.Path,array_position_date);
-            return new ((_a = T.Path).bind.apply(_a, [void 0].concat(array_position_date)))();
+            //return Object.create(TOWNS.Path,array_position_date);
+            return new ((_a = TOWNS.Path).bind.apply(_a, [void 0].concat(array_position_date)))();
             var _a;
         };
         Path.prototype.getPositions = function () {
@@ -2140,7 +2732,7 @@ var T;
             return (positions);
         };
         /**
-         * Count in which segment is T.Path progress
+         * Count in which segment is TOWNS.Path progress
          * @param date
          * @returns {number}
          */
@@ -2164,12 +2756,12 @@ var T;
                     return (i);
                 }
             }
-            throw new Error('Error while counting segment in T.Path, maybe because of param date is ' + date);
+            throw new Error('Error while counting segment in TOWNS.Path, maybe because of param date is ' + date);
         };
         /**
          * Counts position at 'date'
          * @param {Date} date
-         * @returns {T.Position}
+         * @returns {TOWNS.Position}
          */
         Path.prototype.countPosition = function (date) {
             if (date === void 0) { date = 0; }
@@ -2191,9 +2783,9 @@ var T;
             var A = this.array_position_date[segment];
             var B = this.array_position_date[segment + 1];
             //console.log((A-date)+' - '+(B-date));
-            var x = T.TMath.proportions(A.date / 1, date / 1, B.date / 1, A.x, B.x);
-            var y = T.TMath.proportions(A.date / 1, date / 1, B.date / 1, A.y, B.y);
-            return (new T.Position(x, y));
+            var x = TOWNS.TMath.proportions(A.date / 1, date / 1, B.date / 1, A.x, B.x);
+            var y = TOWNS.TMath.proportions(A.date / 1, date / 1, B.date / 1, A.y, B.y);
+            return (new TOWNS.Position(x, y));
         };
         /**
          * Counts rotation at 'date'
@@ -2250,7 +2842,7 @@ var T;
         };
         //todo maybe countProgress
         /**
-         * Converts T.Path to string
+         * Converts TOWNS.Path to string
          * @returns {string}
          */
         Path.prototype.toString = function () {
@@ -2258,15 +2850,15 @@ var T;
         };
         return Path;
     }());
-    T.Path = Path;
-})(T || (T = {}));
+    TOWNS.Path = Path;
+})(TOWNS || (TOWNS = {}));
 /**
  * @author ©Towns.cz
- * @fileOverview Creates class T.Position3D
+ * @fileOverview Creates class TOWNS.Position3D
  */
 //======================================================================================================================
-var T;
-(function (T) {
+var TOWNS;
+(function (TOWNS) {
     var Position3D = (function () {
         function Position3D(x_or_object, y, z) {
             var x;
@@ -2283,10 +2875,10 @@ var T;
         }
         /**
          * Return deep clone of this.
-         * @returns {T.Resources}
+         * @returns {TOWNS.Resources}
          */
         Position3D.prototype.clone = function () {
-            return new T.Position3D(this);
+            return new TOWNS.Position3D(this);
         };
         /**
          * Converts Position3D to simple string
@@ -2297,15 +2889,15 @@ var T;
         };
         return Position3D;
     }());
-    T.Position3D = Position3D;
-})(T || (T = {}));
+    TOWNS.Position3D = Position3D;
+})(TOWNS || (TOWNS = {}));
 /**
  * @author ©Towns.cz
  * @fileOverview Creates class PositionPolar
  */
 //======================================================================================================================
-var T;
-(function (T) {
+var TOWNS;
+(function (TOWNS) {
     var PositionPolar = (function () {
         function PositionPolar(distance, degrees) {
             this.distance = distance;
@@ -2313,14 +2905,14 @@ var T;
         }
         /**
          * Return deep clone of this.
-         * @returns {T.Resources}
+         * @returns {TOWNS.Resources}
          */
         PositionPolar.prototype.clone = function () {
-            return new T.PositionPolar(this.distance, this.degrees);
+            return new TOWNS.PositionPolar(this.distance, this.degrees);
         };
         PositionPolar.prototype.getPosition = function () {
             var radians = this.getRadians();
-            return (new T.Position(Math.cos(radians) * this.distance, Math.sin(radians) * this.distance));
+            return (new TOWNS.Position(Math.cos(radians) * this.distance, Math.sin(radians) * this.distance));
         };
         PositionPolar.prototype.getDistance = function () {
             return this.distance;
@@ -2329,7 +2921,7 @@ var T;
             return (this.degrees + 360) % 360;
         };
         PositionPolar.prototype.getRadians = function () {
-            return T.TMath.deg2rad(this.degrees);
+            return TOWNS.TMath.deg2rad(this.degrees);
         };
         /**
          * Converts Position to simple string
@@ -2340,15 +2932,15 @@ var T;
         };
         return PositionPolar;
     }());
-    T.PositionPolar = PositionPolar;
-})(T || (T = {}));
+    TOWNS.PositionPolar = PositionPolar;
+})(TOWNS || (TOWNS = {}));
 /**
  * @author ©Towns.cz
- * @fileOverview Creates class T.Position
+ * @fileOverview Creates class TOWNS.Position
  */
 //======================================================================================================================
-var T;
-(function (T) {
+var TOWNS;
+(function (TOWNS) {
     /**
      * Global position on towns map
      */
@@ -2378,14 +2970,14 @@ var T;
                 return;
             }
             //todo check
-            throw new Error('Wrong constructor params while creating T.Position!');
+            throw new Error('Wrong constructor params while creating TOWNS.Position!');
         }
         /**
          * Return deep clone of this.
-         * @returns {T.Resources}
+         * @returns {TOWNS.Resources}
          */
         Position.prototype.clone = function () {
-            return new T.Position(this);
+            return new TOWNS.Position(this);
         };
         Position.prototype.plus = function (position) {
             this.x += position.x;
@@ -2403,13 +2995,13 @@ var T;
             return this;
         };
         Position.prototype.getFloored = function () {
-            return new T.Position(Math.floor(this.x), Math.floor(this.y));
+            return new TOWNS.Position(Math.floor(this.x), Math.floor(this.y));
         };
         Position.prototype.getPositionPolar = function () {
-            return (new T.PositionPolar(T.TMath.xy2dist(this.x, this.y), T.TMath.rad2deg(Math.atan2(this.y, this.x))));
+            return (new TOWNS.PositionPolar(TOWNS.TMath.xy2dist(this.x, this.y), TOWNS.TMath.rad2deg(Math.atan2(this.y, this.x))));
         };
         Position.prototype.getDistance = function (position) {
-            return T.TMath.xy2dist(position.x - this.x, position.y - this.y);
+            return TOWNS.TMath.xy2dist(position.x - this.x, position.y - this.y);
         };
         /**
          * Converts Position to simple string
@@ -2420,15 +3012,15 @@ var T;
         };
         return Position;
     }());
-    T.Position = Position;
-})(T || (T = {}));
+    TOWNS.Position = Position;
+})(TOWNS || (TOWNS = {}));
 /**
  * @author ©Towns.cz
- * @fileOverview Creates class T.PositionDate
+ * @fileOverview Creates class TOWNS.PositionDate
  */
 //======================================================================================================================
-var T;
-(function (T) {
+var TOWNS;
+(function (TOWNS) {
     /**
      * Global position on towns map with time
      */
@@ -2468,17 +3060,17 @@ var T;
         }
         /**
          * Return deep clone of this.
-         * @returns {T.Resources}
+         * @returns {TOWNS.Resources}
          */
         PositionDate.prototype.clone = function () {
-            return new T.PositionDate(this);
+            return new TOWNS.PositionDate(this);
         };
         /**
          * Return only position
-         * @returns {T.Position}
+         * @returns {TOWNS.Position}
          */
         PositionDate.prototype.getPosition = function () {
-            return new T.Position(this.x, this.y);
+            return new TOWNS.Position(this.x, this.y);
         };
         /**
          * Converts Position to simple string
@@ -2490,11 +3082,11 @@ var T;
                 ' ' + this.date.getHours() + ':' + this.date.getMinutes() + ':' + this.date.getSeconds();
         };
         return PositionDate;
-    }(T.Position));
-    T.PositionDate = PositionDate;
-})(T || (T = {}));
-var T;
-(function (T) {
+    }(TOWNS.Position));
+    TOWNS.PositionDate = PositionDate;
+})(TOWNS || (TOWNS = {}));
+var TOWNS;
+(function (TOWNS) {
     var Area = (function () {
         function Area() {
             var positions = [];
@@ -2527,7 +3119,7 @@ var T;
                     ib = i + 1;
                     if (ib == this.positions.length)
                         ib = 0;
-                    collision = T.TMath.lineCollision(this.positions[ia].x, this.positions[ia].y, this.positions[ib].x, this.positions[ib].y, position.x, position.y, position.x, position.y + (testside - 0.5) * 1000000000 //todo better
+                    collision = TOWNS.TMath.lineCollision(this.positions[ia].x, this.positions[ia].y, this.positions[ib].x, this.positions[ib].y, position.x, position.y, position.x, position.y + (testside - 0.5) * 1000000000 //todo better
                     );
                     if (collision == true) {
                         sidecollision = true;
@@ -2541,637 +3133,45 @@ var T;
         };
         return Area;
     }());
-    T.Area = Area;
-})(T || (T = {}));
+    TOWNS.Area = Area;
+})(TOWNS || (TOWNS = {}));
 /**
  * @author ©Towns.cz
- * @fileOverview Creates class T.Objects.Array
+ * @fileOverview Creates instance TOWNS.World.terrains
  */
 //======================================================================================================================
-var T;
-(function (T) {
-    var Objects;
-    (function (Objects) {
-        //todo T.Objects.Array = class extends Array{
-        var Array = (function () {
-            //public objects:Array;
-            function Array(objects) {
-                //r(objects);
-                //r(objects.length);
-                if (objects === void 0) { objects = []; }
-                for (var i in objects) {
-                    objects[i] = T.Objects.Object.init(objects[i]);
-                }
-                this.objects = objects;
-            }
-            Array.prototype.getAll = function () {
-                return this.objects;
-            };
-            Array.prototype.forEach = function (callback) {
-                return this.objects.forEach(callback);
-            };
-            Array.prototype.filter = function (callback) {
-                var filtered_objects = new T.Objects.Array();
-                //r(filtered_objects.objects);
-                filtered_objects.objects = this.objects.filter(callback);
-                return (filtered_objects);
-            };
-            /**
-             * Push new object into Objects Array
-             * @param object
-             * @returns {Number}
-             */
-            Array.prototype.push = function (object) {
-                this.objects.push(T.Objects.Object.init(object));
-            };
-            /**
-             * Update or push object into Objects Array
-             * @param object
-             */
-            Array.prototype.update = function (object) {
-                if (!this.setById(object.id, object)) {
-                    this.push(object);
-                }
-            };
-            /**
-             *
-             * @param {string} id
-             * @returns {object}
-             */
-            Array.prototype.getById = function (id) {
-                if (typeof id !== 'string')
-                    throw new Error('getById: id should be string');
-                for (var i in this.objects) {
-                    if (this.objects[i].id == id)
-                        return this.objects[i];
-                }
-                return null;
-            };
-            /**
-             *
-             * @param {string} id
-             * @param {object} object
-             * @returns {boolean}
-             */
-            Array.prototype.setById = function (id, object) {
-                if (typeof id !== 'string')
-                    throw new Error('setById: id should be string');
-                for (var i in this.objects) {
-                    if (this.objects[i].id == id) {
-                        this.objects[i] = T.Objects.Object.init(object);
-                        return (true);
-                    }
-                }
-                return false;
-            };
-            /**
-             *
-             * @param {string} id
-             * @returns {boolean}
-             */
-            Array.prototype.removeId = function (id, object) {
-                if (typeof id !== 'string')
-                    throw new Error('removeId: id should be string');
-                for (var i in this.objects) {
-                    if (this.objects[i].id == id) {
-                        this.objects.splice(i, 1);
-                        return (true);
-                    }
-                }
-                return false;
-            };
-            /**
-             * @param {string} type
-             * @returns {T.Objects.Array}
-             */
-            Array.prototype.filterTypes = function () {
-                var types = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    types[_i - 0] = arguments[_i];
-                }
-                var filtered_objects = new T.Objects.Array();
-                this.forEach(function (object) {
-                    if (types.indexOf(object.type) == -1)
-                        return;
-                    filtered_objects.getAll().push(object);
-                });
-                return (filtered_objects);
-            };
-            /**
-             *
-             * @param {T.Position} center
-             * @param {number} radius
-             * @returns {T.Objects.Array}
-             */
-            Array.prototype.filterRadius = function (center, radius) {
-                var filtered_objects = new T.Objects.Array();
-                this.forEach(function (object) {
-                    if (object.getPosition().getDistance(center) <= radius) {
-                        filtered_objects.getAll().push(object);
-                    }
-                });
-                return (filtered_objects);
-            };
-            Array.prototype.filterArea = function (area) {
-                var filtered_objects = new T.Objects.Array();
-                this.forEach(function (object) {
-                    if (area.isContaining(object.getPosition())) {
-                        filtered_objects.getAll().push(object);
-                    }
-                });
-                return (filtered_objects);
-            };
-            /**
-             *
-             * @param {T.Position} center
-             * @param {number} radius
-             * @returns {Array}
-             */
-            Array.prototype.getMapOfTerrainCodes = function (center, radius) {
-                /*var radius = size/2;
-                 var center ={
-                 x: topleft.x+radius,
-                 y: topleft.y+radius
-                 };*/
-                var x, y;
-                //--------------------------Create empty array
-                var map_array = [];
-                for (y = 0; y < radius * 2; y++) {
-                    map_array[y] = [];
-                    for (x = 0; x < radius * 2; x++) {
-                        map_array[y][x] = false;
-                    }
-                }
-                //--------------------------
-                //--------------------------Fill array
-                var terrain_objects_raw = this.filterTypes('terrain').getAll(); //.slice().reverse();
-                var object;
-                for (var i = 0, l = terrain_objects_raw.length; i < l; i++) {
-                    object = terrain_objects_raw[i];
-                    if (object.design.data.size == 1) {
-                        //--------------------------
-                        x = Math.floor(object.x - center.x + radius);
-                        y = Math.floor(object.y - center.y + radius);
-                        if (y >= 0 &&
-                            x >= 0 &&
-                            y < radius * 2 &&
-                            x < radius * 2) {
-                            map_array[y][x] = object.getCode();
-                        }
-                    }
-                    else {
-                        //--------------------------
-                        var x_from = Math.floor(object.x - center.x + radius - object.design.data.size);
-                        var x_to = Math.ceil(object.x - center.x + radius + object.design.data.size);
-                        var y_from = Math.floor(object.y - center.y + radius - object.design.data.size);
-                        var y_to = Math.ceil(object.y - center.y + radius + object.design.data.size);
-                        var xc = object.x - center.x + radius;
-                        var yc = object.y - center.y + radius;
-                        for (y = y_from; y <= y_to; y++) {
-                            if (typeof map_array[y] === 'undefined')
-                                continue;
-                            for (x = x_from; x <= x_to; x++) {
-                                if (typeof map_array[y][x] === 'undefined')
-                                    continue;
-                                if (T.TMath.xy2dist(x - xc, y - yc) <= object.design.data.size) {
-                                    map_array[y][x] = object.getCode();
-                                }
-                            }
-                        }
-                    }
-                }
-                //--------------------------
-                return map_array;
-            };
-            Array.prototype.getMapOfCollisions = function (center, radius) {
-                //--------------------------Terrains
-                var map_of_terrain_codes = this.getMapOfTerrainCodes(center, radius);
-                var map_of_collisions = [];
-                var x, y;
-                for (y = 0; y < radius * 2; y++) {
-                    map_of_collisions[y] = [];
-                    for (x = 0; x < radius * 2; x++) {
-                        if ([1, 5, 11].indexOf(map_of_terrain_codes[y][x]) !== -1) {
-                            map_of_collisions[y][x] = 1;
-                        }
-                        else {
-                            map_of_collisions[y][x] = 0;
-                        }
-                    }
-                }
-                //--------------------------
-                //--------------------------Objects
-                this.forEach(function (object) {
-                    if (object.type == 'building' && object.subtype == 'wall') { }
-                    else {
-                        return;
-                    }
-                    var x = Math.round(object.x) - Math.round(center.x - (radius));
-                    var y = Math.round(object.y) - Math.round(center.y - (radius));
-                    [
-                        { x: x, y: y },
-                        { x: x + 1, y: y },
-                        { x: x - 1, y: y },
-                        { x: x, y: y + 1 },
-                        { x: x, y: y - 1 }
-                    ].forEach(function (p_) {
-                        if (p_.x >= 0 && p_.y >= 0 && p_.x < radius * 2 && p_.y < radius * 2) {
-                            map_of_collisions[p_.y][p_.x] = 1;
-                        }
-                    });
-                });
-                //--------------------------
-                return (map_of_collisions);
-            };
-            /**
-             *
-             * @returns {T.Objects.Array}
-             */
-            Array.prototype.get1x1TerrainObjects = function () {
-                var terrain_objects_1x1 = new T.Objects.Array();
-                var terrain_objects_raw = this.filterTypes('terrain').getAll().slice().reverse(); //normal Array
-                //--------------------------Fill array
-                var blocked_positions = {};
-                var object_1x1, key;
-                var object;
-                for (var i = 0, l = terrain_objects_raw.length; i < l; i++) {
-                    object = terrain_objects_raw[i];
-                    if (object.design.data.size == 1) {
-                        //--------------------------
-                        object_1x1 = object;
-                        key = 'x' + Math.round(object_1x1.x) + 'y' + Math.round(object_1x1.y);
-                        if (typeof blocked_positions[key] === 'undefined') {
-                            blocked_positions[key] = true;
-                            terrain_objects_1x1.push(object_1x1);
-                        }
-                    }
-                    else {
-                        //--------------------------
-                        var x_from = Math.floor(-object.design.data.size);
-                        var x_to = Math.ceil(object.design.data.size);
-                        var y_from = Math.floor(-object.design.data.size);
-                        var y_to = Math.ceil(object.design.data.size);
-                        for (var y = y_from; y <= y_to; y++) {
-                            for (var x = x_from; x <= x_to; x++) {
-                                if (T.TMath.xy2dist(x, y) <= object.design.data.size) {
-                                    object_1x1 = object.clone();
-                                    object_1x1.design.data.size = 1;
-                                    object_1x1.x = Math.round(object_1x1.x + x);
-                                    object_1x1.y = Math.round(object_1x1.y + y);
-                                    key = 'x' + object_1x1.x + 'y' + object_1x1.y;
-                                    if (typeof blocked_positions[key] == 'undefined') {
-                                        blocked_positions[key] = true;
-                                        terrain_objects_1x1.push(object_1x1);
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-                //--------------------------
-                return terrain_objects_1x1;
-            };
-            //todo jsdoc
-            Array.prototype.getTerrainOnPosition = function (position) {
-                for (var i = this.objects.length - 1; i >= 0; i--) {
-                    //if (this.objects[i].type != 'terrain')continue;
-                    if (this.objects[i] instanceof T.Objects.Terrain) {
-                        if (this.objects[i].design.data.size <= position.getDistance(new T.Position(this.objects[i].x, this.objects[i].y))) {
-                            return (this.objects[i]);
-                        }
-                    }
-                }
-                return (null);
-            };
-            //todo jsdoc
-            Array.prototype.getNearestTerrainPositionWithCode = function (position, terrain_code) {
-                var terrain_objects_1x1 = this.get1x1TerrainObjects();
-                var min_distance = -1;
-                var nearest_terrain_1x1;
-                terrain_objects_1x1.forEach(function (terrain_1x1) {
-                    var distance = terrain_1x1.getPosition().getDistance(position);
-                    if (min_distance === -1 || min_distance > distance) {
-                        min_distance = distance;
-                        nearest_terrain_1x1 = terrain_1x1;
-                    }
-                });
-                if (nearest_terrain_1x1) {
-                    return null;
-                }
-                else {
-                    return nearest_terrain_1x1.getPosition();
-                }
-            };
-            return Array;
-        }());
-        Objects.Array = Array;
-    })(Objects = T.Objects || (T.Objects = {}));
-})(T || (T = {}));
-/**
- * @author ©Towns.cz
- * @fileOverview Creates class T.Objects.Object
- */
-//======================================================================================================================
-var T;
-(function (T) {
-    var Objects;
-    (function (Objects) {
-        var Object = (function () {
-            /**
-             * @param {object} object
-             */
-            function Object(object) {
-                for (var key in object) {
-                    var this_key = key;
-                    if (this_key == '_id')
-                        this_key = 'id'; //todo maybe better solution
-                    this[this_key] = object[key];
-                }
-            }
-            Object.init = function (object) {
-                if (object instanceof T.Objects.Object) {
-                    return (object);
-                }
-                //----------------------------------
-                if (object.type == 'building') {
-                    object = new T.Objects.Building(object);
-                }
-                else if (object.type == 'terrain') {
-                    object = new T.Objects.Terrain(object);
-                }
-                else if (object.type == 'story') {
-                    object = new T.Objects.Story(object);
-                }
-                else if (object.type == 'natural') {
-                    object = new T.Objects.Natural(object);
-                }
-                else {
-                    console.log(object);
-                    throw new Error('Cant put item into Towns Objects Array because of unrecognized object type ' + object.type);
-                }
-                //----------------------------------
-                return (object);
-            };
-            Object.prototype.getPosition = function () {
-                return (new T.Position(this.x, this.y));
-            };
-            /**
-             * @returns {boolean}
-             */
-            Object.prototype.isMoving = function () {
-                return (false);
-            };
-            /**
-             *
-             * @returns {string}
-             */
-            Object.prototype.toString = function () {
-                return ('[' + this.name + ']');
-            };
-            return Object;
-        }());
-        Objects.Object = Object;
-    })(Objects = T.Objects || (T.Objects = {}));
-})(T || (T = {}));
-/**
- * @author ©Towns.cz
- * @fileOverview Creates class T.Objects.Building
- */
-//======================================================================================================================
-var T;
-(function (T) {
-    var Objects;
-    (function (Objects) {
-        var Building = (function (_super) {
-            __extends(Building, _super);
-            /**
-             * @param {object} object
-             */
-            function Building(object) {
-                _super.call(this, object);
-                //-----------------------------
-                if (typeof this.actions === 'undefined') {
-                    this.actions = [];
-                }
-                else {
-                    var actions_classes = [];
-                    for (var i = 0, l = this.actions.length; i < l; i++) {
-                        try {
-                            actions_classes.push(T.World.game.newActionInstance(this.actions[i]));
-                        }
-                        catch (error) {
-                            console.warn(error);
-                        }
-                    }
-                    this.actions = actions_classes;
-                }
-                //-----------------------------
-                //-----------------------------
-                if (typeof this.path === 'object') {
-                    r(this.path);
-                    this.path = new ((_a = T.Path).bind.apply(_a, [void 0].concat(this.path)))();
-                }
-                //-----------------------------
-                //-----------------------------
-                var life_action = this.getAction('life');
-                var max_life = T.World.game.getObjectMaxLife(this);
-                if (life_action === null) {
-                    life_action = T.World.game.newActionInstance({
-                        type: 'life',
-                        params: {
-                            life: max_life,
-                            max_life: max_life
-                        }
-                    });
-                    this.actions.push(life_action);
-                }
-                else {
-                    life_action.params.max_life = max_life;
-                }
-                var _a;
-                //-----------------------------
-            }
-            /**
-             *
-             * @param {Date} date
-             * @returns {T.Position}
-             */
-            Building.prototype.getPosition = function (date) {
-                if (typeof this.path === 'undefined') {
-                    return (new T.Position(this.x, this.y));
-                }
-                else {
-                    return this.path.countPosition(date);
-                }
-            };
-            /**
-             *
-             * @param {Date} date
-             * @returns {boolean}
-             */
-            Building.prototype.isMoving = function (date) {
-                if (typeof this.path === 'undefined') {
-                    return (false);
-                }
-                else {
-                    return this.path.inProgress(date);
-                }
-            };
-            /**
-             * @returns {T.Objects}
-             */
-            Building.prototype.clone = function () {
-                return (new T.Objects.Building(JSON.parse(JSON.stringify(this))));
-            };
-            /**
-             * @returns {T.Model}
-             */
-            Building.prototype.getModel = function () {
-                if (!(this.design.data instanceof T.Model)) {
-                    this.design.data = new T.Model(this.design.data);
-                }
-                return (this.design.data);
-            };
-            /**
-             *
-             * @param action_type
-             * @returns {T.Game.ActionAbility}
-             */
-            Building.prototype.getAction = function (action_type) {
-                for (var i = 0, l = this.actions.length; i < l; i++) {
-                    if (this.actions[i].type == action_type) {
-                        return (this.actions[i]);
-                    }
-                }
-                return null;
-            };
-            Building.prototype.createHtmlProfile = function () {
-                var actions_profile = '';
-                for (var i = 0, l = this.actions.length; i < l; i++) {
-                    actions_profile += this.actions[i].createHtmlProfile();
-                }
-                return ("\n\n            <div class=\"object-building-profile\">\n\n                <h2>" + this.name + "</h2>\n                " + this.getPosition() + "\n\n\n                " + actions_profile + "\n\n\n\n            </div>\n\n        ");
-            };
-            return Building;
-        }(T.Objects.Object));
-        Objects.Building = Building;
-    })(Objects = T.Objects || (T.Objects = {}));
-})(T || (T = {}));
-/**
- * @author ©Towns.cz
- * @fileOverview Creates class T.Objects.Natural
- */
-//======================================================================================================================
-var T;
-(function (T) {
-    var Objects;
-    (function (Objects) {
-        var Natural = (function (_super) {
-            __extends(Natural, _super);
-            function Natural() {
-                _super.apply(this, arguments);
-            }
-            Natural.prototype.clone = function () {
-                return (new T.Objects.Natural(JSON.parse(JSON.stringify(this))));
-            };
-            Natural.prototype.getCode = function () {
-                return (this.design.data.image);
-            };
-            return Natural;
-        }(T.Objects.Object));
-        Objects.Natural = Natural;
-    })(Objects = T.Objects || (T.Objects = {}));
-})(T || (T = {}));
-/**
- * @author ©Towns.cz
- * @fileOverview Creates class T.Objects.Story
- */
-//======================================================================================================================
-var T;
-(function (T) {
-    var Objects;
-    (function (Objects) {
-        var Story = (function (_super) {
-            __extends(Story, _super);
-            function Story() {
-                _super.apply(this, arguments);
-            }
-            Story.prototype.clone = function () {
-                return (new T.Objects.Story(JSON.parse(JSON.stringify(this))));
-            };
-            Story.prototype.getMarkdown = function () {
-                return (this.content.data);
-            };
-            return Story;
-        }(T.Objects.Object));
-        Objects.Story = Story;
-    })(Objects = T.Objects || (T.Objects = {}));
-})(T || (T = {}));
-/**
- * @author ©Towns.cz
- * @fileOverview Creates class T.Objects.Story
- */
-//======================================================================================================================
-var T;
-(function (T) {
-    var Objects;
-    (function (Objects) {
-        var Terrain = (function (_super) {
-            __extends(Terrain, _super);
-            function Terrain() {
-                _super.apply(this, arguments);
-            }
-            Terrain.prototype.clone = function () {
-                return (new T.Objects.Terrain(JSON.parse(JSON.stringify(this))));
-            };
-            Terrain.prototype.getCode = function (prefered_width) {
-                return (this.design.data.image);
-            };
-            Terrain.prototype.getColor = function () {
-                return (this.design.data.color);
-            };
-            return Terrain;
-        }(T.Objects.Object));
-        Objects.Terrain = Terrain;
-    })(Objects = T.Objects || (T.Objects = {}));
-})(T || (T = {}));
-/**
- * @author ©Towns.cz
- * @fileOverview Creates instance T.World.terrains
- */
-//======================================================================================================================
-var T;
-(function (T) {
+var TOWNS;
+(function (TOWNS) {
     var World;
     (function (World) {
         World.terrains = [
-            new T.Objects.Terrain({ type: 'terrain', design: { type: 'terrain', data: { image: 0, color: '#000000', size: 1 } }, name: 'temnota' }),
-            new T.Objects.Terrain({ type: 'terrain', design: { type: 'terrain', data: { image: 1, color: '#337EFA', size: 1 } }, name: 'moře' }),
-            new T.Objects.Terrain({ type: 'terrain', design: { type: 'terrain', data: { image: 2, color: '#545454', size: 1 } }, name: 'dlažba' }),
-            new T.Objects.Terrain({ type: 'terrain', design: { type: 'terrain', data: { image: 3, color: '#EFF7FB', size: 1 } }, name: 'sníh/led' }),
-            new T.Objects.Terrain({ type: 'terrain', design: { type: 'terrain', data: { image: 4, color: '#F9F98D', size: 1 } }, name: 'písek' }),
-            new T.Objects.Terrain({ type: 'terrain', design: { type: 'terrain', data: { image: 5, color: '#878787', size: 1 } }, name: 'kamení' }),
-            new T.Objects.Terrain({ type: 'terrain', design: { type: 'terrain', data: { image: 6, color: '#5A2F00', size: 1 } }, name: 'hlína' }),
-            new T.Objects.Terrain({ type: 'terrain', design: { type: 'terrain', data: { image: 7, color: '#EFF7FB', size: 1 } }, name: 'sníh/led' }),
-            new T.Objects.Terrain({ type: 'terrain', design: { type: 'terrain', data: { image: 8, color: '#2A7302', size: 1 } }, name: 'tráva(normal)' }),
-            new T.Objects.Terrain({ type: 'terrain', design: { type: 'terrain', data: { image: 9, color: '#51F311', size: 1 } }, name: 'tráva(toxic)' }),
-            new T.Objects.Terrain({ type: 'terrain', design: { type: 'terrain', data: { image: 10, color: '#535805', size: 1 } }, name: 'les' }),
-            new T.Objects.Terrain({ type: 'terrain', design: { type: 'terrain', data: { image: 11, color: '#6aa2ff', size: 1 } }, name: 'řeka' }),
-            new T.Objects.Terrain({ type: 'terrain', design: { type: 'terrain', data: { image: 12, color: '#8ABC02', size: 1 } }, name: 'tráva(jaro)' }),
-            new T.Objects.Terrain({ type: 'terrain', design: { type: 'terrain', data: { image: 13, color: '#8A9002', size: 1 } }, name: 'tráva(pozim)' })
+            new TOWNS.Objects.Terrain({ type: 'terrain', design: { type: 'terrain', data: { image: 0, color: '#000000', size: 1 } }, name: 'temnota' }),
+            new TOWNS.Objects.Terrain({ type: 'terrain', design: { type: 'terrain', data: { image: 1, color: '#337EFA', size: 1 } }, name: 'moře' }),
+            new TOWNS.Objects.Terrain({ type: 'terrain', design: { type: 'terrain', data: { image: 2, color: '#545454', size: 1 } }, name: 'dlažba' }),
+            new TOWNS.Objects.Terrain({ type: 'terrain', design: { type: 'terrain', data: { image: 3, color: '#EFF7FB', size: 1 } }, name: 'sníh/led' }),
+            new TOWNS.Objects.Terrain({ type: 'terrain', design: { type: 'terrain', data: { image: 4, color: '#F9F98D', size: 1 } }, name: 'písek' }),
+            new TOWNS.Objects.Terrain({ type: 'terrain', design: { type: 'terrain', data: { image: 5, color: '#878787', size: 1 } }, name: 'kamení' }),
+            new TOWNS.Objects.Terrain({ type: 'terrain', design: { type: 'terrain', data: { image: 6, color: '#5A2F00', size: 1 } }, name: 'hlína' }),
+            new TOWNS.Objects.Terrain({ type: 'terrain', design: { type: 'terrain', data: { image: 7, color: '#EFF7FB', size: 1 } }, name: 'sníh/led' }),
+            new TOWNS.Objects.Terrain({ type: 'terrain', design: { type: 'terrain', data: { image: 8, color: '#2A7302', size: 1 } }, name: 'tráva(normal)' }),
+            new TOWNS.Objects.Terrain({ type: 'terrain', design: { type: 'terrain', data: { image: 9, color: '#51F311', size: 1 } }, name: 'tráva(toxic)' }),
+            new TOWNS.Objects.Terrain({ type: 'terrain', design: { type: 'terrain', data: { image: 10, color: '#535805', size: 1 } }, name: 'les' }),
+            new TOWNS.Objects.Terrain({ type: 'terrain', design: { type: 'terrain', data: { image: 11, color: '#6aa2ff', size: 1 } }, name: 'řeka' }),
+            new TOWNS.Objects.Terrain({ type: 'terrain', design: { type: 'terrain', data: { image: 12, color: '#8ABC02', size: 1 } }, name: 'tráva(jaro)' }),
+            new TOWNS.Objects.Terrain({ type: 'terrain', design: { type: 'terrain', data: { image: 13, color: '#8A9002', size: 1 } }, name: 'tráva(pozim)' })
         ];
-    })(World = T.World || (T.World = {}));
-})(T || (T = {}));
+    })(World = TOWNS.World || (TOWNS.World = {}));
+})(TOWNS || (TOWNS = {}));
 /**
  * @author ©Towns.cz
- * @fileOverview Creates instance T.World.mapGenerator
+ * @fileOverview Creates instance TOWNS.World.mapGenerator
  */
 //======================================================================================================================
-var T;
-(function (T) {
+var TOWNS;
+(function (TOWNS) {
     var World;
     (function (World) {
-        World.mapGenerator = new T.MapGenerator(T.TMath.blurXY(function (x, y) {
+        World.mapGenerator = new TOWNS.MapGenerator(TOWNS.TMath.blurXY(function (x, y) {
             //todo//var key='x'+x+'y'+y;
             //todo//if(typeof z_map_cache[key]!='undefined'){
             //todo//    return(z_map_cache[key]);
@@ -3187,7 +3187,7 @@ var T;
                 max_possible_n += div;
                 //x=Math.floor(x/3);
                 //y=Math.floor(y/3);
-                //var xy = T.TMath.xyRotate(x,y,57);
+                //var xy = TOWNS.TMath.xyRotate(x,y,57);
                 //x=xy.x;
                 //y=xy.y;
                 _x = (-y * k) + (x * k_);
@@ -3202,23 +3202,23 @@ var T;
                 n -= Math.floor(n);
             //todo//z_map_cache[key]=n;
             return (n);
-        }, 2), [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.0001, 0.0001, 0.0001, 0.0001, 0.0001, 0.0001, 0.0002, 0.0003, 0.0003, 0.0005, 0.0006, 0.0007, 0.0009, 0.001, 0.001, 0.001, 0.0012, 0.0014, 0.0015, 0.0016, 0.0021, 0.0025, 0.003, 0.0033, 0.0034, 0.0037, 0.0038, 0.0042, 0.0046, 0.0049, 0.0057, 0.0065, 0.0068, 0.0072, 0.0074, 0.0079, 0.0084, 0.009, 0.0096, 0.0105, 0.0115, 0.0123, 0.0131, 0.0142, 0.0148, 0.0159, 0.0166, 0.0184, 0.019, 0.0204, 0.021, 0.022, 0.0232, 0.0245, 0.026, 0.0266, 0.0277, 0.029, 0.0297, 0.031, 0.0318, 0.0331, 0.0346, 0.0361, 0.0378, 0.0389, 0.0404, 0.0414, 0.0431, 0.0456, 0.0475, 0.0501, 0.0517, 0.0533, 0.0548, 0.0566, 0.0589, 0.0609, 0.0622, 0.0635, 0.0658, 0.0678, 0.0692, 0.0712, 0.0733, 0.0751, 0.0774, 0.079, 0.0813, 0.0837, 0.0859, 0.088, 0.0902, 0.0927, 0.0961, 0.0988, 0.1003, 0.1031, 0.105, 0.1071, 0.11, 0.1113, 0.1137, 0.1165, 0.1187, 0.1218, 0.1243, 0.1277, 0.1297, 0.1323, 0.1353, 0.1371, 0.1395, 0.1426, 0.1449, 0.1474, 0.1509, 0.1536, 0.156, 0.1582, 0.1605, 0.1633, 0.1662, 0.1692, 0.1726, 0.1755, 0.1781, 0.1813, 0.1842, 0.1869, 0.1899, 0.1939, 0.1975, 0.2001, 0.2029, 0.207, 0.2108, 0.2135, 0.2158, 0.2187, 0.221, 0.2238, 0.226, 0.2283, 0.2326, 0.2362, 0.2394, 0.2427, 0.2455, 0.2485, 0.2508, 0.2532, 0.2568, 0.2594, 0.2628, 0.2651, 0.2678, 0.2712, 0.2738, 0.276, 0.2792, 0.2819, 0.2852, 0.2885, 0.2908, 0.2943, 0.2969, 0.2994, 0.3019, 0.3049, 0.3077, 0.3108, 0.3135, 0.3162, 0.3194, 0.3216, 0.3243, 0.3276, 0.3307, 0.3334, 0.336, 0.3386, 0.3421, 0.3443, 0.3462, 0.3484, 0.351, 0.3535, 0.3569, 0.3593, 0.3618, 0.3642, 0.3659, 0.3681, 0.3706, 0.3722, 0.3742, 0.3772, 0.3794, 0.3816, 0.3837, 0.3865, 0.3879, 0.3907, 0.3925, 0.3947, 0.3967, 0.3985, 0.3998, 0.4021, 0.4035, 0.4054, 0.4067, 0.4088, 0.4107, 0.4133, 0.4141, 0.4161, 0.4177, 0.4193, 0.4209, 0.4219, 0.4234, 0.4245, 0.4264, 0.4283, 0.4302, 0.4318, 0.4327, 0.4346, 0.4363, 0.4381, 0.44, 0.4409, 0.4435, 0.445, 0.4462, 0.4484, 0.4492, 0.4506, 0.4518, 0.4533, 0.4548, 0.4554, 0.456, 0.4573, 0.4588, 0.4605, 0.4616, 0.463, 0.4638, 0.4656, 0.4663, 0.4672, 0.4684, 0.4696, 0.4708, 0.4721, 0.473, 0.4737, 0.4747, 0.4756, 0.4765, 0.4781, 0.4791, 0.4802, 0.4809, 0.4819, 0.4824, 0.483, 0.4838, 0.4847, 0.4859, 0.4865, 0.487, 0.4875, 0.4883, 0.4894, 0.4901, 0.4907, 0.4915, 0.4929, 0.4934, 0.494, 0.4949, 0.4955, 0.496, 0.4967, 0.4971, 0.4975, 0.4981, 0.499, 0.4997, 0.5005, 0.5008, 0.5018, 0.5024, 0.5032, 0.5038, 0.5042, 0.5046, 0.505, 0.5059, 0.5067, 0.507, 0.5074, 0.5077, 0.5084, 0.5086, 0.5095, 0.5104, 0.5109, 0.5117, 0.5122, 0.5129, 0.5136, 0.514, 0.5141, 0.5145, 0.515, 0.5153, 0.5157, 0.5162, 0.5169, 0.5172, 0.5176, 0.518, 0.5186, 0.5193, 0.5197, 0.5202, 0.5207, 0.5209, 0.5214, 0.5218, 0.5223, 0.5231, 0.5237, 0.5244, 0.5246, 0.5249, 0.5259, 0.5261, 0.5269, 0.5272, 0.5275, 0.5281, 0.5283, 0.5285, 0.5291, 0.5302, 0.531, 0.5317, 0.532, 0.5326, 0.5334, 0.5336, 0.5341, 0.5343, 0.5345, 0.5349, 0.5353, 0.5357, 0.5364, 0.5377, 0.5382, 0.5388, 0.5393, 0.5399, 0.5403, 0.5412, 0.5419, 0.543, 0.5437, 0.5446, 0.5457, 0.5466, 0.5476, 0.5482, 0.5486, 0.5491, 0.5495, 0.5503, 0.5506, 0.5515, 0.5522, 0.5527, 0.554, 0.555, 0.5553, 0.5557, 0.5562, 0.5569, 0.5578, 0.5586, 0.5595, 0.5608, 0.5616, 0.5626, 0.5634, 0.5645, 0.5652, 0.5667, 0.5673, 0.5683, 0.5697, 0.5707, 0.5723, 0.5739, 0.575, 0.5758, 0.5771, 0.5779, 0.5791, 0.5803, 0.5817, 0.5833, 0.5849, 0.5865, 0.5876, 0.5884, 0.5899, 0.5919, 0.5929, 0.5942, 0.5954, 0.5969, 0.5987, 0.5998, 0.6018, 0.6036, 0.6052, 0.6063, 0.6077, 0.6099, 0.6116, 0.6136, 0.6154, 0.6166, 0.6185, 0.6201, 0.6223, 0.6238, 0.6258, 0.6278, 0.6295, 0.631, 0.6324, 0.6344, 0.6358, 0.6372, 0.6395, 0.6414, 0.6434, 0.6451, 0.6472, 0.6493, 0.6513, 0.6536, 0.6559, 0.6578, 0.6598, 0.6622, 0.6638, 0.667, 0.6696, 0.671, 0.674, 0.6765, 0.679, 0.6811, 0.6836, 0.6861, 0.6884, 0.6903, 0.6933, 0.6946, 0.6976, 0.6997, 0.7027, 0.7049, 0.7084, 0.7109, 0.7128, 0.7164, 0.7189, 0.7222, 0.7245, 0.7271, 0.7305, 0.7326, 0.7367, 0.7398, 0.7421, 0.7443, 0.7461, 0.7483, 0.7507, 0.754, 0.7566, 0.7587, 0.7615, 0.7639, 0.7662, 0.7693, 0.7723, 0.7753, 0.7769, 0.7797, 0.7822, 0.7843, 0.7869, 0.7891, 0.7918, 0.7944, 0.7982, 0.801, 0.8041, 0.8068, 0.8094, 0.812, 0.8148, 0.8174, 0.82, 0.8219, 0.824, 0.8259, 0.8287, 0.8311, 0.8333, 0.8349, 0.8374, 0.841, 0.8433, 0.8456, 0.8481, 0.8518, 0.854, 0.8562, 0.8588, 0.862, 0.864, 0.8666, 0.8693, 0.8719, 0.8737, 0.8749, 0.8773, 0.8793, 0.8816, 0.8839, 0.887, 0.8888, 0.8905, 0.8924, 0.8948, 0.8966, 0.8986, 0.9009, 0.9029, 0.9039, 0.9063, 0.908, 0.9095, 0.911, 0.9125, 0.915, 0.9173, 0.9186, 0.9209, 0.9228, 0.9249, 0.9259, 0.927, 0.929, 0.9303, 0.9322, 0.9332, 0.9343, 0.9356, 0.9372, 0.9387, 0.9407, 0.9427, 0.944, 0.9459, 0.9473, 0.949, 0.9508, 0.9521, 0.9533, 0.9555, 0.9569, 0.958, 0.9592, 0.9606, 0.9612, 0.9617, 0.962, 0.9627, 0.9642, 0.9646, 0.9658, 0.967, 0.968, 0.9684, 0.9688, 0.9698, 0.9706, 0.9719, 0.9727, 0.974, 0.9747, 0.9761, 0.9774, 0.9785, 0.9793, 0.9802, 0.9811, 0.9817, 0.9823, 0.9828, 0.984, 0.9846, 0.9851, 0.9858, 0.9863, 0.9869, 0.987, 0.9874, 0.9879, 0.9886, 0.9888, 0.9895, 0.9903, 0.9904, 0.9907, 0.9912, 0.9913, 0.9917, 0.992, 0.9928, 0.9929, 0.9936, 0.9939, 0.9942, 0.9946, 0.9949, 0.9955, 0.9955, 0.9959, 0.9963, 0.9964, 0.9966, 0.9966, 0.9968, 0.9969, 0.9971, 0.9973, 0.9978, 0.9981, 0.9985, 0.9986, 0.9988, 0.9988, 0.9989, 0.9989, 0.999, 0.999, 0.999, 0.9993, 0.9993, 0.9993, 0.9993, 0.9993, 0.9993, 0.9996, 0.9996, 0.9997, 0.9997, 0.9997, 0.9998, 0.9999, 0.9999, 0.9999, 0.9999, 0.9999, 0.9999, 0.9999, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], new T.MapGenerator.Biotope([
-            { amount: 120, terrain: T.World.terrains[1] },
-            { amount: 40, terrain: T.World.terrains[11] },
-            { amount: 30, terrain: T.World.terrains[4] },
-            { amount: 20, terrain: T.World.terrains[12] },
-            { amount: 40, terrain: T.World.terrains[9] },
-            { amount: 20, terrain: T.World.terrains[10] },
-            { amount: 10, terrain: T.World.terrains[8] },
-            { amount: 20, terrain: T.World.terrains[10] },
-            { amount: 20, terrain: T.World.terrains[12] },
-            { amount: 50, terrain: T.World.terrains[4] },
-            { amount: 10, terrain: T.World.terrains[13] },
-            { amount: 20, terrain: T.World.terrains[5] },
-            { amount: 60, terrain: T.World.terrains[3] },
-            { amount: 5, terrain: T.World.terrains[10] },
-            { amount: 60, terrain: T.World.terrains[7] },
-            { amount: 10, terrain: T.World.terrains[5] },
+        }, 2), [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.0001, 0.0001, 0.0001, 0.0001, 0.0001, 0.0001, 0.0002, 0.0003, 0.0003, 0.0005, 0.0006, 0.0007, 0.0009, 0.001, 0.001, 0.001, 0.0012, 0.0014, 0.0015, 0.0016, 0.0021, 0.0025, 0.003, 0.0033, 0.0034, 0.0037, 0.0038, 0.0042, 0.0046, 0.0049, 0.0057, 0.0065, 0.0068, 0.0072, 0.0074, 0.0079, 0.0084, 0.009, 0.0096, 0.0105, 0.0115, 0.0123, 0.0131, 0.0142, 0.0148, 0.0159, 0.0166, 0.0184, 0.019, 0.0204, 0.021, 0.022, 0.0232, 0.0245, 0.026, 0.0266, 0.0277, 0.029, 0.0297, 0.031, 0.0318, 0.0331, 0.0346, 0.0361, 0.0378, 0.0389, 0.0404, 0.0414, 0.0431, 0.0456, 0.0475, 0.0501, 0.0517, 0.0533, 0.0548, 0.0566, 0.0589, 0.0609, 0.0622, 0.0635, 0.0658, 0.0678, 0.0692, 0.0712, 0.0733, 0.0751, 0.0774, 0.079, 0.0813, 0.0837, 0.0859, 0.088, 0.0902, 0.0927, 0.0961, 0.0988, 0.1003, 0.1031, 0.105, 0.1071, 0.11, 0.1113, 0.1137, 0.1165, 0.1187, 0.1218, 0.1243, 0.1277, 0.1297, 0.1323, 0.1353, 0.1371, 0.1395, 0.1426, 0.1449, 0.1474, 0.1509, 0.1536, 0.156, 0.1582, 0.1605, 0.1633, 0.1662, 0.1692, 0.1726, 0.1755, 0.1781, 0.1813, 0.1842, 0.1869, 0.1899, 0.1939, 0.1975, 0.2001, 0.2029, 0.207, 0.2108, 0.2135, 0.2158, 0.2187, 0.221, 0.2238, 0.226, 0.2283, 0.2326, 0.2362, 0.2394, 0.2427, 0.2455, 0.2485, 0.2508, 0.2532, 0.2568, 0.2594, 0.2628, 0.2651, 0.2678, 0.2712, 0.2738, 0.276, 0.2792, 0.2819, 0.2852, 0.2885, 0.2908, 0.2943, 0.2969, 0.2994, 0.3019, 0.3049, 0.3077, 0.3108, 0.3135, 0.3162, 0.3194, 0.3216, 0.3243, 0.3276, 0.3307, 0.3334, 0.336, 0.3386, 0.3421, 0.3443, 0.3462, 0.3484, 0.351, 0.3535, 0.3569, 0.3593, 0.3618, 0.3642, 0.3659, 0.3681, 0.3706, 0.3722, 0.3742, 0.3772, 0.3794, 0.3816, 0.3837, 0.3865, 0.3879, 0.3907, 0.3925, 0.3947, 0.3967, 0.3985, 0.3998, 0.4021, 0.4035, 0.4054, 0.4067, 0.4088, 0.4107, 0.4133, 0.4141, 0.4161, 0.4177, 0.4193, 0.4209, 0.4219, 0.4234, 0.4245, 0.4264, 0.4283, 0.4302, 0.4318, 0.4327, 0.4346, 0.4363, 0.4381, 0.44, 0.4409, 0.4435, 0.445, 0.4462, 0.4484, 0.4492, 0.4506, 0.4518, 0.4533, 0.4548, 0.4554, 0.456, 0.4573, 0.4588, 0.4605, 0.4616, 0.463, 0.4638, 0.4656, 0.4663, 0.4672, 0.4684, 0.4696, 0.4708, 0.4721, 0.473, 0.4737, 0.4747, 0.4756, 0.4765, 0.4781, 0.4791, 0.4802, 0.4809, 0.4819, 0.4824, 0.483, 0.4838, 0.4847, 0.4859, 0.4865, 0.487, 0.4875, 0.4883, 0.4894, 0.4901, 0.4907, 0.4915, 0.4929, 0.4934, 0.494, 0.4949, 0.4955, 0.496, 0.4967, 0.4971, 0.4975, 0.4981, 0.499, 0.4997, 0.5005, 0.5008, 0.5018, 0.5024, 0.5032, 0.5038, 0.5042, 0.5046, 0.505, 0.5059, 0.5067, 0.507, 0.5074, 0.5077, 0.5084, 0.5086, 0.5095, 0.5104, 0.5109, 0.5117, 0.5122, 0.5129, 0.5136, 0.514, 0.5141, 0.5145, 0.515, 0.5153, 0.5157, 0.5162, 0.5169, 0.5172, 0.5176, 0.518, 0.5186, 0.5193, 0.5197, 0.5202, 0.5207, 0.5209, 0.5214, 0.5218, 0.5223, 0.5231, 0.5237, 0.5244, 0.5246, 0.5249, 0.5259, 0.5261, 0.5269, 0.5272, 0.5275, 0.5281, 0.5283, 0.5285, 0.5291, 0.5302, 0.531, 0.5317, 0.532, 0.5326, 0.5334, 0.5336, 0.5341, 0.5343, 0.5345, 0.5349, 0.5353, 0.5357, 0.5364, 0.5377, 0.5382, 0.5388, 0.5393, 0.5399, 0.5403, 0.5412, 0.5419, 0.543, 0.5437, 0.5446, 0.5457, 0.5466, 0.5476, 0.5482, 0.5486, 0.5491, 0.5495, 0.5503, 0.5506, 0.5515, 0.5522, 0.5527, 0.554, 0.555, 0.5553, 0.5557, 0.5562, 0.5569, 0.5578, 0.5586, 0.5595, 0.5608, 0.5616, 0.5626, 0.5634, 0.5645, 0.5652, 0.5667, 0.5673, 0.5683, 0.5697, 0.5707, 0.5723, 0.5739, 0.575, 0.5758, 0.5771, 0.5779, 0.5791, 0.5803, 0.5817, 0.5833, 0.5849, 0.5865, 0.5876, 0.5884, 0.5899, 0.5919, 0.5929, 0.5942, 0.5954, 0.5969, 0.5987, 0.5998, 0.6018, 0.6036, 0.6052, 0.6063, 0.6077, 0.6099, 0.6116, 0.6136, 0.6154, 0.6166, 0.6185, 0.6201, 0.6223, 0.6238, 0.6258, 0.6278, 0.6295, 0.631, 0.6324, 0.6344, 0.6358, 0.6372, 0.6395, 0.6414, 0.6434, 0.6451, 0.6472, 0.6493, 0.6513, 0.6536, 0.6559, 0.6578, 0.6598, 0.6622, 0.6638, 0.667, 0.6696, 0.671, 0.674, 0.6765, 0.679, 0.6811, 0.6836, 0.6861, 0.6884, 0.6903, 0.6933, 0.6946, 0.6976, 0.6997, 0.7027, 0.7049, 0.7084, 0.7109, 0.7128, 0.7164, 0.7189, 0.7222, 0.7245, 0.7271, 0.7305, 0.7326, 0.7367, 0.7398, 0.7421, 0.7443, 0.7461, 0.7483, 0.7507, 0.754, 0.7566, 0.7587, 0.7615, 0.7639, 0.7662, 0.7693, 0.7723, 0.7753, 0.7769, 0.7797, 0.7822, 0.7843, 0.7869, 0.7891, 0.7918, 0.7944, 0.7982, 0.801, 0.8041, 0.8068, 0.8094, 0.812, 0.8148, 0.8174, 0.82, 0.8219, 0.824, 0.8259, 0.8287, 0.8311, 0.8333, 0.8349, 0.8374, 0.841, 0.8433, 0.8456, 0.8481, 0.8518, 0.854, 0.8562, 0.8588, 0.862, 0.864, 0.8666, 0.8693, 0.8719, 0.8737, 0.8749, 0.8773, 0.8793, 0.8816, 0.8839, 0.887, 0.8888, 0.8905, 0.8924, 0.8948, 0.8966, 0.8986, 0.9009, 0.9029, 0.9039, 0.9063, 0.908, 0.9095, 0.911, 0.9125, 0.915, 0.9173, 0.9186, 0.9209, 0.9228, 0.9249, 0.9259, 0.927, 0.929, 0.9303, 0.9322, 0.9332, 0.9343, 0.9356, 0.9372, 0.9387, 0.9407, 0.9427, 0.944, 0.9459, 0.9473, 0.949, 0.9508, 0.9521, 0.9533, 0.9555, 0.9569, 0.958, 0.9592, 0.9606, 0.9612, 0.9617, 0.962, 0.9627, 0.9642, 0.9646, 0.9658, 0.967, 0.968, 0.9684, 0.9688, 0.9698, 0.9706, 0.9719, 0.9727, 0.974, 0.9747, 0.9761, 0.9774, 0.9785, 0.9793, 0.9802, 0.9811, 0.9817, 0.9823, 0.9828, 0.984, 0.9846, 0.9851, 0.9858, 0.9863, 0.9869, 0.987, 0.9874, 0.9879, 0.9886, 0.9888, 0.9895, 0.9903, 0.9904, 0.9907, 0.9912, 0.9913, 0.9917, 0.992, 0.9928, 0.9929, 0.9936, 0.9939, 0.9942, 0.9946, 0.9949, 0.9955, 0.9955, 0.9959, 0.9963, 0.9964, 0.9966, 0.9966, 0.9968, 0.9969, 0.9971, 0.9973, 0.9978, 0.9981, 0.9985, 0.9986, 0.9988, 0.9988, 0.9989, 0.9989, 0.999, 0.999, 0.999, 0.9993, 0.9993, 0.9993, 0.9993, 0.9993, 0.9993, 0.9996, 0.9996, 0.9997, 0.9997, 0.9997, 0.9998, 0.9999, 0.9999, 0.9999, 0.9999, 0.9999, 0.9999, 0.9999, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], new TOWNS.MapGenerator.Biotope([
+            { amount: 120, terrain: TOWNS.World.terrains[1] },
+            { amount: 40, terrain: TOWNS.World.terrains[11] },
+            { amount: 30, terrain: TOWNS.World.terrains[4] },
+            { amount: 20, terrain: TOWNS.World.terrains[12] },
+            { amount: 40, terrain: TOWNS.World.terrains[9] },
+            { amount: 20, terrain: TOWNS.World.terrains[10] },
+            { amount: 10, terrain: TOWNS.World.terrains[8] },
+            { amount: 20, terrain: TOWNS.World.terrains[10] },
+            { amount: 20, terrain: TOWNS.World.terrains[12] },
+            { amount: 50, terrain: TOWNS.World.terrains[4] },
+            { amount: 10, terrain: TOWNS.World.terrains[13] },
+            { amount: 20, terrain: TOWNS.World.terrains[5] },
+            { amount: 60, terrain: TOWNS.World.terrains[3] },
+            { amount: 5, terrain: TOWNS.World.terrains[10] },
+            { amount: 60, terrain: TOWNS.World.terrains[7] },
+            { amount: 10, terrain: TOWNS.World.terrains[5] },
         ]), function (object, virtual_objects) {
             if (object.type != 'terrain')
                 return;
@@ -3232,8 +3232,8 @@ var T;
              design: {
              type: 'natural',
              data:{
-             image:'rock'+Math.floor(T.TMath.randomSeedPosition(1,{x:object.x,y:object.y})*6)%6+'dark'+Math.floor(T.TMath.randomSeedPosition(2,{x:object.x,y:object.y})*4)%4,
-             size: 0.5+T.TMath.randomSeedPosition(5,{x:object.x,y:object.y})*1
+             image:'rock'+Math.floor(TOWNS.TMath.randomSeedPosition(1,{x:object.x,y:object.y})*6)%6+'dark'+Math.floor(TOWNS.TMath.randomSeedPosition(2,{x:object.x,y:object.y})*4)%4,
+             size: 0.5+TOWNS.TMath.randomSeedPosition(5,{x:object.x,y:object.y})*1
              }
              }
 
@@ -3243,7 +3243,7 @@ var T;
 
              }else*/
             if (object.getCode() == 10) {
-                if (T.TMath.randomSeedPosition(3, { x: object.x, y: object.y }) > 0.95) {
+                if (TOWNS.TMath.randomSeedPosition(3, { x: object.x, y: object.y }) > 0.95) {
                     virtual_objects.push({
                         x: object.x,
                         y: object.y,
@@ -3252,11 +3252,11 @@ var T;
                             type: 'natural',
                             data: {
                                 model: 'tree',
-                                size: 3 + T.TMath.randomSeedPosition(6, { x: object.x, y: object.y }) / 2,
+                                size: 3 + TOWNS.TMath.randomSeedPosition(6, { x: object.x, y: object.y }) / 2,
                                 rotation: {
-                                    x: T.TMath.randomSeedPosition(7, { x: object.x, y: object.y }) * 20 - 10,
-                                    y: T.TMath.randomSeedPosition(7, { x: object.x, y: object.y }) * 20 - 10,
-                                    z: T.TMath.randomSeedPosition(7, { x: object.x, y: object.y }) * 360
+                                    x: TOWNS.TMath.randomSeedPosition(7, { x: object.x, y: object.y }) * 20 - 10,
+                                    y: TOWNS.TMath.randomSeedPosition(7, { x: object.x, y: object.y }) * 20 - 10,
+                                    z: TOWNS.TMath.randomSeedPosition(7, { x: object.x, y: object.y }) * 360
                                 }
                             }
                         }
@@ -3264,22 +3264,22 @@ var T;
                 }
             }
         });
-    })(World = T.World || (T.World = {}));
-})(T || (T = {}));
+    })(World = TOWNS.World || (TOWNS.World = {}));
+})(TOWNS || (TOWNS = {}));
 /**
  * @author ©Towns.cz
- * @fileOverview Creates configuration of game conditions via instance T.World.game
+ * @fileOverview Creates configuration of game conditions via instance TOWNS.World.game
  */
 //======================================================================================================================
-var T;
-(function (T) {
+var TOWNS;
+(function (TOWNS) {
     var World;
     (function (World) {
-        World.game = new T.Game(T.TMath.prettyNumber, T.TMath.prettyNumber);
-    })(World = T.World || (T.World = {}));
-})(T || (T = {}));
-var T;
-(function (T) {
+        World.game = new TOWNS.Game(TOWNS.TMath.prettyNumber, TOWNS.TMath.prettyNumber);
+    })(World = TOWNS.World || (TOWNS.World = {}));
+})(TOWNS || (TOWNS = {}));
+var TOWNS;
+(function (TOWNS) {
     var World;
     (function (World) {
         World.game.installActionClass({
@@ -3300,10 +3300,10 @@ var T;
             };
             class_1.prototype.getPriceResources = function () {
                 return ([
-                    new T.Resources({ 'wood': 2 }),
-                    //new T.Resources({'clay':   0}),
-                    new T.Resources({ 'stone': 3 }),
-                    new T.Resources({ 'iron': 2 })
+                    new TOWNS.Resources({ 'wood': 2 }),
+                    //new TOWNS.Resources({'clay':   0}),
+                    new TOWNS.Resources({ 'stone': 3 }),
+                    new TOWNS.Resources({ 'iron': 2 })
                 ]);
             };
             class_1.execute = function (game, attacker, attacked, resources_attacker) {
@@ -3314,25 +3314,25 @@ var T;
                 var attacker_life = attacker.getAction('life').params;
                 var attacked_life = attacked.getAction('life').params;
                 //---------------------Missing action
-                if (attacker_attack instanceof T.Game.Action) {
+                if (attacker_attack instanceof TOWNS.Game.Action) {
                     attacker_attack = attacker_attack.clone().params;
                 }
                 else {
                     throw new Error('Attacker has not ability to attack');
                 }
-                if (attacker_defence instanceof T.Game.Action) {
+                if (attacker_defence instanceof TOWNS.Game.Action) {
                     attacker_defence = attacker_defence.clone().params;
                 }
                 else {
                     attacker_defence = game.getActionEmptyInstance('defence').params;
                 }
-                if (attacked_attack instanceof T.Game.Action) {
+                if (attacked_attack instanceof TOWNS.Game.Action) {
                     attacked_attack = attacked_attack.clone().params;
                 }
                 else {
                     attacked_attack = game.getActionEmptyInstance('attack').params;
                 }
-                if (attacked_defence instanceof T.Game.Action) {
+                if (attacked_defence instanceof TOWNS.Game.Action) {
                     attacked_defence = attacked_defence.clone().params;
                 }
                 else {
@@ -3379,16 +3379,16 @@ var T;
                     attacked_life.life = 1;
             };
             return class_1;
-        }(T.Game.ActionActive)));
-    })(World = T.World || (T.World = {}));
-})(T || (T = {}));
+        }(TOWNS.Game.ActionActive)));
+    })(World = TOWNS.World || (TOWNS.World = {}));
+})(TOWNS || (TOWNS = {}));
 /**
  * @author ©Towns.cz
- * @fileOverview Creates configuration of game conditions via instance T.World.game
+ * @fileOverview Creates configuration of game conditions via instance TOWNS.World.game
  */
 //======================================================================================================================
-var T;
-(function (T) {
+var TOWNS;
+(function (TOWNS) {
     var World;
     (function (World) {
         World.game.installActionClass({
@@ -3406,22 +3406,22 @@ var T;
             };
             class_2.prototype.getPriceResources = function () {
                 return ([
-                    new T.Resources({ 'wood': 2 }),
-                    new T.Resources({ 'clay': 2 }),
-                    new T.Resources({ 'stone': 1 }),
+                    new TOWNS.Resources({ 'wood': 2 }),
+                    new TOWNS.Resources({ 'clay': 2 }),
+                    new TOWNS.Resources({ 'stone': 1 }),
                 ]);
             };
             return class_2;
-        }(T.Game.Action)));
-    })(World = T.World || (T.World = {}));
-})(T || (T = {}));
+        }(TOWNS.Game.Action)));
+    })(World = TOWNS.World || (TOWNS.World = {}));
+})(TOWNS || (TOWNS = {}));
 /**
  * @author ©Towns.cz
- * @fileOverview Creates configuration of game conditions via instance T.World.game
+ * @fileOverview Creates configuration of game conditions via instance TOWNS.World.game
  */
 //======================================================================================================================
-var T;
-(function (T) {
+var TOWNS;
+(function (TOWNS) {
     var World;
     (function (World) {
         World.game.installActionClass({
@@ -3439,19 +3439,19 @@ var T;
                 return (0);
             };
             class_3.prototype.getPriceResources = function () {
-                return ([new T.Resources()]);
+                return ([new TOWNS.Resources()]);
             };
             return class_3;
-        }(T.Game.Action)));
-    })(World = T.World || (T.World = {}));
-})(T || (T = {}));
+        }(TOWNS.Game.Action)));
+    })(World = TOWNS.World || (TOWNS.World = {}));
+})(TOWNS || (TOWNS = {}));
 /**
  * @author ©Towns.cz
- * @fileOverview Creates configuration of game conditions via instance T.World.game
+ * @fileOverview Creates configuration of game conditions via instance TOWNS.World.game
  */
 //======================================================================================================================
-var T;
-(function (T) {
+var TOWNS;
+(function (TOWNS) {
     var World;
     (function (World) {
         World.game.installActionClass({
@@ -3473,23 +3473,23 @@ var T;
             };
             class_4.prototype.getPriceResources = function () {
                 return ([
-                    new T.Resources({ 'wood': 3 }),
-                    new T.Resources({ 'clay': 2 }),
-                    new T.Resources({ 'stone': 2 }),
-                    new T.Resources({ 'iron': 4 })
+                    new TOWNS.Resources({ 'wood': 3 }),
+                    new TOWNS.Resources({ 'clay': 2 }),
+                    new TOWNS.Resources({ 'stone': 2 }),
+                    new TOWNS.Resources({ 'iron': 4 })
                 ]);
             };
             return class_4;
-        }(T.Game.Action)));
-    })(World = T.World || (T.World = {}));
-})(T || (T = {}));
+        }(TOWNS.Game.Action)));
+    })(World = TOWNS.World || (TOWNS.World = {}));
+})(TOWNS || (TOWNS = {}));
 /**
  * @author ©Towns.cz
- * @fileOverview Creates configuration of game conditions via instance T.World.game
+ * @fileOverview Creates configuration of game conditions via instance TOWNS.World.game
  */
 //======================================================================================================================
-var T;
-(function (T) {
+var TOWNS;
+(function (TOWNS) {
     var World;
     (function (World) {
         World.game.installActionClass({
@@ -3508,16 +3508,16 @@ var T;
             };
             class_5.prototype.getPriceResources = function () {
                 return ([
-                    new T.Resources({ 'wood': 2 }),
-                    //new T.Resources({'clay':   0}),
-                    //new T.Resources({'stone':  0}),
-                    new T.Resources({ 'iron': 1 })
+                    new TOWNS.Resources({ 'wood': 2 }),
+                    //new TOWNS.Resources({'clay':   0}),
+                    //new TOWNS.Resources({'stone':  0}),
+                    new TOWNS.Resources({ 'iron': 1 })
                 ]);
             };
             class_5.execute = function (game, object, destinations /*,objects_nearby,resources*/) {
                 //---------------------Checking action//todo maybe auto
                 var action = object.getAction('move');
-                if (action instanceof T.Game.Action) {
+                if (action instanceof TOWNS.Game.Action) {
                 }
                 else {
                     throw new Error('Object has not ability to move');
@@ -3526,22 +3526,22 @@ var T;
                 var start_position = object.getPosition();
                 destinations.unshift(start_position);
                 //r(destinations);
-                object.path = T.Path.newConstantSpeed(destinations, action.params.speed);
+                object.path = TOWNS.Path.newConstantSpeed(destinations, action.params.speed);
                 //---------------------Set usage//todo maybe auto
                 object.getAction('move').nowExecuted(); //todo is it needed
                 //---------------------
             };
             return class_5;
-        }(T.Game.ActionActive)));
-    })(World = T.World || (T.World = {}));
-})(T || (T = {}));
+        }(TOWNS.Game.ActionActive)));
+    })(World = TOWNS.World || (TOWNS.World = {}));
+})(TOWNS || (TOWNS = {}));
 /**
  * @author ©Towns.cz
- * @fileOverview Creates configuration of game conditions via instance T.World.game
+ * @fileOverview Creates configuration of game conditions via instance TOWNS.World.game
  */
 //======================================================================================================================
-var T;
-(function (T) {
+var TOWNS;
+(function (TOWNS) {
     var World;
     (function (World) {
         World.game.installActionClass({
@@ -3559,23 +3559,23 @@ var T;
             };
             class_6.prototype.getPriceResources = function () {
                 return ([
-                    new T.Resources({ 'wood': 4 }),
-                    new T.Resources({ 'clay': 2 }),
-                    new T.Resources({ 'stone': 2 }),
-                    new T.Resources({ 'iron': 2 })
+                    new TOWNS.Resources({ 'wood': 4 }),
+                    new TOWNS.Resources({ 'clay': 2 }),
+                    new TOWNS.Resources({ 'stone': 2 }),
+                    new TOWNS.Resources({ 'iron': 2 })
                 ]);
             };
             return class_6;
-        }(T.Game.Action)));
-    })(World = T.World || (T.World = {}));
-})(T || (T = {}));
+        }(TOWNS.Game.Action)));
+    })(World = TOWNS.World || (TOWNS.World = {}));
+})(TOWNS || (TOWNS = {}));
 /**
  * @author ©Towns.cz
- * @fileOverview Creates configuration of game conditions via instance T.World.game
+ * @fileOverview Creates configuration of game conditions via instance TOWNS.World.game
  */
 //======================================================================================================================
-var T;
-(function (T) {
+var TOWNS;
+(function (TOWNS) {
     var World;
     (function (World) {
         World.game.installActionClass({
@@ -3593,23 +3593,23 @@ var T;
             };
             class_7.prototype.getPriceResources = function () {
                 return ([
-                    new T.Resources({ 'wood': 4 }),
-                    new T.Resources({ 'clay': 2 }),
-                    new T.Resources({ 'stone': 3 }),
-                    new T.Resources({ 'iron': 4 })
+                    new TOWNS.Resources({ 'wood': 4 }),
+                    new TOWNS.Resources({ 'clay': 2 }),
+                    new TOWNS.Resources({ 'stone': 3 }),
+                    new TOWNS.Resources({ 'iron': 4 })
                 ]);
             };
             return class_7;
-        }(T.Game.ActionActive)));
-    })(World = T.World || (T.World = {}));
-})(T || (T = {}));
+        }(TOWNS.Game.ActionActive)));
+    })(World = TOWNS.World || (TOWNS.World = {}));
+})(TOWNS || (TOWNS = {}));
 /**
  * @author ©Towns.cz
- * @fileOverview Creates configuration of game conditions via instance T.World.game
+ * @fileOverview Creates configuration of game conditions via instance TOWNS.World.game
  */
 //======================================================================================================================
-var T;
-(function (T) {
+var TOWNS;
+(function (TOWNS) {
     var World;
     (function (World) {
         World.game.installActionClass({
@@ -3627,13 +3627,13 @@ var T;
             };
             class_8.prototype.getPriceResources = function () {
                 return ([
-                    new T.Resources({ 'wood': 2 }),
-                    new T.Resources({ 'clay': 3 }),
-                    new T.Resources({ 'stone': 1 }),
-                    new T.Resources({ 'iron': 0 })
+                    new TOWNS.Resources({ 'wood': 2 }),
+                    new TOWNS.Resources({ 'clay': 3 }),
+                    new TOWNS.Resources({ 'stone': 1 }),
+                    new TOWNS.Resources({ 'iron': 0 })
                 ]);
             };
             return class_8;
-        }(T.Game.Action)));
-    })(World = T.World || (T.World = {}));
-})(T || (T = {}));
+        }(TOWNS.Game.Action)));
+    })(World = TOWNS.World || (TOWNS.World = {}));
+})(TOWNS || (TOWNS = {}));

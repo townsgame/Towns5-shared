@@ -1,10 +1,10 @@
 /**
  * @author ©Towns.cz
- * @fileOverview Creates class T.PositionDate
+ * @fileOverview Creates class TOWNS.PositionDate
  */
 //======================================================================================================================
 
-namespace T {
+namespace TOWNS {
 
     interface PositionDateObject {
         x:number;
@@ -16,7 +16,7 @@ namespace T {
     /**
      * Global position on towns map with time
      */
-    export class PositionDate extends T.Position {//todo is thare solution without using T.?
+    export class PositionDate extends TOWNS.Position {//todo is thare solution without using TOWNS.?
 
         public x:number;
         public y:number;
@@ -74,19 +74,19 @@ namespace T {
 
         /**
          * Return deep clone of this.
-         * @returns {T.Resources}
+         * @returns {TOWNS.Resources}
          */
         clone() {
-            return new T.PositionDate(this);
+            return new TOWNS.PositionDate(this);
         }
 
 
         /**
          * Return only position
-         * @returns {T.Position}
+         * @returns {TOWNS.Position}
          */
         getPosition() {
-            return new T.Position(this.x, this.y);
+            return new TOWNS.Position(this.x, this.y);
         }
 
 

@@ -1,11 +1,11 @@
 
 /**
  * @author ©Towns.cz
- * @fileOverview Creates class T.MapGenerator
+ * @fileOverview Creates class TOWNS.MapGenerator
  */
 //======================================================================================================================
 
-namespace T {
+namespace TOWNS {
 
 
 
@@ -16,22 +16,22 @@ namespace T {
          *
          * @param {function} getZ
          * @param {Array} z_normalizing_table
-         * @param {T.MapGenerator.Biotope} biotope
+         * @param {TOWNS.MapGenerator.Biotope} biotope
          * @param {function} virtualObjectGenerator
          * @constructor
          */
-        constructor(public getZ: Function, public z_normalizing_table: Array<number>, public biotope: T.MapGenerator.Biotope, public virtualObjectGenerator:Function) {
+        constructor(public getZ: Function, public z_normalizing_table: Array<number>, public biotope: TOWNS.MapGenerator.Biotope, public virtualObjectGenerator:Function) {
         }
 
 
         /**
          *
-         * @param {T.Position} center_integer
+         * @param {TOWNS.Position} center_integer
          * @param {number} radius
          * @returns {Array}
          * @private
          */
-        getZMapCircle(center_integer: T.Position, radius: number): Array<Array<number>> {
+        getZMapCircle(center_integer: TOWNS.Position, radius: number): Array<Array<number>> {
 
             var map = [];
 
@@ -69,7 +69,7 @@ namespace T {
          * @returns {Array}
          * @private
          */
-        terrainMap(map: Array<Array<number>>): Array<Array<T.Objects.Terrain>> {
+        terrainMap(map: Array<Array<number>>): Array<Array<TOWNS.Objects.Terrain>> {
 
             var map_bg = [];
 
@@ -91,12 +91,12 @@ namespace T {
 
         /**
          *
-         * @param {T.Position} center_integer
+         * @param {TOWNS.Position} center_integer
          * @param {number} radius
          * @returns {Array}
          * @private
          */
-        getMapArrayCircle(center_integer: T.Position, radius: number): Array<Array<T.Objects.Terrain>> {
+        getMapArrayCircle(center_integer: TOWNS.Position, radius: number): Array<Array<TOWNS.Objects.Terrain>> {
 
 
             var bounds = 1;
@@ -114,14 +114,14 @@ namespace T {
         /**
          *
          * @param {Array} map_array
-         * @param {T.Position} center_integer
+         * @param {TOWNS.Position} center_integer
          * @param {number} radius
          * @returns {Array}
          * @private
          */
-        convertMapArrayToObjects(map_array, center_integer: T.Position, radius: number): T.Objects.Array {
+        convertMapArrayToObjects(map_array, center_integer: TOWNS.Position, radius: number): TOWNS.Objects.Array {
 
-            var objects = new T.Objects.Array();
+            var objects = new TOWNS.Objects.Array();
 
             for (var y = 0; y < radius * 2; y++) {
                 for (var x = 0; x < radius * 2; x++) {
@@ -129,7 +129,7 @@ namespace T {
                     if (typeof(map_array[y][x]) === 'undefined')continue;
 
 
-                    var object = new T.Objects.Terrain(map_array[y][x]);
+                    var object = new TOWNS.Objects.Terrain(map_array[y][x]);
 
 
                     object.x = center_integer.x - radius + x;
@@ -148,13 +148,13 @@ namespace T {
 
         /**
          *
-         * @param {T.Position} center
+         * @param {TOWNS.Position} center
          * @param {number} radius
-         * @param {T.Position} not_center
+         * @param {TOWNS.Position} not_center
          * @returns {Array}
          * @private
          */
-        getPureMap(center: T.Position, radius: number, not_center: T.Position): T.Objects.Array {
+        getPureMap(center: TOWNS.Position, radius: number, not_center: TOWNS.Position): TOWNS.Objects.Array {
 
             //console.log(center,not_center);
 
@@ -164,7 +164,7 @@ namespace T {
             };
 
             if (not_center)
-                not_center = new T.Position(
+                not_center = new TOWNS.Position(
                     not_center.x - center_integer.x,
                     not_center.y - center_integer.y
                 );
@@ -174,7 +174,7 @@ namespace T {
              var objects = this.convertMapArrayToObjects(map_array,center_integer,radius);/**/
 
 
-            var objects = new T.Objects.Array();
+            var objects = new TOWNS.Objects.Array();
 
             var x, y, z, t, object;
             for (y = 0; y <= radius * 2; y++) {
@@ -203,7 +203,7 @@ namespace T {
 
                     //console.log(t);
 
-                    object = new T.Objects.Terrain(t);
+                    object = new TOWNS.Objects.Terrain(t);
                     object.x = center_integer.x - radius + x;
                     object.y = center_integer.y - radius + y;
 
@@ -221,15 +221,15 @@ namespace T {
 
         /**
          *
-         * @param {T.Objects.Array} objects
-         * @returns {T.Objects.Array}
+         * @param {TOWNS.Objects.Array} objects
+         * @returns {TOWNS.Objects.Array}
          * @private
          */
-        getVirtualObjectsFromTerrainObjects(objects: T.Objects.Array): T.Objects.Array {
+        getVirtualObjectsFromTerrainObjects(objects: TOWNS.Objects.Array): TOWNS.Objects.Array {
 
 
-            var virtual_objects = new T.Objects.Array();
-            var objects_1x1_raw: T.Objects.Object[] = objects.get1x1TerrainObjects().getAll();
+            var virtual_objects = new TOWNS.Objects.Array();
+            var objects_1x1_raw: TOWNS.Objects.Object[] = objects.get1x1TerrainObjects().getAll();
 
 
             for (var i = 0, l = objects_1x1_raw.length; i < l; i++) {
@@ -248,14 +248,14 @@ namespace T {
 
         /**
          * Complete terrain and virtual objects into Objects Array
-         * @param {T.Objects.Array} real_objects
-         * @param {T.Position} center
+         * @param {TOWNS.Objects.Array} real_objects
+         * @param {TOWNS.Position} center
          * @param {number} radius
          * @param {boolean} natural_objects
-         * @param {T.Position} not_center Dont get objects near this center.
-         * @returns {T.Objects.Array}}
+         * @param {TOWNS.Position} not_center Dont get objects near this center.
+         * @returns {TOWNS.Objects.Array}}
          */
-        getCompleteObjects(real_objects: T.Objects.Array, center: T.Position, radius: number, natural_objects:boolean = true, not_center: T.Position): T.Objects.Array {
+        getCompleteObjects(real_objects: TOWNS.Objects.Array, center: TOWNS.Position, radius: number, natural_objects:boolean = true, not_center: TOWNS.Position): TOWNS.Objects.Array {
 
 
             var complete_objects = this.getPureMap(center, radius, not_center);

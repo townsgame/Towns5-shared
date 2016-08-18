@@ -1,11 +1,11 @@
 /**
  * @author ©Towns.cz
- * @fileOverview Creates class T.Color
+ * @fileOverview Creates class TOWNS.Color
  */
 //======================================================================================================================
 
 
-namespace T {
+namespace TOWNS {
     /**
      * Object which represents RGBA color.
      */
@@ -22,8 +22,8 @@ namespace T {
         }
 
         /**
-         * Get deep clone od T.Color
-         * @returns {T.Color}
+         * Get deep clone od TOWNS.Color
+         * @returns {TOWNS.Color}
          */
         clone():Color{
             return new Color(this.r,this.g,this.b,this.a);
@@ -96,9 +96,9 @@ namespace T {
 
 
         /**
-         * Creates new T.Color form hex code of color
+         * Creates new TOWNS.Color form hex code of color
          * @param {string} hex code of color eg. #00ff00
-         * @returns {T.Color} Color
+         * @returns {TOWNS.Color} Color
          */
         static createFromHex(hex: string): Color {
 
@@ -117,7 +117,7 @@ namespace T {
                 );
             } else {
 
-                throw new Error('Error while creating T.Color from ' + hex);
+                throw new Error('Error while creating TOWNS.Color from ' + hex);
 
             }
         }

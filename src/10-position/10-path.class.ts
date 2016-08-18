@@ -1,17 +1,17 @@
 /**
  * @author ©Towns.cz
- * @fileOverview Creates class T.Path
+ * @fileOverview Creates class TOWNS.Path
  */
 //======================================================================================================================
 
-namespace T{
+namespace TOWNS{
 
     export class Path {
 
         public array_position_date;
 
         /**
-         * @param {...T.PositionDate} Position with date at least 2
+         * @param {...TOWNS.PositionDate} Position with date at least 2
          */
         constructor(...args) {
 
@@ -24,7 +24,7 @@ namespace T{
 
 
             if (this.array_position_date.length < 2) {
-                throw new Error('Thare must be at least 2 params when constructing T.Path.');
+                throw new Error('Thare must be at least 2 params when constructing TOWNS.Path.');
             }
 
 
@@ -33,23 +33,23 @@ namespace T{
 
                 position_date = this.array_position_date[i];
 
-                if (position_date instanceof T.PositionDate) {
+                if (position_date instanceof TOWNS.PositionDate) {
                 } else {
 
                     if (position_date instanceof Object) {
 
-                        this.array_position_date[i] = new T.PositionDate(this.array_position_date[i]);
+                        this.array_position_date[i] = new TOWNS.PositionDate(this.array_position_date[i]);
 
                     } else {
 
-                        throw new Error('All Params when constructing T.Path must be T.PositionDate');
+                        throw new Error('All Params when constructing TOWNS.Path must be TOWNS.PositionDate');
                     }
 
 
                 }
 
                 if (last_date >= position_date.date) {
-                    throw new Error('Dates should be consecutive when constructing T.Path (' + position_date.date + ' should be after ' + last_date + '). ' + this);
+                    throw new Error('Dates should be consecutive when constructing TOWNS.Path (' + position_date.date + ' should be after ' + last_date + '). ' + this);
                 }
 
                 last_date = position_date.date/1;
@@ -67,10 +67,10 @@ namespace T{
 
         /**
          *
-         * @param {Array.<T.Position>} array_position
+         * @param {Array.<TOWNS.Position>} array_position
          * @param {number} speed
          * @param {Date} date
-         * @returns {T.Path}
+         * @returns {TOWNS.Path}
          */
         static newConstantSpeed(array_position: Array, speed: number, date: number | Date = 0): Path {
 
@@ -88,11 +88,11 @@ namespace T{
             }
 
             if (array_position.length < 2) {
-                throw new Error('Thare must be at least 2 params when constructing T.Path.');
+                throw new Error('Thare must be at least 2 params when constructing TOWNS.Path.');
             }
 
             var array_position_date = [
-                new T.PositionDate(array_position[0].x, array_position[0].y, date)
+                new TOWNS.PositionDate(array_position[0].x, array_position[0].y, date)
             ];
 
 
@@ -104,9 +104,9 @@ namespace T{
                 position_date = array_position[i];
 
 
-                if (position_date instanceof T.Position) {
+                if (position_date instanceof TOWNS.Position) {
                 } else {
-                    throw new Error('All Params when constructing T.Path via newConstantSpeed must be T.Position');
+                    throw new Error('All Params when constructing TOWNS.Path via newConstantSpeed must be TOWNS.Position');
                 }
 
 
@@ -118,15 +118,15 @@ namespace T{
 
 
                 array_position_date.push(
-                    new T.PositionDate(array_position[i].x, array_position[i].y, date)
+                    new TOWNS.PositionDate(array_position[i].x, array_position[i].y, date)
                 );
 
             }
 
 
             //return new this.apply(this,array_position_date);
-            //return Object.create(T.Path,array_position_date);
-            return new T.Path(...array_position_date);
+            //return Object.create(TOWNS.Path,array_position_date);
+            return new TOWNS.Path(...array_position_date);
 
         }
 
@@ -150,7 +150,7 @@ namespace T{
 
 
         /**
-         * Count in which segment is T.Path progress
+         * Count in which segment is TOWNS.Path progress
          * @param date
          * @returns {number}
          */
@@ -186,7 +186,7 @@ namespace T{
             }
 
 
-            throw new Error('Error while counting segment in T.Path, maybe because of param date is ' + date);
+            throw new Error('Error while counting segment in TOWNS.Path, maybe because of param date is ' + date);
 
         }
 
@@ -194,7 +194,7 @@ namespace T{
         /**
          * Counts position at 'date'
          * @param {Date} date
-         * @returns {T.Position}
+         * @returns {TOWNS.Position}
          */
         countPosition(date: number | Date = 0) {
 
@@ -222,10 +222,10 @@ namespace T{
 
             //console.log((A-date)+' - '+(B-date));
 
-            var x = T.TMath.proportions(A.date / 1, date / 1, B.date / 1, A.x, B.x);
-            var y = T.TMath.proportions(A.date / 1, date / 1, B.date / 1, A.y, B.y);
+            var x = TOWNS.TMath.proportions(A.date / 1, date / 1, B.date / 1, A.x, B.x);
+            var y = TOWNS.TMath.proportions(A.date / 1, date / 1, B.date / 1, A.y, B.y);
 
-            return (new T.Position(x, y));
+            return (new TOWNS.Position(x, y));
 
 
         }
@@ -305,7 +305,7 @@ namespace T{
 
 
         /**
-         * Converts T.Path to string
+         * Converts TOWNS.Path to string
          * @returns {string}
          */
         toString() {

@@ -1,10 +1,10 @@
 /**
  * @author ©Towns.cz
- * @fileOverview Creates configuration of game conditions via instance T.World.game
+ * @fileOverview Creates configuration of game conditions via instance TOWNS.World.game
  */
 //======================================================================================================================
 
-namespace T.World {
+namespace TOWNS.World {
 
     interface ActionLifeParamsObject{
         life: number;
@@ -16,7 +16,7 @@ namespace T.World {
             life: 1,
             max_life: 1
         },
-        class extends T.Game.Action {
+        class extends TOWNS.Game.Action {
 
             public params:ActionLifeParamsObject;
 
@@ -32,7 +32,7 @@ namespace T.World {
 
             getPriceResources() {
 
-                return ([new T.Resources()]);
+                return ([new TOWNS.Resources()]);
             }
 
 

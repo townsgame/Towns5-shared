@@ -53,10 +53,10 @@ var object = {
 };
 
 //max_life is number
-var max_life = T.World.game.getObjectMaxLife(object);
+var max_life = TOWNS.World.game.getObjectMaxLife(object);
 
 //price is instance of Resources
-var price = T.World.game.getObjectPrice(object);
+var price = TOWNS.World.game.getObjectPrice(object);
 
 
 console.log('Maximum amount life of '+object.type+' is: '+max_life);

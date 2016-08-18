@@ -1,11 +1,11 @@
 /**
  * @author ©Towns.cz
- * @fileOverview Creates class T.Game
+ * @fileOverview Creates class TOWNS.Game
  */
 //======================================================================================================================
 
 
-namespace T {
+namespace TOWNS {
 
 
     /**
@@ -36,7 +36,7 @@ namespace T {
          * @param {object} Object
          * @return {array} of numbers
          */
-        getObjectPriceBases(object:T.Objects.Object) {
+        getObjectPriceBases(object:TOWNS.Objects.Object) {
 
             var self = this;
             var price_bases = [];
@@ -81,7 +81,7 @@ namespace T {
          * @param {object} Object
          * @return {number} maximum life of object
          */
-        getObjectMaxLife(object:T.Objects.Object) {
+        getObjectMaxLife(object:TOWNS.Objects.Object) {
 
             var price_bases = this.getObjectPriceBases(object);
             var price_base = price_bases.reduce(function (pv, cv) {
@@ -144,9 +144,9 @@ namespace T {
          * @param {object} Object
          * @return {object} Resources - price of object
          */
-        getObjectPrice(object:T.Objects.Array) {
+        getObjectPrice(object:TOWNS.Objects.Array) {
 
-            var price = new T.Resources({});
+            var price = new TOWNS.Resources({});
 
             //console.log('empty price',price);
 
@@ -201,7 +201,7 @@ namespace T {
 
             if (typeof action_class == 'undefined') {
 
-                throw new Error('In this game instance thare is no action class type ' + action_type + '. There are only these action types: ' + T.ArrayFunctions.getKeys(this.action_classes).join(', '));
+                throw new Error('In this game instance thare is no action class type ' + action_type + '. There are only these action types: ' + TOWNS.ArrayFunctions.getKeys(this.action_classes).join(', '));
 
             }
 

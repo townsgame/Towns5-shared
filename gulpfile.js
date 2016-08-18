@@ -220,7 +220,7 @@ gulp.src(includes)
 gulp.task("test", function() {
 
 
-    global.T = require('./build/towns-shared.js');
+    global.TOWNS = require('./build/towns-shared.js');
 
 
     return gulp.src(['./test/*.js','./test/*/*.js'])

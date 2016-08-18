@@ -1,30 +1,30 @@
 
 /**
  * @author ©Towns.cz
- * @fileOverview Creates class T.Objects.Array
+ * @fileOverview Creates class TOWNS.Objects.Array
  */
 //======================================================================================================================
 
-namespace T.Objects {
+namespace TOWNS.Objects {
 
-//todo T.Objects.Array = class extends Array{
+//todo TOWNS.Objects.Array = class extends Array{
 
 
     export class Array {
 
 
-        public objects:T.Objects.Object[];
-        //public objects:Array;
+        public objects:TOWNS.Objects.Object[];
+        //public objects:Array<string>;
 
 
-        constructor(objects:T.Objects.Object[] = []) {
+        constructor(objects:TOWNS.Objects.Object[] = []) {
 
             //r(objects);
             //r(objects.length);
 
             for(let i in objects){
 
-                objects[i] = T.Objects.Object.init(objects[i]);
+                objects[i] = TOWNS.Objects.Object.init(objects[i]);
             }
 
 
@@ -33,7 +33,7 @@ namespace T.Objects {
         }
 
 
-        getAll():T.Objects.Object[] {
+        getAll():TOWNS.Objects.Object[] {
             return this.objects;
         }
 
@@ -43,9 +43,9 @@ namespace T.Objects {
         }
 
 
-        filter(callback: Function):T.Objects.Array {
+        filter(callback: Function):TOWNS.Objects.Array {
 
-            var filtered_objects = new T.Objects.Array();
+            var filtered_objects = new TOWNS.Objects.Array();
 
             //r(filtered_objects.objects);
 
@@ -63,7 +63,7 @@ namespace T.Objects {
          * @returns {Number}
          */
         push(object: Object): void {
-            this.objects.push(T.Objects.Object.init(object));
+            this.objects.push(TOWNS.Objects.Object.init(object));
         }
 
 
@@ -71,7 +71,7 @@ namespace T.Objects {
          * Update or push object into Objects Array
          * @param object
          */
-        update(object: T.Objects.Object): void {
+        update(object: TOWNS.Objects.Object): void {
             if (!this.setById(object.id, object)) {
                 this.push(object);
             }
@@ -83,7 +83,7 @@ namespace T.Objects {
          * @param {string} id
          * @returns {object}
          */
-        getById(id: string): T.Objects.Object {
+        getById(id: string): TOWNS.Objects.Object {
 
             if (typeof id !== 'string')throw new Error('getById: id should be string');
 
@@ -101,14 +101,14 @@ namespace T.Objects {
          * @param {object} object
          * @returns {boolean}
          */
-        setById(id: string, object: T.Objects.Object):boolean {
+        setById(id: string, object: TOWNS.Objects.Object):boolean {
 
             if (typeof id !== 'string')throw new Error('setById: id should be string');
 
             for (var i in this.objects) {
                 if (this.objects[i].id == id) {
 
-                    this.objects[i] = T.Objects.Object.init(object);
+                    this.objects[i] = TOWNS.Objects.Object.init(object);
                     return (true);
 
                 }
@@ -123,7 +123,7 @@ namespace T.Objects {
          * @param {string} id
          * @returns {boolean}
          */
-        removeId(id: string, object: T.Objects.Object): boolean {
+        removeId(id: string, object: TOWNS.Objects.Object): boolean {
 
             if (typeof id !== 'string')throw new Error('removeId: id should be string');
 
@@ -142,12 +142,12 @@ namespace T.Objects {
 
         /**
          * @param {string} type
-         * @returns {T.Objects.Array}
+         * @returns {TOWNS.Objects.Array}
          */
-        filterTypes(...types: string[]): T.Objects.Array {
+        filterTypes(...types: string[]): TOWNS.Objects.Array {
 
 
-            var filtered_objects = new T.Objects.Array();
+            var filtered_objects = new TOWNS.Objects.Array();
 
             this.forEach(function (object) {
 
@@ -163,13 +163,13 @@ namespace T.Objects {
 
         /**
          *
-         * @param {T.Position} center
+         * @param {TOWNS.Position} center
          * @param {number} radius
-         * @returns {T.Objects.Array}
+         * @returns {TOWNS.Objects.Array}
          */
-        filterRadius(center: T.Position, radius: number): T.Objects.Array {
+        filterRadius(center: TOWNS.Position, radius: number): TOWNS.Objects.Array {
 
-            var filtered_objects = new T.Objects.Array();
+            var filtered_objects = new TOWNS.Objects.Array();
 
             this.forEach(function (object) {
 
@@ -185,9 +185,9 @@ namespace T.Objects {
         }
 
 
-        filterArea(area:T.Area): T.Objects.Array {
+        filterArea(area:TOWNS.Area): TOWNS.Objects.Array {
 
-            var filtered_objects = new T.Objects.Array();
+            var filtered_objects = new TOWNS.Objects.Array();
 
             this.forEach(function (object) {
 
@@ -205,11 +205,11 @@ namespace T.Objects {
 
         /**
          *
-         * @param {T.Position} center
+         * @param {TOWNS.Position} center
          * @param {number} radius
          * @returns {Array}
          */
-        getMapOfTerrainCodes(center: T.Position, radius: number): number[][] {//todo maybe refactor to getTerrainCodes2DArray or getTerrainCodesMap
+        getMapOfTerrainCodes(center: TOWNS.Position, radius: number): number[][] {//todo maybe refactor to getTerrainCodes2DArray or getTerrainCodesMap
 
             /*var radius = size/2;
              var center ={
@@ -281,7 +281,7 @@ namespace T.Objects {
                             if (typeof map_array[y][x] === 'undefined')continue;
 
 
-                            if (T.TMath.xy2dist(x - xc, y - yc) <= object.design.data.size) {
+                            if (TOWNS.TMath.xy2dist(x - xc, y - yc) <= object.design.data.size) {
 
                                 map_array[y][x] = object.getCode();
 
@@ -304,7 +304,7 @@ namespace T.Objects {
 
 
 
-        getMapOfCollisions(center: T.Position, radius:number): boolean[][]{
+        getMapOfCollisions(center: TOWNS.Position, radius:number): boolean[][]{
 
             //--------------------------Terrains
             var map_of_terrain_codes = this.getMapOfTerrainCodes(center, radius);
@@ -364,12 +364,12 @@ namespace T.Objects {
 
         /**
          *
-         * @returns {T.Objects.Array}
+         * @returns {TOWNS.Objects.Array}
          */
-        get1x1TerrainObjects():T.Objects.Array {
+        get1x1TerrainObjects():TOWNS.Objects.Array {
 
 
-            var terrain_objects_1x1 = new T.Objects.Array();
+            var terrain_objects_1x1 = new TOWNS.Objects.Array();
 
 
             var terrain_objects_raw = this.filterTypes('terrain').getAll().slice().reverse();//normal Array
@@ -413,7 +413,7 @@ namespace T.Objects {
                     for (var y = y_from; y <= y_to; y++) {
                         for (var x = x_from; x <= x_to; x++) {
 
-                            if (T.TMath.xy2dist(x, y) <= object.design.data.size) {
+                            if (TOWNS.TMath.xy2dist(x, y) <= object.design.data.size) {
 
                                 object_1x1 = object.clone();
 
@@ -448,14 +448,14 @@ namespace T.Objects {
 
 
         //todo jsdoc
-        getTerrainOnPosition(position: T.Position): T.Objects.Terrain {
+        getTerrainOnPosition(position: TOWNS.Position): TOWNS.Objects.Terrain {
 
 
             for (var i = this.objects.length - 1; i >= 0; i--) {
                 //if (this.objects[i].type != 'terrain')continue;
-                if (this.objects[i] instanceof T.Objects.Terrain){
+                if (this.objects[i] instanceof TOWNS.Objects.Terrain){
 
-                    if (this.objects[i].design.data.size <= position.getDistance(new T.Position(this.objects[i].x, this.objects[i].y))) {
+                    if (this.objects[i].design.data.size <= position.getDistance(new TOWNS.Position(this.objects[i].x, this.objects[i].y))) {
                         return (this.objects[i]);
                     }
 
@@ -471,12 +471,12 @@ namespace T.Objects {
 
 
         //todo jsdoc
-        getNearestTerrainPositionWithCode(position: T.Position, terrain_code: number): T.Position {
+        getNearestTerrainPositionWithCode(position: TOWNS.Position, terrain_code: number): TOWNS.Position {
 
             var terrain_objects_1x1 = this.get1x1TerrainObjects();
 
             var min_distance = -1;
-            var nearest_terrain_1x1: T.Objects.Object;
+            var nearest_terrain_1x1: TOWNS.Objects.Object;
 
             terrain_objects_1x1.forEach(function (terrain_1x1) {
 

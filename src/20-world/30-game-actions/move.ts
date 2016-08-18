@@ -1,10 +1,10 @@
 /**
  * @author ©Towns.cz
- * @fileOverview Creates configuration of game conditions via instance T.World.game
+ * @fileOverview Creates configuration of game conditions via instance TOWNS.World.game
  */
 //======================================================================================================================
 
-namespace T.World {
+namespace TOWNS.World {
 
     interface ActionMoveParamsObject{
         speed: number;
@@ -17,7 +17,7 @@ namespace T.World {
             speed: 0,
             cooldown: 0
         },
-        class extends T.Game.ActionActive {
+        class extends TOWNS.Game.ActionActive {
 
             public params:ActionMoveParamsObject;
 
@@ -34,10 +34,10 @@ namespace T.World {
             getPriceResources() {
 
                 return ([
-                    new T.Resources({'wood': 2}),
-                    //new T.Resources({'clay':   0}),
-                    //new T.Resources({'stone':  0}),
-                    new T.Resources({'iron': 1})
+                    new TOWNS.Resources({'wood': 2}),
+                    //new TOWNS.Resources({'clay':   0}),
+                    //new TOWNS.Resources({'stone':  0}),
+                    new TOWNS.Resources({'iron': 1})
                 ]);
             }
 
@@ -46,7 +46,7 @@ namespace T.World {
 
                 //---------------------Checking action//todo maybe auto
                 var action = object.getAction('move');
-                if (action instanceof T.Game.Action) {
+                if (action instanceof TOWNS.Game.Action) {
                 } else {
                     throw new Error('Object has not ability to move');
                 }
@@ -58,7 +58,7 @@ namespace T.World {
 
                 //r(destinations);
 
-                object.path = T.Path.newConstantSpeed(destinations, action.params.speed);
+                object.path = TOWNS.Path.newConstantSpeed(destinations, action.params.speed);
 
 
                 //---------------------Set usage//todo maybe auto

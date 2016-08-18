@@ -1,21 +1,21 @@
 
 /**
  * @author ©Towns.cz
- * @fileOverview Creates class T.MapGenerator.Biotope
+ * @fileOverview Creates class TOWNS.MapGenerator.Biotope
  */
 //======================================================================================================================
 
 
-namespace T.MapGenerator {
+namespace TOWNS.MapGenerator {
 
     interface BiotopeItemAmountObject{
         amount: number;
-        terrain: T.Objects.Terrain;
+        terrain: TOWNS.Objects.Terrain;
     }
 
     interface BiotopeItemFromObject{
         from: number;
-        terrain: T.Objects.Terrain;
+        terrain: TOWNS.Objects.Terrain;
     }
 
 
@@ -60,9 +60,9 @@ namespace T.MapGenerator {
         /**
          *
          * @param {number} z
-         * @returns {T.Objects.Terrain}
+         * @returns {TOWNS.Objects.Terrain}
          */
-        getZTerrain(z: number):T.Objects.Terrain {
+        getZTerrain(z: number):TOWNS.Objects.Terrain {
 
 
             for (var i = this.terrains.length - 1; i >= 0; i--) {

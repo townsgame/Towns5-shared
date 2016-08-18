@@ -1,6 +1,6 @@
 /**
  * @author ©Towns.cz
- * @fileOverview Initialize namespace Towns
+ * @fileOverview Initialize namespace TOWNSowns
  */
 //======================================================================================================================
 
@@ -9,5 +9,5 @@
  * @type {object}
  */
 
-var T = {};
-module.exports =  T;
+var TOWNS = {};
+module.exports =  TOWNS;

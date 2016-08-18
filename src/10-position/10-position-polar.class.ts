@@ -4,7 +4,7 @@
  */
 //======================================================================================================================
 
-namespace T {
+namespace TOWNS {
 
     export class PositionPolar {
 
@@ -14,10 +14,10 @@ namespace T {
 
         /**
          * Return deep clone of this.
-         * @returns {T.Resources}
+         * @returns {TOWNS.Resources}
          */
         clone() {
-            return new T.PositionPolar(this.distance,this.degrees);
+            return new TOWNS.PositionPolar(this.distance,this.degrees);
         }
 
 
@@ -25,7 +25,7 @@ namespace T {
 
             var radians = this.getRadians();
 
-            return (new T.Position(
+            return (new TOWNS.Position(
                 Math.cos(radians) * this.distance,
                 Math.sin(radians) * this.distance
             ));
@@ -50,7 +50,7 @@ namespace T {
 
         getRadians() {
 
-            return T.TMath.deg2rad(this.degrees);
+            return TOWNS.TMath.deg2rad(this.degrees);
 
         }
 

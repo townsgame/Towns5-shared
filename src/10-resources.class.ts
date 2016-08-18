@@ -6,7 +6,7 @@
 
 
 
-namespace T {
+namespace TOWNS {
 
 
     export class Resources {
@@ -31,7 +31,7 @@ namespace T {
          * Return deep clone of this.
          * @returns {Resources}
          */
-        clone():T.Resources {
+        clone():TOWNS.Resources {
             return new Resources(this);
         }
 
@@ -41,7 +41,7 @@ namespace T {
          * @param {object} Resources
          * @return {bool} contains
          */
-        contains(resources:T.Resources):boolean {
+        contains(resources:TOWNS.Resources):boolean {
 
             for (var key in resources) {
 
@@ -64,7 +64,7 @@ namespace T {
          * @param {object} Resources
          * @return {bool} success
          */
-        add(resources:T.Resources):T.Resources {
+        add(resources:TOWNS.Resources):TOWNS.Resources {
 
             for (var key in resources) {
 
@@ -87,7 +87,7 @@ namespace T {
          * @param {number} k
          * @return this
          */
-        multiply(k:number):T.Resources {
+        multiply(k:number):TOWNS.Resources {
 
             for (var key in this) {
 
@@ -107,7 +107,7 @@ namespace T {
          * @param {number} k
          * @return this
          */
-        signum(k:string):T.Resources {
+        signum(k:string):TOWNS.Resources {
 
             for (var key in this) {
 
@@ -137,7 +137,7 @@ namespace T {
          * @param {function} modifier
          * @return this
          */
-        apply(modifier:Function):T.Resources {
+        apply(modifier:Function):TOWNS.Resources {
 
             for (var key in this) {
 
@@ -179,7 +179,7 @@ namespace T {
          * @param {object} Resoures
          * @return {number} Distance between this and given Resources
          */
-        compare(resoures:T.Resources):number {
+        compare(resoures:TOWNS.Resources):number {
 
             var resources_A = this;
             var resources_B = resoures;
@@ -225,7 +225,7 @@ namespace T {
          * @param {object} Resources
          * @return {bool} success
          */
-        remove(resources:T.Resources):boolean {
+        remove(resources:TOWNS.Resources):boolean {
 
             if (!this.contains(resources))return false;
 
@@ -275,7 +275,7 @@ namespace T {
 
                     if (this[key] !== 0) {
 
-                        var name = T.Locale.get('resource', key);
+                        var name = TOWNS.Locale.get('resource', key);
                         var value = this[key];
 
                         value = value.toLocaleString(/*'en-US''de-DE'*/);//todo todo better solution

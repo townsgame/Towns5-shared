@@ -1,12 +1,12 @@
 /**
  * @author ©Towns.cz
- * @fileOverview Creates class T.Resources
+ * @fileOverview Creates class TOWNS.Resources
  */
 //======================================================================================================================
 
 
 
-namespace T {
+namespace TOWNS {
 
     interface UserProfile {
         username: 'string';

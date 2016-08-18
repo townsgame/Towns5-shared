@@ -1,18 +1,18 @@
 
 /**
  * @author ©Towns.cz
- * @fileOverview Creates class T.Objects.Story
+ * @fileOverview Creates class TOWNS.Objects.Story
  */
 //======================================================================================================================
 
-namespace T.Objects {
+namespace TOWNS.Objects {
 
-    export class Terrain extends T.Objects.Object {
+    export class Terrain extends TOWNS.Objects.Object {
 
         public design;
 
         clone() {
-            return (new T.Objects.Terrain(JSON.parse(JSON.stringify(this))));
+            return (new TOWNS.Objects.Terrain(JSON.parse(JSON.stringify(this))));
         }
 
 
