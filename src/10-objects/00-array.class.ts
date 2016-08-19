@@ -130,7 +130,7 @@ namespace TOWNS.Objects {
             for (var i in this.objects) {
                 if (this.objects[i].id == id) {
 
-                    this.objects.splice(i, 1);
+                    (this.objects as [any]).splice(i, 1);//todo better
                     return (true);
 
                 }
@@ -151,7 +151,7 @@ namespace TOWNS.Objects {
 
             this.forEach(function (object) {
 
-                if (types.indexOf(object.type) == -1)return;
+                if ((types as [any]).indexOf(object.type) == -1)return;//todo better
 
                 filtered_objects.getAll().push(object);
 
@@ -235,7 +235,7 @@ namespace TOWNS.Objects {
 
 
             var object;
-            for (var i = 0, l = terrain_objects_raw.length; i < l; i++) {
+            for (var i = 0, l = (terrain_objects_raw as [any]).length; i < l; i++) {
                 object = terrain_objects_raw[i];
 
 
@@ -317,7 +317,7 @@ namespace TOWNS.Objects {
                 map_of_collisions[y] = [];
                 for (x = 0; x < radius * 2; x++) {
 
-                    if([1,5,11].indexOf(map_of_terrain_codes[y][x])!==-1){
+                    if(([1,5,11] as [any]).indexOf(map_of_terrain_codes[y][x])!==-1){
                         map_of_collisions[y][x] = 1;
                     }else{
                         map_of_collisions[y][x] = 0;
@@ -372,7 +372,7 @@ namespace TOWNS.Objects {
             var terrain_objects_1x1 = new TOWNS.Objects.Array();
 
 
-            var terrain_objects_raw = this.filterTypes('terrain').getAll().slice().reverse();//normal Array
+            var terrain_objects_raw = (this.filterTypes('terrain').getAll() as [any]).slice().reverse();//normal Array
 
             //--------------------------Fill array
 
@@ -451,12 +451,12 @@ namespace TOWNS.Objects {
         getTerrainOnPosition(position: TOWNS.Position): TOWNS.Objects.Terrain {
 
 
-            for (var i = this.objects.length - 1; i >= 0; i--) {
+            for (var i = (this.objects as [any]).length - 1; i >= 0; i--) {
                 //if (this.objects[i].type != 'terrain')continue;
                 if (this.objects[i] instanceof TOWNS.Objects.Terrain){
 
-                    if (this.objects[i].design.data.size <= position.getDistance(new TOWNS.Position(this.objects[i].x, this.objects[i].y))) {
-                        return (this.objects[i]);
+                    if ((this.objects[i] as TOWNS.Objects.Terrain).design.data.size <= position.getDistance(new TOWNS.Position(this.objects[i].x, this.objects[i].y))) {
+                        return (this.objects[i] as TOWNS.Objects.Terrain);
                     }
 
                 }
