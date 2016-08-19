@@ -36,7 +36,7 @@ namespace TOWNS {
          * @param {object} Object
          * @return {array} of numbers
          */
-        getObjectPriceBases(object:TOWNS.Objects.Object) {
+        getObjectPriceBases(object:TOWNS.Objects.Building):number[] {
 
             var self = this;
             var price_bases = [];
@@ -81,7 +81,7 @@ namespace TOWNS {
          * @param {object} Object
          * @return {number} maximum life of object
          */
-        getObjectMaxLife(object:TOWNS.Objects.Object) {
+        getObjectMaxLife(object:TOWNS.Objects.Building):number {
 
             var price_bases = this.getObjectPriceBases(object);
             var price_base = price_bases.reduce(function (pv, cv) {
@@ -101,7 +101,7 @@ namespace TOWNS {
          * @param {object} Object
          * @return {array} of Resources
          */
-        getObjectPrices(object) {
+        getObjectPrices(object):TOWNS.Resources[] {
 
 
             var price_bases = this.getObjectPriceBases(object);
@@ -144,7 +144,7 @@ namespace TOWNS {
          * @param {object} Object
          * @return {object} Resources - price of object
          */
-        getObjectPrice(object:TOWNS.Objects.Array) {
+        getObjectPrice(object:TOWNS.Objects.Array):TOWNS.Resources {
 
             var price = new TOWNS.Resources({});
 
@@ -165,7 +165,7 @@ namespace TOWNS {
         }
 
 
-        installActionClass(action_empty_instance_params:Object, action_class:any) {
+        installActionClass(action_empty_instance_params:Object, action_class:any):void {
 
             var type = action_class.prototype.getType();
 
@@ -195,7 +195,7 @@ namespace TOWNS {
         }
 
 
-        getActionClass(action_type:string) {
+        getActionClass(action_type:string):any {//todo not any but class that is extended from TOWNS.Game.Action
 
             var action_class = this.action_classes[action_type];
 
@@ -210,7 +210,7 @@ namespace TOWNS {
         }
 
 
-        newActionInstance(action:any) {
+        newActionInstance(action:any):TOWNS.Game.Action {
 
             //todo solve defense vs. defence
             if (action.type === 'defense') {
@@ -225,7 +225,7 @@ namespace TOWNS {
         }
 
 
-        createActionExecute(action_type:string) {
+        createActionExecute(action_type:string):Function {
 
             var game = this;
 
@@ -245,7 +245,7 @@ namespace TOWNS {
         }
 
 
-        getActionEmptyInstance(action_type:string) {
+        getActionEmptyInstance(action_type:string):TOWNS.Game.Action {
 
             var action_instance = this.action_empty_instances[action_type];
 

@@ -38,7 +38,7 @@ namespace TOWNS.Objects {
 
                 var actions_classes = [];
 
-                for (var i = 0, l = this.actions.length; i < l; i++) {
+                for (var i = 0, l = (this.actions as [any]).length; i < l; i++) {
 
                     try {
                         actions_classes.push(TOWNS.World.game.newActionInstance(this.actions[i]));
@@ -158,7 +158,7 @@ namespace TOWNS.Objects {
          */
         getAction(action_type) {
 
-            for (var i = 0, l = this.actions.length; i < l; i++) {
+            for (var i = 0, l = (this.actions as [any]).length; i < l; i++) {
 
                 if (this.actions[i].type == action_type) {
 
@@ -174,7 +174,7 @@ namespace TOWNS.Objects {
         createHtmlProfile() {
 
             var actions_profile = '';
-            for (var i = 0, l = this.actions.length; i < l; i++) {
+            for (var i = 0, l = (this.actions as [any]).length; i < l; i++) {
                 actions_profile += this.actions[i].createHtmlProfile();
             }
 
