@@ -1,6 +1,6 @@
 # `This project is very old and not maintained for a long time. So expect a very pure code quality, outdated dependencies and security issues.`
 
-# Towns 5 Shared library
+# 🌆Towns5 shared library
 
 This is shared library for Towns 5. All what is common between frontend and backend should be placed here. 
 
